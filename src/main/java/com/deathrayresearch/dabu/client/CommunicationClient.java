@@ -1,7 +1,7 @@
 package com.deathrayresearch.dabu.client;
 
-import com.deathrayresearch.dabu.shared.Reply;
-import com.deathrayresearch.dabu.shared.Request;
+import com.deathrayresearch.dabu.shared.msg.Reply;
+import com.deathrayresearch.dabu.shared.msg.Request;
 
 /**
  *

@@ -1,7 +1,7 @@
 package com.deathrayresearch.dabu.shared;
 
 /**
- *
+ *  A document is the basic unit of persistence
  */
 public interface Document {
 
@@ -16,10 +16,17 @@ public interface Document {
    */
   int documentVersion();
 
+  /**
+   * Returns the document's contents, a domain model object as a byte array
+   */
+  byte[] getContents();
 
   /**
-   * Returns the document's contents, a domain model object
+   * Returns a String naming the kind of document represented by the content
    */
-  DocumentContents getContents();
+  String getContentType();
+
+  int schemaVersion();
+
 
 }

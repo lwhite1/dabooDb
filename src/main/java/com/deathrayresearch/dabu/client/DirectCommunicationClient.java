@@ -1,8 +1,8 @@
 package com.deathrayresearch.dabu.client;
 
 import com.deathrayresearch.dabu.server.DbServer;
-import com.deathrayresearch.dabu.shared.Reply;
-import com.deathrayresearch.dabu.shared.Request;
+import com.deathrayresearch.dabu.shared.msg.Reply;
+import com.deathrayresearch.dabu.shared.msg.Request;
 
 /**
  * A communication client that communicates directly with an in-process db server

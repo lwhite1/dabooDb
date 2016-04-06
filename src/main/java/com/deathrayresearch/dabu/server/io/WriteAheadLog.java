@@ -1,6 +1,6 @@
 package com.deathrayresearch.dabu.server.io;
 
-import com.deathrayresearch.dabu.shared.Request;
+import com.deathrayresearch.dabu.shared.msg.Request;
 
 /**
  *
@@ -8,4 +8,6 @@ import com.deathrayresearch.dabu.shared.Request;
 public interface WriteAheadLog {
 
   void logRequest(Request request);
+
+  void replay();
 }

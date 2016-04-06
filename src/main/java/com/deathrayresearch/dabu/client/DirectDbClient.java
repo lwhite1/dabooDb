@@ -1,9 +1,9 @@
 package com.deathrayresearch.dabu.client;
 
 import com.deathrayresearch.dabu.shared.Document;
-import com.deathrayresearch.dabu.shared.Reply;
-import com.deathrayresearch.dabu.shared.Request;
-import com.deathrayresearch.dabu.shared.WriteRequest;
+import com.deathrayresearch.dabu.shared.msg.Reply;
+import com.deathrayresearch.dabu.shared.msg.Request;
+import com.deathrayresearch.dabu.shared.msg.WriteRequest;
 
 /**
  * A database client that is in the same address space (JVM) as the server,
@@ -20,17 +20,28 @@ public class DirectDbClient implements DbClient {
   }
 
   @Override
-  public void write(Document document) {
+  public void write(Document ... document) {
+    //Request request = new WriteRequest(document);
+    //Reply reply = communicationClient.sendRequest(request);
+  }
+
+  @Override
+  public Document getDoc(byte[] ... key) {
+    return null;
+  }
+
+  @Override
+  public void deleteDoc(byte[] ... key) {
 
   }
 
   @Override
-  public byte[] get(byte[] key) {
+  public byte[] get(byte[] ... key) {
     return new byte[0];
   }
 
   @Override
-  public void delete(byte[] key) {
+  public void delete(byte[] ... key) {
 
   }
 }

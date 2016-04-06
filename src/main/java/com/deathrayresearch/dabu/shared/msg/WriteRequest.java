@@ -1,12 +1,12 @@
-package com.deathrayresearch.dabu.shared;
+package com.deathrayresearch.dabu.shared.msg;
 
 /**
  *
  */
 public class WriteRequest extends AbstractRequest {
 
-  private byte[] key;
-  private byte[] value;
+  private final byte[] key;
+  private final byte[] value;
 
   public WriteRequest(byte[] key, byte[] value) {
     super(RequestType.WRITE);
