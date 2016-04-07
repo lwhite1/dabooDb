@@ -3,12 +3,12 @@ package com.deathrayresearch.dabu.shared.msg;
 /**
  *
  */
-public class WriteRequest extends AbstractRequest {
+public class KeyValueWriteRequest extends AbstractRequest {
 
   private final byte[] key;
   private final byte[] value;
 
-  public WriteRequest(byte[] key, byte[] value) {
+  public KeyValueWriteRequest(byte[] key, byte[] value) {
     super(RequestType.WRITE);
     this.key = key;
     this.value = value;

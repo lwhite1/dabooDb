@@ -3,7 +3,7 @@ package com.deathrayresearch.dabu.client;
 import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
-import com.deathrayresearch.dabu.shared.msg.WriteRequest;
+import com.deathrayresearch.dabu.shared.msg.KeyValueWriteRequest;
 
 /**
  * A database client that is in the same address space (JVM) as the server,
@@ -15,13 +15,13 @@ public class DirectDbClient implements DbClient {
 
   @Override
   public void write(byte[] key, byte[] value) {
-    Request request = new WriteRequest(key, value);
+    Request request = new KeyValueWriteRequest(key, value);
     Reply reply = communicationClient.sendRequest(request);
   }
 
   @Override
   public void write(Document ... document) {
-    //Request request = new WriteRequest(document);
+    //Request request = new KeyValueWriteRequest(document);
     //Reply reply = communicationClient.sendRequest(request);
   }
 

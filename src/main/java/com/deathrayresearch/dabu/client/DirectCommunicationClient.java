@@ -9,7 +9,11 @@ import com.deathrayresearch.dabu.shared.msg.Request;
  */
 public class DirectCommunicationClient implements CommunicationClient {
 
-  private final DbServer dbServer = new DbServer();
+  private final DbServer dbServer;
+
+  public DirectCommunicationClient() {
+    dbServer = new DbServer();
+  }
 
   @Override
   public Reply sendRequest(Request request) {

@@ -1,5 +1,7 @@
 package com.deathrayresearch.dabu.shared;
 
+import java.util.Arrays;
+
 /**
  * A basic document implementation
  */
@@ -56,5 +58,15 @@ public class StandardDocument implements Document {
     return documentVersion;
   }
 
-
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("StandardDocument{");
+    sb.append("contents=").append(Arrays.toString(contents));
+    sb.append(", documentVersion=").append(documentVersion);
+    sb.append(", schemaVersion=").append(schemaVersion);
+    sb.append(", deleted=").append(deleted);
+    sb.append(", contentType='").append(contentType).append('\'');
+    sb.append('}');
+    return sb.toString();
+  }
 }

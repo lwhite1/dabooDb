@@ -1,5 +1,8 @@
 package com.deathrayresearch.dabu.client;
 
+import com.deathrayresearch.dabu.shared.Document;
+import com.deathrayresearch.dabu.shared.StandardDocument;
+import com.deathrayresearch.dabu.testutil.Company;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +15,7 @@ import static org.junit.Assert.*;
  */
 public class DirectDbClientTest {
 
+
   DbClient client = new DirectDbClient();
 
   @Before
@@ -20,10 +24,16 @@ public class DirectDbClientTest {
   }
 
   @Test
-  public void testWrite() {
+  public void testWriteKv() {
     byte[] key = "foo".getBytes(StandardCharsets.UTF_8);
     byte[] val = "bar".getBytes(StandardCharsets.UTF_8);
     client.write(key, val);
+  }
+  @Test
+  public void testWriteDocument() {
+    Company company = new Company("Drr");
+    Document document = new StandardDocument(company);
+    System.out.println(document.toString());
   }
 
   @Test

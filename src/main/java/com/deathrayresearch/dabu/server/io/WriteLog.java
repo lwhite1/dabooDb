@@ -7,6 +7,7 @@ import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
 
 import java.io.*;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Iterator;
@@ -17,14 +18,26 @@ import java.util.NoSuchElementException;
  */
 public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
 
+  private static WriteLog instance;
+
+  static {
+    try {
+      instance = new WriteLog(System.getProperty("user.dir"));
+    } catch (IOException e) {
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+  public static WriteLog getInstance() {
+    return instance;
+  }
+
   //TODO(lwhite) handle locking/synchronization for these files
 
   private final static String FOLDER = "wal";
   private final static String DATA_FILE = "dataFile";
   private final static String INDEX_FILE = "indexFile";
-
-  private java.io.File dataFile;
-  private java.io.File indexFile;
 
   // The length of the current request in bytes
   private int length = -1;
@@ -97,7 +110,7 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
     requestOutputByteStream.write(request);
     requestOutputByteStream.flush();
 
-    indexWriter.write(String.valueOf(length) + "\n");
+    indexWriter.write(String.valueOf(request.length) + "\n");
     indexWriter.flush();
   }
 
@@ -111,6 +124,9 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
     if (!targetDirectory.exists()) {
       targetDirectory.mkdirs();
     }
+
+    File indexFile = Paths.get(targetDirectory + String.valueOf(File.separatorChar) + INDEX_FILE).toFile();
+    File dataFile = Paths.get(targetDirectory + String.valueOf(File.separatorChar) + DATA_FILE).toFile();
 
     if (!indexFile.exists() ) {
       indexFile.createNewFile();
