@@ -1,5 +1,7 @@
 package com.deathrayresearch.dabu.server;
 
+import com.google.common.primitives.SignedBytes;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -9,7 +11,7 @@ import java.util.TreeMap;
  */
 public class MemoryDb implements Db {
 
-  private TreeMap<byte[], byte[]> store = new TreeMap<byte[], byte[]>();
+  private TreeMap<byte[], byte[]> store = new TreeMap<>(SignedBytes.lexicographicalComparator());
 
   @Override
   public void write(byte[] key, byte[] value) {

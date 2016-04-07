@@ -7,14 +7,14 @@ import com.deathrayresearch.dabu.shared.Document;
  */
 public class DocumentGetRequest extends AbstractRequest {
 
-  private final Document document;
+  private final byte[] key;
 
-  public DocumentGetRequest(Document document) {
-    super(RequestType.WRITE);
-    this.document = document;
+  public DocumentGetRequest(byte[] key) {
+    super(RequestType.GET);
+    this.key = key;
   }
 
-  public Document getDocument() {
-    return document;
+  public byte[] getKey() {
+    return key;
   }
 }

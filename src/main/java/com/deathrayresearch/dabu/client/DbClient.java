@@ -3,6 +3,6 @@ package com.deathrayresearch.dabu.client;
 /**
  *
  */
-public interface DbClient extends KeyValueApi, DocumentApi {
+public interface DbClient extends DocumentApi {
 
 }

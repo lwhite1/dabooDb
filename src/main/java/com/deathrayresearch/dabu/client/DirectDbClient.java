@@ -1,6 +1,9 @@
 package com.deathrayresearch.dabu.client;
 
 import com.deathrayresearch.dabu.shared.Document;
+import com.deathrayresearch.dabu.shared.msg.DocumentGetReply;
+import com.deathrayresearch.dabu.shared.msg.DocumentGetRequest;
+import com.deathrayresearch.dabu.shared.msg.DocumentWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
 import com.deathrayresearch.dabu.shared.msg.KeyValueWriteRequest;
@@ -14,34 +17,21 @@ public class DirectDbClient implements DbClient {
   private CommunicationClient communicationClient = new DirectCommunicationClient();
 
   @Override
-  public void write(byte[] key, byte[] value) {
-    Request request = new KeyValueWriteRequest(key, value);
+  public void writeDoc(Document document) {
+
+    Request request = new DocumentWriteRequest(document);
     Reply reply = communicationClient.sendRequest(request);
   }
 
   @Override
-  public void write(Document ... document) {
-    //Request request = new KeyValueWriteRequest(document);
-    //Reply reply = communicationClient.sendRequest(request);
-  }
-
-  @Override
-  public Document getDoc(byte[] ... key) {
-    return null;
+  public Document getDoc(byte[] key) {
+    DocumentGetRequest request = new DocumentGetRequest(key);
+    DocumentGetReply reply = communicationClient.sendRequest(request);
+    return reply.getDocument();
   }
 
   @Override
   public void deleteDoc(byte[] ... key) {
-
-  }
-
-  @Override
-  public byte[] get(byte[] ... key) {
-    return new byte[0];
-  }
-
-  @Override
-  public void delete(byte[] ... key) {
 
   }
 }

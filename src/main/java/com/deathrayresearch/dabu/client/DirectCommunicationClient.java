@@ -1,6 +1,8 @@
 package com.deathrayresearch.dabu.client;
 
 import com.deathrayresearch.dabu.server.DbServer;
+import com.deathrayresearch.dabu.shared.msg.DocumentGetReply;
+import com.deathrayresearch.dabu.shared.msg.DocumentGetRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
 
@@ -18,5 +20,10 @@ public class DirectCommunicationClient implements CommunicationClient {
   @Override
   public Reply sendRequest(Request request) {
     return dbServer.handleRequest(request);
+  }
+
+  @Override
+  public DocumentGetReply sendRequest(DocumentGetRequest request) {
+    return (DocumentGetReply) dbServer.handleRequest(request);
   }
 }

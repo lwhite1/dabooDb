@@ -1,9 +1,15 @@
 package com.deathrayresearch.dabu.shared;
 
+import com.google.gson.Gson;
+
+import java.nio.charset.StandardCharsets;
+
 /**
  *  A document is the basic unit of persistence
  */
 public interface Document {
+
+  static Gson GSON = new Gson();
 
   /**
    * Returns the primary key by which this document can be found in the db
@@ -28,5 +34,8 @@ public interface Document {
 
   int schemaVersion();
 
+  default byte[] marshall() {
+    return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);
+  }
 
 }

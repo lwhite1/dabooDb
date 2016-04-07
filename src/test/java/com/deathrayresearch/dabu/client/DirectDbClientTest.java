@@ -6,10 +6,6 @@ import com.deathrayresearch.dabu.testutil.Company;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.StandardCharsets;
-
-import static org.junit.Assert.*;
-
 /**
  *
  */
@@ -24,15 +20,12 @@ public class DirectDbClientTest {
   }
 
   @Test
-  public void testWriteKv() {
-    byte[] key = "foo".getBytes(StandardCharsets.UTF_8);
-    byte[] val = "bar".getBytes(StandardCharsets.UTF_8);
-    client.write(key, val);
-  }
-  @Test
   public void testWriteDocument() {
     Company company = new Company("Drr");
     Document document = new StandardDocument(company);
+    client.writeDoc(document);
+    byte[] key = document.key();
+    Document document1 = client.getDoc(key);
     System.out.println(document.toString());
   }
 
