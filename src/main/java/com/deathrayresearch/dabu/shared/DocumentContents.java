@@ -9,9 +9,11 @@ import java.nio.charset.StandardCharsets;
  */
 public interface DocumentContents {
 
-  static final Gson GSON = new Gson();
+  Gson GSON = new Gson();
 
-  String getType();
+  default String getType() {
+    return this.getClass().getCanonicalName();
+  }
 
   default byte[] marshall() {
     return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);
