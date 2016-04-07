@@ -38,4 +38,5 @@ public interface Document {
     return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);
   }
 
+  DocumentContents documentContents();
 }

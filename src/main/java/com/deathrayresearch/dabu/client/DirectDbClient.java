@@ -1,11 +1,14 @@
 package com.deathrayresearch.dabu.client;
 
+import com.deathrayresearch.dabu.server.DbServer;
 import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.msg.GetReply;
 import com.deathrayresearch.dabu.shared.msg.GetRequest;
 import com.deathrayresearch.dabu.shared.msg.WriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * A database client that is in the same address space (JVM) as the server,
@@ -26,7 +29,8 @@ public class DirectDbClient implements DbClient {
   public Document getDoc(byte[] key) {
     GetRequest request = new GetRequest(key);
     GetReply reply = communicationClient.sendRequest(request);
-    return reply.getDocument();
+    String docString = new String(reply.getDocument(), StandardCharsets.UTF_8);
+    return (Document) Document.GSON.fromJson(docString, DbServer.INSTANCE.getDocumentClass());
   }
 
   @Override

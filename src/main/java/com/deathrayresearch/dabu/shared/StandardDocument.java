@@ -1,5 +1,7 @@
 package com.deathrayresearch.dabu.shared;
 
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -70,5 +72,14 @@ public class StandardDocument implements Document {
     return sb.toString();
   }
 
-
+  public DocumentContents documentContents() {
+    String contentJson = new String(contents, StandardCharsets.UTF_8);
+    DocumentContents documentContents = null;
+    try {
+      documentContents = (DocumentContents) GSON.fromJson(contentJson, Class.forName(contentType));
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
+    return documentContents;
+  }
 }

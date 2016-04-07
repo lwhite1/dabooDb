@@ -9,14 +9,14 @@ import java.time.ZonedDateTime;
  */
 public class GetReply extends AbstractReply {
 
-  Document document = null;
+  byte[] document = null;
 
-  public GetReply(Request request, Document document) {
+  public GetReply(Request request, byte[] document) {
     super(request);
     this.document = document;
   }
 
-  public Document getDocument() {
+  public byte[] getDocument() {
     return document;
   }
 }

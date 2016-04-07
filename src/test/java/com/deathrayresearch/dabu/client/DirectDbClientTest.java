@@ -11,6 +11,9 @@ import org.junit.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  *
  */
@@ -32,6 +35,9 @@ public class DirectDbClientTest {
     client.writeDoc(document);
     byte[] key = document.key();
     Document document1 = client.getDoc(key);
+    assertTrue(document1 != null);
+    Company company1 = (Company) document1.documentContents();
+    assertEquals(company, company1);
     System.out.println("Round trip: " + stopwatch.elapsed(TimeUnit.MICROSECONDS));
     System.out.println(document.toString());
   }

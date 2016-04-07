@@ -14,7 +14,7 @@ public class DirectCommunicationClient implements CommunicationClient {
   private final DbServer dbServer;
 
   public DirectCommunicationClient() {
-    dbServer = new DbServer();
+    dbServer = DbServer.INSTANCE;
   }
 
   @Override

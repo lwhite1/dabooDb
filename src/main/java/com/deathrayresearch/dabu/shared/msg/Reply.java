@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
  *
  */
 public interface Reply {
+
   ZonedDateTime getTimestamp();
 
   byte[] getRequestId();
