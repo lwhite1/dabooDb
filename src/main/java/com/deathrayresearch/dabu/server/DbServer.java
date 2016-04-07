@@ -1,5 +1,6 @@
 package com.deathrayresearch.dabu.server;
 
+import com.deathrayresearch.dabu.server.io.CompressionType;
 import com.deathrayresearch.dabu.server.io.WriteLog;
 import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.msg.AbstractReply;
@@ -80,5 +81,13 @@ public class DbServer {
 
   public Class getDocumentClass() {
     return config.getDocumentClass();
+  }
+
+  public CompressionType getDocumentContentCompressionType() {
+    return config.getDocumentContentCompressionType();
+  }
+
+  public CompressionType getRequestCompressionType() {
+    return config.getRequestCompressionType();
   }
 }

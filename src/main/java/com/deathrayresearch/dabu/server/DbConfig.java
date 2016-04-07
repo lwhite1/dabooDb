@@ -1,6 +1,6 @@
 package com.deathrayresearch.dabu.server;
 
-import com.deathrayresearch.dabu.server.io.Compression;
+import com.deathrayresearch.dabu.server.io.CompressionType;
 import com.deathrayresearch.dabu.shared.StandardDocument;
 
 /**
@@ -8,10 +8,14 @@ import com.deathrayresearch.dabu.shared.StandardDocument;
  */
 public class DbConfig {
 
+  // Db implementation class used
   private final Class dbClass;
 
-  private final Compression compression = Compression.SNAPPY;
+  // Compression type used
+  private final CompressionType documentContentCompressionType = CompressionType.NONE;
+  private final CompressionType requestCompressionType = CompressionType.NONE;
 
+  // Document implementation class used
   private final Class documentClass = StandardDocument.class;
 
   public DbConfig() {
@@ -22,11 +26,15 @@ public class DbConfig {
     return dbClass;
   }
 
-  public Compression getCompression() {
-    return compression;
+  public CompressionType getDocumentContentCompressionType() {
+    return documentContentCompressionType;
   }
 
   public Class getDocumentClass() {
     return documentClass;
+  }
+
+  public CompressionType getRequestCompressionType() {
+    return requestCompressionType;
   }
 }

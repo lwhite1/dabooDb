@@ -3,7 +3,7 @@ package com.deathrayresearch.dabu.server.io;
 /**
  *
  */
-public enum Compression {
+public enum CompressionType {
 
   SNAPPY,
   NONE,
