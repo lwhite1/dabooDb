@@ -2,15 +2,17 @@ package com.deathrayresearch.dabu.shared.msg;
 
 import com.deathrayresearch.dabu.shared.Document;
 
+import java.time.ZonedDateTime;
+
 /**
  *
  */
-public class DocumentWriteRequest extends AbstractRequest {
+public class GetReply extends AbstractReply {
 
-  private final Document document;
+  Document document = null;
 
-  public DocumentWriteRequest(Document document) {
-    super(RequestType.WRITE);
+  public GetReply(Request request, Document document) {
+    super(request);
     this.document = document;
   }
 

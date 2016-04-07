@@ -1,12 +1,11 @@
 package com.deathrayresearch.dabu.client;
 
 import com.deathrayresearch.dabu.shared.Document;
-import com.deathrayresearch.dabu.shared.msg.DocumentGetReply;
-import com.deathrayresearch.dabu.shared.msg.DocumentGetRequest;
-import com.deathrayresearch.dabu.shared.msg.DocumentWriteRequest;
+import com.deathrayresearch.dabu.shared.msg.GetReply;
+import com.deathrayresearch.dabu.shared.msg.GetRequest;
+import com.deathrayresearch.dabu.shared.msg.WriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
-import com.deathrayresearch.dabu.shared.msg.KeyValueWriteRequest;
 
 /**
  * A database client that is in the same address space (JVM) as the server,
@@ -19,14 +18,14 @@ public class DirectDbClient implements DbClient {
   @Override
   public void writeDoc(Document document) {
 
-    Request request = new DocumentWriteRequest(document);
+    Request request = new WriteRequest(document);
     Reply reply = communicationClient.sendRequest(request);
   }
 
   @Override
   public Document getDoc(byte[] key) {
-    DocumentGetRequest request = new DocumentGetRequest(key);
-    DocumentGetReply reply = communicationClient.sendRequest(request);
+    GetRequest request = new GetRequest(key);
+    GetReply reply = communicationClient.sendRequest(request);
     return reply.getDocument();
   }
 

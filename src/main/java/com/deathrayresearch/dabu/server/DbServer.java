@@ -5,13 +5,12 @@ import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.DocumentContents;
 import com.deathrayresearch.dabu.shared.StandardDocument;
 import com.deathrayresearch.dabu.shared.msg.AbstractReply;
-import com.deathrayresearch.dabu.shared.msg.DocumentGetReply;
-import com.deathrayresearch.dabu.shared.msg.DocumentGetRequest;
-import com.deathrayresearch.dabu.shared.msg.DocumentWriteRequest;
+import com.deathrayresearch.dabu.shared.msg.GetReply;
+import com.deathrayresearch.dabu.shared.msg.GetRequest;
+import com.deathrayresearch.dabu.shared.msg.WriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 
 /**
@@ -27,7 +26,7 @@ public class DbServer {
     writeLog = WriteLog.getInstance();
   }
 
-  public Reply handleRequest(DocumentWriteRequest request) {
+  public Reply handleRequest(WriteRequest request) {
     try {
       writeLog.logRequest(request);
       Document document = request.getDocument();
@@ -48,9 +47,9 @@ public class DbServer {
 
   /**
    */
-  public Reply handleRequest(DocumentGetRequest request) {
+  public Reply handleRequest(GetRequest request) {
     byte[] result = db.get(request.getKey());
-    return new DocumentGetReply(request, new StandardDocument(new DocumentContents() {
+    return new GetReply(request, new StandardDocument(new DocumentContents() {
       @Override
       public String getType() {
         return null;
