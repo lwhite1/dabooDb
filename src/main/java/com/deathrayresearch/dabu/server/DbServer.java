@@ -4,11 +4,11 @@ import com.deathrayresearch.dabu.server.io.CompressionType;
 import com.deathrayresearch.dabu.server.io.WriteLog;
 import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.msg.AbstractReply;
-import com.deathrayresearch.dabu.shared.msg.DeleteRequest;
+import com.deathrayresearch.dabu.shared.msg.DocDeleteRequest;
 import com.deathrayresearch.dabu.shared.msg.GetReply;
-import com.deathrayresearch.dabu.shared.msg.GetRequest;
+import com.deathrayresearch.dabu.shared.msg.DocGetRequest;
 import com.deathrayresearch.dabu.shared.msg.QueryRequest;
-import com.deathrayresearch.dabu.shared.msg.WriteRequest;
+import com.deathrayresearch.dabu.shared.msg.DocWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
 
@@ -36,20 +36,20 @@ public class DbServer {
    */
   public Reply handleRequest(Request request) {
     switch (request.getRequestType()) {
-      case WRITE:return handleRequest((WriteRequest) request);
-      case GET:return handleRequest((GetRequest) request);
-      case DELETE:return handleRequest((DeleteRequest) request);
+      case WRITE:return handleRequest((DocWriteRequest) request);
+      case GET:return handleRequest((DocGetRequest) request);
+      case DELETE:return handleRequest((DocDeleteRequest) request);
       case QUERY:return handleRequest((QueryRequest) request);
       default: throw new RuntimeException("Unknown request type");
     }
   }
 
-  private Reply handleRequest(WriteRequest request) {
+  private Reply handleRequest(DocWriteRequest request) {
     try {
       writeLog.logRequest(request);
       Document document = request.getDocument();
       db.write(document.key(), document.marshall());
-    } catch (IOException e) {
+     } catch (IOException e) {
       e.printStackTrace();
       //TODO(lwhite): We should probably exit if we can't write to the WAL
     }
@@ -58,7 +58,7 @@ public class DbServer {
 
   /**
    */
-  private Reply handleRequest(DeleteRequest request) {
+  private Reply handleRequest(DocDeleteRequest request) {
     return new AbstractReply(request);
   }
 
@@ -70,7 +70,7 @@ public class DbServer {
 
   /**
    */
-  private Reply handleRequest(GetRequest request) {
+  private Reply handleRequest(DocGetRequest request) {
     byte[] result = db.get(request.getKey());
     return new GetReply(request, result);
   }

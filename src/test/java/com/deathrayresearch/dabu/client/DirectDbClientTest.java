@@ -8,6 +8,7 @@ import com.google.common.base.Stopwatch;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -44,10 +45,15 @@ public class DirectDbClientTest {
 
   @Test
   public void testWriteDocuments() {
-    List<Person> people = Person.createPeoples(60_000);
-    Stopwatch stopwatch = Stopwatch.createStarted();
+    List<Person> people = Person.createPeoples(600_000);
+    List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
       Document document = new StandardDocument(person);
+      peopleDocs.add(document);
+    }
+
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    for (Document document : peopleDocs) {
       client.writeDoc(document);
     }
     System.out.println("Write: " + stopwatch.elapsed(TimeUnit.MILLISECONDS));

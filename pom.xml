@@ -35,6 +35,11 @@
             <artifactId>snappy</artifactId>
             <version>0.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.mapdb</groupId>
+            <artifactId>mapdb</artifactId>
+            <version>3.0.0-M4</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

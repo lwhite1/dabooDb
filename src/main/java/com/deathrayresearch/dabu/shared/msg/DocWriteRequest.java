@@ -5,11 +5,11 @@ import com.deathrayresearch.dabu.shared.Document;
 /**
  *
  */
-public class WriteRequest extends AbstractRequest {
+public class DocWriteRequest extends AbstractRequest {
 
   private final Document document;
 
-  public WriteRequest(Document document) {
+  public DocWriteRequest(Document document) {
     super(RequestType.WRITE);
     this.document = document;
   }

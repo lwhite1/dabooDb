@@ -3,11 +3,11 @@ package com.deathrayresearch.dabu.shared.msg;
 /**
  *
  */
-public class DeleteRequest extends AbstractRequest {
+public class DocDeleteRequest extends AbstractRequest {
 
   private final byte[] key;
 
-  public DeleteRequest(byte[] key) {
+  public DocDeleteRequest(byte[] key) {
     super(RequestType.DELETE);
     this.key = key;
   }

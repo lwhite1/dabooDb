@@ -5,11 +5,11 @@ import com.deathrayresearch.dabu.shared.Document;
 /**
  *
  */
-public class GetRequest extends AbstractRequest {
+public class DocGetRequest extends AbstractRequest {
 
   private final byte[] key;
 
-  public GetRequest(byte[] key) {
+  public DocGetRequest(byte[] key) {
     super(RequestType.GET);
     this.key = key;
   }

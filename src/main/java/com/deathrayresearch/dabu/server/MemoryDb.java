@@ -1,17 +1,34 @@
 package com.deathrayresearch.dabu.server;
 
 import com.google.common.primitives.SignedBytes;
+import org.mapdb.BTreeMap;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.Serializer;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * An in-memory implementation of a Db
  */
 public class MemoryDb implements Db {
 
+  //private ConcurrentSkipListMap<byte[], byte[]> store
+  //    = new ConcurrentSkipListMap<>(SignedBytes.lexicographicalComparator());
   private TreeMap<byte[], byte[]> store = new TreeMap<>(SignedBytes.lexicographicalComparator());
+/*
+  private DB db = DBMaker
+      .memoryDB()
+      .make();
+
+  BTreeMap<byte[],byte[]> store = db
+      .treeMap("treemap", Serializer.BYTE_ARRAY, Serializer.BYTE_ARRAY)
+      .make();
+*/
 
   @Override
   public void write(byte[] key, byte[] value) {
