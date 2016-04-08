@@ -10,22 +10,22 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
- *
+ *  A class representing a person that can be used as a test content for the db
  */
 public class Person implements DocumentContents {
-  byte[] key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
-  String fName;
-  String lName;
-  String city;
-  String state;
-  String zip;
-  LocalDate birthday;
-  int height;
-  int weight;
-  char gender;
+
+  private byte[] key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
+  private String fName;
+  private String lName;
+  private String city;
+  private String state;
+  private String zip;
+  private LocalDate birthday;
+  private int height;
+  private int weight;
+  private char gender;
 
   public static List<Person> createPeoples(int quantity) {
 
@@ -102,5 +102,49 @@ public class Person implements DocumentContents {
   @Override
   public byte[] getKey() {
     return new byte[0];
+  }
+
+  public String getfName() {
+    return fName;
+  }
+
+  public String getlName() {
+    return lName;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public String getZip() {
+    return zip;
+  }
+
+  public LocalDate getBirthday() {
+    return birthday;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public int getWeight() {
+    return weight;
+  }
+
+  public char getGender() {
+    return gender;
+  }
+
+  public static String[] getUsStateArray() {
+    return usStateArray;
+  }
+
+  public static List<String> getUsStates() {
+    return usStates;
   }
 }
