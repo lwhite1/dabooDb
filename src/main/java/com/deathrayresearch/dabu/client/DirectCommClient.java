@@ -9,11 +9,11 @@ import com.deathrayresearch.dabu.shared.msg.Request;
 /**
  * A communication client that communicates directly with an in-process db server
  */
-public class DirectCommunicationClient implements CommunicationClient {
+public class DirectCommClient implements CommClient {
 
   private final DbServer dbServer;
 
-  public DirectCommunicationClient() {
+  public DirectCommClient() {
     dbServer = DbServer.INSTANCE;
   }
 

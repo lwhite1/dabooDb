@@ -1,7 +1,6 @@
 package com.deathrayresearch.dabu.testutil;
 
 import com.deathrayresearch.dabu.shared.DocumentContents;
-import com.google.common.base.Stopwatch;
 import io.codearte.jfairy.Fairy;
 
 import java.nio.charset.StandardCharsets;
@@ -9,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -29,8 +29,6 @@ public class Person implements DocumentContents {
 
   public static List<Person> createPeoples(int quantity) {
 
-    Stopwatch stopwatch = Stopwatch.createStarted();
-
     Person person = new Person();
     Fairy fairy = Fairy.create();
 
@@ -50,8 +48,46 @@ public class Person implements DocumentContents {
       person.gender = p.sex().name().charAt(0);
       people.add(person);
     }
-    System.out.println("Time to generate " + stopwatch.elapsed(TimeUnit.SECONDS));
     return people;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Person person = (Person) o;
+    return height == person.height &&
+        weight == person.weight &&
+        gender == person.gender &&
+        Arrays.equals(key, person.key) &&
+        Objects.equals(fName, person.fName) &&
+        Objects.equals(lName, person.lName) &&
+        Objects.equals(city, person.city) &&
+        Objects.equals(state, person.state) &&
+        Objects.equals(zip, person.zip) &&
+        Objects.equals(birthday, person.birthday);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(key, fName, lName, city, state, zip, birthday, height, weight, gender);
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("Person{");
+    sb.append("key=").append(Arrays.toString(key));
+    sb.append(", fName='").append(fName).append('\'');
+    sb.append(", lName='").append(lName).append('\'');
+    sb.append(", city='").append(city).append('\'');
+    sb.append(", state='").append(state).append('\'');
+    sb.append(", zip='").append(zip).append('\'');
+    sb.append(", birthday=").append(birthday);
+    sb.append(", height=").append(height);
+    sb.append(", weight=").append(weight);
+    sb.append(", gender=").append(gender);
+    sb.append('}');
+    return sb.toString();
   }
 
   private static String[] usStateArray = {"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut",

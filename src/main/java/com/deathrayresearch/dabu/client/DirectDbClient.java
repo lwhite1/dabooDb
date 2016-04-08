@@ -18,13 +18,13 @@ import java.util.List;
  */
 public class DirectDbClient implements DbClient {
 
-  private CommunicationClient communicationClient = new DirectCommunicationClient();
+  private CommClient commClient = new DirectCommClient();
 
   @Override
   public void writeDoc(Document document) {
 
     Request request = new DocWriteRequest(document);
-    Reply reply = communicationClient.sendRequest(request);
+    Reply reply = commClient.sendRequest(request);
   }
 
   @Override
@@ -35,7 +35,7 @@ public class DirectDbClient implements DbClient {
   @Override
   public Document getDoc(byte[] key) {
     DocGetRequest request = new DocGetRequest(key);
-    GetReply reply = communicationClient.sendRequest(request);
+    GetReply reply = commClient.sendRequest(request);
     String docString = new String(reply.getDocument(), StandardCharsets.UTF_8);
     return (Document) Document.GSON.fromJson(docString, DbServer.INSTANCE.getDocumentClass());
   }

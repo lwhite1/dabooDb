@@ -1,6 +1,6 @@
 package com.deathrayresearch.dabu.server;
 
-import com.deathrayresearch.dabu.server.io.CompressionType;
+import com.deathrayresearch.dabu.shared.compression.CompressionType;
 import com.deathrayresearch.dabu.shared.StandardDocument;
 
 /**

@@ -8,7 +8,7 @@ import com.deathrayresearch.dabu.shared.msg.Request;
 /**
  *
  */
-public interface CommunicationClient {
+public interface CommClient {
 
   Reply sendRequest(Request request);
 

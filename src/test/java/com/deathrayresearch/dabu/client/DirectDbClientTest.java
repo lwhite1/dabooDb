@@ -60,6 +60,20 @@ public class DirectDbClientTest {
   }
 
   @Test
+  public void testWriteDocuments2() {
+    List<Person> people = Person.createPeoples(600_000);
+    List<Document> peopleDocs = new ArrayList<>();
+    for (Person person : people) {
+      Document document = new StandardDocument(person);
+      peopleDocs.add(document);
+    }
+
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    client.writeDocs(peopleDocs);
+    System.out.println("Write: " + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+  }
+
+  @Test
   public void testGet() {
 
   }
