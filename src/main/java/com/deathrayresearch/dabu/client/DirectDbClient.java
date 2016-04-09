@@ -2,6 +2,8 @@ package com.deathrayresearch.dabu.client;
 
 import com.deathrayresearch.dabu.server.DbServer;
 import com.deathrayresearch.dabu.shared.Document;
+import com.deathrayresearch.dabu.shared.msg.DeleteReply;
+import com.deathrayresearch.dabu.shared.msg.DocDeleteRequest;
 import com.deathrayresearch.dabu.shared.msg.GetReply;
 import com.deathrayresearch.dabu.shared.msg.DocGetRequest;
 import com.deathrayresearch.dabu.shared.msg.DocWriteRequest;
@@ -48,6 +50,8 @@ public class DirectDbClient implements DbClient {
 
   @Override
   public void deleteDoc(byte[] key) {
+    DocDeleteRequest request = new DocDeleteRequest(key);
+    DeleteReply reply = commClient.sendRequest(request);
 
   }
 

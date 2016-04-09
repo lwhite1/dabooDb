@@ -2,7 +2,7 @@ package com.deathrayresearch.dabu.shared;
 
 import com.deathrayresearch.dabu.client.serialization.ContentSerializerDeserializer;
 import com.deathrayresearch.dabu.shared.compression.CompressorDeCompressor;
-import com.deathrayresearch.dabu.shared.encryption.EncipherDecipher;
+import com.deathrayresearch.dabu.shared.encryption.EncryptorDecryptor;
 
 /**
  * A processing pipeline for DocumentContents
@@ -21,11 +21,11 @@ import com.deathrayresearch.dabu.shared.encryption.EncipherDecipher;
 public class ContentsPipe {
 
   private final CompressorDeCompressor compressorDeCompressor;
-  private final EncipherDecipher encryptorDecryptor;
+  private final EncryptorDecryptor encryptorDecryptor;
   private final ContentSerializerDeserializer serializerDeserializer;
 
   public ContentsPipe(CompressorDeCompressor compressorDeCompressor,
-                      EncipherDecipher encryptorDecryptor,
+                      EncryptorDecryptor encryptorDecryptor,
                       ContentSerializerDeserializer serializerDeserializer) {
 
     this.compressorDeCompressor = compressorDeCompressor;

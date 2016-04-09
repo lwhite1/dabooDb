@@ -3,7 +3,7 @@ package com.deathrayresearch.dabu.shared.encryption;
 /**
  * An 'encryptor' that does nothing. Input bytes are the same as output bytes
  */
-public class NullEncryptor implements EncipherDecipher {
+public class NullEncryptor implements EncryptorDecryptor {
 
   private static NullEncryptor INSTANCE = new NullEncryptor();
 

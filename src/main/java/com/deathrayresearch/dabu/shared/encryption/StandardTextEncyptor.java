@@ -5,7 +5,7 @@ import org.jasypt.encryption.pbe.PooledPBEByteEncryptor;
 /**
  *
  */
-public class StandardTextEncyptor implements EncipherDecipher {
+public class StandardTextEncyptor implements EncryptorDecryptor {
 
   private final PooledPBEByteEncryptor textEncryptor = new PooledPBEByteEncryptor();
 
