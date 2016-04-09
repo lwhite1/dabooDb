@@ -1,11 +1,12 @@
 package com.deathrayresearch.dabu.shared.msg;
 
-import com.deathrayresearch.dabu.shared.Document;
+import javax.annotation.concurrent.Immutable;
 
 /**
- *
+ * A reply to a request to delete a single document
  */
-public class DeleteReply extends AbstractReply {
+@Immutable
+public final class DeleteReply extends AbstractReply {
 
   public DeleteReply(Request request) {
     super(request);

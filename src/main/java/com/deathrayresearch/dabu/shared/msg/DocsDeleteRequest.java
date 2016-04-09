@@ -1,11 +1,13 @@
 package com.deathrayresearch.dabu.shared.msg;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.Collection;
 
 /**
  * A request to delete a collection of documents
  */
-public class DocsDeleteRequest extends AbstractRequest {
+@Immutable
+public final class DocsDeleteRequest extends AbstractRequest {
 
   private final Collection<byte[]> keys;
 

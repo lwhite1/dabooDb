@@ -1,7 +1,7 @@
 package com.deathrayresearch.dabu.shared.msg;
 
 /**
- *
+ * The types of requests supported
  */
 public enum RequestType {
 

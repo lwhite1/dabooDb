@@ -1,9 +1,12 @@
 package com.deathrayresearch.dabu.shared.msg;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
- *
+ * A request to get a single document
  */
-public class DocGetRequest extends AbstractRequest {
+@Immutable
+public final class DocGetRequest extends AbstractRequest {
 
   private final byte[] key;
 

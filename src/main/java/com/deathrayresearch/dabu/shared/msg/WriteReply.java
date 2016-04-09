@@ -1,9 +1,12 @@
 package com.deathrayresearch.dabu.shared.msg;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * Reply to a document write request
  */
-public class WriteReply extends AbstractReply {
+@Immutable
+public final class WriteReply extends AbstractReply {
 
   public WriteReply(Request request) {
     super(request);

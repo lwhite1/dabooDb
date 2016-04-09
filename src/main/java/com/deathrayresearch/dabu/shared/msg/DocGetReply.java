@@ -1,15 +1,14 @@
 package com.deathrayresearch.dabu.shared.msg;
 
-import com.deathrayresearch.dabu.shared.Document;
-
-import java.time.ZonedDateTime;
+import javax.annotation.concurrent.Immutable;
 
 /**
- *
+ * A reply to a get request for a single document
  */
-public class DocGetReply extends AbstractReply {
+@Immutable
+public final class DocGetReply extends AbstractReply {
 
-  byte[] document = null;
+  private final byte[] document;
 
   public DocGetReply(Request request, byte[] document) {
     super(request);

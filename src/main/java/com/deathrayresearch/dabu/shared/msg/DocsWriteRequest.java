@@ -3,6 +3,7 @@ package com.deathrayresearch.dabu.shared.msg;
 import com.deathrayresearch.dabu.shared.Document;
 import com.google.common.primitives.SignedBytes;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.List;
 /**
  *  A request to write a collection of documents at a time in a single transactional batch
  */
-public class DocsWriteRequest extends AbstractRequest {
+@Immutable
+public final class DocsWriteRequest extends AbstractRequest {
 
   private final ArrayList<Document> documents = new ArrayList<>();
 

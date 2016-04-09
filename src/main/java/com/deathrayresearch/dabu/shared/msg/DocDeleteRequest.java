@@ -1,9 +1,12 @@
 package com.deathrayresearch.dabu.shared.msg;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * A request to delete a single document
  */
-public class DocDeleteRequest extends AbstractRequest {
+@Immutable
+public final class DocDeleteRequest extends AbstractRequest {
 
   private final byte[] key;
 
