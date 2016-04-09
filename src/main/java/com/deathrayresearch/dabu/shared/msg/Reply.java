@@ -5,11 +5,6 @@ import java.time.ZonedDateTime;
 /**
  *
  */
-public interface Reply {
+public interface Reply extends Message {
 
-  ZonedDateTime getTimestamp();
-
-  byte[] getRequestId();
-
-  RequestType getType();
 }

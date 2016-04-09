@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- *  Writes more than one document at a time in a single transactional batch
+ *  A request to write a collection of documents at a time in a single transactional batch
  */
 public class DocsWriteRequest extends AbstractRequest {
 

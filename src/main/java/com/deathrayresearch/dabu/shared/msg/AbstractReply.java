@@ -33,7 +33,7 @@ public class AbstractReply implements Reply {
   }
 
   @Override
-  public RequestType getType() {
+  public RequestType getRequestType() {
     return type;
   }
 }

@@ -8,15 +8,9 @@ import java.time.ZonedDateTime;
 /**
  *
  */
-public interface Request {
+public interface Request extends Message {
 
   static Gson GSON = new Gson();
-
-  RequestType getRequestType();
-
-  byte[] getRequestId();
-
-  ZonedDateTime getTimestamp();
 
   default byte[] marshall() {
     return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);

@@ -1,7 +1,7 @@
 package com.deathrayresearch.dabu.shared.msg;
 
 /**
- *
+ * A request to delete a single document
  */
 public class DocDeleteRequest extends AbstractRequest {
 

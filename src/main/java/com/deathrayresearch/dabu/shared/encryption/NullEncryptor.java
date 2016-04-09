@@ -7,7 +7,7 @@ public class NullEncryptor implements EncryptorDecryptor {
 
   private static NullEncryptor INSTANCE = new NullEncryptor();
 
-  public static NullEncryptor get() {
+  static NullEncryptor get() {
     return INSTANCE;
   }
 

@@ -3,7 +3,7 @@ package com.deathrayresearch.dabu.shared.msg;
 import java.util.Collection;
 
 /**
- *
+ * A request to delete a collection of documents
  */
 public class DocsDeleteRequest extends AbstractRequest {
 

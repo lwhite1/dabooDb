@@ -5,11 +5,11 @@ import org.jasypt.encryption.pbe.PooledPBEByteEncryptor;
 /**
  *
  */
-public class StandardTextEncyptor implements EncryptorDecryptor {
+public class StandardTextEncryptor implements EncryptorDecryptor {
 
   private final PooledPBEByteEncryptor textEncryptor = new PooledPBEByteEncryptor();
 
-  public StandardTextEncyptor(String password) {
+  StandardTextEncryptor(String password) {
     textEncryptor.setPassword(password);
     textEncryptor.setPoolSize(3);
   }

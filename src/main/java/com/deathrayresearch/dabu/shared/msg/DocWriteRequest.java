@@ -3,7 +3,7 @@ package com.deathrayresearch.dabu.shared.msg;
 import com.deathrayresearch.dabu.shared.Document;
 
 /**
- *
+ * A request to write a single document
  */
 public class DocWriteRequest extends AbstractRequest {
 

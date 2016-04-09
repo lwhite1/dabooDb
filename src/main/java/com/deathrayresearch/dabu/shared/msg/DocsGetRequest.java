@@ -1,10 +1,9 @@
 package com.deathrayresearch.dabu.shared.msg;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
- *
+ *  A request to get a collection of documents using their document keys
  */
 public class DocsGetRequest extends AbstractRequest {
 
