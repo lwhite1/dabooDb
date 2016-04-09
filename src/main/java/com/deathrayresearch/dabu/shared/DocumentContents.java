@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import java.nio.charset.StandardCharsets;
 
 /**
- *
+ * The interface to be implemented by any class to be persisted
  */
 public interface DocumentContents {
 

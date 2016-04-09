@@ -13,11 +13,9 @@ import com.deathrayresearch.dabu.shared.msg.DocWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.DocsWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.WriteReply;
-import com.sun.javadoc.Doc;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -38,7 +36,6 @@ public class DirectDbClient implements DbClient {
   public void writeDocs(List<Document> documentCollection) {
     DocsWriteRequest request = new DocsWriteRequest(documentCollection);
     WriteReply reply = commClient.sendRequest(request);
-
   }
 
   @Override
