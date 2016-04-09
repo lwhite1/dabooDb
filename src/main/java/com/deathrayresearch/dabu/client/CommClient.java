@@ -16,7 +16,7 @@ import com.deathrayresearch.dabu.shared.msg.WriteReply;
  *
  */
 public interface CommClient {
-  
+
   GetReply sendRequest(DocGetRequest request);
 
   GetReply sendRequest(DocsGetRequest request);

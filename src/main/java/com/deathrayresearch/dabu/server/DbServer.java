@@ -11,6 +11,7 @@ import com.deathrayresearch.dabu.shared.msg.QueryRequest;
 import com.deathrayresearch.dabu.shared.msg.DocWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.Reply;
 import com.deathrayresearch.dabu.shared.msg.Request;
+import com.deathrayresearch.dabu.shared.msg.WriteReply;
 
 import java.io.IOException;
 
@@ -44,7 +45,7 @@ public class DbServer {
     }
   }
 
-  private Reply handleRequest(DocWriteRequest request) {
+  private WriteReply handleRequest(DocWriteRequest request) {
     try {
       writeLog.logRequest(request);
       Document document = request.getDocument();
@@ -53,7 +54,7 @@ public class DbServer {
       e.printStackTrace();
       //TODO(lwhite): We should probably exit if we can't write to the WAL
     }
-    return new AbstractReply(request);
+    return new WriteReply(request);
   }
 
   /**
@@ -70,7 +71,7 @@ public class DbServer {
 
   /**
    */
-  private Reply handleRequest(DocGetRequest request) {
+  private GetReply handleRequest(DocGetRequest request) {
     byte[] result = db.get(request.getKey());
     return new GetReply(request, result);
   }

@@ -25,7 +25,7 @@ public class DirectDbClient implements DbClient {
   @Override
   public void writeDoc(Document document) {
 
-    Request request = new DocWriteRequest(document);
+    DocWriteRequest request = new DocWriteRequest(document);
     Reply reply = commClient.sendRequest(request);
   }
 
