@@ -1,6 +1,5 @@
 package com.deathrayresearch.dabu.shared;
 
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 

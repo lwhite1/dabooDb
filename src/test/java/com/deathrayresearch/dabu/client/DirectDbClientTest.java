@@ -45,7 +45,7 @@ public class DirectDbClientTest {
 
   @Test
   public void testWriteDocuments() {
-    List<Person> people = Person.createPeoples(600_000);
+    List<Person> people = Person.createPeoples(6_000);
     List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
       Document document = new StandardDocument(person);
@@ -61,7 +61,7 @@ public class DirectDbClientTest {
 
   @Test
   public void testWriteDocuments2() {
-    List<Person> people = Person.createPeoples(600_000);
+    List<Person> people = Person.createPeoples(6_000);
     List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
       Document document = new StandardDocument(person);
