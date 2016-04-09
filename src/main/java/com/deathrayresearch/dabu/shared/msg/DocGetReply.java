@@ -7,11 +7,11 @@ import java.time.ZonedDateTime;
 /**
  *
  */
-public class GetReply extends AbstractReply {
+public class DocGetReply extends AbstractReply {
 
   byte[] document = null;
 
-  public GetReply(Request request, byte[] document) {
+  public DocGetReply(Request request, byte[] document) {
     super(request);
     this.document = document;
   }

@@ -5,7 +5,7 @@ import com.deathrayresearch.dabu.server.io.WriteLog;
 import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.msg.AbstractReply;
 import com.deathrayresearch.dabu.shared.msg.DocDeleteRequest;
-import com.deathrayresearch.dabu.shared.msg.GetReply;
+import com.deathrayresearch.dabu.shared.msg.DocGetReply;
 import com.deathrayresearch.dabu.shared.msg.DocGetRequest;
 import com.deathrayresearch.dabu.shared.msg.QueryRequest;
 import com.deathrayresearch.dabu.shared.msg.DocWriteRequest;
@@ -71,9 +71,9 @@ public class DbServer {
 
   /**
    */
-  private GetReply handleRequest(DocGetRequest request) {
+  private DocGetReply handleRequest(DocGetRequest request) {
     byte[] result = db.get(request.getKey());
-    return new GetReply(request, result);
+    return new DocGetReply(request, result);
   }
 
   public DbConfig getConfig() {
