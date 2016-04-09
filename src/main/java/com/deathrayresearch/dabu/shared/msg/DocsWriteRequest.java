@@ -4,8 +4,8 @@ import com.deathrayresearch.dabu.shared.Document;
 import com.google.common.primitives.SignedBytes;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *  Writes more than one document at a time in a single transactional batch
@@ -14,8 +14,8 @@ public class DocsWriteRequest extends AbstractRequest {
 
   private final ArrayList<Document> documents = new ArrayList<>();
 
-  public DocsWriteRequest(Collection<Document> documents) {
-    super(RequestType.WRITE);
+  public DocsWriteRequest(List<Document> documents) {
+    super(RequestType.DOCUMENTS_WRITE);
     this.documents.addAll(documents);
     this.documents.sort(new Comparator<Document>() {
       @Override
@@ -25,7 +25,7 @@ public class DocsWriteRequest extends AbstractRequest {
     });
   }
 
-  public Collection<Document> getDocuments() {
+  public List<Document> getDocuments() {
     return documents;
   }
 }

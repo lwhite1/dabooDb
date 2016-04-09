@@ -1,5 +1,6 @@
 package com.deathrayresearch.dabu.server;
 
+import com.deathrayresearch.dabu.shared.Document;
 import com.google.common.primitives.SignedBytes;
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
@@ -7,6 +8,7 @@ import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentMap;
@@ -36,6 +38,11 @@ public class MemoryDb implements Db {
   }
 
   @Override
+  public void write(List<Document> documentList) {
+
+  }
+
+  @Override
   public void remove(byte[] key) {
     store.remove(key);
   }
@@ -43,6 +50,11 @@ public class MemoryDb implements Db {
   @Override
   public byte[] get(byte[] key) {
     return store.get(key);
+  }
+
+  @Override
+  public List<byte[]> get(List<byte[]> keys) {
+    return null;
   }
 
   @Override

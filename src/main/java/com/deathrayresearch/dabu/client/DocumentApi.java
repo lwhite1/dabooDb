@@ -13,14 +13,14 @@ public interface DocumentApi {
 
   void writeDoc(Document document);
 
-  void writeDocs(Collection<Document> documentCollection);
+  void writeDocs(List<Document> documentCollection);
 
   Document getDoc(byte[] key);
 
-  List<Document> getDocs(Collection<byte[]> keys);
+  List<Document> getDocs(List<byte[]> keys);
 
   void deleteDoc(byte[] key);
 
-  void deleteDocs(Collection<byte[]> keys);
+  void deleteDocs(List<byte[]> keys);
 
 }

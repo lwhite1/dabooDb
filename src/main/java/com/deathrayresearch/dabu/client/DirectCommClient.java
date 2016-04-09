@@ -5,6 +5,7 @@ import com.deathrayresearch.dabu.shared.msg.DeleteReply;
 import com.deathrayresearch.dabu.shared.msg.DocDeleteRequest;
 import com.deathrayresearch.dabu.shared.msg.DocWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.DocsDeleteRequest;
+import com.deathrayresearch.dabu.shared.msg.DocsGetReply;
 import com.deathrayresearch.dabu.shared.msg.DocsGetRequest;
 import com.deathrayresearch.dabu.shared.msg.DocsWriteRequest;
 import com.deathrayresearch.dabu.shared.msg.DocGetReply;
@@ -28,8 +29,8 @@ public class DirectCommClient implements CommClient {
   }
 
   @Override
-  public DocGetReply sendRequest(DocsGetRequest request) {
-    return (DocGetReply) dbServer.handleRequest(request);
+  public DocsGetReply sendRequest(DocsGetRequest request) {
+    return (DocsGetReply) dbServer.handleRequest(request);
   }
 
   @Override

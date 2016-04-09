@@ -1,20 +1,22 @@
 package com.deathrayresearch.dabu.shared.msg;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
  */
 public class DocsGetRequest extends AbstractRequest {
 
-  private final Collection<byte[]> keys;
+  private final List<byte[]> keys;
 
-  public DocsGetRequest(Collection<byte[]> keys) {
-    super(RequestType.GET);
+
+  public DocsGetRequest(List<byte[]> keys) {
+    super(RequestType.DOCUMENT_GET);
     this.keys = keys;
   }
 
-  public Collection<byte[]> getKey() {
+  public List<byte[]> getKeys() {
     return keys;
   }
 }

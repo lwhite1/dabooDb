@@ -10,7 +10,7 @@ public class DocWriteRequest extends AbstractRequest {
   private final Document document;
 
   public DocWriteRequest(Document document) {
-    super(RequestType.WRITE);
+    super(RequestType.DOCUMENT_WRITE);
     this.document = document;
   }
 

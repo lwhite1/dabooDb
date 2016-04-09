@@ -8,7 +8,7 @@ public class DocDeleteRequest extends AbstractRequest {
   private final byte[] key;
 
   public DocDeleteRequest(byte[] key) {
-    super(RequestType.DELETE);
+    super(RequestType.DOCUMENT_DELETE);
     this.key = key;
   }
 

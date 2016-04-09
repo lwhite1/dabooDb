@@ -1,7 +1,5 @@
 package com.deathrayresearch.dabu.shared.msg;
 
-import com.deathrayresearch.dabu.shared.Document;
-
 /**
  *
  */
@@ -10,7 +8,7 @@ public class DocGetRequest extends AbstractRequest {
   private final byte[] key;
 
   public DocGetRequest(byte[] key) {
-    super(RequestType.GET);
+    super(RequestType.DOCUMENT_GET);
     this.key = key;
   }
 

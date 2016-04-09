@@ -35,7 +35,7 @@ public class DirectDbClient implements DbClient {
   }
 
   @Override
-  public void writeDocs(Collection<Document> documentCollection) {
+  public void writeDocs(List<Document> documentCollection) {
     DocsWriteRequest request = new DocsWriteRequest(documentCollection);
     WriteReply reply = commClient.sendRequest(request);
 
@@ -50,7 +50,7 @@ public class DirectDbClient implements DbClient {
   }
 
   @Override
-  public List<Document> getDocs(Collection<byte[]> keys) {
+  public List<Document> getDocs(List<byte[]> keys) {
     List<Document> results = new ArrayList<>();
     DocsGetRequest request = new DocsGetRequest(keys);
     DocsGetReply reply = commClient.sendRequest(request);
@@ -69,7 +69,7 @@ public class DirectDbClient implements DbClient {
   }
 
   @Override
-  public void deleteDocs(Collection<byte[]> keys) {
+  public void deleteDocs(List<byte[]> keys) {
     DocsDeleteRequest request = new DocsDeleteRequest(keys);
     DeleteReply reply = commClient.sendRequest(request);
   }
