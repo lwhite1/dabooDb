@@ -3,7 +3,7 @@ package com.deathrayresearch.dabu.shared.encryption;
 /**
  *
  */
-public interface EncipherDecipher {
+public interface EncryptorDecryptor {
 
   byte[] encrypt(byte[] plainText);
 
