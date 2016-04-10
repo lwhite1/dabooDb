@@ -6,8 +6,8 @@ import org.dabudb.dabu.shared.compression.CompressorFactory;
 import org.dabudb.dabu.shared.encryption.EncryptorDecryptor;
 import org.dabudb.dabu.shared.encryption.EncryptorFactory;
 import org.dabudb.dabu.shared.msg.serialization.MessageSerializerFactory;
-import org.dabudb.dabu.shared.msg.serialization.MsgSerializerDeserializer;
-import org.dabudb.dabu.shared.msg.serialization.MsgSerializerType;
+import org.dabudb.dabu.shared.msg.serialization.MessageSerializerDeserializer;
+import org.dabudb.dabu.shared.msg.serialization.MessageSerializerType;
 
 /**
  *
@@ -16,15 +16,15 @@ public class MessagePipe {
 
   private EncryptorDecryptor encryptorDecryptor;
   private CompressorDeCompressor compressorDeCompressor;
-  private MsgSerializerDeserializer serializerDeserializer;
+  private MessageSerializerDeserializer serializerDeserializer;
 
   /**
    * Creates a messagePipe with no encryption, and the other filters as defined
    */
-  public static MessagePipe create(CompressionType compressionType, MsgSerializerType serializerType) {
+  public static MessagePipe create(CompressionType compressionType, MessageSerializerType serializerType) {
     CompressorDeCompressor compressor = CompressorFactory.get(compressionType);
     EncryptorDecryptor encryptor = EncryptorFactory.NONE;
-    MsgSerializerDeserializer serializer = MessageSerializerFactory.get(serializerType);
+    MessageSerializerDeserializer serializer = MessageSerializerFactory.get(serializerType);
 
     return new MessagePipe(
         compressor,
@@ -36,7 +36,7 @@ public class MessagePipe {
   public MessagePipe(
       CompressorDeCompressor compressorDeCompressor,
       EncryptorDecryptor encryptorDecryptor,
-      MsgSerializerDeserializer serializerDeserializer) {
+      MessageSerializerDeserializer serializerDeserializer) {
     this.encryptorDecryptor = encryptorDecryptor;
     this.compressorDeCompressor = compressorDeCompressor;
     this.serializerDeserializer = serializerDeserializer;

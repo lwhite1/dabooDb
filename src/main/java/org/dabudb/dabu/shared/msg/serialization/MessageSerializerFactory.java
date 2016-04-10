@@ -7,7 +7,7 @@ public class MessageSerializerFactory {
   /**
    * Returns a content serializer of the type specified in the input
    */
-  public static MsgSerializerDeserializer get(MsgSerializerType type) {
+  public static MessageSerializerDeserializer get(MessageSerializerType type) {
 
     switch (type) {
       case JSON: return MessageJsonSerializer.get();

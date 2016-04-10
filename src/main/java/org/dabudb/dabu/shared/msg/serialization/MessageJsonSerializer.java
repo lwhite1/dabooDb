@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * A serializer that converts Document contents to json, then UTF_8 byte arrays
  */
-public class MessageJsonSerializer implements MsgSerializerDeserializer {
+public class MessageJsonSerializer implements MessageSerializerDeserializer {
 
   private static final Gson GSON = new Gson();
 

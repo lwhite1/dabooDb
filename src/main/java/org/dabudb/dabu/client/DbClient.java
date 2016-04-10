@@ -12,7 +12,7 @@ import org.dabudb.dabu.shared.msg.request.DocsDeleteRequest;
 import org.dabudb.dabu.shared.msg.reply.DocsGetReply;
 import org.dabudb.dabu.shared.msg.request.DocsGetRequest;
 import org.dabudb.dabu.shared.msg.request.DocsWriteRequest;
-import org.dabudb.dabu.shared.msg.Reply;
+import org.dabudb.dabu.shared.msg.reply.Reply;
 import org.dabudb.dabu.shared.msg.reply.WriteReply;
 
 import java.util.ArrayList;

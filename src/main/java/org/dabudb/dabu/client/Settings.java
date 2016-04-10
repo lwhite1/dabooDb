@@ -1,8 +1,8 @@
 package org.dabudb.dabu.client;
 
 import org.dabudb.dabu.shared.ContentsPipe;
-import org.dabudb.dabu.shared.DocumentJsonSerializer;
-import org.dabudb.dabu.shared.DocumentSerializer;
+import org.dabudb.dabu.shared.serialization.DocumentJsonSerializer;
+import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;

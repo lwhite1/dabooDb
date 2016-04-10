@@ -1,6 +1,7 @@
 package org.dabudb.dabu.shared;
 
 import org.dabudb.dabu.client.Settings;
+import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 
 import java.util.Arrays;
 

@@ -1,6 +1,7 @@
-package org.dabudb.dabu.shared;
+package org.dabudb.dabu.shared.serialization;
 
 import com.google.gson.Gson;
+import org.dabudb.dabu.shared.Document;
 
 import java.nio.charset.StandardCharsets;
 

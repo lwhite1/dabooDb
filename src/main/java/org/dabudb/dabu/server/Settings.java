@@ -2,12 +2,12 @@ package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.server.io.WriteAheadLog;
 import org.dabudb.dabu.server.io.WriteLog;
-import org.dabudb.dabu.shared.DocumentSerializer;
+import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;
 import org.dabudb.dabu.shared.msg.MessagePipe;
-import org.dabudb.dabu.shared.msg.serialization.MsgSerializerType;
+import org.dabudb.dabu.shared.msg.serialization.MessageSerializerType;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -132,8 +132,8 @@ public class Settings {
 
   private void setMessagePipe(Properties properties) {
     CompressionType compressionType = CompressionType.valueOf(properties.getProperty("message.compression"));
-    MsgSerializerType serializerType =
-        MsgSerializerType.valueOf(properties.getProperty("message.serialization"));
+    MessageSerializerType serializerType =
+        MessageSerializerType.valueOf(properties.getProperty("message.serialization"));
     EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("message.encryption"));
     String encryptionPwd = String.valueOf(properties.getProperty("message.encryption.pwd"));
 

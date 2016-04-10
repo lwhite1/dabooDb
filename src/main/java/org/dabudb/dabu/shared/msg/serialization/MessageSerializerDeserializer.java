@@ -5,7 +5,7 @@ import org.dabudb.dabu.shared.msg.Message;
 /**
  *  Interface for a converter that serializes messages to bytes, and vice-versa.
  */
-public interface MsgSerializerDeserializer {
+public interface MessageSerializerDeserializer {
 
   byte[] serialize(Message message);
 

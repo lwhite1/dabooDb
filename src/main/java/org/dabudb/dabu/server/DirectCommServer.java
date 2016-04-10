@@ -7,7 +7,7 @@ import org.dabudb.dabu.shared.msg.request.DocsDeleteRequest;
 import org.dabudb.dabu.shared.msg.request.DocsGetRequest;
 import org.dabudb.dabu.shared.msg.request.DocsWriteRequest;
 import org.dabudb.dabu.shared.msg.request.QueryRequest;
-import org.dabudb.dabu.shared.msg.Reply;
+import org.dabudb.dabu.shared.msg.reply.Reply;
 
 /**
  *

@@ -1,6 +1,5 @@
 package org.dabudb.dabu.shared.msg.reply;
 
-import org.dabudb.dabu.shared.msg.Reply;
 import org.dabudb.dabu.shared.msg.request.Request;
 import org.dabudb.dabu.shared.msg.request.RequestType;
 
