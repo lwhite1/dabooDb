@@ -1,5 +1,6 @@
 package org.dabudb.dabu.server;
 
+import org.dabudb.dabu.server.db.Db;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.msg.reply.AbstractReply;

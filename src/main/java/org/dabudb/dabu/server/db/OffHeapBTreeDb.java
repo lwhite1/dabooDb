@@ -1,4 +1,4 @@
-package org.dabudb.dabu.server;
+package org.dabudb.dabu.server.db;
 
 import org.dabudb.dabu.shared.Document;
 import org.mapdb.BTreeMap;
@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * An in-memory implementation of a Db

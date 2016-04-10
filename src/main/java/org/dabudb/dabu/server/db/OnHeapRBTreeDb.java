@@ -1,4 +1,4 @@
-package org.dabudb.dabu.server;
+package org.dabudb.dabu.server.db;
 
 import com.google.common.primitives.SignedBytes;
 import org.dabudb.dabu.shared.Document;
@@ -8,15 +8,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.TreeMap;
 
 /**
  * An in-memory implementation of a Db
  */
-public class OnHeapConcurrentSkipListDb implements Db {
+public class OnHeapRBTreeDb implements Db {
 
-  private ConcurrentSkipListMap<byte[], byte[]> store
-      = new ConcurrentSkipListMap<>(SignedBytes.lexicographicalComparator());
+  private TreeMap<byte[], byte[]> store = new TreeMap<>(SignedBytes.lexicographicalComparator());
 
   @Override
   public void write(byte[] key, byte[] value) {

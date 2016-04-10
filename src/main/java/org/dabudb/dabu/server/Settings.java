@@ -1,5 +1,7 @@
 package org.dabudb.dabu.server;
 
+import org.dabudb.dabu.server.db.Db;
+import org.dabudb.dabu.server.db.OffHeapBTreeDb;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 import org.dabudb.dabu.server.io.WriteLog;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;

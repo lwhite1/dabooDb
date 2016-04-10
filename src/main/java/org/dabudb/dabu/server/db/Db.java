@@ -1,4 +1,4 @@
-package org.dabudb.dabu.server;
+package org.dabudb.dabu.server.db;
 
 import org.dabudb.dabu.shared.Document;
 
