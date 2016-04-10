@@ -5,6 +5,8 @@ import org.dabudb.dabu.shared.msg.request.RequestType;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A reply to a request to perform a database action
@@ -38,5 +40,29 @@ public class AbstractReply implements Reply {
   @Override
   public RequestType getRequestType() {
     return type;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AbstractReply that = (AbstractReply) o;
+    return Objects.equals(getTimestamp(), that.getTimestamp()) &&
+        Arrays.equals(getRequestId(), that.getRequestId()) &&
+        type == that.type;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getTimestamp(), getRequestId(), type);
+  }
+
+  @Override
+  public String toString() {
+    return "AbstractReply{" +
+        "timestamp=" + timestamp +
+        ", requestId=" + Arrays.toString(requestId) +
+        ", type=" + type +
+        '}';
   }
 }
