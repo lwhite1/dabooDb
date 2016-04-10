@@ -2,6 +2,7 @@ package org.dabudb.dabu.shared.serialization;
 
 import org.dabudb.dabu.shared.DocumentContents;
 import com.google.gson.Gson;
+import org.dabudb.dabu.shared.serialization.json.GsonFactory;
 
 import java.nio.charset.StandardCharsets;
 
@@ -10,7 +11,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class ContentJsonSerializer implements ContentSerializerDeserializer {
 
-  private static final Gson GSON = new Gson();
+  private static final Gson GSON = GsonFactory.INSTANCE.defaultGson();
 
   private static final ContentJsonSerializer INSTANCE = new ContentJsonSerializer();
 

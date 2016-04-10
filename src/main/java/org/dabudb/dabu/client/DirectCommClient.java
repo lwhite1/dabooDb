@@ -3,13 +3,11 @@ package org.dabudb.dabu.client;
 import org.dabudb.dabu.server.DirectCommServer;
 import org.dabudb.dabu.shared.msg.reply.DeleteReply;
 import org.dabudb.dabu.shared.msg.request.DocDeleteRequest;
-import org.dabudb.dabu.shared.msg.request.DocWriteRequest;
 import org.dabudb.dabu.shared.msg.request.DocsDeleteRequest;
 import org.dabudb.dabu.shared.msg.reply.DocsGetReply;
 import org.dabudb.dabu.shared.msg.request.DocsGetRequest;
 import org.dabudb.dabu.shared.msg.request.DocsWriteRequest;
 import org.dabudb.dabu.shared.msg.reply.DocGetReply;
-import org.dabudb.dabu.shared.msg.request.DocGetRequest;
 import org.dabudb.dabu.shared.msg.reply.WriteReply;
 
 /**
@@ -21,11 +19,6 @@ public class DirectCommClient implements CommClient {
 
   public DirectCommClient() {
     directCommServer = new DirectCommServer();
-  }
-
-  @Override
-  public DocGetReply sendRequest(DocGetRequest request) {
-    return (DocGetReply) directCommServer.handleRequest(request);
   }
 
   @Override
@@ -41,11 +34,6 @@ public class DirectCommClient implements CommClient {
   @Override
   public DeleteReply sendRequest(DocsDeleteRequest request) {
     return (DeleteReply) directCommServer.handleRequest(request);
-  }
-
-  @Override
-  public WriteReply sendRequest(DocWriteRequest request) {
-    return (WriteReply) directCommServer.handleRequest(request);
   }
 
   @Override

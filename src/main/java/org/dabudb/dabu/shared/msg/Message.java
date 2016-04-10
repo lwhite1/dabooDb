@@ -20,8 +20,4 @@ public interface Message {
    */
   ZonedDateTime getTimestamp();
 
-  /**
-   * Returns the type of the request (a write of one or more documents, for example)
-   */
-  RequestType getRequestType();
 }

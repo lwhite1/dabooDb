@@ -1,7 +1,6 @@
 package org.dabudb.dabu.shared.msg.reply;
 
 import org.dabudb.dabu.shared.msg.request.Request;
-import org.dabudb.dabu.shared.msg.request.RequestType;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -11,7 +10,7 @@ import java.util.Objects;
 /**
  * A reply to a request to perform a database action
  */
-public class AbstractReply implements Reply {
+public abstract class AbstractReply implements Reply {
 
   private final static String TIME_ZONE_FOR_TIMESTAMP = "Z"; // UTC
 
@@ -19,21 +18,17 @@ public class AbstractReply implements Reply {
 
   private final byte[] requestId;
 
-  private final RequestType type;
-
   private final ErrorCondition errorCondition;
 
   public AbstractReply(Request request) {
     timestamp = ZonedDateTime.now(ZoneId.of(TIME_ZONE_FOR_TIMESTAMP));
     requestId = request.getRequestId();
-    type = request.getRequestType();
     errorCondition = null;
   }
 
   public AbstractReply(Request request, ErrorCondition errorCondition) {
     timestamp = ZonedDateTime.now(ZoneId.of(TIME_ZONE_FOR_TIMESTAMP));
     requestId = request.getRequestId();
-    type = request.getRequestType();
     this.errorCondition = errorCondition;
   }
 
@@ -47,11 +42,6 @@ public class AbstractReply implements Reply {
     return requestId;
   }
 
-  @Override
-  public RequestType getRequestType() {
-    return type;
-  }
-
   public ErrorCondition getErrorCondition() {
     return errorCondition;
   }
@@ -63,13 +53,12 @@ public class AbstractReply implements Reply {
     AbstractReply that = (AbstractReply) o;
     return Objects.equals(getTimestamp(), that.getTimestamp()) &&
         Arrays.equals(getRequestId(), that.getRequestId()) &&
-        type == that.type &&
         Objects.equals(getErrorCondition(), that.getErrorCondition());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getTimestamp(), getRequestId(), type, getErrorCondition());
+    return Objects.hash(getTimestamp(), getRequestId(), getErrorCondition());
   }
 
   @Override
@@ -77,7 +66,6 @@ public class AbstractReply implements Reply {
     return "AbstractReply{" +
         "timestamp=" + timestamp +
         ", requestId=" + Arrays.toString(requestId) +
-        ", type=" + type +
         ", errorCondition=" + errorCondition +
         '}';
   }

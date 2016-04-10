@@ -12,7 +12,7 @@ public class DocsGetRequest extends AbstractRequest {
 
 
   public DocsGetRequest(List<byte[]> keys) {
-    super(RequestType.DOCUMENT_GET);
+    super(RequestType.GET);
     this.keys = keys;
   }
 

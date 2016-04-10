@@ -1,8 +1,6 @@
 package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.shared.msg.request.DocDeleteRequest;
-import org.dabudb.dabu.shared.msg.request.DocGetRequest;
-import org.dabudb.dabu.shared.msg.request.DocWriteRequest;
 import org.dabudb.dabu.shared.msg.request.DocsDeleteRequest;
 import org.dabudb.dabu.shared.msg.request.DocsGetRequest;
 import org.dabudb.dabu.shared.msg.request.DocsWriteRequest;
@@ -17,10 +15,6 @@ public class DirectCommServer implements CommServer {
   private final DbServer dbServer = DbServer.get();
 
   public Reply handleRequest(DocsWriteRequest request) {
-    return dbServer.handleRequest(request);
-  }
-
-  public Reply handleRequest(DocWriteRequest request) {
     return dbServer.handleRequest(request);
   }
 
@@ -44,10 +38,6 @@ public class DirectCommServer implements CommServer {
 
   /**
    */
-  public Reply handleRequest(DocGetRequest request) {
-    return dbServer.handleRequest(request);
-  }
-
   public Reply handleRequest(DocsGetRequest request) {
     return dbServer.handleRequest(request);
   }

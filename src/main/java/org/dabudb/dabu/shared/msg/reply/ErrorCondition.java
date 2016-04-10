@@ -50,7 +50,7 @@ public final class ErrorCondition {
   public enum ErrorType {
 
     OPTIMISTIC_LOCK_EXCEPTION,
-    IO_EXCEPTION,
-    FATAL_SERVER_EXCEPTION
+    PERSISTENCE_EXCEPTION,
+    SEVERE_SERVER_EXCEPTION
   }
 }

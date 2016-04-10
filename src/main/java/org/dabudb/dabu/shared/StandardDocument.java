@@ -30,18 +30,20 @@ public class StandardDocument implements Document {
 
   private static DocumentSerializer documentSerializer;
 
-  private final byte[] contents;
+  private byte[] contents;
 
-  private final int documentVersion;
+  private int documentVersion;
 
   private final short schemaVersion = 0;
 
   private boolean deleted = false;
 
-  private final byte[] key;
+  private byte[] key;
 
   /** The kind of document represented by the contents */
-  private final String contentType;
+  private String contentType;
+
+  private String contentClass;
 
   public StandardDocument(DocumentContents contents) {
     this.contents = getContentsPipe().contentsToBytes(contents);
@@ -52,7 +54,10 @@ public class StandardDocument implements Document {
     } else {
       key = contents.getKey();
     }
+    this.contentClass = contents.getType();
   }
+
+  private StandardDocument() {}
 
   public StandardDocument(Document other) {
     this.contents = other.getContents();
@@ -61,6 +66,7 @@ public class StandardDocument implements Document {
     }
     this.contentType = other.getContentType();
     this.key = other.key();
+    this.contentClass = other.getContentClass();
   }
 
   @Override
@@ -76,6 +82,11 @@ public class StandardDocument implements Document {
   @Override
   public String getContentType() {
     return contentType;
+  }
+
+  @Override
+  public String getContentClass() {
+    return contentClass;
   }
 
   @Override

@@ -5,9 +5,6 @@ import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.msg.reply.DeleteReply;
 import org.dabudb.dabu.shared.msg.request.DocDeleteRequest;
-import org.dabudb.dabu.shared.msg.reply.DocGetReply;
-import org.dabudb.dabu.shared.msg.request.DocGetRequest;
-import org.dabudb.dabu.shared.msg.request.DocWriteRequest;
 import org.dabudb.dabu.shared.msg.request.DocsDeleteRequest;
 import org.dabudb.dabu.shared.msg.reply.DocsGetReply;
 import org.dabudb.dabu.shared.msg.request.DocsGetRequest;
@@ -16,6 +13,7 @@ import org.dabudb.dabu.shared.msg.reply.Reply;
 import org.dabudb.dabu.shared.msg.reply.WriteReply;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,7 +44,7 @@ public class DbClient implements DocumentApi {
 
   @Override
   public void writeDoc(Document document) {
-    DocWriteRequest request = new DocWriteRequest(document);
+    DocsWriteRequest request = new DocsWriteRequest(Collections.singletonList(document));
     Reply reply = settings.getCommClient().sendRequest(request);
   }
 
@@ -58,9 +56,9 @@ public class DbClient implements DocumentApi {
 
   @Override
   public Document getDoc(byte[] key) {
-    DocGetRequest request = new DocGetRequest(key);
-    DocGetReply reply = settings.getCommClient().sendRequest(request);
-    return bytesToDocument(reply.getDocument());
+    DocsGetRequest request = new DocsGetRequest(Collections.singletonList(key));
+    DocsGetReply reply = settings.getCommClient().sendRequest(request);
+    return bytesToDocument(reply.getDocuments().get(0));
   }
 
   @Override

@@ -1,0 +1,93 @@
+package org.dabudb.dabu.shared.protobufs;
+
+option java_package = "org.dabudb.dabu.shared.protobufs";
+option java_outer_classname = "Request";
+
+/**
+ *  A write request message
+ */
+message WriteRequest {
+    required Header header = 1;
+    required WriteRequestBody body = 2;
+}
+
+/**
+* The header for a request
+*/
+message Header {
+
+    /** A byte array that uniquely identifies requests. Typically a UUID */
+    required bytes id = 1;
+
+    /** The time the request was created (Not sent), according to the client */
+    required int64 timestamp = 2;
+
+    /** The type of request */
+    required RequestType requestType = 3;
+}
+
+/**
+*   The body of a write request
+*/
+message WriteRequestBody {
+    repeated Document document = 1;
+}
+
+/**
+*   The kind of request
+*/
+enum RequestType {
+  GET = 1;
+  WRITE = 2;
+  DELETE = 3;
+  QUERY = 4;
+}
+
+/**
+*   A Document, which is the thing written in a write request
+*/
+message Document {
+    /** A unique identifier for this document and its contents */
+    required bytes key = 1;
+
+    /** The java class name of the class of the contents */
+    required string contentClass = 2;
+
+    /** A human-friendly name for the kind of contents, such as a company or user. Used for querying */
+    required string documentType = 3;
+
+    /** The version of the json schema used to encode the payload */
+    required int32 schemaVersion = 4;
+
+    /** A flag indicating that the document has been deleted */
+    required bool deleted = 5;
+
+    /** The document contents as bytes, possibly compressed or encrypted */
+    required bytes contentBytes = 6;
+
+    /** The current (document) version of this document */
+    required int32 instanceVersion = 7;
+}
+
+/**
+*   A response to a WriteRequest
+*/
+message WriteResponse {
+    required int64 timestamp = 1;
+    optional bytes requestId = 2;
+    optional ErrorCondition errorCondition = 3;
+}
+
+/**
+*  Error information returned in a reply
+*/
+message ErrorCondition {
+    required ErrorType errorType = 1;
+    optional string description = 2;
+}
+
+enum ErrorType {
+    OPTIMISTIC_LOCK_EXCEPTION = 1;
+    PERSISTENCE_EXCEPTION = 2;
+    SEVERE_SERVER_EXCEPTION = 3;
+}

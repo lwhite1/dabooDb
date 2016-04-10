@@ -13,7 +13,7 @@ public final class DocsDeleteRequest extends AbstractRequest {
   private final List<byte[]> keys;
 
   public DocsDeleteRequest(List<byte[]> keys) {
-    super(RequestType.DOCUMENTS_DELETE);
+    super(RequestType.DELETE);
     this.keys = keys;
   }
 

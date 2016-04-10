@@ -18,7 +18,7 @@ public final class DocsWriteRequest extends AbstractRequest {
   private final ArrayList<Document> documents = new ArrayList<>();
 
   public DocsWriteRequest(List<Document> documents) {
-    super(RequestType.DOCUMENTS_WRITE);
+    super(RequestType.WRITE);
     this.documents.addAll(documents);
     this.documents.sort(new Comparator<Document>() {
       @Override

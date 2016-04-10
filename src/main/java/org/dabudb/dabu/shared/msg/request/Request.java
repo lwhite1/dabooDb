@@ -15,4 +15,10 @@ public interface Request extends Message {
   default byte[] marshall() {
     return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);
   }
+
+  /**
+   * Returns the type of the request (a write of one or more documents, for example)
+   */
+  RequestType getRequestType();
+
 }

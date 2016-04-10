@@ -26,6 +26,11 @@ public interface Document {
    */
   String getContentType();
 
+  /**
+   * Returns a String naming the kind of document represented by the content
+   */
+  String getContentClass();
+
   int schemaVersion();
 
   DocumentContents documentContents();
