@@ -2,6 +2,7 @@ package org.dabudb.dabu.shared.msg.serialization;
 
 import org.dabudb.dabu.shared.msg.Message;
 import com.google.gson.Gson;
+import org.dabudb.dabu.shared.serialization.json.GsonFactory;
 
 import java.nio.charset.StandardCharsets;
 
@@ -10,7 +11,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class MessageJsonSerializer implements MessageSerializerDeserializer {
 
-  private static final Gson GSON = new Gson();
+  private static final Gson GSON = GsonFactory.INSTANCE.getMessageGson();
 
   private static final MessageJsonSerializer INSTANCE = new MessageJsonSerializer();
 
@@ -22,7 +23,8 @@ public class MessageJsonSerializer implements MessageSerializerDeserializer {
 
   @Override
   public byte[] serialize(Message message) {
-    return GSON.toJson(message).getBytes(StandardCharsets.UTF_8);
+    String json = GSON.toJson(message);
+    return json.getBytes(StandardCharsets.UTF_8);
   }
 
   @Override

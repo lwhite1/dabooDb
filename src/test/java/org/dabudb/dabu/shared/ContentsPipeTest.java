@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Tests for ContentsPipe
  */
 public class ContentsPipeTest {
 
