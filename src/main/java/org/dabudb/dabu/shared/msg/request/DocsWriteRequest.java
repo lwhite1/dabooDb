@@ -7,6 +7,7 @@ import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *  A request to write a collection of documents at a time in a single transactional batch
@@ -29,5 +30,26 @@ public final class DocsWriteRequest extends AbstractRequest {
 
   public List<Document> getDocuments() {
     return documents;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    DocsWriteRequest that = (DocsWriteRequest) o;
+    return Objects.equals(getDocuments(), that.getDocuments());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getDocuments());
+  }
+
+  @Override
+  public String toString() {
+    return "DocsWriteRequest{" +
+        "documents=" + documents +
+        "} " + super.toString();
   }
 }

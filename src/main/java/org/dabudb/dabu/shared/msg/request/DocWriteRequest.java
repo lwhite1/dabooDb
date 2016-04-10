@@ -31,22 +31,22 @@ public class DocWriteRequest extends AbstractRequest {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
     DocWriteRequest that = (DocWriteRequest) o;
-    return Arrays.equals(key, that.key) &&
-        Arrays.equals(documentBytes, that.documentBytes);
+    return Arrays.equals(getKey(), that.getKey()) &&
+        Arrays.equals(getDocumentBytes(), that.getDocumentBytes());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, documentBytes);
+    return Objects.hash(super.hashCode(), getKey(), getDocumentBytes());
   }
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder("DocWriteRequest{");
-    sb.append("key=").append(Arrays.toString(key));
-    sb.append(", documentBytes=").append(Arrays.toString(documentBytes));
-    sb.append('}');
-    return sb.toString();
+    return "DocWriteRequest{" +
+        "key=" + Arrays.toString(key) +
+        ", documentBytes=" + Arrays.toString(documentBytes) +
+        "} " + super.toString();
   }
 }

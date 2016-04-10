@@ -3,6 +3,8 @@ package org.dabudb.dabu.shared.msg.request;
 import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -37,5 +39,30 @@ public abstract class AbstractRequest implements Request {
   @Override
   public ZonedDateTime getTimestamp() {
     return timestamp;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AbstractRequest that = (AbstractRequest) o;
+    return requestType == that.requestType &&
+        Objects.equals(timestamp, that.timestamp) &&
+        Arrays.equals(requestId, that.requestId);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(requestType, timestamp, requestId);
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("AbstractRequest{");
+    sb.append("requestType=").append(requestType);
+    sb.append(", timestamp=").append(timestamp);
+    sb.append(", requestId=").append(Arrays.toString(requestId));
+    sb.append('}');
+    return sb.toString();
   }
 }
