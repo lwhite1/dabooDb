@@ -2,6 +2,7 @@ package org.dabudb.dabu.shared.msg;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * A request to delete a collection of documents
@@ -9,14 +10,14 @@ import java.util.Collection;
 @Immutable
 public final class DocsDeleteRequest extends AbstractRequest {
 
-  private final Collection<byte[]> keys;
+  private final List<byte[]> keys;
 
-  public DocsDeleteRequest(Collection<byte[]> keys) {
+  public DocsDeleteRequest(List<byte[]> keys) {
     super(RequestType.DOCUMENTS_DELETE);
     this.keys = keys;
   }
 
-  public Collection<byte[]> getKey() {
+  public List<byte[]> getKeys() {
     return keys;
   }
 

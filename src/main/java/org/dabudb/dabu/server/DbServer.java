@@ -99,12 +99,20 @@ public class DbServer {
   /**
    */
   private DeleteReply handleRequest(DocsDeleteRequest request) {
+    try {
+      writeLog().logRequest(request);
+      db().delete(request.getKeys());
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
     return new DeleteReply(request);
   }
 
   /**
    */
   private Reply handleRequest(QueryRequest request) {
+
     return new AbstractReply(request);
   }
 
