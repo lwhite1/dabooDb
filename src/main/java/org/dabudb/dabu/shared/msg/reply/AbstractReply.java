@@ -21,10 +21,20 @@ public class AbstractReply implements Reply {
 
   private final RequestType type;
 
+  private final ErrorCondition errorCondition;
+
   public AbstractReply(Request request) {
     timestamp = ZonedDateTime.now(ZoneId.of(TIME_ZONE_FOR_TIMESTAMP));
     requestId = request.getRequestId();
     type = request.getRequestType();
+    errorCondition = null;
+  }
+
+  public AbstractReply(Request request, ErrorCondition errorCondition) {
+    timestamp = ZonedDateTime.now(ZoneId.of(TIME_ZONE_FOR_TIMESTAMP));
+    requestId = request.getRequestId();
+    type = request.getRequestType();
+    this.errorCondition = errorCondition;
   }
 
   @Override
@@ -40,6 +50,10 @@ public class AbstractReply implements Reply {
   @Override
   public RequestType getRequestType() {
     return type;
+  }
+  
+  public ErrorCondition getErrorCondition() {
+    return errorCondition;
   }
 
   @Override
