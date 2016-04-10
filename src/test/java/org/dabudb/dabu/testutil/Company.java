@@ -12,8 +12,8 @@ import java.util.UUID;
  */
 public class Company implements DocumentContents {
 
-  String name;
-  byte[] key;
+  private String name;
+  private byte[] key;
 
   public Company(String name) {
     this.name = name;

@@ -49,7 +49,7 @@ public class DirectDbClientTest {
     for (Document document : peopleDocs) {
       client.writeDoc(document);
     }
-    System.out.println("Write: " + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+    System.out.println("Write " + 6_000 + " objects in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
 
   @Test

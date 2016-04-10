@@ -19,13 +19,13 @@ import java.util.Properties;
  */
 public class Settings {
 
-  private MessagePipe messagePipe;
+  private MessagePipe messagePipe = MessagePipe.create(CompressionType.SNAPPY, MessageSerializerType.JSON);
 
   private Class documentClass = StandardDocument.class;
 
   private DocumentSerializer documentSerializer;
 
-  private Db db = new MemoryDb();
+  private Db db = new OffHeapBTreeDb();
 
   private File databaseDirectory = new File(System.getProperty("user.dir"));
 

@@ -1,7 +1,10 @@
 package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.shared.Document;
-import com.google.common.primitives.SignedBytes;
+import org.mapdb.BTreeMap;
+import org.mapdb.DB;
+import org.mapdb.DBMaker;
+import org.mapdb.Serializer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,20 +16,18 @@ import java.util.TreeMap;
 /**
  * An in-memory implementation of a Db
  */
-public class MemoryDb implements Db {
+public class OffHeapBTreeDb implements Db {
 
-  //private ConcurrentSkipListMap<byte[], byte[]> store
-  //    = new ConcurrentSkipListMap<>(SignedBytes.lexicographicalComparator());
-  private TreeMap<byte[], byte[]> store = new TreeMap<>(SignedBytes.lexicographicalComparator());
-/*
+  long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 1024;  // 1 GB
+
   private DB db = DBMaker
       .memoryDB()
+      .allocateStartSize(ALLOCATED_SIZE_IN_BYTES)
       .make();
 
   BTreeMap<byte[],byte[]> store = db
       .treeMap("treemap", Serializer.BYTE_ARRAY, Serializer.BYTE_ARRAY)
       .make();
-*/
 
   @Override
   public void write(byte[] key, byte[] value) {

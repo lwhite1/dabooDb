@@ -1,5 +1,6 @@
 package org.dabudb.dabu.server.io;
 
+import org.dabudb.dabu.server.Settings;
 import org.dabudb.dabu.shared.msg.request.Request;
 import com.google.common.io.ByteSink;
 import com.google.common.io.CharSink;
@@ -54,7 +55,7 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
 
   @Override
   public void logRequest(Request request) throws IOException {
-    log(request.toString().getBytes());
+    log(Settings.getInstance().getMessagePipe().messageToBytes(request));
   }
 
   @Override

@@ -3,7 +3,9 @@ package org.dabudb.dabu.shared;
 import org.dabudb.dabu.client.Settings;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * A basic document implementation
@@ -36,6 +38,8 @@ public class StandardDocument implements Document {
 
   private boolean deleted = false;
 
+  private final byte[] key;
+
   /** The kind of document represented by the contents */
   private final String contentType;
 
@@ -43,6 +47,11 @@ public class StandardDocument implements Document {
     this.contents = getContentsPipe().contentsToBytes(contents);
     this.documentVersion = 0;
     this.contentType = contents.getType();
+    if (contents.getKey() == null) {
+      key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
+    } else {
+      key = contents.getKey();
+    }
   }
 
   public StandardDocument(Document other) {
@@ -51,11 +60,12 @@ public class StandardDocument implements Document {
       this.documentVersion = other.documentVersion() + 1;
     }
     this.contentType = other.getContentType();
+    this.key = other.key();
   }
 
   @Override
   public byte[] key() {
-    return new byte[0];
+    return key;
   }
 
   @Override
