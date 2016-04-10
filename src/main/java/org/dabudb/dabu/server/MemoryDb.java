@@ -3,6 +3,8 @@ package org.dabudb.dabu.server;
 import org.dabudb.dabu.shared.Document;
 import com.google.common.primitives.SignedBytes;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -33,12 +35,24 @@ public class MemoryDb implements Db {
 
   @Override
   public void write(List<Document> documentList) {
-
+    //TODO(lwhite): review performance here:
+    Map<byte[], byte[]> documentMap = new HashMap<>();
+    for (Document doc : documentList) {
+      documentMap.put(doc.key(), doc.marshall());
+    }
+    store.putAll(documentMap);
   }
 
   @Override
-  public void remove(byte[] key) {
+  public void delete(byte[] key) {
     store.remove(key);
+  }
+
+  @Override
+  public void delete(List<byte[]> keys) {
+    for (byte[] key : keys) {
+      store.remove(key);
+    }
   }
 
   @Override
@@ -48,7 +62,11 @@ public class MemoryDb implements Db {
 
   @Override
   public List<byte[]> get(List<byte[]> keys) {
-    return null;
+    List<byte[]> docs = new ArrayList<>();
+    for (byte[] key : keys) {
+      docs.add(store.get(key));
+    }
+    return docs;
   }
 
   @Override

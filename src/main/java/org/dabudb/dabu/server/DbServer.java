@@ -85,6 +85,14 @@ public class DbServer {
   /**
    */
   private DeleteReply handleRequest(DocDeleteRequest request) {
+    try {
+      writeLog().logRequest(request);
+      byte[] key = request.getKey();
+      db().delete(key);
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
     return new DeleteReply(request);
   }
 

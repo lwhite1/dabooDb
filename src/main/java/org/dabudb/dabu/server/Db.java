@@ -14,7 +14,9 @@ public interface Db extends Iterable<Map.Entry<byte[], byte[]>> {
 
   void write(List<Document> documentList);
 
-  void remove(byte[] key);
+  void delete(byte[] key);
+
+  void delete(List<byte[]> key);
 
   byte[] get(byte[] key);
 
