@@ -20,21 +20,19 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
 
   private static WriteLog instance;
 
-  static {
+  public static WriteLog getInstance(File databaseDirectory) {
     try {
-      instance = new WriteLog(System.getProperty("user.dir"));
+      if (instance == null) {
+        instance = new WriteLog(databaseDirectory);
+      }
     } catch (IOException e) {
       e.printStackTrace();
-      System.exit(1);
+      throw new RuntimeException(e);
     }
-  }
-
-  public static WriteLog getInstance() {
     return instance;
   }
 
   //TODO(lwhite) handle locking/synchronization for these files
-
   private final static String FOLDER = "wal";
   private final static String DATA_FILE = "dataFile";
   private final static String INDEX_FILE = "indexFile";
@@ -50,7 +48,7 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
   private Writer indexWriter;
   private DataInputStream dataInputStream;
 
-  private WriteLog(String rootFolder) throws IOException {
+  private WriteLog(File rootFolder) throws IOException {
     initializeLog(rootFolder);
   }
 
@@ -61,7 +59,7 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
 
   @Override
   public void replay() {
-
+    //TODO(lwhite): Implement
   }
 
   @Override
@@ -116,11 +114,11 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
 
   /**
    * Initializes the log file, creating tools for reading and writing it
+   *
    * @throws IOException
    */
-  private void initializeLog(String logFileRoot) throws IOException {
+  private void initializeLog(File targetDirectory) throws IOException {
 
-    java.io.File targetDirectory = getFolderName(logFileRoot);
     if (!targetDirectory.exists()) {
       targetDirectory.mkdirs();
     }
@@ -128,7 +126,7 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
     File indexFile = Paths.get(targetDirectory + String.valueOf(File.separatorChar) + INDEX_FILE).toFile();
     File dataFile = Paths.get(targetDirectory + String.valueOf(File.separatorChar) + DATA_FILE).toFile();
 
-    if (!indexFile.exists() ) {
+    if (!indexFile.exists()) {
       indexFile.createNewFile();
     }
     if (!dataFile.exists()) {

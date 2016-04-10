@@ -1,7 +1,6 @@
 package com.deathrayresearch.dabu.server;
 
-import com.deathrayresearch.dabu.shared.compression.CompressionType;
-import com.deathrayresearch.dabu.server.io.WriteLog;
+import com.deathrayresearch.dabu.server.io.WriteAheadLog;
 import com.deathrayresearch.dabu.shared.Document;
 import com.deathrayresearch.dabu.shared.msg.AbstractReply;
 import com.deathrayresearch.dabu.shared.msg.DeleteReply;
@@ -19,7 +18,6 @@ import com.deathrayresearch.dabu.shared.msg.Request;
 import com.deathrayresearch.dabu.shared.msg.WriteReply;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,16 +25,14 @@ import java.util.List;
  */
 public class DbServer {
 
-  public static final DbServer INSTANCE = new DbServer();
+  private static DbServer INSTANCE;
 
-  private final WriteLog writeLog;
-  private final Db db;
-  private final DbConfig config;
+  public static DbServer get() {
 
-  private DbServer() {
-    db = new MemoryDb();
-    writeLog = WriteLog.getInstance();
-    config = new DbConfig();
+    if (INSTANCE == null) {
+      INSTANCE = new DbServer();
+    }
+    return INSTANCE;
   }
 
   /**
@@ -57,24 +53,31 @@ public class DbServer {
 
   private WriteReply handleRequest(DocWriteRequest request) {
     try {
-      writeLog.logRequest(request);
-      Document document = request.getDocument();
-      db.write(document.key(), document.marshall());
+      writeLog().logRequest(request);
+      db().write(request.getKey(), request.getDocumentBytes());
      } catch (IOException e) {
       e.printStackTrace();
-      //TODO(lwhite): We should probably exit if we can't write to the WAL
+      throw(new RuntimeException(e));
     }
     return new WriteReply(request);
   }
 
+  private Db db() {
+    return Settings.getInstance().getDb();
+  }
+
+  private WriteAheadLog writeLog() {
+    return Settings.getInstance().getWriteAheadLog();
+  }
+
   private WriteReply handleRequest(DocsWriteRequest request) {
     try {
-      writeLog.logRequest(request);
+      writeLog().logRequest(request);
       List<Document> documents = request.getDocuments();
-      db.write(documents);
+      db().write(documents);
      } catch (IOException e) {
       e.printStackTrace();
-      //TODO(lwhite): We should probably exit if we can't write to the WAL
+      throw new RuntimeException(e);
     }
     return new WriteReply(request);
   }
@@ -100,28 +103,12 @@ public class DbServer {
   /**
    */
   private DocGetReply handleRequest(DocGetRequest request) {
-    byte[] result = db.get(request.getKey());
+    byte[] result = db().get(request.getKey());
     return new DocGetReply(request, result);
   }
 
   private DocsGetReply handleRequest(DocsGetRequest request) {
-    List<byte[]> result = db.get(request.getKeys());
+    List<byte[]> result = db().get(request.getKeys());
     return new DocsGetReply(request, result);
-  }
-
-  public DbConfig getConfig() {
-    return config;
-  }
-
-  public Class getDocumentClass() {
-    return config.getDocumentClass();
-  }
-
-  public CompressionType getDocumentContentCompressionType() {
-    return config.getDocumentContentCompressionType();
-  }
-
-  public CompressionType getRequestCompressionType() {
-    return config.getRequestCompressionType();
   }
 }

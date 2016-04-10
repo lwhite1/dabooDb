@@ -5,7 +5,6 @@ import com.deathrayresearch.dabu.shared.StandardDocument;
 import com.deathrayresearch.dabu.testutil.Company;
 import com.deathrayresearch.dabu.testutil.Person;
 import com.google.common.base.Stopwatch;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,13 +19,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class DirectDbClientTest {
 
-
-  DbClient client = new DirectDbClient();
-
-  @Before
-  public void setUp() throws Exception {
-
-  }
+  DbClient client = DbClient.get();
 
   @Test
   public void testWriteDocument() {

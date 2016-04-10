@@ -1,12 +1,31 @@
 package com.deathrayresearch.dabu.shared;
 
-import java.nio.charset.StandardCharsets;
+import com.deathrayresearch.dabu.client.Settings;
+
 import java.util.Arrays;
 
 /**
  * A basic document implementation
  */
 public class StandardDocument implements Document {
+
+  private static ContentsPipe contentsPipe;
+
+  public static DocumentSerializer getDocumentSerializer() {
+    if (documentSerializer == null) {
+      documentSerializer = Settings.getInstance().getDocumentSerializer();
+    }
+    return documentSerializer;
+  }
+
+  public static ContentsPipe getContentsPipe() {
+    if (contentsPipe == null) {
+      contentsPipe = Settings.getInstance().getContentsPipe();
+    }
+    return contentsPipe;
+  }
+
+  private static DocumentSerializer documentSerializer;
 
   private final byte[] contents;
 
@@ -20,17 +39,16 @@ public class StandardDocument implements Document {
   private final String contentType;
 
   public StandardDocument(DocumentContents contents) {
-    this.contents = contents.marshall();
+    this.contents = getContentsPipe().contentsToBytes(contents);
     this.documentVersion = 0;
     this.contentType = contents.getType();
   }
 
   public StandardDocument(Document other) {
     this.contents = other.getContents();
-
-    //TODO(lwhite): Thread saftey
-    this.documentVersion = other.documentVersion() + 1;
-
+    synchronized(this) {
+      this.documentVersion = other.documentVersion() + 1;
+    }
     this.contentType = other.getContentType();
   }
 
@@ -72,13 +90,17 @@ public class StandardDocument implements Document {
   }
 
   public DocumentContents documentContents() {
-    String contentJson = new String(contents, StandardCharsets.UTF_8);
     DocumentContents documentContents = null;
     try {
-      documentContents = (DocumentContents) GSON.fromJson(contentJson, Class.forName(contentType));
+      documentContents = getContentsPipe().bytesToContents(Class.forName(contentType), contents);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
     return documentContents;
+  }
+
+  @Override
+  public byte[] marshall() {
+    return getDocumentSerializer().documentToBytes(this);
   }
 }

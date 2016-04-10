@@ -1,8 +1,13 @@
 package com.deathrayresearch.dabu.shared;
 
-import com.deathrayresearch.dabu.client.serialization.ContentSerializerDeserializer;
+import com.deathrayresearch.dabu.shared.compression.CompressionType;
+import com.deathrayresearch.dabu.shared.serialization.ContentSerializerDeserializer;
 import com.deathrayresearch.dabu.shared.compression.CompressorDeCompressor;
+import com.deathrayresearch.dabu.shared.compression.CompressorFactory;
 import com.deathrayresearch.dabu.shared.encryption.EncryptorDecryptor;
+import com.deathrayresearch.dabu.shared.encryption.EncryptorFactory;
+import com.deathrayresearch.dabu.shared.serialization.ContentSerializerFactory;
+import com.deathrayresearch.dabu.shared.serialization.ContentSerializerType;
 
 /**
  * A processing pipeline for DocumentContents
@@ -24,7 +29,32 @@ public class ContentsPipe {
   private final EncryptorDecryptor encryptorDecryptor;
   private final ContentSerializerDeserializer serializerDeserializer;
 
-  public ContentsPipe(CompressorDeCompressor compressorDeCompressor,
+  public static ContentsPipe create(ContentsPipeDefinition definition, String encryptionPassword) {
+    CompressorDeCompressor compressor = CompressorFactory.get(definition.getCompressionType());
+    EncryptorDecryptor encryptor = EncryptorFactory.get(definition.getEncryptionType(), encryptionPassword);
+    ContentSerializerDeserializer serializer = ContentSerializerFactory.get(definition.getContentSerializerType());
+
+    return new ContentsPipe(
+        compressor,
+        encryptor,
+        serializer);
+  }
+
+  /**
+   * Creates a contentsPipe with no encryption, and the other filters as defined in the definition
+   */
+  public static ContentsPipe create(CompressionType compressionType, ContentSerializerType serializerType) {
+    CompressorDeCompressor compressor = CompressorFactory.get(compressionType);
+    EncryptorDecryptor encryptor = EncryptorFactory.NONE;
+    ContentSerializerDeserializer serializer = ContentSerializerFactory.get(serializerType);
+
+    return new ContentsPipe(
+        compressor,
+        encryptor,
+        serializer);
+  }
+
+  private ContentsPipe(CompressorDeCompressor compressorDeCompressor,
                       EncryptorDecryptor encryptorDecryptor,
                       ContentSerializerDeserializer serializerDeserializer) {
 

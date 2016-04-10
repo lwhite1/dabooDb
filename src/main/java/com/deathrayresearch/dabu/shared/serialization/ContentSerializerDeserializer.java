@@ -1,4 +1,4 @@
-package com.deathrayresearch.dabu.client.serialization;
+package com.deathrayresearch.dabu.shared.serialization;
 
 import com.deathrayresearch.dabu.shared.DocumentContents;
 

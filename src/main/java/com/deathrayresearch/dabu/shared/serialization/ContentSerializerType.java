@@ -3,8 +3,8 @@ package com.deathrayresearch.dabu.shared.serialization;
 /**
  *  Indicates the type of compression to use
  */
-public enum SerializationType {
+public enum ContentSerializerType {
 
-  SNAPPY,
+  JSON,
   NONE,
 }

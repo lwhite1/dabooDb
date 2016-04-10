@@ -1,4 +1,4 @@
-package com.deathrayresearch.dabu.client.serialization;
+package com.deathrayresearch.dabu.shared.serialization;
 
 import com.deathrayresearch.dabu.shared.DocumentContents;
 import com.google.gson.Gson;
@@ -8,15 +8,15 @@ import java.nio.charset.StandardCharsets;
 /**
  * A serializer that converts Document contents to json, then UTF_8 byte arrays
  */
-public class JsonSerializerDeserializer implements ContentSerializerDeserializer {
+public class ContentJsonSerializer implements ContentSerializerDeserializer {
 
   private static final Gson GSON = new Gson();
 
-  private static final JsonSerializerDeserializer INSTANCE = new JsonSerializerDeserializer();
+  private static final ContentJsonSerializer INSTANCE = new ContentJsonSerializer();
 
-  private JsonSerializerDeserializer() {}
+  private ContentJsonSerializer() {}
 
-  public static JsonSerializerDeserializer get() {
+  public static ContentJsonSerializer get() {
     return INSTANCE;
   }
 
