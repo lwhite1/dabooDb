@@ -51,7 +51,7 @@ public class AbstractReply implements Reply {
   public RequestType getRequestType() {
     return type;
   }
-  
+
   public ErrorCondition getErrorCondition() {
     return errorCondition;
   }
@@ -63,12 +63,13 @@ public class AbstractReply implements Reply {
     AbstractReply that = (AbstractReply) o;
     return Objects.equals(getTimestamp(), that.getTimestamp()) &&
         Arrays.equals(getRequestId(), that.getRequestId()) &&
-        type == that.type;
+        type == that.type &&
+        Objects.equals(getErrorCondition(), that.getErrorCondition());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getTimestamp(), getRequestId(), type);
+    return Objects.hash(getTimestamp(), getRequestId(), type, getErrorCondition());
   }
 
   @Override
@@ -77,6 +78,7 @@ public class AbstractReply implements Reply {
         "timestamp=" + timestamp +
         ", requestId=" + Arrays.toString(requestId) +
         ", type=" + type +
+        ", errorCondition=" + errorCondition +
         '}';
   }
 }
