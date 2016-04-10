@@ -1,4 +1,4 @@
-package org.dabudb.dabu.shared.msg;
+package org.dabudb.dabu.shared.msg.request;
 
 import org.dabudb.dabu.shared.Document;
 import com.google.common.primitives.SignedBytes;

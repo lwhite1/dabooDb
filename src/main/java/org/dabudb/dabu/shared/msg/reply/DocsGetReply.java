@@ -1,4 +1,6 @@
-package org.dabudb.dabu.shared.msg;
+package org.dabudb.dabu.shared.msg.reply;
+
+import org.dabudb.dabu.shared.msg.request.Request;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.List;

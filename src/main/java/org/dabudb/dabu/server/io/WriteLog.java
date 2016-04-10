@@ -1,6 +1,6 @@
 package org.dabudb.dabu.server.io;
 
-import org.dabudb.dabu.shared.msg.Request;
+import org.dabudb.dabu.shared.msg.request.Request;
 import com.google.common.io.ByteSink;
 import com.google.common.io.CharSink;
 import com.google.common.io.FileWriteMode;

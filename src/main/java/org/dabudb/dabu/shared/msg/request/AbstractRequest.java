@@ -1,4 +1,4 @@
-package org.dabudb.dabu.shared.msg;
+package org.dabudb.dabu.shared.msg.request;
 
 import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;

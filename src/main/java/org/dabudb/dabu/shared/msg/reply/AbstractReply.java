@@ -1,4 +1,8 @@
-package org.dabudb.dabu.shared.msg;
+package org.dabudb.dabu.shared.msg.reply;
+
+import org.dabudb.dabu.shared.msg.Reply;
+import org.dabudb.dabu.shared.msg.request.Request;
+import org.dabudb.dabu.shared.msg.request.RequestType;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

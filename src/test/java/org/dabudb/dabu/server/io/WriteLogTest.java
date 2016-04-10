@@ -3,8 +3,8 @@ package org.dabudb.dabu.server.io;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.StandardDocument;
-import org.dabudb.dabu.shared.msg.DocWriteRequest;
-import org.dabudb.dabu.shared.msg.Request;
+import org.dabudb.dabu.shared.msg.request.DocWriteRequest;
+import org.dabudb.dabu.shared.msg.request.Request;
 import org.dabudb.dabu.testutil.Person;
 import org.junit.Test;
 

@@ -1,6 +1,7 @@
-package org.dabudb.dabu.shared.msg;
+package org.dabudb.dabu.shared.msg.request;
 
 import com.google.gson.Gson;
+import org.dabudb.dabu.shared.msg.Message;
 
 import java.nio.charset.StandardCharsets;
 

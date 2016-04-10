@@ -1,5 +1,7 @@
 package org.dabudb.dabu.shared.msg;
 
+import org.dabudb.dabu.shared.msg.request.RequestType;
+
 import java.time.ZonedDateTime;
 
 /**
