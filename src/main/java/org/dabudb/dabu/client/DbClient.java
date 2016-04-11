@@ -2,20 +2,12 @@ package org.dabudb.dabu.client;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import org.dabudb.dabu.shared.ContentsPipe;
 import org.dabudb.dabu.shared.Document;
-import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.DocumentFactory;
-import org.dabudb.dabu.shared.DocumentUtils;
-import org.dabudb.dabu.shared.msg.MessageUtils;
 import org.dabudb.dabu.shared.protobufs.Request;
 
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import static org.dabudb.dabu.shared.DocumentUtils.*;
 import static org.dabudb.dabu.shared.msg.MessageUtils.*;
@@ -34,18 +26,6 @@ public class DbClient implements DocumentApi {
 
   private DbClient() {}
 
-  public ContentsPipe getContentsPipe() {
-    return settings.getContentsPipe();
-  }
-
-  DocumentContents bytesToContents(Class contentClass, byte[] contentBytes) {
-    return settings.getContentsPipe().bytesToContents(contentClass, contentBytes);
-  }
-
-  Document bytesToDocument(byte[] documentBytes) {
-    return settings.getDocumentSerializer().bytesToDocument(settings.getDocumentClass(), documentBytes);
-  }
-
   public void write(Document document) {
 
     Request.Document doc = getDocument(document);
@@ -53,6 +33,7 @@ public class DbClient implements DocumentApi {
     WriteRequestBody body = getWriteRequestBody(doc);
     WriteRequest request = getWriteRequest(header, body);
     Request.WriteReply reply = settings.getCommClient().sendRequest(request);
+    checkErrorCondition(reply.getErrorCondition());
   }
 
   public void write(List<Document> documentCollection) {
@@ -65,6 +46,7 @@ public class DbClient implements DocumentApi {
     WriteRequestBody body = getWriteRequestBody(documentList);
     WriteRequest request = getWriteRequest(header, body);
     Request.WriteReply reply = settings.getCommClient().sendRequest(request);
+    checkErrorCondition(reply.getErrorCondition());
   }
 
   @Override
@@ -74,14 +56,15 @@ public class DbClient implements DocumentApi {
     GetRequestBody body = getGetRequestBody(keyBytes);
     GetRequest request = getGetRequest(header, body);
     Request.GetReply reply = settings.getCommClient().sendRequest(request);
-    return getDocumentFromRequestDoc(reply);
+    checkErrorCondition(reply.getErrorCondition());
+    ByteString resultBytes = reply.getDocumentBytesList().get(0);
+    return getDocumentFromRequestDoc(resultBytes);
   }
 
-  private Document getDocumentFromRequestDoc(GetReply reply) {
+  private Document getDocumentFromRequestDoc(ByteString resultBytes) {
     Document document = DocumentFactory.documentForClass(settings.getDocumentClass());
 
-    ByteString resultBytes = reply.getDocumentBytesList().get(0);
-    Request.Document result = null;
+    Request.Document result;
     try {
       result = Request.Document.parseFrom(resultBytes);
     } catch (InvalidProtocolBufferException e) {
@@ -107,8 +90,13 @@ public class DbClient implements DocumentApi {
     }
     GetRequestBody body = getGetRequestBody(byteStrings);
     GetRequest request = getGetRequest(header, body);
-
+    Request.GetReply reply = settings.getCommClient().sendRequest(request);
+    checkErrorCondition(reply.getErrorCondition());
+    List<ByteString> byteStringList = reply.getDocumentBytesList();
     List<Document> results = new ArrayList<>();
+    for (ByteString bytes : byteStringList) {
+      results.add(getDocumentFromRequestDoc(bytes));
+    }
     return results;
   }
 
@@ -119,6 +107,7 @@ public class DbClient implements DocumentApi {
     DeleteRequestBody body = getDeleteRequestBody(doc);
     DeleteRequest request = getDeleteRequest(header, body);
     Request.DeleteReply reply = settings.getCommClient().sendRequest(request);
+    checkErrorCondition(reply.getErrorCondition());
   }
 
   @Override
@@ -129,9 +118,18 @@ public class DbClient implements DocumentApi {
       Request.Document doc = getDocument(document);
       docs.add(doc);
     }
+
     Header header = getHeader();
     DeleteRequestBody body = getDeleteRequestBody(docs);
     DeleteRequest request = getDeleteRequest(header, body);
     Request.DeleteReply reply = settings.getCommClient().sendRequest(request);
+    checkErrorCondition(reply.getErrorCondition());
+  }
+
+  private void checkErrorCondition(ErrorCondition condition) {
+    if (condition != null && condition.getErrorType() != ErrorType.NONE) {
+      System.out.println(condition);
+      throw new RuntimeException("OOOPS!");
+    }
   }
 }

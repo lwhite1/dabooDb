@@ -21,12 +21,6 @@ public class DirectCommServer implements CommServer {
 
   /**
    */
-  public Request.QueryReply handleRequest(Request.QueryRequest request) {
-    return dbServer.handleRequest(request);
-  }
-
-  /**
-   */
   public Request.GetReply handleRequest(Request.GetRequest request) {
     return dbServer.handleRequest(request);
   }

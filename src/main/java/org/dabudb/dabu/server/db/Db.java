@@ -1,7 +1,6 @@
 package org.dabudb.dabu.server.db;
 
 import com.google.protobuf.ByteString;
-import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.util.List;

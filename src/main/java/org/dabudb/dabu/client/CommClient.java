@@ -12,6 +12,4 @@ public interface CommClient {
   GetReply sendRequest(GetRequest request);
 
   DeleteReply sendRequest(DeleteRequest request);
-
-  QueryReply sendRequest(QueryRequest request);
 }

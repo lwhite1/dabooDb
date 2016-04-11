@@ -67,16 +67,9 @@ public class DbServer {
     return Request.DeleteReply.newBuilder()
         .setRequestId(request.getHeader().getId())
         .setTimestamp(Instant.now().toEpochMilli())
+        .setErrorCondition(noErrorCondition())
         .build();
   }
-
-  /**
-   * TODO(lwhite): implement
-   */
-  public Request.QueryReply handleRequest(Request.QueryRequest request) {
-    return null;
-  }
-
 
   public Request.GetReply handleRequest(Request.GetRequest request) {
     List<ByteString> result = db().get(request.getBody().getKeyList());
@@ -84,6 +77,13 @@ public class DbServer {
         .setRequestId(request.getHeader().getId())
         .setTimestamp(Instant.now().toEpochMilli())
         .addAllDocumentBytes(result)
+        .build();
+  }
+
+  private Request.ErrorCondition noErrorCondition() {
+    return Request.ErrorCondition.newBuilder()
+        .setErrorType(Request.ErrorType.NONE)
+        .setDescription("")
         .build();
   }
 }

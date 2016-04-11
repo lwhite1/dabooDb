@@ -12,7 +12,9 @@ import java.util.UUID;
  */
 public class StandardDocument implements Document {
 
-  private static ContentsPipe contentsPipe;
+  private volatile static ContentsPipe contentsPipe;
+
+  private volatile static DocumentSerializer documentSerializer;
 
   public static DocumentSerializer getDocumentSerializer() {
     if (documentSerializer == null) {
@@ -28,7 +30,6 @@ public class StandardDocument implements Document {
     return contentsPipe;
   }
 
-  private static DocumentSerializer documentSerializer;
 
   private byte[] contents;
 

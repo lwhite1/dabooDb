@@ -28,14 +28,6 @@ message GetRequest {
 }
 
 /**
- *  A Get request message
- */
-message QueryRequest {
-    required Header header = 1;
-    required QueryRequestBody body = 2;
-}
-
-/**
 * The header for a request
 */
 message Header {
@@ -69,13 +61,6 @@ message DeleteRequestBody {
 */
 message GetRequestBody {
     repeated bytes key = 1;   //keys to get
-}
-
-/**
-*   The body of a query request
-*/
-message QueryRequestBody {
-    repeated bytes document = 1;   //TODO(Lwhite): replace with a query body
 }
 
 /**
@@ -143,25 +128,16 @@ message GetReply {
 }
 
 /**
-*   a Query reply
-*/
-message QueryReply {
-    required int64 timestamp = 1;
-    optional bytes requestId = 2;
-    optional ErrorCondition errorCondition = 3;
-    repeated bytes documentBytes = 4;
-}
-
-/**
 *  Error information returned in a reply
 */
 message ErrorCondition {
-    required ErrorType errorType = 1;
+    optional ErrorType errorType = 1;
     optional string description = 2;
 }
 
 enum ErrorType {
-    OPTIMISTIC_LOCK_EXCEPTION = 1;
-    PERSISTENCE_EXCEPTION = 2;
-    SEVERE_SERVER_EXCEPTION = 3;
+    NONE = 1;
+    OPTIMISTIC_LOCK_EXCEPTION = 2;
+    PERSISTENCE_EXCEPTION = 3;
+    SEVERE_SERVER_EXCEPTION = 4;
 }

@@ -8,7 +8,6 @@ import com.google.common.io.Files;
 import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.io.*;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Iterator;
@@ -142,7 +141,7 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
     FileInputStream dataFis = new FileInputStream(dataFile);
     dataInputStream = new DataInputStream(dataFis);
     FileInputStream indexFis = new FileInputStream(indexFile);
-    indexReader = new BufferedReader(new InputStreamReader(indexFis));
+    indexReader = new BufferedReader(new InputStreamReader(indexFis, StandardCharsets.UTF_8));
 
     ByteSink byteSink = Files.asByteSink(dataFile, FileWriteMode.APPEND);
     requestOutputByteStream = byteSink.openStream();

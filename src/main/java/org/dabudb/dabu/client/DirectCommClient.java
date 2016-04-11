@@ -28,9 +28,4 @@ public class DirectCommClient implements CommClient {
   public Request.DeleteReply sendRequest(Request.DeleteRequest request) {
     return directCommServer.handleRequest(request);
   }
-
-  @Override
-  public Request.QueryReply sendRequest(Request.QueryRequest request) {
-    return directCommServer.handleRequest(request);
-  }
 }

@@ -10,8 +10,6 @@ import org.dabudb.dabu.shared.protobufs.Request;
 import org.dabudb.dabu.testutil.Company;
 import org.junit.Test;
 
-import java.util.Collections;
-
 import static org.dabudb.dabu.shared.protobufs.Request.*;
 import static org.junit.Assert.*;
 

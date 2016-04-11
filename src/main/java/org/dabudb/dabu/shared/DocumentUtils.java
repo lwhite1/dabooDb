@@ -4,7 +4,7 @@ import com.google.protobuf.ByteString;
 import org.dabudb.dabu.shared.protobufs.Request;
 
 /**
- *
+ * Utilities for working with Documents
  */
 public final class DocumentUtils {
 
@@ -21,5 +21,4 @@ public final class DocumentUtils {
         .setSchemaVersion(document.schemaVersion())
         .build();
   }
-
 }
