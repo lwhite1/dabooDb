@@ -5,4 +5,5 @@ package org.dabudb.dabu.shared.msg.serialization;
  */
 public enum MessageSerializerType {
   JSON,
+  PROTOBUF
 }

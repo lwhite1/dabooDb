@@ -26,14 +26,21 @@ public class DirectDbClientTest {
     Company company = new Company("Drr");
     Document document = new StandardDocument(company);
     Stopwatch stopwatch = Stopwatch.createStarted();
-    client.writeDoc(document);
+    client.write(document);
     byte[] key = document.key();
-    Document document1 = client.getDoc(key);
+    Document document1 = client.get(key);
     assertTrue(document1 != null);
     Company company1 = (Company) document1.documentContents();
     assertEquals(company, company1);
     System.out.println("Round trip: " + stopwatch.elapsed(TimeUnit.MICROSECONDS));
     System.out.println(document.toString());
+  }
+
+  @Test
+  public void testWriteDocument2() {
+    Company company = new Company("Drr");
+    Document document = new StandardDocument(company);
+    client.write(document);
   }
 
   @Test
@@ -47,7 +54,7 @@ public class DirectDbClientTest {
 
     Stopwatch stopwatch = Stopwatch.createStarted();
     for (Document document : peopleDocs) {
-      client.writeDoc(document);
+      client.write(document);
     }
     System.out.println("Write " + 6_000 + " objects in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
@@ -62,7 +69,7 @@ public class DirectDbClientTest {
     }
 
     Stopwatch stopwatch = Stopwatch.createStarted();
-    client.writeDocs(peopleDocs);
+    client.write(peopleDocs);
     System.out.println("Write: " + stopwatch.elapsed(TimeUnit.MILLISECONDS));
   }
 

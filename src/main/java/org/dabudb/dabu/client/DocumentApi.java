@@ -9,16 +9,17 @@ import java.util.List;
  */
 public interface DocumentApi {
 
-  void writeDoc(Document document);
+  void write(List<Document> documentCollection);
 
-  void writeDocs(List<Document> documentCollection);
+  void write(Document document);
 
-  Document getDoc(byte[] key);
+  Document get(byte[] key);
 
-  List<Document> getDocs(List<byte[]> keys);
+  List<Document> get(List<byte[]> keys);
 
-  void deleteDoc(byte[] key);
+  void delete(Document document);
 
-  void deleteDocs(List<byte[]> keys);
+  void delete(List<Document> document);
+
 
 }

@@ -12,6 +12,30 @@ message WriteRequest {
 }
 
 /**
+ *  A Delete request message
+ */
+message DeleteRequest {
+    required Header header = 1;
+    required DeleteRequestBody body = 2;
+}
+
+/**
+ *  A Get request message
+ */
+message GetRequest {
+    required Header header = 1;
+    required GetRequestBody body = 2;
+}
+
+/**
+ *  A Get request message
+ */
+message QueryRequest {
+    required Header header = 1;
+    required QueryRequestBody body = 2;
+}
+
+/**
 * The header for a request
 */
 message Header {
@@ -31,6 +55,27 @@ message Header {
 */
 message WriteRequestBody {
     repeated Document document = 1;
+}
+
+/**
+*   The body of a delete request
+*/
+message DeleteRequestBody {
+    repeated Document document = 1;
+}
+
+/**
+*   The body of a get request
+*/
+message GetRequestBody {
+    repeated bytes key = 1;   //keys to get
+}
+
+/**
+*   The body of a query request
+*/
+message QueryRequestBody {
+    repeated bytes document = 1;   //TODO(Lwhite): replace with a query body
 }
 
 /**
@@ -54,7 +99,7 @@ message Document {
     required string contentClass = 2;
 
     /** A human-friendly name for the kind of contents, such as a company or user. Used for querying */
-    required string documentType = 3;
+    required string contentType = 3;
 
     /** The version of the json schema used to encode the payload */
     required int32 schemaVersion = 4;
@@ -65,17 +110,46 @@ message Document {
     /** The document contents as bytes, possibly compressed or encrypted */
     required bytes contentBytes = 6;
 
-    /** The current (document) version of this document */
+    /** The current instance (document) version of this object */
     required int32 instanceVersion = 7;
 }
 
 /**
-*   A response to a WriteRequest
+*   A reply to a WriteRequest
 */
-message WriteResponse {
+message WriteReply {
     required int64 timestamp = 1;
     optional bytes requestId = 2;
     optional ErrorCondition errorCondition = 3;
+}
+
+/**
+*   A reply to a DeleteRequest
+*/
+message DeleteReply {
+    required int64 timestamp = 1;
+    optional bytes requestId = 2;
+    optional ErrorCondition errorCondition = 3;
+}
+
+/**
+*   a get reply
+*/
+message GetReply {
+    required int64 timestamp = 1;
+    optional bytes requestId = 2;
+    optional ErrorCondition errorCondition = 3;
+    repeated bytes documentBytes = 4;
+}
+
+/**
+*   a Query reply
+*/
+message QueryReply {
+    required int64 timestamp = 1;
+    optional bytes requestId = 2;
+    optional ErrorCondition errorCondition = 3;
+    repeated bytes documentBytes = 4;
 }
 
 /**

@@ -33,6 +33,26 @@ public interface Document {
 
   int schemaVersion();
 
+  boolean isDeleted();
+
+  void setContents(byte[] contents);
+
+  void setInstanceVersion(int documentVersion);
+
+  void setDeleted(boolean deleted);
+
+  void setKey(byte[] key);
+
+  void setContentType(String contentType);
+
+  void setContentClass(String contentClass);
+
+  int getInstanceVersion();
+
+  short getSchemaVersion();
+
+  void setSchemaVersion(short schemaVersion);
+
   DocumentContents documentContents();
 
   byte[] marshall();

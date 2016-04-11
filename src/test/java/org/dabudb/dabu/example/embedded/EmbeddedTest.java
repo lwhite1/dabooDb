@@ -21,7 +21,7 @@ public class EmbeddedTest {
 
     DbClient client = DbClient.get();
 
-    int testCount = 100_000;
+    int testCount = 1_000_000;
 
     List<Person> people = Person.createPeoples(testCount);
     List<Document> peopleDocs = new ArrayList<>();
@@ -36,13 +36,13 @@ public class EmbeddedTest {
 
     Stopwatch stopwatch = Stopwatch.createStarted();
     for (Document document : peopleDocs) {
-      client.writeDoc(document);
+      client.write(document);
     }
     System.out.println("Wrote " + testCount + " objects in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
 
     stopwatch.reset().start();
     for (byte[] key : keys) {
-      Document document = client.getDoc(key);
+      Document document = client.get(key);
       assertNotNull(document);
     }
     System.out.println("Read " + testCount + " objects in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");

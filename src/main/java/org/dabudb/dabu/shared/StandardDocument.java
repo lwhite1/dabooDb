@@ -32,9 +32,9 @@ public class StandardDocument implements Document {
 
   private byte[] contents;
 
-  private int documentVersion;
+  private int instanceVersion;
 
-  private final short schemaVersion = 0;
+  private short schemaVersion = 0;
 
   private boolean deleted = false;
 
@@ -47,22 +47,25 @@ public class StandardDocument implements Document {
 
   public StandardDocument(DocumentContents contents) {
     this.contents = getContentsPipe().contentsToBytes(contents);
-    this.documentVersion = 0;
-    this.contentType = contents.getType();
+    this.instanceVersion = 0;
+    this.contentType = contents.getContentType();
     if (contents.getKey() == null) {
       key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
     } else {
       key = contents.getKey();
     }
-    this.contentClass = contents.getType();
+    this.contentClass = contents.getClass().getCanonicalName();
   }
 
-  private StandardDocument() {}
+  /**
+   * visible for serialization only.
+   */
+  StandardDocument() {}
 
   public StandardDocument(Document other) {
     this.contents = other.getContents();
     synchronized(this) {
-      this.documentVersion = other.documentVersion() + 1;
+      this.instanceVersion = other.documentVersion() + 1;
     }
     this.contentType = other.getContentType();
     this.key = other.key();
@@ -95,15 +98,64 @@ public class StandardDocument implements Document {
   }
 
   @Override
+  public boolean isDeleted() {
+    return deleted;
+  }
+
+  @Override
   public int documentVersion() {
-    return documentVersion;
+    return instanceVersion;
+  }
+
+  @Override
+  public void setContents(byte[] contents) {
+    this.contents = contents;
+  }
+
+  public void setInstanceVersion(int instanceVersion) {
+    this.instanceVersion = instanceVersion;
+  }
+
+  @Override
+  public void setDeleted(boolean deleted) {
+    this.deleted = deleted;
+  }
+
+  @Override
+  public void setKey(byte[] key) {
+    this.key = key;
+  }
+
+  @Override
+  public void setContentType(String contentType) {
+    this.contentType = contentType;
+  }
+
+  @Override
+  public void setContentClass(String contentClass) {
+    this.contentClass = contentClass;
+  }
+
+  @Override
+  public int getInstanceVersion() {
+    return instanceVersion;
+  }
+
+  @Override
+  public short getSchemaVersion() {
+    return schemaVersion;
+  }
+
+  @Override
+  public void setSchemaVersion(short schemaVersion) {
+    this.schemaVersion = schemaVersion;
   }
 
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("StandardDocument{");
     sb.append("contents=").append(Arrays.toString(contents));
-    sb.append(", documentVersion=").append(documentVersion);
+    sb.append(", instanceVersion=").append(instanceVersion);
     sb.append(", schemaVersion=").append(schemaVersion);
     sb.append(", deleted=").append(deleted);
     sb.append(", contentType='").append(contentType).append('\'');
@@ -114,7 +166,7 @@ public class StandardDocument implements Document {
   public DocumentContents documentContents() {
     DocumentContents documentContents = null;
     try {
-      documentContents = getContentsPipe().bytesToContents(Class.forName(contentType), contents);
+      documentContents = getContentsPipe().bytesToContents(Class.forName(contentClass), contents);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }

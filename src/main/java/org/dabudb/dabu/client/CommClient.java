@@ -1,23 +1,17 @@
 package org.dabudb.dabu.client;
 
-import org.dabudb.dabu.shared.msg.reply.DeleteReply;
-import org.dabudb.dabu.shared.msg.request.DocDeleteRequest;
-import org.dabudb.dabu.shared.msg.request.DocsDeleteRequest;
-import org.dabudb.dabu.shared.msg.reply.DocsGetReply;
-import org.dabudb.dabu.shared.msg.request.DocsGetRequest;
-import org.dabudb.dabu.shared.msg.request.DocsWriteRequest;
-import org.dabudb.dabu.shared.msg.reply.WriteReply;
+import static org.dabudb.dabu.shared.protobufs.Request.*;
 
 /**
- *
+ * An object that handles the client side of communications with a database
  */
 public interface CommClient {
 
-  DocsGetReply sendRequest(DocsGetRequest request);
+  WriteReply sendRequest(WriteRequest request);
 
-  DeleteReply sendRequest(DocDeleteRequest request);
+  GetReply sendRequest(GetRequest request);
 
-  DeleteReply sendRequest(DocsDeleteRequest request);
+  DeleteReply sendRequest(DeleteRequest request);
 
-  WriteReply sendRequest(DocsWriteRequest request);
+  QueryReply sendRequest(QueryRequest request);
 }

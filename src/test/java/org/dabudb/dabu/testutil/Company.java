@@ -26,6 +26,11 @@ public class Company implements DocumentContents {
   }
 
   @Override
+  public String getContentType() {
+    return "Company";
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;

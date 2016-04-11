@@ -1,5 +1,6 @@
 package org.dabudb.dabu.shared.msg;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.compression.CompressorDeCompressor;
 import org.dabudb.dabu.shared.compression.CompressorFactory;
@@ -8,6 +9,7 @@ import org.dabudb.dabu.shared.encryption.EncryptorFactory;
 import org.dabudb.dabu.shared.msg.serialization.MessageSerializerFactory;
 import org.dabudb.dabu.shared.msg.serialization.MessageSerializerDeserializer;
 import org.dabudb.dabu.shared.msg.serialization.MessageSerializerType;
+import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.util.Objects;
 
@@ -46,19 +48,39 @@ public class MessagePipe {
     this.serializerDeserializer = serializerDeserializer;
   }
 
-  public byte[] messageToBytes(Message message) {
+  public byte[] messageToBytes(Request.WriteRequest message) {
     return
         encryptorDecryptor.encrypt(
-            compressorDeCompressor.compress(
-                serializerDeserializer.serialize(message)));
+            compressorDeCompressor.compress(message.toByteArray()));
   }
 
-  public Message bytesToMessage(Class messageClass, byte[] contentAsBytes) {
+  public byte[] messageToBytes(Request.DeleteRequest message) {
     return
-        serializerDeserializer.deserialize(
-            messageClass,
-            compressorDeCompressor.decompress(
-                encryptorDecryptor.decrypt(contentAsBytes)));
+        encryptorDecryptor.encrypt(
+            compressorDeCompressor.compress(message.toByteArray()));
+  }
+
+  public Request.WriteRequest bytesToWriteRequst(byte[] contentAsBytes) {
+
+    try {
+      return Request.WriteRequest.parseFrom(
+              compressorDeCompressor.decompress(
+                  encryptorDecryptor.decrypt(contentAsBytes)));
+    } catch (InvalidProtocolBufferException e) {
+      e.printStackTrace();
+      throw new RuntimeException("PROTOBUF FAIL");
+    }
+  }
+
+  public Request.DeleteRequest bytesToMessage(byte[] contentAsBytes) {
+    try {
+      return Request.DeleteRequest.parseFrom(
+              compressorDeCompressor.decompress(
+                  encryptorDecryptor.decrypt(contentAsBytes)));
+    } catch (InvalidProtocolBufferException e) {
+      e.printStackTrace();
+      throw new RuntimeException("PROTOBUF FAIL");
+    }
   }
 
   public EncryptorDecryptor getEncryptorDecryptor() {

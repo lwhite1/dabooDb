@@ -11,13 +11,11 @@ public interface DocumentContents {
 
   Gson GSON = new Gson();
 
-  default String getType() {
-    return this.getClass().getCanonicalName();
-  }
-
   default byte[] marshall() {
     return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);
   }
 
   byte[] getKey();
+
+  String getContentType();
 }

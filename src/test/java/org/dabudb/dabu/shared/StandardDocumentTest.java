@@ -28,7 +28,7 @@ public class StandardDocumentTest {
 
   @Test
   public void testGetContentType() {
-    Assert.assertEquals(person.getType(), document.getContentType());
+    Assert.assertEquals(person.getContentType(), document.getContentType());
   }
 
   @Test

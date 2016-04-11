@@ -147,4 +147,8 @@ public class Person implements DocumentContents {
   public static List<String> getUsStates() {
     return usStates;
   }
+
+  public String getContentType() {
+    return "Person";
+  }
 }

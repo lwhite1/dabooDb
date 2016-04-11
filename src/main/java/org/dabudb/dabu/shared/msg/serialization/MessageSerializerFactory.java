@@ -10,7 +10,8 @@ public class MessageSerializerFactory {
   public static MessageSerializerDeserializer get(MessageSerializerType type) {
 
     switch (type) {
-      case JSON: return MessageJsonSerializer.get();
+      case JSON: return null;
+      case PROTOBUF: return null;
       default: throw new RuntimeException("No Serializer available for specified type: " + type.name());
     }
   }
