@@ -3,7 +3,6 @@
 
 package org.dabudb.dabu.shared.protobufs;
 
-@SuppressWarnings("ALL")
 public final class Request {
   private Request() {}
   public static void registerAllExtensions(
@@ -5120,24 +5119,7 @@ public final class Request {
     int getSchemaVersion();
 
     /**
-     * <code>required bool deleted = 5;</code>
-     *
-     * <pre>
-     ** A flag indicating that the document has been deleted 
-     * </pre>
-     */
-    boolean hasDeleted();
-    /**
-     * <code>required bool deleted = 5;</code>
-     *
-     * <pre>
-     ** A flag indicating that the document has been deleted 
-     * </pre>
-     */
-    boolean getDeleted();
-
-    /**
-     * <code>required bytes contentBytes = 6;</code>
+     * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
      ** The document contents as bytes, possibly compressed or encrypted 
@@ -5145,7 +5127,7 @@ public final class Request {
      */
     boolean hasContentBytes();
     /**
-     * <code>required bytes contentBytes = 6;</code>
+     * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
      ** The document contents as bytes, possibly compressed or encrypted 
@@ -5154,7 +5136,7 @@ public final class Request {
     com.google.protobuf.ByteString getContentBytes();
 
     /**
-     * <code>required int32 instanceVersion = 7;</code>
+     * <code>required int32 instanceVersion = 6;</code>
      *
      * <pre>
      ** The current instance (document) version of this object 
@@ -5162,7 +5144,7 @@ public final class Request {
      */
     boolean hasInstanceVersion();
     /**
-     * <code>required int32 instanceVersion = 7;</code>
+     * <code>required int32 instanceVersion = 6;</code>
      *
      * <pre>
      ** The current instance (document) version of this object 
@@ -5191,7 +5173,6 @@ public final class Request {
       contentClass_ = "";
       contentType_ = "";
       schemaVersion_ = 0;
-      deleted_ = false;
       contentBytes_ = com.google.protobuf.ByteString.EMPTY;
       instanceVersion_ = 0;
     }
@@ -5245,18 +5226,13 @@ public final class Request {
               schemaVersion_ = input.readInt32();
               break;
             }
-            case 40: {
+            case 42: {
               bitField0_ |= 0x00000010;
-              deleted_ = input.readBool();
-              break;
-            }
-            case 50: {
-              bitField0_ |= 0x00000020;
               contentBytes_ = input.readBytes();
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000040;
+            case 48: {
+              bitField0_ |= 0x00000020;
               instanceVersion_ = input.readInt32();
               break;
             }
@@ -5440,43 +5416,20 @@ public final class Request {
       return schemaVersion_;
     }
 
-    public static final int DELETED_FIELD_NUMBER = 5;
-    private boolean deleted_;
-    /**
-     * <code>required bool deleted = 5;</code>
-     *
-     * <pre>
-     ** A flag indicating that the document has been deleted 
-     * </pre>
-     */
-    public boolean hasDeleted() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>required bool deleted = 5;</code>
-     *
-     * <pre>
-     ** A flag indicating that the document has been deleted 
-     * </pre>
-     */
-    public boolean getDeleted() {
-      return deleted_;
-    }
-
-    public static final int CONTENTBYTES_FIELD_NUMBER = 6;
+    public static final int CONTENTBYTES_FIELD_NUMBER = 5;
     private com.google.protobuf.ByteString contentBytes_;
     /**
-     * <code>required bytes contentBytes = 6;</code>
+     * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
      ** The document contents as bytes, possibly compressed or encrypted 
      * </pre>
      */
     public boolean hasContentBytes() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required bytes contentBytes = 6;</code>
+     * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
      ** The document contents as bytes, possibly compressed or encrypted 
@@ -5486,20 +5439,20 @@ public final class Request {
       return contentBytes_;
     }
 
-    public static final int INSTANCEVERSION_FIELD_NUMBER = 7;
+    public static final int INSTANCEVERSION_FIELD_NUMBER = 6;
     private int instanceVersion_;
     /**
-     * <code>required int32 instanceVersion = 7;</code>
+     * <code>required int32 instanceVersion = 6;</code>
      *
      * <pre>
      ** The current instance (document) version of this object 
      * </pre>
      */
     public boolean hasInstanceVersion() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int32 instanceVersion = 7;</code>
+     * <code>required int32 instanceVersion = 6;</code>
      *
      * <pre>
      ** The current instance (document) version of this object 
@@ -5531,10 +5484,6 @@ public final class Request {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasDeleted()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasContentBytes()) {
         memoizedIsInitialized = 0;
         return false;
@@ -5562,13 +5511,10 @@ public final class Request {
         output.writeInt32(4, schemaVersion_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBool(5, deleted_);
+        output.writeBytes(5, contentBytes_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(6, contentBytes_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, instanceVersion_);
+        output.writeInt32(6, instanceVersion_);
       }
       unknownFields.writeTo(output);
     }
@@ -5594,15 +5540,11 @@ public final class Request {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(5, deleted_);
+          .computeBytesSize(5, contentBytes_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, contentBytes_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, instanceVersion_);
+          .computeInt32Size(6, instanceVersion_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5729,12 +5671,10 @@ public final class Request {
         bitField0_ = (bitField0_ & ~0x00000004);
         schemaVersion_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        deleted_ = false;
-        bitField0_ = (bitField0_ & ~0x00000010);
         contentBytes_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         instanceVersion_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -5778,13 +5718,9 @@ public final class Request {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.deleted_ = deleted_;
+        result.contentBytes_ = contentBytes_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
-        }
-        result.contentBytes_ = contentBytes_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
         }
         result.instanceVersion_ = instanceVersion_;
         result.bitField0_ = to_bitField0_;
@@ -5819,9 +5755,6 @@ public final class Request {
         if (other.hasSchemaVersion()) {
           setSchemaVersion(other.getSchemaVersion());
         }
-        if (other.hasDeleted()) {
-          setDeleted(other.getDeleted());
-        }
         if (other.hasContentBytes()) {
           setContentBytes(other.getContentBytes());
         }
@@ -5844,9 +5777,6 @@ public final class Request {
           return false;
         }
         if (!hasSchemaVersion()) {
-          return false;
-        }
-        if (!hasDeleted()) {
           return false;
         }
         if (!hasContentBytes()) {
@@ -6176,67 +6106,19 @@ public final class Request {
         return this;
       }
 
-      private boolean deleted_ ;
-      /**
-       * <code>required bool deleted = 5;</code>
-       *
-       * <pre>
-       ** A flag indicating that the document has been deleted 
-       * </pre>
-       */
-      public boolean hasDeleted() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>required bool deleted = 5;</code>
-       *
-       * <pre>
-       ** A flag indicating that the document has been deleted 
-       * </pre>
-       */
-      public boolean getDeleted() {
-        return deleted_;
-      }
-      /**
-       * <code>required bool deleted = 5;</code>
-       *
-       * <pre>
-       ** A flag indicating that the document has been deleted 
-       * </pre>
-       */
-      public Builder setDeleted(boolean value) {
-        bitField0_ |= 0x00000010;
-        deleted_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required bool deleted = 5;</code>
-       *
-       * <pre>
-       ** A flag indicating that the document has been deleted 
-       * </pre>
-       */
-      public Builder clearDeleted() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        deleted_ = false;
-        onChanged();
-        return this;
-      }
-
       private com.google.protobuf.ByteString contentBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes contentBytes = 6;</code>
+       * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
        ** The document contents as bytes, possibly compressed or encrypted 
        * </pre>
        */
       public boolean hasContentBytes() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required bytes contentBytes = 6;</code>
+       * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
        ** The document contents as bytes, possibly compressed or encrypted 
@@ -6246,7 +6128,7 @@ public final class Request {
         return contentBytes_;
       }
       /**
-       * <code>required bytes contentBytes = 6;</code>
+       * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
        ** The document contents as bytes, possibly compressed or encrypted 
@@ -6256,20 +6138,20 @@ public final class Request {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000010;
         contentBytes_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required bytes contentBytes = 6;</code>
+       * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
        ** The document contents as bytes, possibly compressed or encrypted 
        * </pre>
        */
       public Builder clearContentBytes() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         contentBytes_ = getDefaultInstance().getContentBytes();
         onChanged();
         return this;
@@ -6277,17 +6159,17 @@ public final class Request {
 
       private int instanceVersion_ ;
       /**
-       * <code>required int32 instanceVersion = 7;</code>
+       * <code>required int32 instanceVersion = 6;</code>
        *
        * <pre>
        ** The current instance (document) version of this object 
        * </pre>
        */
       public boolean hasInstanceVersion() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 instanceVersion = 7;</code>
+       * <code>required int32 instanceVersion = 6;</code>
        *
        * <pre>
        ** The current instance (document) version of this object 
@@ -6297,27 +6179,27 @@ public final class Request {
         return instanceVersion_;
       }
       /**
-       * <code>required int32 instanceVersion = 7;</code>
+       * <code>required int32 instanceVersion = 6;</code>
        *
        * <pre>
        ** The current instance (document) version of this object 
        * </pre>
        */
       public Builder setInstanceVersion(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         instanceVersion_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 instanceVersion = 7;</code>
+       * <code>required int32 instanceVersion = 6;</code>
        *
        * <pre>
        ** The current instance (document) version of this object 
        * </pre>
        */
       public Builder clearInstanceVersion() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         instanceVersion_ = 0;
         onChanged();
         return this;
@@ -9231,29 +9113,28 @@ public final class Request {
       "ed.protobufs.Document\"Q\n\021DeleteRequestBo" +
       "dy\022<\n\010document\030\001 \003(\0132*.org.dabudb.dabu.s" +
       "hared.protobufs.Document\"\035\n\016GetRequestBo" +
-      "dy\022\013\n\003key\030\001 \003(\014\"\231\001\n\010Document\022\013\n\003key\030\001 \002(",
+      "dy\022\013\n\003key\030\001 \003(\014\"\210\001\n\010Document\022\013\n\003key\030\001 \002(",
       "\014\022\024\n\014contentClass\030\002 \002(\t\022\023\n\013contentType\030\003" +
-      " \002(\t\022\025\n\rschemaVersion\030\004 \002(\005\022\017\n\007deleted\030\005" +
-      " \002(\010\022\024\n\014contentBytes\030\006 \002(\014\022\027\n\017instanceVe" +
-      "rsion\030\007 \002(\005\"|\n\nWriteReply\022\021\n\ttimestamp\030\001" +
-      " \002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorConditio" +
-      "n\030\003 \001(\01320.org.dabudb.dabu.shared.protobu" +
-      "fs.ErrorCondition\"}\n\013DeleteReply\022\021\n\ttime" +
-      "stamp\030\001 \002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorC" +
-      "ondition\030\003 \001(\01320.org.dabudb.dabu.shared." +
-      "protobufs.ErrorCondition\"\221\001\n\010GetReply\022\021\n",
-      "\ttimestamp\030\001 \002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016e" +
-      "rrorCondition\030\003 \001(\01320.org.dabudb.dabu.sh" +
-      "ared.protobufs.ErrorCondition\022\025\n\rdocumen" +
-      "tBytes\030\004 \003(\014\"e\n\016ErrorCondition\022>\n\terrorT" +
-      "ype\030\001 \001(\0162+.org.dabudb.dabu.shared.proto" +
-      "bufs.ErrorType\022\023\n\013description\030\002 \001(\t*8\n\013R" +
-      "equestType\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE" +
-      "\020\003\022\t\n\005QUERY\020\004*l\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031" +
-      "OPTIMISTIC_LOCK_EXCEPTION\020\002\022\031\n\025PERSISTEN" +
-      "CE_EXCEPTION\020\003\022\033\n\027SEVERE_SERVER_EXCEPTIO",
-      "N\020\004B+\n org.dabudb.dabu.shared.protobufsB" +
-      "\007Request"
+      " \002(\t\022\025\n\rschemaVersion\030\004 \002(\005\022\024\n\014contentBy" +
+      "tes\030\005 \002(\014\022\027\n\017instanceVersion\030\006 \002(\005\"|\n\nWr" +
+      "iteReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\trequestId" +
+      "\030\002 \001(\014\022H\n\016errorCondition\030\003 \001(\01320.org.dab" +
+      "udb.dabu.shared.protobufs.ErrorCondition" +
+      "\"}\n\013DeleteReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\tre" +
+      "questId\030\002 \001(\014\022H\n\016errorCondition\030\003 \001(\01320." +
+      "org.dabudb.dabu.shared.protobufs.ErrorCo" +
+      "ndition\"\221\001\n\010GetReply\022\021\n\ttimestamp\030\001 \002(\003\022",
+      "\021\n\trequestId\030\002 \001(\014\022H\n\016errorCondition\030\003 \001" +
+      "(\01320.org.dabudb.dabu.shared.protobufs.Er" +
+      "rorCondition\022\025\n\rdocumentBytes\030\004 \003(\014\"e\n\016E" +
+      "rrorCondition\022>\n\terrorType\030\001 \001(\0162+.org.d" +
+      "abudb.dabu.shared.protobufs.ErrorType\022\023\n" +
+      "\013description\030\002 \001(\t*8\n\013RequestType\022\007\n\003GET" +
+      "\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE\020\003\022\t\n\005QUERY\020\004*l\n\t" +
+      "ErrorType\022\010\n\004NONE\020\001\022\035\n\031OPTIMISTIC_LOCK_E" +
+      "XCEPTION\020\002\022\031\n\025PERSISTENCE_EXCEPTION\020\003\022\033\n" +
+      "\027SEVERE_SERVER_EXCEPTION\020\004B+\n org.dabudb",
+      ".dabu.shared.protobufsB\007Request"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9314,7 +9195,7 @@ public final class Request {
     internal_static_org_dabudb_dabu_shared_protobufs_Document_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_Document_descriptor,
-        new java.lang.String[] { "Key", "ContentClass", "ContentType", "SchemaVersion", "Deleted", "ContentBytes", "InstanceVersion", });
+        new java.lang.String[] { "Key", "ContentClass", "ContentType", "SchemaVersion", "ContentBytes", "InstanceVersion", });
     internal_static_org_dabudb_dabu_shared_protobufs_WriteReply_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_org_dabudb_dabu_shared_protobufs_WriteReply_fieldAccessorTable = new

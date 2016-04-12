@@ -89,14 +89,11 @@ message Document {
     /** The version of the json schema used to encode the payload */
     required int32 schemaVersion = 4;
 
-    /** A flag indicating that the document has been deleted */
-    required bool deleted = 5;
-
     /** The document contents as bytes, possibly compressed or encrypted */
-    required bytes contentBytes = 6;
+    required bytes contentBytes = 5;
 
     /** The current instance (document) version of this object */
-    required int32 instanceVersion = 7;
+    required int32 instanceVersion = 6;
 }
 
 /**

@@ -16,7 +16,6 @@ public final class DocumentUtils {
         .setContentBytes(ByteString.copyFrom(document.getContents()))
         .setContentClass(document.getContentClass())
         .setContentType(document.getContentType())
-        .setDeleted(document.isDeleted())
         .setInstanceVersion(document.documentVersion())
         .setSchemaVersion(document.schemaVersion())
         .build();

@@ -74,7 +74,6 @@ public class DbClient implements DocumentApi {
     document.setContentClass(result.getContentClass());
     document.setContentType(result.getContentType());
     document.setKey(result.getKey().toByteArray());
-    document.setDeleted(result.getDeleted());
     document.setSchemaVersion((short) result.getSchemaVersion());
     document.setInstanceVersion(result.getInstanceVersion());
     document.setContents(result.getContentBytes().toByteArray());

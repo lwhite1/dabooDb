@@ -30,14 +30,11 @@ public class StandardDocument implements Document {
     return contentsPipe;
   }
 
-
   private byte[] contents;
 
   private int instanceVersion;
 
   private short schemaVersion = 0;
-
-  private boolean deleted = false;
 
   private byte[] key;
 
@@ -99,11 +96,6 @@ public class StandardDocument implements Document {
   }
 
   @Override
-  public boolean isDeleted() {
-    return deleted;
-  }
-
-  @Override
   public int documentVersion() {
     return instanceVersion;
   }
@@ -115,11 +107,6 @@ public class StandardDocument implements Document {
 
   public void setInstanceVersion(int instanceVersion) {
     this.instanceVersion = instanceVersion;
-  }
-
-  @Override
-  public void setDeleted(boolean deleted) {
-    this.deleted = deleted;
   }
 
   @Override
@@ -158,7 +145,6 @@ public class StandardDocument implements Document {
     sb.append("contents=").append(Arrays.toString(contents));
     sb.append(", instanceVersion=").append(instanceVersion);
     sb.append(", schemaVersion=").append(schemaVersion);
-    sb.append(", deleted=").append(deleted);
     sb.append(", contentType='").append(contentType).append('\'');
     sb.append('}');
     return sb.toString();

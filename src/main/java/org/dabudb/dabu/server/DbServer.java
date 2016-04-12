@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- *
+ * The primary controller for the db. It receives input from a CommServer and forwards to a WAL (log) and db
  */
 public class DbServer {
 

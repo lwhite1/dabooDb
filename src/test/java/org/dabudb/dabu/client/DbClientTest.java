@@ -103,7 +103,7 @@ public class DbClientTest {
   @Test
   public void testDelete() {
     DbClient client = DbClient.get();
-    int testCount = 1_000;
+    int testCount = 100_000;
 
     List<Person> people = Person.createPeoples(testCount);
     List<Document> peopleDocs = new ArrayList<>();

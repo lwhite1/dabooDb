@@ -33,13 +33,9 @@ public interface Document {
 
   int schemaVersion();
 
-  boolean isDeleted();
-
   void setContents(byte[] contents);
 
   void setInstanceVersion(int documentVersion);
-
-  void setDeleted(boolean deleted);
 
   void setKey(byte[] key);
 
