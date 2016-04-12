@@ -17,7 +17,7 @@ Here's a rough roadmap:
 * Pluggable support for encryption and compression of data and messages
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
-Performance with small databases is good (my laptop):
+Performance with small databases (my laptop):
 
 * 1 million random inserts: 8.8 seconds (8.8 micros per insert)
 * 1 million random reads: 3.279 seconds (3.3 micros per insert)
