@@ -11,5 +11,4 @@ public interface CommClient {
 
   GetReply sendRequest(GetRequest request);
 
-  DeleteReply sendRequest(DeleteRequest request);
 }

@@ -107,8 +107,8 @@ public class DbClient implements DocumentApi {
     Request.Document doc = getDocument(document);
     Header header = getHeader();
     DeleteRequestBody body = getDeleteRequestBody(doc);
-    DeleteRequest request = getDeleteRequest(header, body);
-    Request.DeleteReply reply = settings.getCommClient().sendRequest(request);
+    WriteRequest request = getDeleteRequest(header, body);
+    Request.WriteReply reply = settings.getCommClient().sendRequest(request);
     checkErrorCondition(reply.getErrorCondition());
   }
 
@@ -123,8 +123,8 @@ public class DbClient implements DocumentApi {
 
     Header header = getHeader();
     DeleteRequestBody body = getDeleteRequestBody(docs);
-    DeleteRequest request = getDeleteRequest(header, body);
-    Request.DeleteReply reply = settings.getCommClient().sendRequest(request);
+    WriteRequest request = getDeleteRequest(header, body);
+    Request.WriteReply reply = settings.getCommClient().sendRequest(request);
     checkErrorCondition(reply.getErrorCondition());
   }
 

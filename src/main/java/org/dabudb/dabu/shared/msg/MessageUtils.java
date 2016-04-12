@@ -21,14 +21,16 @@ public final class MessageUtils {
   public static Request.WriteRequest getWriteRequest(Request.Header header, Request.WriteRequestBody body) {
     return Request.WriteRequest.newBuilder()
         .setHeader(header)
-        .setBody(body)
+        .setIsDelete(false)
+        .setWriteBody(body)
         .build();
   }
 
-  public static Request.DeleteRequest getDeleteRequest(Request.Header header, Request.DeleteRequestBody body) {
-    return Request.DeleteRequest.newBuilder()
+  public static Request.WriteRequest getDeleteRequest(Request.Header header, Request.DeleteRequestBody body) {
+    return Request.WriteRequest.newBuilder()
         .setHeader(header)
-        .setBody(body)
+        .setIsDelete(true)
+        .setDeleteBody(body)
         .build();
   }
 

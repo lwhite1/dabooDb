@@ -35,10 +35,6 @@ public class NullLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
   }
 
   @Override
-  public void logRequest(Request.DeleteRequest request) throws IOException {
-  }
-
-  @Override
   public void close() throws IOException {
   }
 

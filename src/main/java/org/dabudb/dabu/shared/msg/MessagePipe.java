@@ -44,27 +44,10 @@ public class MessagePipe {
             compressorDeCompressor.compress(message.toByteArray()));
   }
 
-  public byte[] messageToBytes(Request.DeleteRequest message) {
-    return
-        encryptorDecryptor.encrypt(
-            compressorDeCompressor.compress(message.toByteArray()));
-  }
-
   public Request.WriteRequest bytesToWriteRequest(byte[] contentAsBytes) {
 
     try {
       return Request.WriteRequest.parseFrom(
-          compressorDeCompressor.decompress(
-              encryptorDecryptor.decrypt(contentAsBytes)));
-    } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
-      throw new RuntimeException("PROTOBUF FAIL");
-    }
-  }
-
-  public Request.DeleteRequest bytesToMessage(byte[] contentAsBytes) {
-    try {
-      return Request.DeleteRequest.parseFrom(
           compressorDeCompressor.decompress(
               encryptorDecryptor.decrypt(contentAsBytes)));
     } catch (InvalidProtocolBufferException e) {

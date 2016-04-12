@@ -11,21 +11,12 @@ public class DirectCommServer implements CommServer {
   private final DbServer dbServer = DbServer.get();
 
   /**
-   * Passes a write request to the database server for processing
+   * Passes a write request (insert, update, or delete) to the database server for processing
    * @param request The write request
    * @return  A WriteReply, which may contain an ErrorCondition object signifying a problem with the write
    */
   public Request.WriteReply handleRequest(Request.WriteRequest request) {
     return dbServer.handleRequest(request, request.toByteArray());
-  }
-
-  /**
-   * Passes a delete request to the database server for processing
-   * @param request The delete request
-   * @return A delete reply, which may contain an ErrorCondition object signifying a problem
-   */
-  public Request.DeleteReply handleRequest(Request.DeleteRequest request) {
-    return dbServer.handleRequest(request);
   }
 
   /**

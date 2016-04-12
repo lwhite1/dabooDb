@@ -5,7 +5,6 @@ import org.dabudb.dabu.server.db.Db;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 
 import org.dabudb.dabu.shared.protobufs.Request;
-import org.dabudb.dabu.shared.protobufs.Request.DeleteReply;
 import org.dabudb.dabu.shared.protobufs.Request.GetReply;
 import org.dabudb.dabu.shared.protobufs.Request.WriteReply;
 import org.dabudb.dabu.shared.protobufs.Request.WriteRequest;
@@ -39,16 +38,22 @@ class DbServer {
     return ServerSettings.getInstance().getWriteAheadLog();
   }
 
+
   Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
     try {
       writeLog().log(requestBytes);
-
-      List<Request.DocumentKeyValue> documents = request.getBody().getDocumentKeyValueList();
-      Map<byte[], byte[]> documentMap = new HashMap<>();
-      for (Request.DocumentKeyValue keyValue : documents) {
-        documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
+      if (!request.getIsDelete()) {
+        List<Request.DocumentKeyValue> documents = request.getWriteBody().getDocumentKeyValueList();
+        Map<byte[], byte[]> documentMap = new HashMap<>();
+        for (Request.DocumentKeyValue keyValue : documents) {
+          documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
+        }
+        db().write(documentMap);
       }
-      db().write(documentMap);
+      else {
+        List<Request.Document> documents = request.getDeleteBody().getDocumentList();
+        db().delete(documents);
+      }
     } catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException(e);
@@ -57,24 +62,6 @@ class DbServer {
     return WriteReply.newBuilder()
         .setRequestId(request.getHeader().getId())
         .setTimestamp(Instant.now().toEpochMilli())
-        .build();
-  }
-
-  /**
-   */
-  public DeleteReply handleRequest(Request.DeleteRequest request) {
-    try {
-      writeLog().logRequest(request);
-      List<Request.Document> documentList = request.getBody().getDocumentList();
-      db().delete(documentList);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    }
-    return Request.DeleteReply.newBuilder()
-        .setRequestId(request.getHeader().getId())
-        .setTimestamp(Instant.now().toEpochMilli())
-        .setErrorCondition(noErrorCondition())
         .build();
   }
 
@@ -99,12 +86,21 @@ class DbServer {
 
       try {
         WriteRequest request = WriteRequest.parseFrom(requestBytes);
-        List<Request.DocumentKeyValue> documents = request.getBody().getDocumentKeyValueList();
-        Map<byte[], byte[]> documentMap = new HashMap<>();
-        for (Request.DocumentKeyValue keyValue : documents) {
-          documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
+        if (!request.getIsDelete()) {
+          List<Request.DocumentKeyValue> documents = request.getWriteBody().getDocumentKeyValueList();
+          Map<byte[], byte[]> documentMap = new HashMap<>();
+          for (Request.DocumentKeyValue keyValue : documents) {
+            documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
+          }
+          db().write(documentMap);
+        } else {
+          List<Request.Document> documents = request.getDeleteBody().getDocumentList();
+          Map<byte[], byte[]> documentMap = new HashMap<>();
+          for (Request.Document document : documents) {
+            documentMap.put(document.getKey().toByteArray(), document.toByteArray());
+          }
+          db().write(documentMap);
         }
-        db().write(documentMap);
       } catch (IOException e) {
         e.printStackTrace();
         throw new RuntimeException(e);

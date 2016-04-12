@@ -57,11 +57,6 @@ public class WriteLog implements WriteAheadLog, Closeable {
   }
 
   @Override
-  public void logRequest(Request.DeleteRequest request) throws IOException {
-    log(ServerSettings.getInstance().getMessagePipe().messageToBytes(request));
-  }
-
-  @Override
   public void close() throws IOException {
 
     requestInputByteStream.close();

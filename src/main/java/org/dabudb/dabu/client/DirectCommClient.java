@@ -10,7 +10,7 @@ public class DirectCommClient implements CommClient {
 
   private final DirectCommServer directCommServer;
 
-  public DirectCommClient() {
+  DirectCommClient() {
     directCommServer = new DirectCommServer();
   }
 
@@ -24,8 +24,4 @@ public class DirectCommClient implements CommClient {
     return directCommServer.handleRequest(request);
   }
 
-  @Override
-  public Request.DeleteReply sendRequest(Request.DeleteRequest request) {
-    return directCommServer.handleRequest(request);
-  }
 }

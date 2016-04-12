@@ -8,15 +8,9 @@ option java_outer_classname = "Request";
  */
 message WriteRequest {
     required Header header = 1;
-    required WriteRequestBody body = 2;
-}
-
-/**
- *  A Delete request message
- */
-message DeleteRequest {
-    required Header header = 1;
-    required DeleteRequestBody body = 2;
+    required bool isDelete = 2;
+    optional WriteRequestBody writeBody = 3;
+    optional DeleteRequestBody deleteBody = 4;
 }
 
 /**
@@ -100,15 +94,6 @@ message Document {
 *   A reply to a WriteRequest
 */
 message WriteReply {
-    required int64 timestamp = 1;
-    optional bytes requestId = 2;
-    optional ErrorCondition errorCondition = 3;
-}
-
-/**
-*   A reply to a DeleteRequest
-*/
-message DeleteReply {
     required int64 timestamp = 1;
     optional bytes requestId = 2;
     optional ErrorCondition errorCondition = 3;
