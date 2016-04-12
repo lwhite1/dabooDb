@@ -4,12 +4,14 @@ import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;
 import org.dabudb.dabu.shared.serialization.ContentSerializerType;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.Objects;
 
 /**
  * Defines a ContentsPipe
  */
-public class ContentsPipeDefinition {
+@Immutable
+final class ContentsPipeDefinition {
 
   private final ContentSerializerType contentSerializerType;
   private final CompressionType compressionType;

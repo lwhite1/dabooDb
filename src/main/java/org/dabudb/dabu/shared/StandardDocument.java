@@ -16,14 +16,14 @@ public class StandardDocument implements Document {
 
   private volatile static DocumentSerializer documentSerializer;
 
-  public static DocumentSerializer getDocumentSerializer() {
+  private static DocumentSerializer getDocumentSerializer() {
     if (documentSerializer == null) {
       documentSerializer = Settings.getInstance().getDocumentSerializer();
     }
     return documentSerializer;
   }
 
-  public static ContentsPipe getContentsPipe() {
+  private static ContentsPipe getContentsPipe() {
     if (contentsPipe == null) {
       contentsPipe = Settings.getInstance().getContentsPipe();
     }

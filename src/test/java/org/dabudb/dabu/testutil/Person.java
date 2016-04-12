@@ -42,7 +42,7 @@ public class Person implements DocumentContents {
       person.birthday = LocalDate.parse(p.dateOfBirth().toLocalDate().toString());
       person.city = p.getAddress().getCity();
       person.zip = p.getAddress().getPostalCode();
-      person.state = fairy.baseProducer().randomElement(usStateArray);
+      person.state = fairy.baseProducer().randomElement(US_STATE_ARRAY);
       person.weight = fairy.baseProducer().randomBetween(65, 280);
       person.height = fairy.baseProducer().randomBetween(64, 78);
       person.gender = p.sex().name().charAt(0);
@@ -90,25 +90,25 @@ public class Person implements DocumentContents {
     return sb.toString();
   }
 
-  private static String[] usStateArray = {"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut",
+  private static final String[] US_STATE_ARRAY = {"Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut",
       "Delaware","District Of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas",
       "Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri",
       "Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina",
       "North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota",
       "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"};
 
-  private static List<String> usStates = Arrays.asList(usStateArray);
+  private static final List<String> US_STATES = Arrays.asList(US_STATE_ARRAY);
 
   @Override
   public byte[] getKey() {
     return new byte[0];
   }
 
-  public String getfName() {
+  public String getFirstName() {
     return fName;
   }
 
-  public String getlName() {
+  public String getLastName() {
     return lName;
   }
 
@@ -141,11 +141,11 @@ public class Person implements DocumentContents {
   }
 
   public static String[] getUsStateArray() {
-    return usStateArray;
+    return US_STATE_ARRAY;
   }
 
   public static List<String> getUsStates() {
-    return usStates;
+    return US_STATES;
   }
 
   public String getContentType() {

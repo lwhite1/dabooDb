@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class ContentsPipeTest {
 
-  private Person person = Person.createPeoples(1).get(0);
+  private final Person person = Person.createPeoples(1).get(0);
 
   @Test
   public void testContentsToBytes() {

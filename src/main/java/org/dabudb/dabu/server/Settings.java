@@ -9,7 +9,6 @@ import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;
 import org.dabudb.dabu.shared.msg.MessagePipe;
-import org.dabudb.dabu.shared.msg.serialization.MessageSerializerType;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -21,7 +20,7 @@ import java.util.Properties;
  */
 public class Settings {
 
-  private MessagePipe messagePipe = MessagePipe.create(CompressionType.SNAPPY, MessageSerializerType.JSON);
+  private MessagePipe messagePipe = MessagePipe.create(CompressionType.SNAPPY);
 
   private Class documentClass = StandardDocument.class;
 
@@ -37,7 +36,7 @@ public class Settings {
 
   private static Settings ourInstance;
 
-  public Settings() {
+  private Settings() {
   }
 
   public static Settings getInstance() {
@@ -134,14 +133,12 @@ public class Settings {
 
   private void setMessagePipe(Properties properties) {
     CompressionType compressionType = CompressionType.valueOf(properties.getProperty("message.compression"));
-    MessageSerializerType serializerType =
-        MessageSerializerType.valueOf(properties.getProperty("message.serialization"));
     EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("message.encryption"));
     String encryptionPwd = String.valueOf(properties.getProperty("message.encryption.pwd"));
 
     Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
 
-    this.messagePipe = MessagePipe.create(compressionType, serializerType);
+    this.messagePipe = MessagePipe.create(compressionType);
   }
 
   public File getDatabaseDirectory() {

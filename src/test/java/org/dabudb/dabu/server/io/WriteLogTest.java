@@ -14,11 +14,11 @@ import org.junit.Test;
  */
 public class WriteLogTest {
 
-  private DocumentContents contents = Person.createPeoples(1).get(0);
-  private Document document = new StandardDocument(contents);
-  Request.Document doc = DocumentUtils.getDocument(document);
-  Request.Header header = MessageUtils.getHeader();
-  Request.WriteRequestBody body = MessageUtils.getWriteRequestBody(doc);
+  private final DocumentContents contents = Person.createPeoples(1).get(0);
+  private final Document document = new StandardDocument(contents);
+  private final Request.Document doc = DocumentUtils.getDocument(document);
+  private final Request.Header header = MessageUtils.getHeader();
+  private final Request.WriteRequestBody body = MessageUtils.getWriteRequestBody(doc);
   private final Request.WriteRequest writeRequest = MessageUtils.getWriteRequest(header, body);
 
   @Test

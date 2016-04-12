@@ -5,7 +5,7 @@ package org.dabudb.dabu.shared.encryption;
  */
 public class NullEncryptor implements EncryptorDecryptor {
 
-  private static NullEncryptor INSTANCE = new NullEncryptor();
+  private final static NullEncryptor INSTANCE = new NullEncryptor();
 
   static NullEncryptor get() {
     return INSTANCE;

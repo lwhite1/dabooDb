@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Company implements DocumentContents {
 
   private String name;
-  private byte[] key;
+  private final byte[] key;
 
   public Company(String name) {
     this.name = name;

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  */
 public class DocumentContentsTest {
 
-  Company company = new Company("Standard Oil");
+  private final Company company = new Company("Standard Oil");
 
   @Test
   public void testGetType() {

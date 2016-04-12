@@ -21,11 +21,6 @@ import java.util.Map;
 public class GsonFactory {
 
   /**
-   * A standard Gson object that is used for serializing and deserialzing requests and replies
-   */
-  private Gson messageGson = defaultGson();
-
-  /**
    * Maps from a schemaVersion int to a constructed Gson instance that embodies that version.
    * This is essentially a cache for the Gson instance, so we don't have to construct one from the
    * corresponding schema whenever it's needed. Corresponding schemas are held in the contentSchemaVersions map.
@@ -135,10 +130,6 @@ public class GsonFactory {
     builder.setDateFormat("yyyy-MM-dd HH:mm:ss.S");
     registerSerializers(schema, builder);
     return builder.create();
-  }
-
-  public Gson getMessageGson() {
-    return messageGson;
   }
 
   private void registerSerializers(GsonSchema schema, GsonBuilder builder) {

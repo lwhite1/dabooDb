@@ -3,6 +3,7 @@
 
 package org.dabudb.dabu.shared.protobufs;
 
+@SuppressWarnings("ALL")
 public final class Request {
   private Request() {}
   public static void registerAllExtensions(

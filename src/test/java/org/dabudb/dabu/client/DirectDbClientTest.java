@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class DirectDbClientTest {
 
-  DbClient client = DbClient.get();
+  private final DbClient client = DbClient.get();
 
   @Test
   public void testWriteDocument() {

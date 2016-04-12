@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  */
 public class OnHeapConcurrentSkipListDb implements Db {
 
-  private ConcurrentSkipListMap<byte[], byte[]> store
+  private final ConcurrentSkipListMap<byte[], byte[]> store
       = new ConcurrentSkipListMap<>(SignedBytes.lexicographicalComparator());
 
   @Override

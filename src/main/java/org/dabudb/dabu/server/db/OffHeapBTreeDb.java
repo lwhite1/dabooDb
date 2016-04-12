@@ -18,14 +18,14 @@ import java.util.Map;
  */
 public class OffHeapBTreeDb implements Db {
 
-  long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 1024;  // 1 GB
+  private final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 1024;  // 1 GB
 
-  private DB db = DBMaker
+  private final DB db = DBMaker
       .memoryDB()
       .allocateStartSize(ALLOCATED_SIZE_IN_BYTES)
       .make();
 
-  BTreeMap<byte[],byte[]> store = db
+  private final BTreeMap<byte[],byte[]> store = db
       .treeMap("treemap", Serializer.BYTE_ARRAY, Serializer.BYTE_ARRAY)
       .make();
 

@@ -6,9 +6,6 @@ import org.dabudb.dabu.shared.compression.CompressorDeCompressor;
 import org.dabudb.dabu.shared.compression.CompressorFactory;
 import org.dabudb.dabu.shared.encryption.EncryptorDecryptor;
 import org.dabudb.dabu.shared.encryption.EncryptorFactory;
-import org.dabudb.dabu.shared.msg.serialization.MessageSerializerFactory;
-import org.dabudb.dabu.shared.msg.serialization.MessageSerializerDeserializer;
-import org.dabudb.dabu.shared.msg.serialization.MessageSerializerType;
 import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.util.Objects;
@@ -20,32 +17,25 @@ import java.util.Objects;
  */
 public class MessagePipe {
 
-  private EncryptorDecryptor encryptorDecryptor;
-  private CompressorDeCompressor compressorDeCompressor;
-  private MessageSerializerDeserializer serializerDeserializer;
+  private final EncryptorDecryptor encryptorDecryptor;
+  private final CompressorDeCompressor compressorDeCompressor;
 
   /**
    * Creates a messagePipe with no encryption, and the other filters as defined
    */
-  public static MessagePipe create(CompressionType compressionType, MessageSerializerType serializerType) {
+  public static MessagePipe create(CompressionType compressionType) {
     CompressorDeCompressor compressor = CompressorFactory.get(compressionType);
     EncryptorDecryptor encryptor = EncryptorFactory.NONE;
-    MessageSerializerDeserializer serializer = MessageSerializerFactory.get(serializerType);
 
-    return new MessagePipe(
-        compressor,
-        encryptor,
-        serializer);
+    return new MessagePipe(compressor, encryptor);
   }
 
 
   public MessagePipe(
       CompressorDeCompressor compressorDeCompressor,
-      EncryptorDecryptor encryptorDecryptor,
-      MessageSerializerDeserializer serializerDeserializer) {
+      EncryptorDecryptor encryptorDecryptor) {
     this.encryptorDecryptor = encryptorDecryptor;
     this.compressorDeCompressor = compressorDeCompressor;
-    this.serializerDeserializer = serializerDeserializer;
   }
 
   public byte[] messageToBytes(Request.WriteRequest message) {
@@ -60,7 +50,7 @@ public class MessagePipe {
             compressorDeCompressor.compress(message.toByteArray()));
   }
 
-  public Request.WriteRequest bytesToWriteRequst(byte[] contentAsBytes) {
+  public Request.WriteRequest bytesToWriteRequest(byte[] contentAsBytes) {
 
     try {
       return Request.WriteRequest.parseFrom(
@@ -91,23 +81,18 @@ public class MessagePipe {
     return compressorDeCompressor;
   }
 
-  public MessageSerializerDeserializer getSerializerDeserializer() {
-    return serializerDeserializer;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     MessagePipe that = (MessagePipe) o;
     return Objects.equals(encryptorDecryptor, that.encryptorDecryptor) &&
-        Objects.equals(compressorDeCompressor, that.compressorDeCompressor) &&
-        Objects.equals(serializerDeserializer, that.serializerDeserializer);
+        Objects.equals(compressorDeCompressor, that.compressorDeCompressor);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(encryptorDecryptor, compressorDeCompressor, serializerDeserializer);
+    return Objects.hash(encryptorDecryptor, compressorDeCompressor);
   }
 
   @Override
@@ -115,7 +100,6 @@ public class MessagePipe {
     final StringBuilder sb = new StringBuilder("MessagePipe{");
     sb.append("encryptorDecryptor=").append(encryptorDecryptor);
     sb.append(", compressorDeCompressor=").append(compressorDeCompressor);
-    sb.append(", serializerDeserializer=").append(serializerDeserializer);
     sb.append('}');
     return sb.toString();
   }

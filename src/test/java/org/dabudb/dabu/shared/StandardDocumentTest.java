@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
  */
 public class StandardDocumentTest {
 
-  private Person person = Person.createPeoples(1).get(0);
-  private Document document = new StandardDocument(person);
+  private final Person person = Person.createPeoples(1).get(0);
+  private final Document document = new StandardDocument(person);
 
   @Test
   public void testKey() {

@@ -9,7 +9,7 @@ import org.iq80.snappy.Snappy;
  */
 public class SnappyCompressor implements CompressorDeCompressor {
 
-  // TODO(lwhite): Either make this a singleton (if thread-safe) or make a pool of preallocated compressors
+  // TODO(lwhite): Either make this a singleton (if thread-safe) or make a pool of pre-allocated compressors
   public static SnappyCompressor get() {
     return new SnappyCompressor();
   }
