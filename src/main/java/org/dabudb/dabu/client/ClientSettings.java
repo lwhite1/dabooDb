@@ -1,5 +1,6 @@
 package org.dabudb.dabu.client;
 
+import com.google.gson.Gson;
 import org.dabudb.dabu.shared.ContentsPipe;
 import org.dabudb.dabu.shared.serialization.DocumentJsonSerializer;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
@@ -13,9 +14,14 @@ import com.google.common.base.Strings;
 import java.util.Properties;
 
 /**
+ * ClientSettings for a database client.
  *
+ * These should be the same for all clients,
+ * and they should be consistent with the server for every value common to clients and servers.
  */
-public class Settings {
+public class ClientSettings {
+
+  private static Gson GSON = new Gson();
 
   private ContentsPipe contentsPipe = ContentsPipe.create(CompressionType.SNAPPY, ContentSerializerType.JSON);
 
@@ -25,19 +31,18 @@ public class Settings {
 
   private CommClient commClient = new DirectCommClient();
 
-  private static Settings ourInstance;
+  private static ClientSettings ourInstance;
 
-  public Settings() {}
+  public ClientSettings() {}
 
-  public static Settings getInstance() {
+  public static ClientSettings getInstance() {
     if (ourInstance == null) {
-      //throw new RuntimeException("Database settings have not been initialized.");
-      ourInstance = new Settings();
+      ourInstance = new ClientSettings();
     }
     return ourInstance;
   }
 
-  Settings(Properties properties) {
+  ClientSettings(Properties properties) {
 
     setDocumentClass(properties);
     setDocumentSerializer(properties);
@@ -68,7 +73,7 @@ public class Settings {
               Class.forName(String.valueOf(properties.getProperty("document.serializer.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load DocumentSerializer as specified in server.properties");
+      throw new RuntimeException("Unable to load DocumentSerializer as specified in client.properties");
     }
   }
 
@@ -77,7 +82,7 @@ public class Settings {
       this.documentClass = Class.forName(String.valueOf(properties.get("document.class")));
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load document class specified in server.properties");
+      throw new RuntimeException("Unable to load document class specified in client.properties");
     }
   }
 
@@ -88,19 +93,23 @@ public class Settings {
               Class.forName(String.valueOf(properties.getProperty("comm.client.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load CommServer as specified in server.properties");
+      throw new RuntimeException("Unable to load CommServer as specified in client.properties");
     }
   }
 
   private void setContentsPipe(Properties properties) {
-    CompressionType compressionType = CompressionType.valueOf(properties.getProperty("document.content.compression"));
+    CompressionType compressionType = CompressionType.valueOf(properties.getProperty("document.contents.compression"));
     ContentSerializerType serializerType =
-        ContentSerializerType.valueOf(properties.getProperty("document.content.serialization"));
-    EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("document.content.encryption"));
-    String encryptionPwd = String.valueOf(properties.getProperty("document.content.encryption.pwd"));
+        ContentSerializerType.valueOf(properties.getProperty("document.contents.serialization"));
+    EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("document.contents.encryption"));
+    String encryptionPwd = String.valueOf(properties.getProperty("document.contents.encryption.pwd"));
 
     Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
 
     this.contentsPipe = ContentsPipe.create(compressionType, serializerType);
+  }
+
+  String toJson() {
+    return GSON.toJson(this);
   }
 }

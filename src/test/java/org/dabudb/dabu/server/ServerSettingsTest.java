@@ -1,0 +1,31 @@
+package org.dabudb.dabu.server;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.Properties;
+
+/**
+ *
+ */
+public class ServerSettingsTest {
+
+  @Before
+  public void setUp() throws Exception {
+
+    Properties serverProperties = new Properties();
+    InputStream inputStream = new FileInputStream("src/main/resources/server.properties");
+    serverProperties.load(inputStream);
+
+    //new ServerSettings(serverProperties);
+  }
+
+  @Test
+  public void testStub() {
+
+
+  }
+}

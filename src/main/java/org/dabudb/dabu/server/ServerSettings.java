@@ -18,7 +18,7 @@ import java.util.Properties;
 /**
  *
  */
-public class Settings {
+public class ServerSettings {
 
   private MessagePipe messagePipe = MessagePipe.create(CompressionType.SNAPPY);
 
@@ -34,19 +34,19 @@ public class Settings {
 
   private CommServer commServer = new DirectCommServer();
 
-  private static Settings ourInstance;
+  private static ServerSettings ourInstance;
 
-  private Settings() {
+  private ServerSettings() {
   }
 
-  public static Settings getInstance() {
+  public static ServerSettings getInstance() {
     if (ourInstance == null) {
-      ourInstance = new Settings();
+      ourInstance = new ServerSettings();
     }
     return ourInstance;
   }
 
-  Settings(Properties properties) {
+  ServerSettings(Properties properties) {
 
     setDocumentClass(properties);
     setDocumentSerializer(properties);

@@ -22,7 +22,7 @@ public class DbClient implements DocumentApi {
     return new DbClient();
   }
 
-  private final Settings settings = Settings.getInstance();
+  private final ClientSettings settings = ClientSettings.getInstance();
 
   private DbClient() {}
 

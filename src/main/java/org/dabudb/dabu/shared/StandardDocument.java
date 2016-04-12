@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared;
 
-import org.dabudb.dabu.client.Settings;
+import org.dabudb.dabu.client.ClientSettings;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 
 import java.nio.charset.StandardCharsets;
@@ -18,14 +18,14 @@ public class StandardDocument implements Document {
 
   private static DocumentSerializer getDocumentSerializer() {
     if (documentSerializer == null) {
-      documentSerializer = Settings.getInstance().getDocumentSerializer();
+      documentSerializer = ClientSettings.getInstance().getDocumentSerializer();
     }
     return documentSerializer;
   }
 
   private static ContentsPipe getContentsPipe() {
     if (contentsPipe == null) {
-      contentsPipe = Settings.getInstance().getContentsPipe();
+      contentsPipe = ClientSettings.getInstance().getContentsPipe();
     }
     return contentsPipe;
   }

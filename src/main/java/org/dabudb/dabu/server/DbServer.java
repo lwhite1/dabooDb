@@ -30,11 +30,11 @@ public class DbServer {
   }
 
   private Db db() {
-    return Settings.getInstance().getDb();
+    return ServerSettings.getInstance().getDb();
   }
 
   private WriteAheadLog writeLog() {
-    return Settings.getInstance().getWriteAheadLog();
+    return ServerSettings.getInstance().getWriteAheadLog();
   }
 
   public Request.WriteReply handleRequest(WriteRequest request) {
