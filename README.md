@@ -27,7 +27,7 @@ The system is a key-value document store with the following capabilities:
 * Basic key value functionality: write, get, delete (single and batch)
 * Embedded mode only
 * Excellent performance for small amounts of data
-* Pluggable storage engine and logging
+* Pluggable storage engine and write-ahead logging
 * Pluggable serializers for data and messages
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
@@ -36,21 +36,24 @@ Performance with small databases is quite good: (my laptop):
 * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
 * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
 
-### 1.5
+### 1.1
 
-* Pluggable comparator
+* Pluggable comparator 
 * Range search
+
+### 1.2
 * Optimistic locking
-* Simple transactions
+* Transaction support 
+
+### 1.3
 * Proper performance testing framework
 
 ### 2.0
 
-* Client-Server or embedded modes
-* Excellent performance at scale (say, less than 10 micros per read, up to 100 million records)
+* Client-Server Mode with pluggable communication protocols
 
-At this point, we will have a good working system, and proceed with making a Low Performance/High Latency version, 
-that can be used as a starting point for students.
+We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
+We can proceed with making a Low Performance/High Latency version that can be used as a starting point for students.
 
 ## Beyond that?
 Here are some further extensions to make it a real db (should we decide that would be fun):
