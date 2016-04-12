@@ -129,6 +129,7 @@ public class DbClient implements DocumentApi {
   private void checkErrorCondition(ErrorCondition condition) {
     if (condition != null && condition.getErrorType() != ErrorType.NONE) {
       System.out.println(condition);
+      //TODO(lwhite): Proper error handling
       throw new RuntimeException("OOOPS!");
     }
   }

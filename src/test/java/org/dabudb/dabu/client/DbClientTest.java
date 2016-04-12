@@ -11,13 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  *
  */
-public class DirectDbClientTest {
+public class DbClientTest {
 
   private final DbClient client = DbClient.get();
 
@@ -75,11 +74,62 @@ public class DirectDbClientTest {
 
   @Test
   public void testGet() {
+    DbClient client = DbClient.get();
+    int testCount = 1_000;
 
+    List<Person> people = Person.createPeoples(testCount);
+    List<Document> peopleDocs = new ArrayList<>();
+    List<byte[]> keys = new ArrayList<>();
+    for (Person person : people) {
+      Document document = new StandardDocument(person);
+      peopleDocs.add(document);
+      keys.add(person.getKey());
+    }
+
+    System.out.println("Test data created");
+    // Write
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    for (Document document : peopleDocs) {
+      client.write(document);
+    }
+    System.out.println("Wrote " + testCount + " objects in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+
+    stopwatch.reset().start();
+    List<Document> documents = client.get(keys);
+    assertEquals(testCount, documents.size());
+    System.out.println("Read " + testCount + " objects in 1 batch " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
 
   @Test
   public void testDelete() {
+    DbClient client = DbClient.get();
+    int testCount = 1_000;
 
+    List<Person> people = Person.createPeoples(testCount);
+    List<Document> peopleDocs = new ArrayList<>();
+    List<byte[]> keys = new ArrayList<>();
+    for (Person person : people) {
+      Document document = new StandardDocument(person);
+      peopleDocs.add(document);
+      keys.add(person.getKey());
+    }
+
+    System.out.println("Test data created");
+    // Write
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    for (Document document : peopleDocs) {
+      client.write(document);
+    }
+    System.out.println("Wrote " + testCount + " objects in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+
+    stopwatch.reset().start();
+    client.delete(peopleDocs);
+    System.out.println("Deleted "
+        + testCount + " objects in 1 batch " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+
+    stopwatch.reset().start();
+    List<Document> documents = client.get(keys);
+    assertEquals(0, documents.size());
+    System.out.println("Read " + testCount + " objects in 1 batch " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
 }
