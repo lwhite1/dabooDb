@@ -40,7 +40,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
   private int length = -1;
 
   private BufferedReader indexReader;
-  private BufferedInputStream requestInputByteStream;
+  //private BufferedInputStream requestInputByteStream;
 
   private OutputStream requestOutputByteStream;
 
@@ -59,7 +59,6 @@ public class WriteLog implements WriteAheadLog, Closeable {
   @Override
   public void close() throws IOException {
 
-    requestInputByteStream.close();
     requestOutputByteStream.close();
     dataInputStream.close();
     indexWriter.close();
@@ -88,7 +87,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
     }
     byte[] requestBytes = new byte[length];
     try {
-      requestInputByteStream.read(requestBytes);
+      dataInputStream.read(requestBytes);
 
     } catch (IOException e) {
       e.printStackTrace();

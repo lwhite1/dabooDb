@@ -22,6 +22,9 @@ class DbServer {
 
   private static DbServer INSTANCE;
 
+  private Db db;
+  private WriteAheadLog writeAheadLog;
+
   public static DbServer get() {
 
     if (INSTANCE == null) {
@@ -30,12 +33,28 @@ class DbServer {
     return INSTANCE;
   }
 
+  private DbServer() {
+    replayWAL();
+  }
+
+  private void init() {
+    ServerSettings serverSettings = ServerSettings.getInstance();
+    db = serverSettings.getDb();
+    writeAheadLog = serverSettings.getWriteAheadLog();
+  }
+
   private Db db() {
-    return ServerSettings.getInstance().getDb();
+    if (db == null) {
+      init();
+    }
+    return db;
   }
 
   private WriteAheadLog writeLog() {
-    return ServerSettings.getInstance().getWriteAheadLog();
+    if (writeAheadLog == null) {
+      init();
+    }
+    return writeAheadLog;
   }
 
 
@@ -49,8 +68,7 @@ class DbServer {
           documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
         }
         db().write(documentMap);
-      }
-      else {
+      } else {
         List<Request.Document> documents = request.getDeleteBody().getDocumentList();
         db().delete(documents);
       }
@@ -76,12 +94,14 @@ class DbServer {
 
   /**
    * Replay the writeAheadLog, on startup, to initialize the in-memory data structures
-   *
+   * <p>
    * TODO(lwhite): Review. This probably needs to lock the files or otherwise fully synchronize
    */
   public synchronized void replayWAL() {
 
+    int count = 0;
     while (writeLog().hasNext()) {
+
       byte[] requestBytes = writeLog().next();
 
       try {
@@ -104,6 +124,10 @@ class DbServer {
       } catch (IOException e) {
         e.printStackTrace();
         throw new RuntimeException(e);
+      }
+      count++;
+      if (count % 10_000 == 0) {
+        System.out.println("Loaded " + count + " documents ");
       }
     }
   }

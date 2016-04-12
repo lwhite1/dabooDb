@@ -8,7 +8,14 @@ import org.dabudb.dabu.shared.protobufs.Request;
 public class DirectCommServer implements CommServer {
 
   /** The database server I work for */
-  private final DbServer dbServer = DbServer.get();
+  private DbServer dbServer;
+
+  private DbServer dbServer() {
+    if (dbServer == null) {
+      dbServer = DbServer.get();
+    }
+    return dbServer;
+  }
 
   /**
    * Passes a write request (insert, update, or delete) to the database server for processing
@@ -16,7 +23,7 @@ public class DirectCommServer implements CommServer {
    * @return  A WriteReply, which may contain an ErrorCondition object signifying a problem with the write
    */
   public Request.WriteReply handleRequest(Request.WriteRequest request) {
-    return dbServer.handleRequest(request, request.toByteArray());
+    return dbServer().handleRequest(request, request.toByteArray());
   }
 
   /**
@@ -25,6 +32,6 @@ public class DirectCommServer implements CommServer {
    * @return  A reply containing all documents found
    */
   public Request.GetReply handleRequest(Request.GetRequest request) {
-    return dbServer.handleRequest(request);
+    return dbServer().handleRequest(request);
   }
 }

@@ -1,7 +1,6 @@
 package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.server.db.Db;
-import org.dabudb.dabu.server.db.OffHeapBTreeDb;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 import org.dabudb.dabu.server.io.WriteLog;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
@@ -13,6 +12,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
@@ -20,19 +23,20 @@ import java.util.Properties;
  */
 public class ServerSettings {
 
-  private MessagePipe messagePipe = MessagePipe.create(CompressionType.SNAPPY);
+  private MessagePipe messagePipe;
 
   private Class documentClass = StandardDocument.class;
 
   private DocumentSerializer documentSerializer;
 
-  private Db db = new OffHeapBTreeDb();
+  private Db db;
 
   private File databaseDirectory = new File(System.getProperty("user.dir"));
 
-  private WriteAheadLog writeAheadLog = WriteLog.getInstance(databaseDirectory);
+  private WriteAheadLog writeAheadLog;
 
-  private CommServer commServer = new DirectCommServer();
+  //private CommServer commServer = new DirectCommServer();
+  private CommServer commServer;
 
   private static ServerSettings ourInstance;
 
@@ -41,7 +45,12 @@ public class ServerSettings {
 
   public static ServerSettings getInstance() {
     if (ourInstance == null) {
-      ourInstance = new ServerSettings();
+      try {
+        ourInstance = loadServerSettings();
+      } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Unable to load ServerSettings", e);
+      }
     }
     return ourInstance;
   }
@@ -54,6 +63,8 @@ public class ServerSettings {
     setWriteAheadLog(properties);
     setCommServer(properties);
     setMessagePipe(properties);
+
+    ourInstance = this;
   }
 
   public MessagePipe getMessagePipe() {
@@ -87,7 +98,7 @@ public class ServerSettings {
               Class.forName(String.valueOf(properties.getProperty("document.serializer.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load DocumentSerializer as specified in server.properties");
+      throw new RuntimeException("Unable to load DocumentSerializer as specified in server.properties", e);
     }
   }
 
@@ -96,7 +107,7 @@ public class ServerSettings {
       this.documentClass = Class.forName(String.valueOf(properties.get("document.class")));
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load document class specified in server.properties");
+      throw new RuntimeException("Unable to load document class specified in server.properties", e);
     }
   }
 
@@ -105,18 +116,15 @@ public class ServerSettings {
       this.db = (Db) Class.forName(String.valueOf(properties.getProperty("db.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load db as specified in server.properties");
+      throw new RuntimeException("Unable to load db as specified in server.properties", e);
     }
   }
 
   private void setWriteAheadLog(Properties properties) {
-    try {
-      this.writeAheadLog =
-          (WriteAheadLog)
-              Class.forName(String.valueOf(properties.getProperty("db.write_ahead_log.class"))).newInstance();
-    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-      e.printStackTrace();
-      throw new RuntimeException("Unable to load WriteAheadLog as specified in server.properties");
+    String folderName = String.valueOf(properties.getProperty("db.write_ahead_log.folderName"));
+    String writeAheadClassName = String.valueOf(properties.getProperty("db.write_ahead_log.class"));
+    if (writeAheadClassName.equals(WriteLog.class.getCanonicalName())) {
+      this.writeAheadLog = WriteLog.getInstance(Paths.get(folderName).toFile());
     }
   }
 
@@ -143,5 +151,13 @@ public class ServerSettings {
 
   public File getDatabaseDirectory() {
     return databaseDirectory;
+  }
+
+  private static ServerSettings loadServerSettings() throws IOException {
+    Properties serverProperties = new Properties();
+    InputStream inputStream = new FileInputStream("src/main/resources/server.properties");
+    serverProperties.load(inputStream);
+
+    return new ServerSettings(serverProperties);
   }
 }

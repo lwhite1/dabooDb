@@ -19,7 +19,7 @@ public class ServerSettingsTest {
     InputStream inputStream = new FileInputStream("src/main/resources/server.properties");
     serverProperties.load(inputStream);
 
-    //new ServerSettings(serverProperties);
+    new ServerSettings(serverProperties);
   }
 
   @Test
