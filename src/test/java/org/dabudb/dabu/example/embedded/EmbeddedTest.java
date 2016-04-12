@@ -19,7 +19,6 @@ public class EmbeddedTest {
 
   public static void main(String[] args) {
 
-    //ClientSettings clientSettings = new Properties();
     DbClient client = DbClient.get();
 
     int testCount = 1_000_000;
