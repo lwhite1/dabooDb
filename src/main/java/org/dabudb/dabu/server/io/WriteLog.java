@@ -10,13 +10,12 @@ import org.dabudb.dabu.shared.protobufs.Request;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
  * Logs all write requests to a file
  */
-public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
+public class WriteLog implements WriteAheadLog, Closeable {
 
   private static WriteLog instance;
 
@@ -63,11 +62,6 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
   }
 
   @Override
-  public void replay() {
-    //TODO(lwhite): Implement
-  }
-
-  @Override
   public void close() throws IOException {
 
     requestInputByteStream.close();
@@ -109,7 +103,8 @@ public class WriteLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
     return requestBytes;
   }
 
-  private void log(byte[] request) throws IOException {
+  @Override
+  public void log(byte[] request) throws IOException {
     requestOutputByteStream.write(request);
     requestOutputByteStream.flush();
 

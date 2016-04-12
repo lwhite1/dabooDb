@@ -1,6 +1,6 @@
 # dabuDB
 
-DabuDB is a simple, pure Java, key-value document store. It is designed as a vehicle for teaching how to write High-Performance/Low-Latency Java.
+DabuDB is a simple key-value document store. It is designed as a vehicle for teaching how to write High-Performance/Low-Latency Java.
 
 DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. 
 

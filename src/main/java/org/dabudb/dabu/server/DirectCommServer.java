@@ -16,7 +16,7 @@ public class DirectCommServer implements CommServer {
    * @return  A WriteReply, which may contain an ErrorCondition object signifying a problem with the write
    */
   public Request.WriteReply handleRequest(Request.WriteRequest request) {
-    return dbServer.handleRequest(request);
+    return dbServer.handleRequest(request, request.toByteArray());
   }
 
   /**

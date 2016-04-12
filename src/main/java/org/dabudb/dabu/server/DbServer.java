@@ -39,9 +39,9 @@ class DbServer {
     return ServerSettings.getInstance().getWriteAheadLog();
   }
 
-  Request.WriteReply handleRequest(WriteRequest request) {
+  Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
     try {
-      writeLog().logRequest(request);
+      writeLog().log(requestBytes);
 
       List<Request.DocumentKeyValue> documents = request.getBody().getDocumentKeyValueList();
       Map<byte[], byte[]> documentMap = new HashMap<>();
@@ -85,6 +85,31 @@ class DbServer {
         .setTimestamp(Instant.now().toEpochMilli())
         .addAllDocumentBytes(result)
         .build();
+  }
+
+  /**
+   * Replay the writeAheadLog, on startup, to initialize the in-memory data structures
+   *
+   * TODO(lwhite): Review. This probably needs to lock the files or otherwise fully synchronize
+   */
+  public synchronized void replayWAL() {
+
+    while (writeLog().hasNext()) {
+      byte[] requestBytes = writeLog().next();
+
+      try {
+        WriteRequest request = WriteRequest.parseFrom(requestBytes);
+        List<Request.DocumentKeyValue> documents = request.getBody().getDocumentKeyValueList();
+        Map<byte[], byte[]> documentMap = new HashMap<>();
+        for (Request.DocumentKeyValue keyValue : documents) {
+          documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
+        }
+        db().write(documentMap);
+      } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
+    }
   }
 
   private Request.ErrorCondition noErrorCondition() {
