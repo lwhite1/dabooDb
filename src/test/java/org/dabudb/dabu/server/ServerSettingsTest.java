@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
