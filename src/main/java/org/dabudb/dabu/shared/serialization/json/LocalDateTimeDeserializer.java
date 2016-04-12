@@ -13,11 +13,11 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Deserializes a LocalDateTime from a String.
- *
+ * <p>
  * Note: While this is inefficient, it's (about) the best *simple* solution,
  * because a LocalDateTime in Java 8 is represented by two longs, so a primitive conversion will not work.
  * It has problems, though.
- *
+ * <p>
  * TODO(lwhite): Fix precision (and improve efficiency)
  * It should be possible to serialize to 2 longs (i.e. 16 bytes) and convert that to a (zero-padded) string (32 bytes),
  * as opposed to representing in ISO local date time format (38 bytes). The 2-long solution would be better in fact,
@@ -27,18 +27,18 @@ import java.time.format.DateTimeFormatter;
 @ThreadSafe
 class LocalDateTimeDeserializer implements JsonDeserializer<LocalDateTime> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-    public LocalDateTime deserialize(JsonElement json,
-                                     Type typeOfT,
-                                     JsonDeserializationContext context)
-            throws JsonParseException {
+  public LocalDateTime deserialize(JsonElement json,
+                                   Type typeOfT,
+                                   JsonDeserializationContext context)
+      throws JsonParseException {
 
-        if (Strings.isNullOrEmpty(json.getAsString())) {
-            return null;
-        }
-        return LocalDateTime.parse(json.getAsString(), FORMATTER);
+    if (Strings.isNullOrEmpty(json.getAsString())) {
+      return null;
     }
+    return LocalDateTime.parse(json.getAsString(), FORMATTER);
+  }
 }
 
 

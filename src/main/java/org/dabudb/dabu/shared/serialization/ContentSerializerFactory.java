@@ -10,8 +10,10 @@ public class ContentSerializerFactory {
   public static ContentSerializerDeserializer get(ContentSerializerType type) {
 
     switch (type) {
-      case JSON: return ContentJsonSerializer.get();
-      default: throw new RuntimeException("No Serializer available for specified type: " + type.name());
+      case JSON:
+        return ContentJsonSerializer.get();
+      default:
+        throw new RuntimeException("No Serializer available for specified type: " + type.name());
     }
   }
 }

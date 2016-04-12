@@ -5,6 +5,7 @@ import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +15,8 @@ import java.util.UUID;
  */
 public final class MessageUtils {
 
-  private MessageUtils() {}
+  private MessageUtils() {
+  }
 
   public static Request.WriteRequest getWriteRequest(Request.Header header, Request.WriteRequestBody body) {
     return Request.WriteRequest.newBuilder()
@@ -38,8 +40,14 @@ public final class MessageUtils {
   }
 
   public static Request.WriteRequestBody getWriteRequestBody(Request.Document doc) {
+
+    Request.DocumentKeyValue keyValue = Request.DocumentKeyValue.newBuilder()
+        .setKey(doc.getKey())
+        .setValue(doc.toByteString())
+        .build();
+
     return Request.WriteRequestBody.newBuilder()
-        .addAllDocument(Collections.singletonList(doc))
+        .addDocumentKeyValue(keyValue)
         .build();
   }
 
@@ -62,8 +70,19 @@ public final class MessageUtils {
   }
 
   public static Request.WriteRequestBody getWriteRequestBody(List<Request.Document> docs) {
+
+    ArrayList<Request.DocumentKeyValue> keyValueList = new ArrayList<>();
+
+    for (Request.Document doc : docs) {
+      Request.DocumentKeyValue keyValue = Request.DocumentKeyValue.newBuilder()
+          .setKey(doc.getKey())
+          .setValue(doc.toByteString())
+          .build();
+      keyValueList.add(keyValue);
+    }
+
     return Request.WriteRequestBody.newBuilder()
-        .addAllDocument(docs)
+        .addAllDocumentKeyValue(keyValueList)
         .build();
   }
 
@@ -80,5 +99,4 @@ public final class MessageUtils {
         .setTimestamp(Instant.now().toEpochMilli())
         .build();
   }
-
 }

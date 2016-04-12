@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public interface Db extends Iterable<Map.Entry<byte[], byte[]>> {
 
-  void write(List<Request.Document> documentList);
+  void write(Map<byte[], byte[]> documentMap);
 
-  void delete(List<Request.Document> key);
+  void delete(List<Request.Document> documentList);
 
-  List<ByteString> get(List<ByteString> keys);
+  List<ByteString> get(List<ByteString> keyList);
 
 }

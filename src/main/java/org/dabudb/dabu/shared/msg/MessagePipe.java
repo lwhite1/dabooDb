@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * A pipeline for transforming messages, where transforming means converting the reference object to a byte array.
- *
+ * <p>
  * The message can also be compressed and/or encrypted depending on the transformation type.
  */
 public class MessagePipe {
@@ -54,8 +54,8 @@ public class MessagePipe {
 
     try {
       return Request.WriteRequest.parseFrom(
-              compressorDeCompressor.decompress(
-                  encryptorDecryptor.decrypt(contentAsBytes)));
+          compressorDeCompressor.decompress(
+              encryptorDecryptor.decrypt(contentAsBytes)));
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
       throw new RuntimeException("PROTOBUF FAIL");
@@ -65,8 +65,8 @@ public class MessagePipe {
   public Request.DeleteRequest bytesToMessage(byte[] contentAsBytes) {
     try {
       return Request.DeleteRequest.parseFrom(
-              compressorDeCompressor.decompress(
-                  encryptorDecryptor.decrypt(contentAsBytes)));
+          compressorDeCompressor.decompress(
+              encryptorDecryptor.decrypt(contentAsBytes)));
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
       throw new RuntimeException("PROTOBUF FAIL");

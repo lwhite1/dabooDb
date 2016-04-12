@@ -12,12 +12,14 @@ import org.dabudb.dabu.shared.protobufs.Request.WriteRequest;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The primary controller for the db. It receives input from a CommServer and forwards to a WAL (log) and db
  */
-public class DbServer {
+class DbServer {
 
   private static DbServer INSTANCE;
 
@@ -37,11 +39,16 @@ public class DbServer {
     return ServerSettings.getInstance().getWriteAheadLog();
   }
 
-  public Request.WriteReply handleRequest(WriteRequest request) {
+  Request.WriteReply handleRequest(WriteRequest request) {
     try {
       writeLog().logRequest(request);
-      List<Request.Document> documents = request.getBody().getDocumentList();
-      db().write(documents);
+
+      List<Request.DocumentKeyValue> documents = request.getBody().getDocumentKeyValueList();
+      Map<byte[], byte[]> documentMap = new HashMap<>();
+      for (Request.DocumentKeyValue keyValue : documents) {
+        documentMap.put(keyValue.getKey().toByteArray(), keyValue.getValue().toByteArray());
+      }
+      db().write(documentMap);
     } catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException(e);

@@ -18,8 +18,8 @@ public interface DocumentSerializer {
    * assuming of course that's actually what's in the byte array, and that it was serialized to bytes
    * using the same approach.
    *
-   * @param documentClass  A class implementing Document
-   * @param documentBytes  A byte array containing a serialized document of the given class
+   * @param documentClass A class implementing Document
+   * @param documentBytes A byte array containing a serialized document of the given class
    */
   Document bytesToDocument(Class documentClass, byte[] documentBytes);
 }

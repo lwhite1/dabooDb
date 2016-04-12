@@ -16,13 +16,13 @@ import java.time.format.DateTimeFormatter;
 @ThreadSafe
 class InstantSerializer implements JsonSerializer<Instant> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_INSTANT;
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_INSTANT;
 
-    public JsonElement serialize(Instant src,
-                                 Type typeOfSrc,
-                                 JsonSerializationContext context) {
-        return new JsonPrimitive(FORMATTER.format(src));
-    }
+  public JsonElement serialize(Instant src,
+                               Type typeOfSrc,
+                               JsonSerializationContext context) {
+    return new JsonPrimitive(FORMATTER.format(src));
+  }
 }
 
 

@@ -3116,27 +3116,27 @@ public final class Request {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    java.util.List<org.dabudb.dabu.shared.protobufs.Request.Document> 
-        getDocumentList();
+    java.util.List<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue> 
+        getDocumentKeyValueList();
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    org.dabudb.dabu.shared.protobufs.Request.Document getDocument(int index);
+    org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue getDocumentKeyValue(int index);
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    int getDocumentCount();
+    int getDocumentKeyValueCount();
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    java.util.List<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder> 
-        getDocumentOrBuilderList();
+    java.util.List<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder> 
+        getDocumentKeyValueOrBuilderList();
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder getDocumentOrBuilder(
+    org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder getDocumentKeyValueOrBuilder(
         int index);
   }
   /**
@@ -3156,7 +3156,7 @@ public final class Request {
       super(builder);
     }
     private WriteRequestBody() {
-      document_ = java.util.Collections.emptyList();
+      documentKeyValue_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -3188,10 +3188,10 @@ public final class Request {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                document_ = new java.util.ArrayList<org.dabudb.dabu.shared.protobufs.Request.Document>();
+                documentKeyValue_ = new java.util.ArrayList<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              document_.add(input.readMessage(org.dabudb.dabu.shared.protobufs.Request.Document.parser(), extensionRegistry));
+              documentKeyValue_.add(input.readMessage(org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.parser(), extensionRegistry));
               break;
             }
           }
@@ -3204,7 +3204,7 @@ public final class Request {
                 e.getMessage()).setUnfinishedMessage(this));
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          document_ = java.util.Collections.unmodifiableList(document_);
+          documentKeyValue_ = java.util.Collections.unmodifiableList(documentKeyValue_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3222,39 +3222,39 @@ public final class Request {
               org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody.class, org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody.Builder.class);
     }
 
-    public static final int DOCUMENT_FIELD_NUMBER = 1;
-    private java.util.List<org.dabudb.dabu.shared.protobufs.Request.Document> document_;
+    public static final int DOCUMENTKEYVALUE_FIELD_NUMBER = 1;
+    private java.util.List<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue> documentKeyValue_;
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    public java.util.List<org.dabudb.dabu.shared.protobufs.Request.Document> getDocumentList() {
-      return document_;
+    public java.util.List<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue> getDocumentKeyValueList() {
+      return documentKeyValue_;
     }
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    public java.util.List<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder> 
-        getDocumentOrBuilderList() {
-      return document_;
+    public java.util.List<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder> 
+        getDocumentKeyValueOrBuilderList() {
+      return documentKeyValue_;
     }
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    public int getDocumentCount() {
-      return document_.size();
+    public int getDocumentKeyValueCount() {
+      return documentKeyValue_.size();
     }
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    public org.dabudb.dabu.shared.protobufs.Request.Document getDocument(int index) {
-      return document_.get(index);
+    public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue getDocumentKeyValue(int index) {
+      return documentKeyValue_.get(index);
     }
     /**
-     * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+     * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
      */
-    public org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder getDocumentOrBuilder(
+    public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder getDocumentKeyValueOrBuilder(
         int index) {
-      return document_.get(index);
+      return documentKeyValue_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -3263,8 +3263,8 @@ public final class Request {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      for (int i = 0; i < getDocumentCount(); i++) {
-        if (!getDocument(i).isInitialized()) {
+      for (int i = 0; i < getDocumentKeyValueCount(); i++) {
+        if (!getDocumentKeyValue(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -3275,8 +3275,8 @@ public final class Request {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < document_.size(); i++) {
-        output.writeMessage(1, document_.get(i));
+      for (int i = 0; i < documentKeyValue_.size(); i++) {
+        output.writeMessage(1, documentKeyValue_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -3286,9 +3286,9 @@ public final class Request {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < document_.size(); i++) {
+      for (int i = 0; i < documentKeyValue_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, document_.get(i));
+          .computeMessageSize(1, documentKeyValue_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3403,16 +3403,16 @@ public final class Request {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getDocumentFieldBuilder();
+          getDocumentKeyValueFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
-        if (documentBuilder_ == null) {
-          document_ = java.util.Collections.emptyList();
+        if (documentKeyValueBuilder_ == null) {
+          documentKeyValue_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          documentBuilder_.clear();
+          documentKeyValueBuilder_.clear();
         }
         return this;
       }
@@ -3437,14 +3437,14 @@ public final class Request {
       public org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody buildPartial() {
         org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody result = new org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody(this);
         int from_bitField0_ = bitField0_;
-        if (documentBuilder_ == null) {
+        if (documentKeyValueBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            document_ = java.util.Collections.unmodifiableList(document_);
+            documentKeyValue_ = java.util.Collections.unmodifiableList(documentKeyValue_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.document_ = document_;
+          result.documentKeyValue_ = documentKeyValue_;
         } else {
-          result.document_ = documentBuilder_.build();
+          result.documentKeyValue_ = documentKeyValueBuilder_.build();
         }
         onBuilt();
         return result;
@@ -3461,29 +3461,29 @@ public final class Request {
 
       public Builder mergeFrom(org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody other) {
         if (other == org.dabudb.dabu.shared.protobufs.Request.WriteRequestBody.getDefaultInstance()) return this;
-        if (documentBuilder_ == null) {
-          if (!other.document_.isEmpty()) {
-            if (document_.isEmpty()) {
-              document_ = other.document_;
+        if (documentKeyValueBuilder_ == null) {
+          if (!other.documentKeyValue_.isEmpty()) {
+            if (documentKeyValue_.isEmpty()) {
+              documentKeyValue_ = other.documentKeyValue_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureDocumentIsMutable();
-              document_.addAll(other.document_);
+              ensureDocumentKeyValueIsMutable();
+              documentKeyValue_.addAll(other.documentKeyValue_);
             }
             onChanged();
           }
         } else {
-          if (!other.document_.isEmpty()) {
-            if (documentBuilder_.isEmpty()) {
-              documentBuilder_.dispose();
-              documentBuilder_ = null;
-              document_ = other.document_;
+          if (!other.documentKeyValue_.isEmpty()) {
+            if (documentKeyValueBuilder_.isEmpty()) {
+              documentKeyValueBuilder_.dispose();
+              documentKeyValueBuilder_ = null;
+              documentKeyValue_ = other.documentKeyValue_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              documentBuilder_ = 
+              documentKeyValueBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getDocumentFieldBuilder() : null;
+                   getDocumentKeyValueFieldBuilder() : null;
             } else {
-              documentBuilder_.addAllMessages(other.document_);
+              documentKeyValueBuilder_.addAllMessages(other.documentKeyValue_);
             }
           }
         }
@@ -3493,8 +3493,8 @@ public final class Request {
       }
 
       public final boolean isInitialized() {
-        for (int i = 0; i < getDocumentCount(); i++) {
-          if (!getDocument(i).isInitialized()) {
+        for (int i = 0; i < getDocumentKeyValueCount(); i++) {
+          if (!getDocumentKeyValue(i).isInitialized()) {
             return false;
           }
         }
@@ -3520,244 +3520,244 @@ public final class Request {
       }
       private int bitField0_;
 
-      private java.util.List<org.dabudb.dabu.shared.protobufs.Request.Document> document_ =
+      private java.util.List<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue> documentKeyValue_ =
         java.util.Collections.emptyList();
-      private void ensureDocumentIsMutable() {
+      private void ensureDocumentKeyValueIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          document_ = new java.util.ArrayList<org.dabudb.dabu.shared.protobufs.Request.Document>(document_);
+          documentKeyValue_ = new java.util.ArrayList<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue>(documentKeyValue_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          org.dabudb.dabu.shared.protobufs.Request.Document, org.dabudb.dabu.shared.protobufs.Request.Document.Builder, org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder> documentBuilder_;
+          org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder> documentKeyValueBuilder_;
 
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public java.util.List<org.dabudb.dabu.shared.protobufs.Request.Document> getDocumentList() {
-        if (documentBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(document_);
+      public java.util.List<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue> getDocumentKeyValueList() {
+        if (documentKeyValueBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(documentKeyValue_);
         } else {
-          return documentBuilder_.getMessageList();
+          return documentKeyValueBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public int getDocumentCount() {
-        if (documentBuilder_ == null) {
-          return document_.size();
+      public int getDocumentKeyValueCount() {
+        if (documentKeyValueBuilder_ == null) {
+          return documentKeyValue_.size();
         } else {
-          return documentBuilder_.getCount();
+          return documentKeyValueBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public org.dabudb.dabu.shared.protobufs.Request.Document getDocument(int index) {
-        if (documentBuilder_ == null) {
-          return document_.get(index);
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue getDocumentKeyValue(int index) {
+        if (documentKeyValueBuilder_ == null) {
+          return documentKeyValue_.get(index);
         } else {
-          return documentBuilder_.getMessage(index);
+          return documentKeyValueBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder setDocument(
-          int index, org.dabudb.dabu.shared.protobufs.Request.Document value) {
-        if (documentBuilder_ == null) {
+      public Builder setDocumentKeyValue(
+          int index, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue value) {
+        if (documentKeyValueBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDocumentIsMutable();
-          document_.set(index, value);
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.set(index, value);
           onChanged();
         } else {
-          documentBuilder_.setMessage(index, value);
+          documentKeyValueBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder setDocument(
-          int index, org.dabudb.dabu.shared.protobufs.Request.Document.Builder builderForValue) {
-        if (documentBuilder_ == null) {
-          ensureDocumentIsMutable();
-          document_.set(index, builderForValue.build());
+      public Builder setDocumentKeyValue(
+          int index, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder builderForValue) {
+        if (documentKeyValueBuilder_ == null) {
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.set(index, builderForValue.build());
           onChanged();
         } else {
-          documentBuilder_.setMessage(index, builderForValue.build());
+          documentKeyValueBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder addDocument(org.dabudb.dabu.shared.protobufs.Request.Document value) {
-        if (documentBuilder_ == null) {
+      public Builder addDocumentKeyValue(org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue value) {
+        if (documentKeyValueBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDocumentIsMutable();
-          document_.add(value);
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.add(value);
           onChanged();
         } else {
-          documentBuilder_.addMessage(value);
+          documentKeyValueBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder addDocument(
-          int index, org.dabudb.dabu.shared.protobufs.Request.Document value) {
-        if (documentBuilder_ == null) {
+      public Builder addDocumentKeyValue(
+          int index, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue value) {
+        if (documentKeyValueBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDocumentIsMutable();
-          document_.add(index, value);
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.add(index, value);
           onChanged();
         } else {
-          documentBuilder_.addMessage(index, value);
+          documentKeyValueBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder addDocument(
-          org.dabudb.dabu.shared.protobufs.Request.Document.Builder builderForValue) {
-        if (documentBuilder_ == null) {
-          ensureDocumentIsMutable();
-          document_.add(builderForValue.build());
+      public Builder addDocumentKeyValue(
+          org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder builderForValue) {
+        if (documentKeyValueBuilder_ == null) {
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.add(builderForValue.build());
           onChanged();
         } else {
-          documentBuilder_.addMessage(builderForValue.build());
+          documentKeyValueBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder addDocument(
-          int index, org.dabudb.dabu.shared.protobufs.Request.Document.Builder builderForValue) {
-        if (documentBuilder_ == null) {
-          ensureDocumentIsMutable();
-          document_.add(index, builderForValue.build());
+      public Builder addDocumentKeyValue(
+          int index, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder builderForValue) {
+        if (documentKeyValueBuilder_ == null) {
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.add(index, builderForValue.build());
           onChanged();
         } else {
-          documentBuilder_.addMessage(index, builderForValue.build());
+          documentKeyValueBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder addAllDocument(
-          java.lang.Iterable<? extends org.dabudb.dabu.shared.protobufs.Request.Document> values) {
-        if (documentBuilder_ == null) {
-          ensureDocumentIsMutable();
+      public Builder addAllDocumentKeyValue(
+          java.lang.Iterable<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue> values) {
+        if (documentKeyValueBuilder_ == null) {
+          ensureDocumentKeyValueIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, document_);
+              values, documentKeyValue_);
           onChanged();
         } else {
-          documentBuilder_.addAllMessages(values);
+          documentKeyValueBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder clearDocument() {
-        if (documentBuilder_ == null) {
-          document_ = java.util.Collections.emptyList();
+      public Builder clearDocumentKeyValue() {
+        if (documentKeyValueBuilder_ == null) {
+          documentKeyValue_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          documentBuilder_.clear();
+          documentKeyValueBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public Builder removeDocument(int index) {
-        if (documentBuilder_ == null) {
-          ensureDocumentIsMutable();
-          document_.remove(index);
+      public Builder removeDocumentKeyValue(int index) {
+        if (documentKeyValueBuilder_ == null) {
+          ensureDocumentKeyValueIsMutable();
+          documentKeyValue_.remove(index);
           onChanged();
         } else {
-          documentBuilder_.remove(index);
+          documentKeyValueBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public org.dabudb.dabu.shared.protobufs.Request.Document.Builder getDocumentBuilder(
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder getDocumentKeyValueBuilder(
           int index) {
-        return getDocumentFieldBuilder().getBuilder(index);
+        return getDocumentKeyValueFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder getDocumentOrBuilder(
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder getDocumentKeyValueOrBuilder(
           int index) {
-        if (documentBuilder_ == null) {
-          return document_.get(index);  } else {
-          return documentBuilder_.getMessageOrBuilder(index);
+        if (documentKeyValueBuilder_ == null) {
+          return documentKeyValue_.get(index);  } else {
+          return documentKeyValueBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public java.util.List<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder> 
-           getDocumentOrBuilderList() {
-        if (documentBuilder_ != null) {
-          return documentBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder> 
+           getDocumentKeyValueOrBuilderList() {
+        if (documentKeyValueBuilder_ != null) {
+          return documentKeyValueBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(document_);
+          return java.util.Collections.unmodifiableList(documentKeyValue_);
         }
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public org.dabudb.dabu.shared.protobufs.Request.Document.Builder addDocumentBuilder() {
-        return getDocumentFieldBuilder().addBuilder(
-            org.dabudb.dabu.shared.protobufs.Request.Document.getDefaultInstance());
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder addDocumentKeyValueBuilder() {
+        return getDocumentKeyValueFieldBuilder().addBuilder(
+            org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public org.dabudb.dabu.shared.protobufs.Request.Document.Builder addDocumentBuilder(
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder addDocumentKeyValueBuilder(
           int index) {
-        return getDocumentFieldBuilder().addBuilder(
-            index, org.dabudb.dabu.shared.protobufs.Request.Document.getDefaultInstance());
+        return getDocumentKeyValueFieldBuilder().addBuilder(
+            index, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.dabudb.dabu.shared.protobufs.Document document = 1;</code>
+       * <code>repeated .org.dabudb.dabu.shared.protobufs.DocumentKeyValue documentKeyValue = 1;</code>
        */
-      public java.util.List<org.dabudb.dabu.shared.protobufs.Request.Document.Builder> 
-           getDocumentBuilderList() {
-        return getDocumentFieldBuilder().getBuilderList();
+      public java.util.List<org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder> 
+           getDocumentKeyValueBuilderList() {
+        return getDocumentKeyValueFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          org.dabudb.dabu.shared.protobufs.Request.Document, org.dabudb.dabu.shared.protobufs.Request.Document.Builder, org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder> 
-          getDocumentFieldBuilder() {
-        if (documentBuilder_ == null) {
-          documentBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              org.dabudb.dabu.shared.protobufs.Request.Document, org.dabudb.dabu.shared.protobufs.Request.Document.Builder, org.dabudb.dabu.shared.protobufs.Request.DocumentOrBuilder>(
-                  document_,
+          org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder> 
+          getDocumentKeyValueFieldBuilder() {
+        if (documentKeyValueBuilder_ == null) {
+          documentKeyValueBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder>(
+                  documentKeyValue_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
-          document_ = null;
+          documentKeyValue_ = null;
         }
-        return documentBuilder_;
+        return documentKeyValueBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:org.dabudb.dabu.shared.protobufs.WriteRequestBody)
@@ -9025,6 +9025,500 @@ public final class Request {
 
   }
 
+  public interface DocumentKeyValueOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:org.dabudb.dabu.shared.protobufs.DocumentKeyValue)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required bytes key = 1;</code>
+     */
+    boolean hasKey();
+    /**
+     * <code>required bytes key = 1;</code>
+     */
+    com.google.protobuf.ByteString getKey();
+
+    /**
+     * <code>required bytes value = 2;</code>
+     */
+    boolean hasValue();
+    /**
+     * <code>required bytes value = 2;</code>
+     */
+    com.google.protobuf.ByteString getValue();
+  }
+  /**
+   * Protobuf type {@code org.dabudb.dabu.shared.protobufs.DocumentKeyValue}
+   */
+  public  static final class DocumentKeyValue extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:org.dabudb.dabu.shared.protobufs.DocumentKeyValue)
+      DocumentKeyValueOrBuilder {
+    // Use DocumentKeyValue.newBuilder() to construct.
+    private DocumentKeyValue(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private DocumentKeyValue() {
+      key_ = com.google.protobuf.ByteString.EMPTY;
+      value_ = com.google.protobuf.ByteString.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DocumentKeyValue(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              key_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              value_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw new RuntimeException(e.setUnfinishedMessage(this));
+      } catch (java.io.IOException e) {
+        throw new RuntimeException(
+            new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this));
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.class, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString key_;
+    /**
+     * <code>required bytes key = 1;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required bytes key = 1;</code>
+     */
+    public com.google.protobuf.ByteString getKey() {
+      return key_;
+    }
+
+    public static final int VALUE_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString value_;
+    /**
+     * <code>required bytes value = 2;</code>
+     */
+    public boolean hasValue() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bytes value = 2;</code>
+     */
+    public com.google.protobuf.ByteString getValue() {
+      return value_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasKey()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasValue()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, key_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, value_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, key_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, value_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code org.dabudb.dabu.shared.protobufs.DocumentKeyValue}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:org.dabudb.dabu.shared.protobufs.DocumentKeyValue)
+        org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValueOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.class, org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.Builder.class);
+      }
+
+      // Construct using org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        key_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        value_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor;
+      }
+
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue getDefaultInstanceForType() {
+        return org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.getDefaultInstance();
+      }
+
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue build() {
+        org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue buildPartial() {
+        org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue result = new org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.key_ = key_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.value_ = value_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue) {
+          return mergeFrom((org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue other) {
+        if (other == org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue.getDefaultInstance()) return this;
+        if (other.hasKey()) {
+          setKey(other.getKey());
+        }
+        if (other.hasValue()) {
+          setValue(other.getValue());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasKey()) {
+          return false;
+        }
+        if (!hasValue()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.ByteString key_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes key = 1;</code>
+       */
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required bytes key = 1;</code>
+       */
+      public com.google.protobuf.ByteString getKey() {
+        return key_;
+      }
+      /**
+       * <code>required bytes key = 1;</code>
+       */
+      public Builder setKey(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes key = 1;</code>
+       */
+      public Builder clearKey() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString value_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes value = 2;</code>
+       */
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes value = 2;</code>
+       */
+      public com.google.protobuf.ByteString getValue() {
+        return value_;
+      }
+      /**
+       * <code>required bytes value = 2;</code>
+       */
+      public Builder setValue(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes value = 2;</code>
+       */
+      public Builder clearValue() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        value_ = getDefaultInstance().getValue();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:org.dabudb.dabu.shared.protobufs.DocumentKeyValue)
+    }
+
+    // @@protoc_insertion_point(class_scope:org.dabudb.dabu.shared.protobufs.DocumentKeyValue)
+    private static final org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue();
+    }
+
+    public static org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<DocumentKeyValue>
+        PARSER = new com.google.protobuf.AbstractParser<DocumentKeyValue>() {
+      public DocumentKeyValue parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        try {
+          return new DocumentKeyValue(input, extensionRegistry);
+        } catch (RuntimeException e) {
+          if (e.getCause() instanceof
+              com.google.protobuf.InvalidProtocolBufferException) {
+            throw (com.google.protobuf.InvalidProtocolBufferException)
+                e.getCause();
+          }
+          throw e;
+        }
+      }
+    };
+
+    public static com.google.protobuf.Parser<DocumentKeyValue> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DocumentKeyValue> getParserForType() {
+      return PARSER;
+    }
+
+    public org.dabudb.dabu.shared.protobufs.Request.DocumentKeyValue getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_dabudb_dabu_shared_protobufs_WriteRequest_descriptor;
   private static
@@ -9085,6 +9579,11 @@ public final class Request {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_dabudb_dabu_shared_protobufs_ErrorCondition_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9108,33 +9607,35 @@ public final class Request {
       "hared.protobufs.GetRequestBody\"k\n\006Header" +
       "\022\n\n\002id\030\001 \002(\014\022\021\n\ttimestamp\030\002 \002(\003\022B\n\013reque" +
       "stType\030\003 \002(\0162-.org.dabudb.dabu.shared.pr" +
-      "otobufs.RequestType\"P\n\020WriteRequestBody\022" +
-      "<\n\010document\030\001 \003(\0132*.org.dabudb.dabu.shar" +
-      "ed.protobufs.Document\"Q\n\021DeleteRequestBo" +
-      "dy\022<\n\010document\030\001 \003(\0132*.org.dabudb.dabu.s" +
-      "hared.protobufs.Document\"\035\n\016GetRequestBo" +
-      "dy\022\013\n\003key\030\001 \003(\014\"\210\001\n\010Document\022\013\n\003key\030\001 \002(",
-      "\014\022\024\n\014contentClass\030\002 \002(\t\022\023\n\013contentType\030\003" +
-      " \002(\t\022\025\n\rschemaVersion\030\004 \002(\005\022\024\n\014contentBy" +
-      "tes\030\005 \002(\014\022\027\n\017instanceVersion\030\006 \002(\005\"|\n\nWr" +
-      "iteReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\trequestId" +
-      "\030\002 \001(\014\022H\n\016errorCondition\030\003 \001(\01320.org.dab" +
-      "udb.dabu.shared.protobufs.ErrorCondition" +
-      "\"}\n\013DeleteReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\tre" +
-      "questId\030\002 \001(\014\022H\n\016errorCondition\030\003 \001(\01320." +
-      "org.dabudb.dabu.shared.protobufs.ErrorCo" +
-      "ndition\"\221\001\n\010GetReply\022\021\n\ttimestamp\030\001 \002(\003\022",
-      "\021\n\trequestId\030\002 \001(\014\022H\n\016errorCondition\030\003 \001" +
-      "(\01320.org.dabudb.dabu.shared.protobufs.Er" +
-      "rorCondition\022\025\n\rdocumentBytes\030\004 \003(\014\"e\n\016E" +
-      "rrorCondition\022>\n\terrorType\030\001 \001(\0162+.org.d" +
-      "abudb.dabu.shared.protobufs.ErrorType\022\023\n" +
-      "\013description\030\002 \001(\t*8\n\013RequestType\022\007\n\003GET" +
-      "\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE\020\003\022\t\n\005QUERY\020\004*l\n\t" +
-      "ErrorType\022\010\n\004NONE\020\001\022\035\n\031OPTIMISTIC_LOCK_E" +
-      "XCEPTION\020\002\022\031\n\025PERSISTENCE_EXCEPTION\020\003\022\033\n" +
-      "\027SEVERE_SERVER_EXCEPTION\020\004B+\n org.dabudb",
-      ".dabu.shared.protobufsB\007Request"
+      "otobufs.RequestType\"`\n\020WriteRequestBody\022" +
+      "L\n\020documentKeyValue\030\001 \003(\01322.org.dabudb.d" +
+      "abu.shared.protobufs.DocumentKeyValue\"Q\n" +
+      "\021DeleteRequestBody\022<\n\010document\030\001 \003(\0132*.o" +
+      "rg.dabudb.dabu.shared.protobufs.Document" +
+      "\"\035\n\016GetRequestBody\022\013\n\003key\030\001 \003(\014\"\210\001\n\010Docu",
+      "ment\022\013\n\003key\030\001 \002(\014\022\024\n\014contentClass\030\002 \002(\t\022" +
+      "\023\n\013contentType\030\003 \002(\t\022\025\n\rschemaVersion\030\004 " +
+      "\002(\005\022\024\n\014contentBytes\030\005 \002(\014\022\027\n\017instanceVer" +
+      "sion\030\006 \002(\005\"|\n\nWriteReply\022\021\n\ttimestamp\030\001 " +
+      "\002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorCondition" +
+      "\030\003 \001(\01320.org.dabudb.dabu.shared.protobuf" +
+      "s.ErrorCondition\"}\n\013DeleteReply\022\021\n\ttimes" +
+      "tamp\030\001 \002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorCo" +
+      "ndition\030\003 \001(\01320.org.dabudb.dabu.shared.p" +
+      "rotobufs.ErrorCondition\"\221\001\n\010GetReply\022\021\n\t",
+      "timestamp\030\001 \002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016er" +
+      "rorCondition\030\003 \001(\01320.org.dabudb.dabu.sha" +
+      "red.protobufs.ErrorCondition\022\025\n\rdocument" +
+      "Bytes\030\004 \003(\014\"e\n\016ErrorCondition\022>\n\terrorTy" +
+      "pe\030\001 \001(\0162+.org.dabudb.dabu.shared.protob" +
+      "ufs.ErrorType\022\023\n\013description\030\002 \001(\t\".\n\020Do" +
+      "cumentKeyValue\022\013\n\003key\030\001 \002(\014\022\r\n\005value\030\002 \002" +
+      "(\014*8\n\013RequestType\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n" +
+      "\006DELETE\020\003\022\t\n\005QUERY\020\004*l\n\tErrorType\022\010\n\004NON" +
+      "E\020\001\022\035\n\031OPTIMISTIC_LOCK_EXCEPTION\020\002\022\031\n\025PE",
+      "RSISTENCE_EXCEPTION\020\003\022\033\n\027SEVERE_SERVER_E" +
+      "XCEPTION\020\004B+\n org.dabudb.dabu.shared.pro" +
+      "tobufsB\007Request"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9177,7 +9678,7 @@ public final class Request {
     internal_static_org_dabudb_dabu_shared_protobufs_WriteRequestBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_WriteRequestBody_descriptor,
-        new java.lang.String[] { "Document", });
+        new java.lang.String[] { "DocumentKeyValue", });
     internal_static_org_dabudb_dabu_shared_protobufs_DeleteRequestBody_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_org_dabudb_dabu_shared_protobufs_DeleteRequestBody_fieldAccessorTable = new
@@ -9220,6 +9721,12 @@ public final class Request {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_ErrorCondition_descriptor,
         new java.lang.String[] { "ErrorType", "Description", });
+    internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor,
+        new java.lang.String[] { "Key", "Value", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

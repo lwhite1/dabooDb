@@ -11,7 +11,8 @@ public class NullEncryptor implements EncryptorDecryptor {
     return INSTANCE;
   }
 
-  private NullEncryptor() {}
+  private NullEncryptor() {
+  }
 
   @Override
   public byte[] encrypt(byte[] plainText) {

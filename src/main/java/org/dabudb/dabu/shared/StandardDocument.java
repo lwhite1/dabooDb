@@ -1,7 +1,6 @@
 package org.dabudb.dabu.shared;
 
 import org.dabudb.dabu.client.ClientSettings;
-import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -13,15 +12,6 @@ import java.util.UUID;
 public class StandardDocument implements Document {
 
   private volatile static ContentsPipe contentsPipe;
-
-  private volatile static DocumentSerializer documentSerializer;
-
-  private static DocumentSerializer getDocumentSerializer() {
-    if (documentSerializer == null) {
-      documentSerializer = ClientSettings.getInstance().getDocumentSerializer();
-    }
-    return documentSerializer;
-  }
 
   private static ContentsPipe getContentsPipe() {
     if (contentsPipe == null) {
@@ -38,7 +28,9 @@ public class StandardDocument implements Document {
 
   private byte[] key;
 
-  /** The kind of document represented by the contents */
+  /**
+   * The kind of document represented by the contents
+   */
   private String contentType;
 
   private String contentClass;
@@ -58,14 +50,15 @@ public class StandardDocument implements Document {
   /**
    * visible for serialization only.
    */
-  StandardDocument() {}
+  StandardDocument() {
+  }
 
   public StandardDocument(Document other) {
-    this.contents = other.getContents();
-    synchronized(this) {
-      this.instanceVersion = other.documentVersion() + 1;
+    this.contents = other.contents();
+    synchronized (this) {
+      this.instanceVersion = other.instanceVersion() + 1;
     }
-    this.contentType = other.getContentType();
+    this.contentType = other.contentType();
     this.key = other.key();
     this.contentClass = other.getContentClass();
   }
@@ -76,12 +69,12 @@ public class StandardDocument implements Document {
   }
 
   @Override
-  public byte[] getContents() {
+  public byte[] contents() {
     return contents;
   }
 
   @Override
-  public String getContentType() {
+  public String contentType() {
     return contentType;
   }
 
@@ -96,7 +89,7 @@ public class StandardDocument implements Document {
   }
 
   @Override
-  public int documentVersion() {
+  public int instanceVersion() {
     return instanceVersion;
   }
 
@@ -125,16 +118,6 @@ public class StandardDocument implements Document {
   }
 
   @Override
-  public int getInstanceVersion() {
-    return instanceVersion;
-  }
-
-  @Override
-  public short getSchemaVersion() {
-    return schemaVersion;
-  }
-
-  @Override
   public void setSchemaVersion(short schemaVersion) {
     this.schemaVersion = schemaVersion;
   }
@@ -158,10 +141,5 @@ public class StandardDocument implements Document {
       e.printStackTrace();
     }
     return documentContents;
-  }
-
-  @Override
-  public byte[] marshall() {
-    return getDocumentSerializer().documentToBytes(this);
   }
 }

@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  * ClientSettings for a database client.
- *
+ * <p>
  * These should be the same for all clients,
  * and they should be consistent with the server for every value common to clients and servers.
  */
@@ -33,7 +33,8 @@ public class ClientSettings {
 
   private static ClientSettings ourInstance;
 
-  public ClientSettings() {}
+  public ClientSettings() {
+  }
 
   public static ClientSettings getInstance() {
     if (ourInstance == null) {

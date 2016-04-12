@@ -24,7 +24,8 @@ public class DbClient implements DocumentApi {
 
   private final ClientSettings settings = ClientSettings.getInstance();
 
-  private DbClient() {}
+  private DbClient() {
+  }
 
   public void write(Document document) {
 
@@ -55,6 +56,7 @@ public class DbClient implements DocumentApi {
     Header header = getHeader();
     GetRequestBody body = getGetRequestBody(keyBytes);
     GetRequest request = getGetRequest(header, body);
+
     Request.GetReply reply = settings.getCommClient().sendRequest(request);
     checkErrorCondition(reply.getErrorCondition());
     ByteString resultBytes = reply.getDocumentBytesList().get(0);
@@ -62,6 +64,7 @@ public class DbClient implements DocumentApi {
   }
 
   private Document getDocumentFromRequestDoc(ByteString resultBytes) {
+
     Document document = DocumentFactory.documentForClass(settings.getDocumentClass());
 
     Request.Document result;

@@ -46,7 +46,7 @@ message Header {
 *   The body of a write request
 */
 message WriteRequestBody {
-    repeated Document document = 1;
+    repeated DocumentKeyValue documentKeyValue = 1;
 }
 
 /**
@@ -137,4 +137,9 @@ enum ErrorType {
     OPTIMISTIC_LOCK_EXCEPTION = 2;
     PERSISTENCE_EXCEPTION = 3;
     SEVERE_SERVER_EXCEPTION = 4;
+}
+
+message DocumentKeyValue {
+    required bytes key = 1;
+    required bytes value = 2;
 }

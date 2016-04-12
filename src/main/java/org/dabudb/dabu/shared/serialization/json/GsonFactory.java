@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * A factory for creating Gson instances that conform to a specific schema
  * These schemas handle timestamps consistently, support common serializers, etc.
- *
+ * <p>
  * We distinguish between schemas used for message serialization and those used for document content serialization.
  */
 @ThreadSafe
@@ -37,7 +37,8 @@ public class GsonFactory {
 
   public static final GsonFactory INSTANCE = new GsonFactory();
 
-  private GsonFactory() {}
+  private GsonFactory() {
+  }
 
   /**
    * Syntactic sugar for registering a new content schema

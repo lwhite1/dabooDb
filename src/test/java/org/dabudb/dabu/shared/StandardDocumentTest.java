@@ -28,7 +28,7 @@ public class StandardDocumentTest {
 
   @Test
   public void testGetContentType() {
-    Assert.assertEquals(person.getContentType(), document.getContentType());
+    Assert.assertEquals(person.getContentType(), document.contentType());
   }
 
   @Test
@@ -38,7 +38,7 @@ public class StandardDocumentTest {
 
   @Test
   public void testDocumentVersion() {
-    assertEquals(0, document.documentVersion());
+    assertEquals(0, document.instanceVersion());
   }
 
   @Test

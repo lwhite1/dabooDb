@@ -16,14 +16,14 @@ import java.time.format.DateTimeFormatter;
 @ThreadSafe
 class ZonedDateTimeSerializer implements JsonSerializer<ZonedDateTime> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_ZONED_DATE_TIME;
 
-    public JsonElement serialize(ZonedDateTime src,
-                                 Type typeOfSrc,
-                                 JsonSerializationContext context) {
+  public JsonElement serialize(ZonedDateTime src,
+                               Type typeOfSrc,
+                               JsonSerializationContext context) {
 
-        return new JsonPrimitive(src.format(FORMATTER));
-    }
+    return new JsonPrimitive(src.format(FORMATTER));
+  }
 }
 
 

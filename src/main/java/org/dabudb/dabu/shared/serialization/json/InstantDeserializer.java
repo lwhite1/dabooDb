@@ -15,11 +15,11 @@ import java.time.Instant;
 @ThreadSafe
 class InstantDeserializer implements JsonDeserializer<Instant> {
 
-    public Instant deserialize(JsonElement json,
-                               Type typeOfT,
-                               JsonDeserializationContext context)
-            throws JsonParseException {
-        return Instant.parse(json.getAsString());
-    }
+  public Instant deserialize(JsonElement json,
+                             Type typeOfT,
+                             JsonDeserializationContext context)
+      throws JsonParseException {
+    return Instant.parse(json.getAsString());
+  }
 }
 

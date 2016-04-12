@@ -1,21 +1,17 @@
 package org.dabudb.dabu.shared;
 
-import com.google.gson.Gson;
-
-import java.nio.charset.StandardCharsets;
-
 /**
  * The interface to be implemented by any class to be persisted
  */
 public interface DocumentContents {
 
-  Gson GSON = new Gson();
-
-  default byte[] marshall() {
-    return GSON.toJson(this).getBytes(StandardCharsets.UTF_8);
-  }
-
+  /**
+   * Returns the key to be used as the primary database key for this object
+   */
   byte[] getKey();
 
+  /**
+   * Returns a string, analogous to a database table name, that describes what kind of object this is
+   */
   String getContentType();
 }

@@ -15,7 +15,8 @@ public class ContentJsonSerializer implements ContentSerializerDeserializer {
 
   private static final ContentJsonSerializer INSTANCE = new ContentJsonSerializer();
 
-  private ContentJsonSerializer() {}
+  private ContentJsonSerializer() {
+  }
 
   public static ContentJsonSerializer get() {
     return INSTANCE;

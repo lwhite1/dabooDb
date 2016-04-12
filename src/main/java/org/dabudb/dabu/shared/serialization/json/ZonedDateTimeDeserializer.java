@@ -16,15 +16,15 @@ import java.time.format.DateTimeFormatter;
 @ThreadSafe
 class ZonedDateTimeDeserializer implements JsonDeserializer<ZonedDateTime> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_ZONED_DATE_TIME;
 
-    public ZonedDateTime deserialize(JsonElement json,
-                                     Type typeOfT,
-                                     JsonDeserializationContext context)
-            throws JsonParseException {
+  public ZonedDateTime deserialize(JsonElement json,
+                                   Type typeOfT,
+                                   JsonDeserializationContext context)
+      throws JsonParseException {
 
-        return ZonedDateTime.parse(json.getAsString(), FORMATTER);
-    }
+    return ZonedDateTime.parse(json.getAsString(), FORMATTER);
+  }
 }
 
 

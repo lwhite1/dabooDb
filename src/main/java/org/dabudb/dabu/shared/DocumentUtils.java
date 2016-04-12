@@ -8,15 +8,16 @@ import org.dabudb.dabu.shared.protobufs.Request;
  */
 public final class DocumentUtils {
 
-  private DocumentUtils() {}
+  private DocumentUtils() {
+  }
 
   public static Request.Document getDocument(Document document) {
     return Request.Document.newBuilder()
         .setKey(ByteString.copyFrom(document.key()))
-        .setContentBytes(ByteString.copyFrom(document.getContents()))
+        .setContentBytes(ByteString.copyFrom(document.contents()))
         .setContentClass(document.getContentClass())
-        .setContentType(document.getContentType())
-        .setInstanceVersion(document.documentVersion())
+        .setContentType(document.contentType())
+        .setInstanceVersion(document.instanceVersion())
         .setSchemaVersion(document.schemaVersion())
         .build();
   }

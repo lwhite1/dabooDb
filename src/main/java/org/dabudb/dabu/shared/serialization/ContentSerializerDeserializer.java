@@ -3,7 +3,7 @@ package org.dabudb.dabu.shared.serialization;
 import org.dabudb.dabu.shared.DocumentContents;
 
 /**
- *  General interface for serializing and deserializing contents to and from byte arrays
+ * General interface for serializing and deserializing contents to and from byte arrays
  */
 public interface ContentSerializerDeserializer {
 

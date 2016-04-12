@@ -11,16 +11,16 @@ import org.dabudb.dabu.shared.serialization.ContentSerializerType;
 
 /**
  * A processing pipeline for DocumentContents
- *
+ * <p>
  * It works two ways:
  * (1) Converts objects that implement DocumentContents to a byte[]
  * (2) Converts byte[] back to DocumentContents
- *
+ * <p>
  * The conversion includes, necessarily, serialization (and deserialization),
  * and, optionally, compression (decryption) and encryption (decryption)
- *
+ * <p>
  * Construct a ContentsPipe with a NullCompressor to skip compression and a NullEncryptor to skip encryption.
- *
+ * <p>
  * The same pipe must be used in both directions
  */
 public class ContentsPipe {
@@ -55,8 +55,8 @@ public class ContentsPipe {
   }
 
   private ContentsPipe(CompressorDeCompressor compressorDeCompressor,
-                      EncryptorDecryptor encryptorDecryptor,
-                      ContentSerializerDeserializer serializerDeserializer) {
+                       EncryptorDecryptor encryptorDecryptor,
+                       ContentSerializerDeserializer serializerDeserializer) {
 
     this.compressorDeCompressor = compressorDeCompressor;
     this.encryptorDecryptor = encryptorDecryptor;
@@ -75,7 +75,7 @@ public class ContentsPipe {
     return
         serializerDeserializer.deserialize(
             contentClass,
-              compressorDeCompressor.decompress(
+            compressorDeCompressor.decompress(
                 encryptorDecryptor.decrypt(contentAsBytes)));
   }
 }

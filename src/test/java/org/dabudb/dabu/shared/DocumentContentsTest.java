@@ -20,11 +20,6 @@ public class DocumentContentsTest {
   }
 
   @Test
-  public void testMarshall() {
-    byte[] bytes = company.marshall();
-  }
-
-  @Test
   public void testGetKey() {
     assertNotNull(company.getKey());
     System.out.println(Arrays.toString(company.getKey()));

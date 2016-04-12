@@ -19,9 +19,12 @@ public class EncryptorFactory {
 
     switch (type) {
       // TODO(lwhite): instantiate the encryptor using a pool like the underlying algorithm does
-      case STANDARD: return new StandardTextEncryptor(password);
-      case NONE: return NONE;
-      default: throw new RuntimeException("No Encryptor available for specified type: " + type.name());
+      case STANDARD:
+        return new StandardTextEncryptor(password);
+      case NONE:
+        return NONE;
+      default:
+        throw new RuntimeException("No Encryptor available for specified type: " + type.name());
     }
   }
 }

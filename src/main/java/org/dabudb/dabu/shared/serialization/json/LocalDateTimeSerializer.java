@@ -16,14 +16,14 @@ import java.time.format.DateTimeFormatter;
 @ThreadSafe
 class LocalDateTimeSerializer implements JsonSerializer<LocalDateTime> {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-    public JsonElement serialize(LocalDateTime src,
-                                 Type typeOfSrc,
-                                 JsonSerializationContext context) {
+  public JsonElement serialize(LocalDateTime src,
+                               Type typeOfSrc,
+                               JsonSerializationContext context) {
 
-        return new JsonPrimitive(src.format(FORMATTER));
-    }
+    return new JsonPrimitive(src.format(FORMATTER));
+  }
 }
 
 

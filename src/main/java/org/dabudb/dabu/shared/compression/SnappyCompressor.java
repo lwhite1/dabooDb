@@ -4,7 +4,7 @@ import org.iq80.snappy.Snappy;
 
 /**
  * A compressor/de-compressor that uses Snappy for compression.
- *
+ * <p>
  * Snappy provides very fast compression, but with low compression ratios.
  */
 public class SnappyCompressor implements CompressorDeCompressor {

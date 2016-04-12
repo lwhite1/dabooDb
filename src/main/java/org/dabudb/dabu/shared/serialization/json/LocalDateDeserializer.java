@@ -16,15 +16,15 @@ import java.time.LocalDate;
 @ThreadSafe
 class LocalDateDeserializer implements JsonDeserializer<LocalDate> {
 
-    public LocalDate deserialize(JsonElement json,
-                                 Type typeOfT,
-                                 JsonDeserializationContext context)
-            throws JsonParseException {
+  public LocalDate deserialize(JsonElement json,
+                               Type typeOfT,
+                               JsonDeserializationContext context)
+      throws JsonParseException {
 
-        if (Strings.isNullOrEmpty(json.getAsString())) {
-            return null;
-        }
-        return LocalDate.ofEpochDay(Long.parseLong(json.getAsString()));
+    if (Strings.isNullOrEmpty(json.getAsString())) {
+      return null;
     }
+    return LocalDate.ofEpochDay(Long.parseLong(json.getAsString()));
+  }
 }
 

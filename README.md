@@ -1,10 +1,10 @@
 # dabuDB
 
-DabuDB is a simple, pure Java document store.
+DabuDB is a simple, pure Java, in-memory document store.
 
 It's in development. You shouldn't use it for production until the 1.0 release is final.
 
-DabuDB is named after my daughter, who thought her name was "Dabu" when she was very young - thanks to her big brother. Love you both. 
+DabuDB is named after my daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. Love you both. 
 
 Here's a rough roadmap:
 
@@ -17,10 +17,10 @@ Here's a rough roadmap:
 * Pluggable support for encryption and compression of data and messages
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
-Performance with small databases (my laptop):
+Performance with small databases is encouraging: (my laptop):
 
 * 1 million random inserts: 8.8 seconds (8.8 micros per insert)
-* 1 million random reads: 3.279 seconds (3.3 micros per insert)
+* 1 million random reads: 3.279 seconds (3.3 micros per read)
 
 1.0 should not be used for critical data as transactions and recovery are not yet implemented.
 

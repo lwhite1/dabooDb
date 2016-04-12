@@ -15,9 +15,9 @@ import java.time.LocalDate;
 @ThreadSafe
 class LocalDateSerializer implements JsonSerializer<LocalDate> {
 
-    public JsonElement serialize(LocalDate src,
-                                 Type typeOfSrc,
-                                 JsonSerializationContext context) {
-        return new JsonPrimitive(src.toEpochDay());
-    }
+  public JsonElement serialize(LocalDate src,
+                               Type typeOfSrc,
+                               JsonSerializationContext context) {
+    return new JsonPrimitive(src.toEpochDay());
+  }
 }

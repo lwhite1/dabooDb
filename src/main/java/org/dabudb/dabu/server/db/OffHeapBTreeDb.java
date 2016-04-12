@@ -26,30 +26,26 @@ public class OffHeapBTreeDb implements Db {
       .allocateStartSize(ALLOCATED_SIZE_IN_BYTES)
       .make();
 
-  private final BTreeMap<byte[],byte[]> store = db
+  private final BTreeMap<byte[], byte[]> store = db
       .treeMap("treemap", Serializer.BYTE_ARRAY, Serializer.BYTE_ARRAY)
       .make();
 
   @Override
-  public void write(List<Request.Document> documentList) {
-    Map<byte[], byte[]> documentMap = new HashMap<>();
-    for (Request.Document doc : documentList) {
-      documentMap.put(doc.getKey().toByteArray(), doc.toByteArray());
-    }
+  public void write(Map<byte[], byte[]> documentMap) {
     store.putAll(documentMap);
   }
 
   @Override
-  public void delete(List<Request.Document> documents) {
-    for (Request.Document doc : documents) {
+  public void delete(List<Request.Document> documentList) {
+    for (Request.Document doc : documentList) {
       store.remove(doc.getKey().toByteArray());
     }
   }
 
   @Override
-  public List<ByteString> get(List<ByteString> keys) {
+  public List<ByteString> get(List<ByteString> keyList) {
     List<ByteString> docs = new ArrayList<>();
-    for (ByteString key : keys) {
+    for (ByteString key : keyList) {
 
       byte[] result = store.get(key.toByteArray());
       if (result != null) {

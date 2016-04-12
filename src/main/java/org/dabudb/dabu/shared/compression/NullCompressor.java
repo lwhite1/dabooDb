@@ -11,7 +11,8 @@ public class NullCompressor implements CompressorDeCompressor {
     return INSTANCE;
   }
 
-  private NullCompressor() {}
+  private NullCompressor() {
+  }
 
   @Override
   public byte[] compress(byte[] uncompressedBytes) {
