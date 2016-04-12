@@ -4,10 +4,10 @@ DabuDB is a simple key-value document store. It is designed as a vehicle for tea
 
 DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. 
 
-## Requirements
+## Features/Requirements
 The system is a key-value document store with the following capabilities:
 
-#### Basic requirements
+#### Basics
 * Documents are arbitrary POJOs implementing a simple interface.
 * Documents must provide a byte array key that is unique within the database
 * Documents are ordered based on a Comparator, and can be range-searched in that order
