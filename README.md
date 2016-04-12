@@ -1,28 +1,45 @@
 # dabuDB
 
-DabuDB is a simple, pure Java document store. It is designed as a vehicle for teaching how to write High-Performance/Low-Latency Java.
+DabuDB is a simple, pure Java, key-value document store. It is designed as a vehicle for teaching how to write High-Performance/Low-Latency Java.
 
-DabuDB is named after my daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. Love you both. 
+DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. 
 
-## (rough) roadmap:
+## Requirements
+The system is a key-value document store with the following capabilities:
+
+#### Basic requirements
+* Documents are arbitrary POJOs implementing a simple interface.
+* Documents must provide a byte array key that is unique within the database
+* Documents are ordered based on a Comparator, and can be range-searched in that order
+* Supported operations are: Write, Delete, and Get; plus GetRange(from, to)
+* Client-Server and Embedded (client and server in a single JVM) modes are supported
+
+#### Database functionality
+* Data must be persistent (application can be closed and re-opened without losing data)
+* Data written in a single call are processed atomically (commit or roll-back together)
+* Optimistic locking is used to allow multiple writers
+* Idempotent Writes (and Reads) to allow clients to safely retry updates
+
+## A (rough) roadmap:
 
 ### 1.0
 
-* Basic key value functionality: write, get, delete
+* Basic key value functionality: write, get, delete (single and batch)
 * Embedded mode only
 * Excellent performance for small amounts of data
-* Pluggable storage engine
+* Pluggable storage engine and logging
 * Pluggable serializers for data and messages
-* Pluggable write-ahead logging
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
-Performance with small databases is encouraging: (my laptop):
+Performance with small databases is quite good: (my laptop):
 
 * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
 * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
 
 ### 1.5
 
+* Pluggable comparator
+* Range search
 * Optimistic locking
 * Simple transactions
 * Proper performance testing framework
@@ -30,7 +47,7 @@ Performance with small databases is encouraging: (my laptop):
 ### 2.0
 
 * Client-Server or embedded modes
-* Excellent performance at scale (say, up to 100 million records)
+* Excellent performance at scale (say, less than 10 micros per read, up to 100 million records)
 
 At this point, we will have a good working system, and proceed with making a Low Performance/High Latency version, 
 that can be used as a starting point for students.
