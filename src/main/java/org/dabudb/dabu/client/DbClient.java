@@ -5,7 +5,9 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentFactory;
 import org.dabudb.dabu.shared.protobufs.Request;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,16 +20,23 @@ import static org.dabudb.dabu.shared.protobufs.Request.*;
  */
 public class DbClient implements DocumentApi {
 
+  private final ClientSettings settings = ClientSettings.getInstance();
+
+  /**
+   * Returns a DbClient instance
+   */
   public static DbClient get() {
     return new DbClient();
   }
 
-  private final ClientSettings settings = ClientSettings.getInstance();
-
   private DbClient() {
   }
 
-  public void write(Document document) {
+  /**
+   * Writes the given document to the database as an "upsert"
+   */
+  @Override
+  public void write(@NotNull Document document) {
 
     Request.Document doc = getDocument(document);
     Header header = getHeader();
@@ -37,7 +46,13 @@ public class DbClient implements DocumentApi {
     checkErrorCondition(reply.getErrorCondition());
   }
 
-  public void write(List<Document> documentCollection) {
+  /**
+   * Writes all the documents in documentCollection to the database
+   * <p>
+   * All writes are "upserts"
+   */
+  @Override
+  public void write(@NotNull List<Document> documentCollection) {
     List<Request.Document> documentList = new ArrayList<>();
     for (Document document : documentCollection) {
       Request.Document doc = getDocument(document);
@@ -50,8 +65,12 @@ public class DbClient implements DocumentApi {
     checkErrorCondition(reply.getErrorCondition());
   }
 
+  /**
+   * Returns the document with the given key, or null if it doesn't exist
+   */
+  @Nullable
   @Override
-  public Document get(byte[] key) {
+  public Document get(@NotNull byte[] key) {
     ByteString keyBytes = ByteString.copyFrom(key);
     Header header = getHeader();
     GetRequestBody body = getGetRequestBody(keyBytes);
@@ -63,28 +82,11 @@ public class DbClient implements DocumentApi {
     return getDocumentFromRequestDoc(resultBytes);
   }
 
-  private Document getDocumentFromRequestDoc(ByteString resultBytes) {
-
-    Document document = DocumentFactory.documentForClass(settings.getDocumentClass());
-
-    Request.Document result;
-    try {
-      result = Request.Document.parseFrom(resultBytes);
-    } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
-      throw new RuntimeException("Unable to parse from protobuf");
-    }
-    document.setContentClass(result.getContentClass());
-    document.setContentType(result.getContentType());
-    document.setKey(result.getKey().toByteArray());
-    document.setSchemaVersion((short) result.getSchemaVersion());
-    document.setInstanceVersion(result.getInstanceVersion());
-    document.setContents(result.getContentBytes().toByteArray());
-    return document;
-  }
-
+  /**
+   * Returns a collection (possibly empty) of documents associated with the given list of keys
+   */
   @Override
-  public List<Document> get(List<byte[]> keys) {
+  public List<Document> get(@NotNull List<byte[]> keys) {
     Header header = getHeader();
     List<ByteString> byteStrings = new ArrayList<>();
     for (byte[] bytes : keys) {
@@ -102,8 +104,13 @@ public class DbClient implements DocumentApi {
     return results;
   }
 
+  /**
+   * Deletes the given document if it exists in the database
+   * <p>
+   * Does nothing if the document does not exist
+   */
   @Override
-  public void delete(Document document) {
+  public void delete(@NotNull Document document) {
     Request.Document doc = getDocument(document);
     Header header = getHeader();
     DeleteRequestBody body = getDeleteRequestBody(doc);
@@ -112,6 +119,11 @@ public class DbClient implements DocumentApi {
     checkErrorCondition(reply.getErrorCondition());
   }
 
+  /**
+   * Deletes all the given documents that exist in the database
+   * <p>
+   * Any documents not in the database are ignored
+   */
   @Override
   public void delete(List<Document> documents) {
     List<Request.Document> docs = new ArrayList<>();
@@ -134,5 +146,25 @@ public class DbClient implements DocumentApi {
       //TODO(lwhite): Proper error handling
       throw new RuntimeException("OOOPS!");
     }
+  }
+
+  private Document getDocumentFromRequestDoc(ByteString resultBytes) {
+
+    Document document = DocumentFactory.documentForClass(settings.getDocumentClass());
+
+    Request.Document result;
+    try {
+      result = Request.Document.parseFrom(resultBytes);
+    } catch (InvalidProtocolBufferException e) {
+      e.printStackTrace();
+      throw new RuntimeException("Unable to parse from protobuf");
+    }
+    document.setContentClass(result.getContentClass());
+    document.setContentType(result.getContentType());
+    document.setKey(result.getKey().toByteArray());
+    document.setSchemaVersion((short) result.getSchemaVersion());
+    document.setInstanceVersion(result.getInstanceVersion());
+    document.setContents(result.getContentBytes().toByteArray());
+    return document;
   }
 }

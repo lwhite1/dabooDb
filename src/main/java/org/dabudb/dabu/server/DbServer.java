@@ -36,9 +36,12 @@ class DbServer {
   }
 
   private DbServer() {
-    replayWAL();
+    loadExistingDataFromWAL();
   }
 
+  /**
+   * Initialize fields with values that are determined by ServerSettings
+   */
   private void init() {
     ServerSettings serverSettings = ServerSettings.getInstance();
     db = serverSettings.getDb();
@@ -99,7 +102,7 @@ class DbServer {
    * <p>
    * TODO(lwhite): Review. This probably needs to lock the files or otherwise fully synchronize
    */
-  public synchronized void replayWAL() {
+  private synchronized void loadExistingDataFromWAL() {
 
     int count = 0;
     Stopwatch stopwatch = Stopwatch.createStarted();

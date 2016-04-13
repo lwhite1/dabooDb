@@ -5,7 +5,7 @@ import static org.dabudb.dabu.shared.protobufs.Request.*;
 /**
  * An object that handles the client side of communications with a database
  */
-public interface CommClient {
+interface CommClient {
 
   WriteReply sendRequest(WriteRequest request);
 

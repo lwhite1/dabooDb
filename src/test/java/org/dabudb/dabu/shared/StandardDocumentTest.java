@@ -9,7 +9,7 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Tests for StandardDocument
  */
 public class StandardDocumentTest {
 

@@ -43,4 +43,8 @@ public class Company implements DocumentContents {
   public int hashCode() {
     return Objects.hash(name, key);
   }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }

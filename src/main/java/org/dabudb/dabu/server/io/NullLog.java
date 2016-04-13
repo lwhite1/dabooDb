@@ -15,19 +15,13 @@ public class NullLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
   private static NullLog instance;
 
   public static NullLog getInstance(File databaseDirectory) {
-    try {
-      if (instance == null) {
-        instance = new NullLog(databaseDirectory);
-      }
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+    if (instance == null) {
+      instance = new NullLog(databaseDirectory);
     }
     return instance;
   }
 
-  private NullLog(File rootFolder) throws IOException {
-  }
+  private NullLog(File rootFolder) {}
 
   @Override
   public void logRequest(Request.WriteRequest request) throws IOException {

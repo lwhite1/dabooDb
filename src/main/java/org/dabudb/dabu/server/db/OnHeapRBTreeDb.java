@@ -15,7 +15,7 @@ import java.util.TreeMap;
  */
 public class OnHeapRBTreeDb implements Db {
 
-  private TreeMap<byte[], byte[]> store = new TreeMap<>(SignedBytes.lexicographicalComparator());
+  private final TreeMap<byte[], byte[]> store = new TreeMap<>(SignedBytes.lexicographicalComparator());
 
   @Override
   public void write(Map<byte[], byte[]> documentMap) {

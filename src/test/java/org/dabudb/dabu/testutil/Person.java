@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class Person implements DocumentContents {
 
-  private byte[] key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
+  private final byte[] key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
   private String fName;
   private String lName;
   private String city;

@@ -1,6 +1,5 @@
 package org.dabudb.dabu.client;
 
-import org.dabudb.dabu.server.ServerSettings;
 import org.junit.Before;
 import org.junit.Test;
 

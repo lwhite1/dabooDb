@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertNotNull;
 
 /**
- *
+ * Executes a series of tests using embedded mode
  */
-public class EmbeddedTest {
+class EmbeddedTest {
 
   public static void main(String[] args) {
 

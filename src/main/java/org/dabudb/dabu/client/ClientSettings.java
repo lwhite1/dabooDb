@@ -1,15 +1,14 @@
 package org.dabudb.dabu.client;
 
-import com.google.gson.Gson;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import org.dabudb.dabu.shared.ContentsPipe;
-import org.dabudb.dabu.shared.serialization.DocumentJsonSerializer;
-import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;
 import org.dabudb.dabu.shared.serialization.ContentSerializerType;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
+import org.dabudb.dabu.shared.serialization.DocumentJsonSerializer;
+import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 
 import java.util.Properties;
 
@@ -20,8 +19,6 @@ import java.util.Properties;
  * and they should be consistent with the server for every value common to clients and servers.
  */
 public class ClientSettings {
-
-  private static Gson GSON = new Gson();
 
   private ContentsPipe contentsPipe = ContentsPipe.create(CompressionType.SNAPPY, ContentSerializerType.JSON);
 
@@ -108,9 +105,5 @@ public class ClientSettings {
     Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
 
     this.contentsPipe = ContentsPipe.create(compressionType, serializerType);
-  }
-
-  String toJson() {
-    return GSON.toJson(this);
   }
 }
