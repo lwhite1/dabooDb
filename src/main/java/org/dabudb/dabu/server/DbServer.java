@@ -1,5 +1,6 @@
 package org.dabudb.dabu.server;
 
+import com.google.common.base.Stopwatch;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.db.Db;
 import org.dabudb.dabu.server.io.WriteAheadLog;
@@ -14,6 +15,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The primary controller for the db. It receives input from a CommServer and forwards to a WAL (log) and db
@@ -100,6 +102,7 @@ class DbServer {
   public synchronized void replayWAL() {
 
     int count = 0;
+    Stopwatch stopwatch = Stopwatch.createStarted();
     while (writeLog().hasNext()) {
 
       byte[] requestBytes = writeLog().next();
@@ -126,10 +129,11 @@ class DbServer {
         throw new RuntimeException(e);
       }
       count++;
-      if (count % 10_000 == 0) {
+      if (count % 100_000 == 0) {
         System.out.println("Loaded " + count + " documents ");
       }
     }
+    System.out.println("Loaded " + count + " documents in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
 
   private Request.ErrorCondition noErrorCondition() {

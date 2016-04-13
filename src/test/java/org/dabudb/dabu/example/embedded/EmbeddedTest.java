@@ -21,7 +21,7 @@ public class EmbeddedTest {
 
     DbClient client = DbClient.get();
 
-    int testCount = 1_000_000;
+    int testCount = 100_000;
 
     List<Person> people = Person.createPeoples(testCount);
     List<Document> peopleDocs = new ArrayList<>();
