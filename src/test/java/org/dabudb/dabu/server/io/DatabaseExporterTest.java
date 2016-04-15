@@ -2,6 +2,7 @@ package org.dabudb.dabu.server.io;
 
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.DbServer;
+import org.dabudb.dabu.server.ServerSettings;
 import org.dabudb.dabu.shared.protobufs.Request;
 import org.junit.Test;
 
@@ -31,6 +32,6 @@ public class DatabaseExporterTest {
     Request.GetRequest getRequest = getGetRequest(header, getBody);
     Request.GetReply getReply = server.handleRequest(getRequest);
 
-    server.export(Paths.get("testoutput/exports").toFile());
+    server.export(Paths.get(ServerSettings.getInstance().getDatabaseDirectory(),"exports").toFile());
   }
 }
