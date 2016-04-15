@@ -1,7 +1,7 @@
 package org.dabudb.dabu.shared.msg;
 
 import com.google.protobuf.ByteString;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;

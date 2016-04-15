@@ -6,7 +6,7 @@ import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.dabudb.dabu.shared.exceptions.DatastoreRuntimeException;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -22,7 +22,7 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static org.dabudb.dabu.shared.protobufs.Request.Document.parseFrom;
+import static org.dabudb.dabu.generated.protobufs.Request.Document.parseFrom;
 
 /**
  * Logs all write requests to a file

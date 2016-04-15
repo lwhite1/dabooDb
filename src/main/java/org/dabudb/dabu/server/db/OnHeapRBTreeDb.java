@@ -3,7 +3,7 @@ package org.dabudb.dabu.server.db;
 import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.io.DatabaseExporter;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 import java.io.File;
 import java.io.IOException;

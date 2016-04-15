@@ -1,7 +1,7 @@
 package org.dabudb.dabu.client;
 
 import org.dabudb.dabu.server.DirectCommServer;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  * A communication client that communicates directly with an in-process db server

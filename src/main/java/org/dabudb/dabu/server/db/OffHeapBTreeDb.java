@@ -2,7 +2,7 @@ package org.dabudb.dabu.server.db;
 
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.io.DatabaseExporter;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;

@@ -6,7 +6,7 @@ import org.dabudb.dabu.shared.compression.CompressorDeCompressor;
 import org.dabudb.dabu.shared.compression.CompressorFactory;
 import org.dabudb.dabu.shared.encryption.EncryptorDecryptor;
 import org.dabudb.dabu.shared.encryption.EncryptorFactory;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 import java.util.Objects;
 

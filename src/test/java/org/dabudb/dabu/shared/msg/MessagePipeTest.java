@@ -5,11 +5,11 @@ import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.DocumentUtils;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 import org.dabudb.dabu.testutil.Company;
 import org.junit.Test;
 
-import static org.dabudb.dabu.shared.protobufs.Request.*;
+import static org.dabudb.dabu.generated.protobufs.Request.*;
 import static org.junit.Assert.*;
 
 /**
@@ -21,7 +21,9 @@ public class MessagePipeTest {
 
   private final DocumentContents contents = new Company("test co");
   private final Document document = new StandardDocument(contents);
+
   private final Request.Document doc = DocumentUtils.getDocument(document);
+
   private final Header header = MessageUtils.getHeader();
   private final WriteRequestBody body = MessageUtils.getWriteRequestBody(doc);
   private final WriteRequest writeRequest = MessageUtils.getWriteRequest(header, body);

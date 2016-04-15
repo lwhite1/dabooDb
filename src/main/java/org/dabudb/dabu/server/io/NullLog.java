@@ -1,6 +1,5 @@
 package org.dabudb.dabu.server.io;
 
-import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.io.Closeable;
 import java.io.File;

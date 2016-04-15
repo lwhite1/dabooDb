@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared.exceptions;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  * Thrown when an attempt to write a value is determined to represent an update to an existing value, and another

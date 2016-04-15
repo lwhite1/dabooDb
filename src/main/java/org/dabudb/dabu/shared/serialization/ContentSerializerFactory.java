@@ -1,7 +1,7 @@
 package org.dabudb.dabu.shared.serialization;
 
 import org.dabudb.dabu.shared.exceptions.DatastoreRuntimeException;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  * Returns a serializer of the desired type

@@ -3,7 +3,7 @@ package org.dabudb.dabu.server.io;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.DbServer;
 import org.dabudb.dabu.server.ServerSettings;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 import org.junit.Test;
 
 import java.nio.file.Paths;

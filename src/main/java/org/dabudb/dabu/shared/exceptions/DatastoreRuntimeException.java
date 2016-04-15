@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared.exceptions;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  *  General unchecked exception for a system or JVM exception occurring during a database operation

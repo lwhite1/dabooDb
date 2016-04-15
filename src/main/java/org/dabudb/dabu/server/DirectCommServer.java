@@ -1,6 +1,6 @@
 package org.dabudb.dabu.server;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  * An implementation of CommServer that communicates in-process via direct message sends

@@ -10,16 +10,16 @@ import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentFactory;
 import org.dabudb.dabu.shared.exceptions.OptimisticLockException;
 import org.dabudb.dabu.shared.exceptions.PersistenceException;
-import org.dabudb.dabu.shared.protobufs.Request;
-import org.jetbrains.annotations.NotNull;
+import org.dabudb.dabu.generated.protobufs.Request;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.dabudb.dabu.shared.DocumentUtils.*;
 import static org.dabudb.dabu.shared.msg.MessageUtils.*;
-import static org.dabudb.dabu.shared.protobufs.Request.*;
+import static org.dabudb.dabu.generated.protobufs.Request.*;
 
 /**
  * The database client interface
@@ -42,7 +42,7 @@ public class DbClient implements KeyValueStoreApi {
    * Writes the given document to the database as an "upsert"
    */
   @Override
-  public void write(@NotNull Document document) throws DatastoreException {
+  public void write(@Nonnull Document document) throws DatastoreException {
 
     Request.Document doc = getDocument(document);
     Header header = getHeader();
@@ -58,7 +58,7 @@ public class DbClient implements KeyValueStoreApi {
    * All writes are "upserts"
    */
   @Override
-  public void write(@NotNull List<Document> documentCollection) throws DatastoreException {
+  public void write(@Nonnull List<Document> documentCollection) throws DatastoreException {
     List<Request.Document> documentList = new ArrayList<>();
     for (Document document : documentCollection) {
       Request.Document doc = getDocument(document);
@@ -76,7 +76,7 @@ public class DbClient implements KeyValueStoreApi {
    */
   @Nullable
   @Override
-  public Document get(@NotNull byte[] key) throws DatastoreException {
+  public Document get(@Nonnull byte[] key) throws DatastoreException {
     ByteString keyBytes = ByteString.copyFrom(key);
     Header header = getHeader();
     GetRequestBody body = getGetRequestBody(keyBytes);
@@ -92,7 +92,7 @@ public class DbClient implements KeyValueStoreApi {
    * Returns a collection (possibly empty) of documents associated with the given list of keys
    */
   @Override
-  public List<Document> get(@NotNull List<byte[]> keys) throws DatastoreException {
+  public List<Document> get(@Nonnull List<byte[]> keys) throws DatastoreException {
     Header header = getHeader();
     List<ByteString> byteStrings = new ArrayList<>();
     for (byte[] bytes : keys) {
@@ -116,7 +116,7 @@ public class DbClient implements KeyValueStoreApi {
    * Does nothing if the document does not exist
    */
   @Override
-  public void delete(@NotNull Document document) throws DatastoreException {
+  public void delete(@Nonnull Document document) throws DatastoreException {
     Request.Document doc = getDocument(document);
     Header header = getHeader();
     DeleteRequestBody body = getDeleteRequestBody(doc);
@@ -131,7 +131,7 @@ public class DbClient implements KeyValueStoreApi {
    * Any documents not in the database are ignored
    */
   @Override
-  public void delete(@NotNull List<Document> documents) throws DatastoreException {
+  public void delete(@Nonnull List<Document> documents) throws DatastoreException {
     List<Request.Document> docs = new ArrayList<>();
 
     for (Document document : documents) {

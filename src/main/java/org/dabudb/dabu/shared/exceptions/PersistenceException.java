@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared.exceptions;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  * Thrown when an exception occurs during persistence that is not covered by any more specific exception case.

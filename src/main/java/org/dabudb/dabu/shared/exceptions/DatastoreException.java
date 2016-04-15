@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared.exceptions;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  *  General exception for an exception occurring during database operation

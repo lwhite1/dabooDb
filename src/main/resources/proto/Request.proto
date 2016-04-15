@@ -1,6 +1,6 @@
-package org.dabudb.dabu.shared.protobufs;
+package org.dabudb.dabu.generated.protobufs;
 
-option java_package = "org.dabudb.dabu.shared.protobufs";
+option java_package = "org.dabudb.dabu.generated.protobufs";
 option java_outer_classname = "Request";
 
 /**

@@ -5,7 +5,7 @@ import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.DocumentUtils;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.msg.MessageUtils;
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 import org.dabudb.dabu.testutil.Person;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared.exceptions;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
  * An exception throw when a fatal issue is encountered during startup

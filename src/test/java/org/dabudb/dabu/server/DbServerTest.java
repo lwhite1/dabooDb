@@ -1,6 +1,6 @@
 package org.dabudb.dabu.server;
 
-import org.dabudb.dabu.shared.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request;
 import org.junit.Test;
 
 import java.util.ArrayList;

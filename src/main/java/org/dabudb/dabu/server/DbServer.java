@@ -5,10 +5,10 @@ import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.db.Db;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 
-import org.dabudb.dabu.shared.protobufs.Request;
-import org.dabudb.dabu.shared.protobufs.Request.GetReply;
-import org.dabudb.dabu.shared.protobufs.Request.WriteReply;
-import org.dabudb.dabu.shared.protobufs.Request.WriteRequest;
+import org.dabudb.dabu.generated.protobufs.Request;
+import org.dabudb.dabu.generated.protobufs.Request.GetReply;
+import org.dabudb.dabu.generated.protobufs.Request.WriteReply;
+import org.dabudb.dabu.generated.protobufs.Request.WriteRequest;
 
 import java.io.File;
 import java.io.IOException;
