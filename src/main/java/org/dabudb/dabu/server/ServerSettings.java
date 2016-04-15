@@ -1,8 +1,10 @@
 package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.server.db.Db;
+import org.dabudb.dabu.server.io.NullLog;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 import org.dabudb.dabu.server.io.WriteLog;
+import org.dabudb.dabu.shared.exceptions.StartupException;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
@@ -14,12 +16,11 @@ import com.google.common.base.Strings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
- *
+ * Configuratin settings for a Dabu server, or any Dabu server running in embedded mode
  */
 public class ServerSettings {
 
@@ -40,21 +41,16 @@ public class ServerSettings {
 
   private static ServerSettings ourInstance;
 
-  private ServerSettings() {
-  }
-
   public static ServerSettings getInstance() {
     if (ourInstance == null) {
-      try {
-        ourInstance = loadServerSettings();
-      } catch (IOException e) {
-        e.printStackTrace();
-        throw new RuntimeException("Unable to load ServerSettings", e);
-      }
+      ourInstance = loadServerSettings();
     }
     return ourInstance;
   }
 
+  /**
+   * Returns ServerSettings initialized from the given Properties object
+   */
   ServerSettings(Properties properties) {
 
     setDocumentClass(properties);
@@ -83,7 +79,7 @@ public class ServerSettings {
     return db;
   }
 
-  public WriteAheadLog getWriteAheadLog() {
+  WriteAheadLog getWriteAheadLog() {
     return writeAheadLog;
   }
 
@@ -116,15 +112,20 @@ public class ServerSettings {
       this.db = (Db) Class.forName(String.valueOf(properties.getProperty("db.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load db as specified in server.properties", e);
+      throw new StartupException("Unable to load db as specified in server.properties", e);
     }
   }
 
   private void setWriteAheadLog(Properties properties) {
     String folderName = String.valueOf(properties.getProperty("db.write_ahead_log.folderName"));
     String writeAheadClassName = String.valueOf(properties.getProperty("db.write_ahead_log.class"));
+    File logFolder = Paths.get(folderName).toFile();
     if (writeAheadClassName.equals(WriteLog.class.getCanonicalName())) {
-      this.writeAheadLog = WriteLog.getInstance(Paths.get(folderName).toFile());
+      this.writeAheadLog = WriteLog.getInstance(logFolder);
+    } else if (writeAheadClassName.equals(NullLog.class.getCanonicalName())) {
+      this.writeAheadLog = NullLog.getInstance(logFolder);
+    } else {
+      throw new StartupException("Write ahead log not configured.");
     }
   }
 
@@ -135,7 +136,7 @@ public class ServerSettings {
               Class.forName(String.valueOf(properties.getProperty("comm.server.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load CommServer as specified in server.properties");
+      throw new StartupException("Unable to load CommServer as specified in server.properties", e);
     }
   }
 
@@ -144,7 +145,12 @@ public class ServerSettings {
     EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("message.encryption"));
     String encryptionPwd = String.valueOf(properties.getProperty("message.encryption.pwd"));
 
-    Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
+    try {
+      Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+      throw new StartupException("Unable to load MessagePipe as specified in server.properties", e);
+    }
 
     this.messagePipe = MessagePipe.create(compressionType);
   }
@@ -153,11 +159,16 @@ public class ServerSettings {
     return databaseDirectory;
   }
 
-  private static ServerSettings loadServerSettings() throws IOException {
+  private static ServerSettings loadServerSettings() {
     Properties serverProperties = new Properties();
-    InputStream inputStream = new FileInputStream("src/main/resources/server.properties");
-    serverProperties.load(inputStream);
-
+    try {
+      FileInputStream inputStream = new FileInputStream("src/main/resources/server.properties");
+      serverProperties.load(inputStream);
+      inputStream.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new StartupException("Unable to load server settings as Java properties", e);
+    }
     return new ServerSettings(serverProperties);
   }
 }

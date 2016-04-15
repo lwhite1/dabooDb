@@ -6,6 +6,7 @@ import org.dabudb.dabu.shared.ContentsPipe;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;
+import org.dabudb.dabu.shared.exceptions.StartupException;
 import org.dabudb.dabu.shared.serialization.ContentSerializerType;
 import org.dabudb.dabu.shared.serialization.DocumentJsonSerializer;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
@@ -71,7 +72,7 @@ public class ClientSettings {
               Class.forName(String.valueOf(properties.getProperty("document.serializer.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load DocumentSerializer as specified in client.properties");
+      throw new StartupException("Unable to load DocumentSerializer as specified in client.properties", e);
     }
   }
 
@@ -80,7 +81,7 @@ public class ClientSettings {
       this.documentClass = Class.forName(String.valueOf(properties.get("document.class")));
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load document class specified in client.properties");
+      throw new StartupException("Unable to load document class specified in client.properties", e);
     }
   }
 
@@ -91,7 +92,7 @@ public class ClientSettings {
               Class.forName(String.valueOf(properties.getProperty("comm.client.class"))).newInstance();
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
-      throw new RuntimeException("Unable to load CommServer as specified in client.properties");
+      throw new StartupException("Unable to load CommClient as specified in client.properties", e);
     }
   }
 
@@ -102,7 +103,12 @@ public class ClientSettings {
     EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("document.contents.encryption"));
     String encryptionPwd = String.valueOf(properties.getProperty("document.contents.encryption.pwd"));
 
-    Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
+    try {
+      Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+      throw new StartupException("Unable to load ContentsPipe as specified in client.properties", e);
+    }
 
     this.contentsPipe = ContentsPipe.create(compressionType, serializerType);
   }

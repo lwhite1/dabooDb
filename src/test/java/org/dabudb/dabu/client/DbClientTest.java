@@ -21,12 +21,15 @@ public class DbClientTest {
   private final DbClient client = DbClient.get();
 
   @Test
-  public void testWriteDocument() {
+  public void testWriteDocument() throws Exception {
     Company company = new Company("Drr");
     Document document = new StandardDocument(company);
     Stopwatch stopwatch = Stopwatch.createStarted();
     client.write(document);
-    byte[] key = document.key();
+
+    //byte[] key = document.key();
+    byte[] key = null;
+
     Document document1 = client.get(key);
     assertTrue(document1 != null);
     Company company1 = (Company) document1.documentContents();
@@ -36,14 +39,14 @@ public class DbClientTest {
   }
 
   @Test
-  public void testWriteDocument2() {
+  public void testWriteDocument2() throws Exception {
     Company company = new Company("Drr");
     Document document = new StandardDocument(company);
     client.write(document);
   }
 
   @Test
-  public void testWriteDocuments() {
+  public void testWriteDocuments() throws Exception {
     List<Person> people = Person.createPeoples(6_000);
     List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
@@ -59,7 +62,7 @@ public class DbClientTest {
   }
 
   @Test
-  public void testWriteDocuments2() {
+  public void testWriteDocuments2() throws Exception {
     List<Person> people = Person.createPeoples(6_000);
     List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
@@ -73,7 +76,7 @@ public class DbClientTest {
   }
 
   @Test
-  public void testGet() {
+  public void testGet() throws Exception {
     DbClient client = DbClient.get();
     int testCount = 1_000;
 
@@ -101,7 +104,7 @@ public class DbClientTest {
   }
 
   @Test
-  public void testDelete() {
+  public void testDelete() throws Exception {
     DbClient client = DbClient.get();
     int testCount = 100_000;
 

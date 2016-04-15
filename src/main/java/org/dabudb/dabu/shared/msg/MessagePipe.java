@@ -1,6 +1,7 @@
 package org.dabudb.dabu.shared.msg;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import org.dabudb.dabu.client.exceptions.ProtobufSerializationException;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.compression.CompressorDeCompressor;
 import org.dabudb.dabu.shared.compression.CompressorFactory;
@@ -52,7 +53,7 @@ public class MessagePipe {
               encryptorDecryptor.decrypt(contentAsBytes)));
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
-      throw new RuntimeException("PROTOBUF FAIL");
+      throw new RuntimeException("Failed to parse request or reply due to protobuf exception", e);
     }
   }
 

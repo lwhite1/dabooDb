@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNotNull;
  */
 class EmbeddedTest {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
 
     DbClient client = DbClient.get();
 

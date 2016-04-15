@@ -2,8 +2,14 @@ package org.dabudb.dabu.client;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+import org.dabudb.dabu.shared.exceptions.DatastoreException;
+import org.dabudb.dabu.client.exceptions.JsonSerializationException;
+import org.dabudb.dabu.client.exceptions.ProtobufSerializationException;
+import org.dabudb.dabu.client.exceptions.SerializationException;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentFactory;
+import org.dabudb.dabu.shared.exceptions.OptimisticLockException;
+import org.dabudb.dabu.shared.exceptions.PersistenceException;
 import org.dabudb.dabu.shared.protobufs.Request;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +24,7 @@ import static org.dabudb.dabu.shared.protobufs.Request.*;
 /**
  * The database client interface
  */
-public class DbClient implements DocumentApi {
+public class DbClient implements KeyValueStoreApi {
 
   private final ClientSettings settings = ClientSettings.getInstance();
 
@@ -36,7 +42,7 @@ public class DbClient implements DocumentApi {
    * Writes the given document to the database as an "upsert"
    */
   @Override
-  public void write(@NotNull Document document) {
+  public void write(@NotNull Document document) throws DatastoreException {
 
     Request.Document doc = getDocument(document);
     Header header = getHeader();
@@ -52,7 +58,7 @@ public class DbClient implements DocumentApi {
    * All writes are "upserts"
    */
   @Override
-  public void write(@NotNull List<Document> documentCollection) {
+  public void write(@NotNull List<Document> documentCollection) throws DatastoreException {
     List<Request.Document> documentList = new ArrayList<>();
     for (Document document : documentCollection) {
       Request.Document doc = getDocument(document);
@@ -70,7 +76,7 @@ public class DbClient implements DocumentApi {
    */
   @Nullable
   @Override
-  public Document get(@NotNull byte[] key) {
+  public Document get(@NotNull byte[] key) throws DatastoreException {
     ByteString keyBytes = ByteString.copyFrom(key);
     Header header = getHeader();
     GetRequestBody body = getGetRequestBody(keyBytes);
@@ -86,7 +92,7 @@ public class DbClient implements DocumentApi {
    * Returns a collection (possibly empty) of documents associated with the given list of keys
    */
   @Override
-  public List<Document> get(@NotNull List<byte[]> keys) {
+  public List<Document> get(@NotNull List<byte[]> keys) throws DatastoreException {
     Header header = getHeader();
     List<ByteString> byteStrings = new ArrayList<>();
     for (byte[] bytes : keys) {
@@ -110,7 +116,7 @@ public class DbClient implements DocumentApi {
    * Does nothing if the document does not exist
    */
   @Override
-  public void delete(@NotNull Document document) {
+  public void delete(@NotNull Document document) throws DatastoreException {
     Request.Document doc = getDocument(document);
     Header header = getHeader();
     DeleteRequestBody body = getDeleteRequestBody(doc);
@@ -125,7 +131,7 @@ public class DbClient implements DocumentApi {
    * Any documents not in the database are ignored
    */
   @Override
-  public void delete(List<Document> documents) {
+  public void delete(@NotNull List<Document> documents) throws DatastoreException {
     List<Request.Document> docs = new ArrayList<>();
 
     for (Document document : documents) {
@@ -140,17 +146,38 @@ public class DbClient implements DocumentApi {
     checkErrorCondition(reply.getErrorCondition());
   }
 
-  private void checkErrorCondition(ErrorCondition condition) {
+  private void checkErrorCondition(ErrorCondition condition) throws DatastoreException {
     if (condition != null && condition.getErrorType() != ErrorType.NONE) {
       System.out.println(condition);
-      //TODO(lwhite): Proper error handling
-      throw new RuntimeException("OOOPS!");
+      ErrorType type = condition.getErrorType();
+
+      switch (type) {
+        case JSON_SERIALIZATION_EXCEPTION:
+          throw new JsonSerializationException(condition);
+        case PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION:
+          throw new ProtobufSerializationException(condition);
+        case SERIALIZATION_EXCEPTION:
+          throw new SerializationException(condition);
+        case OPTIMISTIC_LOCK_EXCEPTION:
+          throw new OptimisticLockException(condition);
+        case PERSISTENCE_EXCEPTION:
+          throw new PersistenceException(condition);
+      /*  case SEVERE_SERVER_EXCEPTION:
+            throw new SevereServerException();
+        default:
+          throw new DatastoreException("An unhandled error-type condition occurred");
+          */
+      }
     }
   }
 
   private Document getDocumentFromRequestDoc(ByteString resultBytes) {
 
     Document document = DocumentFactory.documentForClass(settings.getDocumentClass());
+
+    if (document == null) {
+      throw new RuntimeException("Failed to get document from DocumentFactory.");
+    }
 
     Request.Document result;
     try {

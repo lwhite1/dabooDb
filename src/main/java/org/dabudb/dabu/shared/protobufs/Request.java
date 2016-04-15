@@ -3,7 +3,6 @@
 
 package org.dabudb.dabu.shared.protobufs;
 
-@SuppressWarnings("ALL")
 public final class Request {
   private Request() {}
   public static void registerAllExtensions(
@@ -137,6 +136,18 @@ public final class Request {
      * <code>SEVERE_SERVER_EXCEPTION = 4;</code>
      */
     SEVERE_SERVER_EXCEPTION(3, 4),
+    /**
+     * <code>PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION = 5;</code>
+     */
+    PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION(4, 5),
+    /**
+     * <code>JSON_SERIALIZATION_EXCEPTION = 6;</code>
+     */
+    JSON_SERIALIZATION_EXCEPTION(5, 6),
+    /**
+     * <code>SERIALIZATION_EXCEPTION = 7;</code>
+     */
+    SERIALIZATION_EXCEPTION(6, 7),
     ;
 
     /**
@@ -155,6 +166,18 @@ public final class Request {
      * <code>SEVERE_SERVER_EXCEPTION = 4;</code>
      */
     public static final int SEVERE_SERVER_EXCEPTION_VALUE = 4;
+    /**
+     * <code>PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION = 5;</code>
+     */
+    public static final int PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION_VALUE = 5;
+    /**
+     * <code>JSON_SERIALIZATION_EXCEPTION = 6;</code>
+     */
+    public static final int JSON_SERIALIZATION_EXCEPTION_VALUE = 6;
+    /**
+     * <code>SERIALIZATION_EXCEPTION = 7;</code>
+     */
+    public static final int SERIALIZATION_EXCEPTION_VALUE = 7;
 
 
     public final int getNumber() {
@@ -167,6 +190,9 @@ public final class Request {
         case 2: return OPTIMISTIC_LOCK_EXCEPTION;
         case 3: return PERSISTENCE_EXCEPTION;
         case 4: return SEVERE_SERVER_EXCEPTION;
+        case 5: return PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION;
+        case 6: return JSON_SERIALIZATION_EXCEPTION;
+        case 7: return SERIALIZATION_EXCEPTION;
         default: return null;
       }
     }
@@ -6484,690 +6510,6 @@ public final class Request {
 
   }
 
-  public interface DeleteReplyOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:org.dabudb.dabu.shared.protobufs.DeleteReply)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required int64 timestamp = 1;</code>
-     */
-    boolean hasTimestamp();
-    /**
-     * <code>required int64 timestamp = 1;</code>
-     */
-    long getTimestamp();
-
-    /**
-     * <code>optional bytes requestId = 2;</code>
-     */
-    boolean hasRequestId();
-    /**
-     * <code>optional bytes requestId = 2;</code>
-     */
-    com.google.protobuf.ByteString getRequestId();
-
-    /**
-     * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-     */
-    boolean hasErrorCondition();
-    /**
-     * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-     */
-    org.dabudb.dabu.shared.protobufs.Request.ErrorCondition getErrorCondition();
-    /**
-     * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-     */
-    org.dabudb.dabu.shared.protobufs.Request.ErrorConditionOrBuilder getErrorConditionOrBuilder();
-  }
-  /**
-   * Protobuf type {@code org.dabudb.dabu.shared.protobufs.DeleteReply}
-   *
-   * <pre>
-   **
-   *   A reply to a DeleteRequest
-   * </pre>
-   */
-  public  static final class DeleteReply extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:org.dabudb.dabu.shared.protobufs.DeleteReply)
-      DeleteReplyOrBuilder {
-    // Use DeleteReply.newBuilder() to construct.
-    private DeleteReply(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private DeleteReply() {
-      timestamp_ = 0L;
-      requestId_ = com.google.protobuf.ByteString.EMPTY;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private DeleteReply(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              timestamp_ = input.readInt64();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              requestId_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
-                subBuilder = errorCondition_.toBuilder();
-              }
-              errorCondition_ = input.readMessage(org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(errorCondition_);
-                errorCondition_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000004;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.dabudb.dabu.shared.protobufs.Request.DeleteReply.class, org.dabudb.dabu.shared.protobufs.Request.DeleteReply.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int TIMESTAMP_FIELD_NUMBER = 1;
-    private long timestamp_;
-    /**
-     * <code>required int64 timestamp = 1;</code>
-     */
-    public boolean hasTimestamp() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int64 timestamp = 1;</code>
-     */
-    public long getTimestamp() {
-      return timestamp_;
-    }
-
-    public static final int REQUESTID_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString requestId_;
-    /**
-     * <code>optional bytes requestId = 2;</code>
-     */
-    public boolean hasRequestId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional bytes requestId = 2;</code>
-     */
-    public com.google.protobuf.ByteString getRequestId() {
-      return requestId_;
-    }
-
-    public static final int ERRORCONDITION_FIELD_NUMBER = 3;
-    private org.dabudb.dabu.shared.protobufs.Request.ErrorCondition errorCondition_;
-    /**
-     * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-     */
-    public boolean hasErrorCondition() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-     */
-    public org.dabudb.dabu.shared.protobufs.Request.ErrorCondition getErrorCondition() {
-      return errorCondition_ == null ? org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.getDefaultInstance() : errorCondition_;
-    }
-    /**
-     * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-     */
-    public org.dabudb.dabu.shared.protobufs.Request.ErrorConditionOrBuilder getErrorConditionOrBuilder() {
-      return errorCondition_ == null ? org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.getDefaultInstance() : errorCondition_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasTimestamp()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, timestamp_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, requestId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, getErrorCondition());
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, timestamp_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, requestId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getErrorCondition());
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(org.dabudb.dabu.shared.protobufs.Request.DeleteReply prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code org.dabudb.dabu.shared.protobufs.DeleteReply}
-     *
-     * <pre>
-     **
-     *   A reply to a DeleteRequest
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:org.dabudb.dabu.shared.protobufs.DeleteReply)
-        org.dabudb.dabu.shared.protobufs.Request.DeleteReplyOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.dabudb.dabu.shared.protobufs.Request.DeleteReply.class, org.dabudb.dabu.shared.protobufs.Request.DeleteReply.Builder.class);
-      }
-
-      // Construct using org.dabudb.dabu.shared.protobufs.Request.DeleteReply.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getErrorConditionFieldBuilder();
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        timestamp_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        requestId_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        if (errorConditionBuilder_ == null) {
-          errorCondition_ = null;
-        } else {
-          errorConditionBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.dabudb.dabu.shared.protobufs.Request.internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_descriptor;
-      }
-
-      public org.dabudb.dabu.shared.protobufs.Request.DeleteReply getDefaultInstanceForType() {
-        return org.dabudb.dabu.shared.protobufs.Request.DeleteReply.getDefaultInstance();
-      }
-
-      public org.dabudb.dabu.shared.protobufs.Request.DeleteReply build() {
-        org.dabudb.dabu.shared.protobufs.Request.DeleteReply result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public org.dabudb.dabu.shared.protobufs.Request.DeleteReply buildPartial() {
-        org.dabudb.dabu.shared.protobufs.Request.DeleteReply result = new org.dabudb.dabu.shared.protobufs.Request.DeleteReply(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.timestamp_ = timestamp_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.requestId_ = requestId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        if (errorConditionBuilder_ == null) {
-          result.errorCondition_ = errorCondition_;
-        } else {
-          result.errorCondition_ = errorConditionBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.dabudb.dabu.shared.protobufs.Request.DeleteReply) {
-          return mergeFrom((org.dabudb.dabu.shared.protobufs.Request.DeleteReply)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(org.dabudb.dabu.shared.protobufs.Request.DeleteReply other) {
-        if (other == org.dabudb.dabu.shared.protobufs.Request.DeleteReply.getDefaultInstance()) return this;
-        if (other.hasTimestamp()) {
-          setTimestamp(other.getTimestamp());
-        }
-        if (other.hasRequestId()) {
-          setRequestId(other.getRequestId());
-        }
-        if (other.hasErrorCondition()) {
-          mergeErrorCondition(other.getErrorCondition());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasTimestamp()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        org.dabudb.dabu.shared.protobufs.Request.DeleteReply parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.dabudb.dabu.shared.protobufs.Request.DeleteReply) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private long timestamp_ ;
-      /**
-       * <code>required int64 timestamp = 1;</code>
-       */
-      public boolean hasTimestamp() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int64 timestamp = 1;</code>
-       */
-      public long getTimestamp() {
-        return timestamp_;
-      }
-      /**
-       * <code>required int64 timestamp = 1;</code>
-       */
-      public Builder setTimestamp(long value) {
-        bitField0_ |= 0x00000001;
-        timestamp_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 timestamp = 1;</code>
-       */
-      public Builder clearTimestamp() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        timestamp_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.ByteString requestId_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>optional bytes requestId = 2;</code>
-       */
-      public boolean hasRequestId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional bytes requestId = 2;</code>
-       */
-      public com.google.protobuf.ByteString getRequestId() {
-        return requestId_;
-      }
-      /**
-       * <code>optional bytes requestId = 2;</code>
-       */
-      public Builder setRequestId(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        requestId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional bytes requestId = 2;</code>
-       */
-      public Builder clearRequestId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        requestId_ = getDefaultInstance().getRequestId();
-        onChanged();
-        return this;
-      }
-
-      private org.dabudb.dabu.shared.protobufs.Request.ErrorCondition errorCondition_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
-          org.dabudb.dabu.shared.protobufs.Request.ErrorCondition, org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.Builder, org.dabudb.dabu.shared.protobufs.Request.ErrorConditionOrBuilder> errorConditionBuilder_;
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public boolean hasErrorCondition() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public org.dabudb.dabu.shared.protobufs.Request.ErrorCondition getErrorCondition() {
-        if (errorConditionBuilder_ == null) {
-          return errorCondition_ == null ? org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.getDefaultInstance() : errorCondition_;
-        } else {
-          return errorConditionBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public Builder setErrorCondition(org.dabudb.dabu.shared.protobufs.Request.ErrorCondition value) {
-        if (errorConditionBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          errorCondition_ = value;
-          onChanged();
-        } else {
-          errorConditionBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public Builder setErrorCondition(
-          org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.Builder builderForValue) {
-        if (errorConditionBuilder_ == null) {
-          errorCondition_ = builderForValue.build();
-          onChanged();
-        } else {
-          errorConditionBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public Builder mergeErrorCondition(org.dabudb.dabu.shared.protobufs.Request.ErrorCondition value) {
-        if (errorConditionBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
-              errorCondition_ != null &&
-              errorCondition_ != org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.getDefaultInstance()) {
-            errorCondition_ =
-              org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.newBuilder(errorCondition_).mergeFrom(value).buildPartial();
-          } else {
-            errorCondition_ = value;
-          }
-          onChanged();
-        } else {
-          errorConditionBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000004;
-        return this;
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public Builder clearErrorCondition() {
-        if (errorConditionBuilder_ == null) {
-          errorCondition_ = null;
-          onChanged();
-        } else {
-          errorConditionBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.Builder getErrorConditionBuilder() {
-        bitField0_ |= 0x00000004;
-        onChanged();
-        return getErrorConditionFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      public org.dabudb.dabu.shared.protobufs.Request.ErrorConditionOrBuilder getErrorConditionOrBuilder() {
-        if (errorConditionBuilder_ != null) {
-          return errorConditionBuilder_.getMessageOrBuilder();
-        } else {
-          return errorCondition_ == null ?
-              org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.getDefaultInstance() : errorCondition_;
-        }
-      }
-      /**
-       * <code>optional .org.dabudb.dabu.shared.protobufs.ErrorCondition errorCondition = 3;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          org.dabudb.dabu.shared.protobufs.Request.ErrorCondition, org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.Builder, org.dabudb.dabu.shared.protobufs.Request.ErrorConditionOrBuilder> 
-          getErrorConditionFieldBuilder() {
-        if (errorConditionBuilder_ == null) {
-          errorConditionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              org.dabudb.dabu.shared.protobufs.Request.ErrorCondition, org.dabudb.dabu.shared.protobufs.Request.ErrorCondition.Builder, org.dabudb.dabu.shared.protobufs.Request.ErrorConditionOrBuilder>(
-                  getErrorCondition(),
-                  getParentForChildren(),
-                  isClean());
-          errorCondition_ = null;
-        }
-        return errorConditionBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:org.dabudb.dabu.shared.protobufs.DeleteReply)
-    }
-
-    // @@protoc_insertion_point(class_scope:org.dabudb.dabu.shared.protobufs.DeleteReply)
-    private static final org.dabudb.dabu.shared.protobufs.Request.DeleteReply DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new org.dabudb.dabu.shared.protobufs.Request.DeleteReply();
-    }
-
-    public static org.dabudb.dabu.shared.protobufs.Request.DeleteReply getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<DeleteReply>
-        PARSER = new com.google.protobuf.AbstractParser<DeleteReply>() {
-      public DeleteReply parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new DeleteReply(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<DeleteReply> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<DeleteReply> getParserForType() {
-      return PARSER;
-    }
-
-    public org.dabudb.dabu.shared.protobufs.Request.DeleteReply getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface GetReplyOrBuilder extends
       // @@protoc_insertion_point(interface_extends:org.dabudb.dabu.shared.protobufs.GetReply)
       com.google.protobuf.MessageOrBuilder {
@@ -9108,11 +8450,6 @@ public final class Request {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_dabudb_dabu_shared_protobufs_WriteReply_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_dabudb_dabu_shared_protobufs_GetReply_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9161,23 +8498,22 @@ public final class Request {
       "\002(\005\"|\n\nWriteReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\t" +
       "requestId\030\002 \001(\014\022H\n\016errorCondition\030\003 \001(\0132" +
       "0.org.dabudb.dabu.shared.protobufs.Error" +
-      "Condition\"}\n\013DeleteReply\022\021\n\ttimestamp\030\001 " +
-      "\002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorCondition" +
-      "\030\003 \001(\01320.org.dabudb.dabu.shared.protobuf" +
-      "s.ErrorCondition\"\221\001\n\010GetReply\022\021\n\ttimesta" +
-      "mp\030\001 \002(\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorCond",
-      "ition\030\003 \001(\01320.org.dabudb.dabu.shared.pro" +
-      "tobufs.ErrorCondition\022\025\n\rdocumentBytes\030\004" +
-      " \003(\014\"e\n\016ErrorCondition\022>\n\terrorType\030\001 \001(" +
-      "\0162+.org.dabudb.dabu.shared.protobufs.Err" +
-      "orType\022\023\n\013description\030\002 \001(\t\".\n\020DocumentK" +
-      "eyValue\022\013\n\003key\030\001 \002(\014\022\r\n\005value\030\002 \002(\014*8\n\013R" +
-      "equestType\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE" +
-      "\020\003\022\t\n\005QUERY\020\004*l\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031" +
-      "OPTIMISTIC_LOCK_EXCEPTION\020\002\022\031\n\025PERSISTEN" +
-      "CE_EXCEPTION\020\003\022\033\n\027SEVERE_SERVER_EXCEPTIO",
-      "N\020\004B+\n org.dabudb.dabu.shared.protobufsB" +
-      "\007Request"
+      "Condition\"\221\001\n\010GetReply\022\021\n\ttimestamp\030\001 \002(" +
+      "\003\022\021\n\trequestId\030\002 \001(\014\022H\n\016errorCondition\030\003" +
+      " \001(\01320.org.dabudb.dabu.shared.protobufs." +
+      "ErrorCondition\022\025\n\rdocumentBytes\030\004 \003(\014\"e\n" +
+      "\016ErrorCondition\022>\n\terrorType\030\001 \001(\0162+.org",
+      ".dabudb.dabu.shared.protobufs.ErrorType\022" +
+      "\023\n\013description\030\002 \001(\t\".\n\020DocumentKeyValue" +
+      "\022\013\n\003key\030\001 \002(\014\022\r\n\005value\030\002 \002(\014*8\n\013RequestT" +
+      "ype\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE\020\003\022\t\n\005Q" +
+      "UERY\020\004*\330\001\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031OPTIMI" +
+      "STIC_LOCK_EXCEPTION\020\002\022\031\n\025PERSISTENCE_EXC" +
+      "EPTION\020\003\022\033\n\027SEVERE_SERVER_EXCEPTION\020\004\022+\n" +
+      "\'PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION" +
+      "\020\005\022 \n\034JSON_SERIALIZATION_EXCEPTION\020\006\022\033\n\027" +
+      "SERIALIZATION_EXCEPTION\020\007B+\n org.dabudb.",
+      "dabu.shared.protobufsB\007Request"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9239,26 +8575,20 @@ public final class Request {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_WriteReply_descriptor,
         new java.lang.String[] { "Timestamp", "RequestId", "ErrorCondition", });
-    internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_org_dabudb_dabu_shared_protobufs_DeleteReply_descriptor,
-        new java.lang.String[] { "Timestamp", "RequestId", "ErrorCondition", });
     internal_static_org_dabudb_dabu_shared_protobufs_GetReply_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_org_dabudb_dabu_shared_protobufs_GetReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_GetReply_descriptor,
         new java.lang.String[] { "Timestamp", "RequestId", "ErrorCondition", "DocumentBytes", });
     internal_static_org_dabudb_dabu_shared_protobufs_ErrorCondition_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_org_dabudb_dabu_shared_protobufs_ErrorCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_ErrorCondition_descriptor,
         new java.lang.String[] { "ErrorType", "Description", });
     internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_shared_protobufs_DocumentKeyValue_descriptor,
