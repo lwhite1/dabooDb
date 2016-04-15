@@ -57,6 +57,11 @@ public class OnHeapRBTreeDb implements Db {
   }
 
   @Override
+  public int size() {
+    return store.size();
+  }
+
+  @Override
   public Iterator<Map.Entry<byte[], byte[]>> iterator() {
     return store.entrySet().iterator();
   }

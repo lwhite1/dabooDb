@@ -149,7 +149,29 @@ public class DbServer {
         .build();
   }
 
+  /**
+   * Returns the number of documents in the database
+   */
+  public int size() {
+    return db().size();
+  }
+
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  /**
+   * Exports the database in its entirety to the given file
+   */
   public void export(File file) {
     db().export(file);
+  }
+
+  /**
+   * Backs-up the database to a file, and clears the WriteAheadLog, so that going forward it will only contain
+   * updates since the latest backup
+   */
+  public void backup(File file) {
+    //TODO(lwhite): Implement
   }
 }

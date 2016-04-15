@@ -10,6 +10,7 @@ import java.util.Properties;
 /**
  * Tests for ClientSettings (client)
  */
+@SuppressWarnings("unused")
 public class ClientSettingsTest {
 
   @Before
