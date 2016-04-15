@@ -1,12 +1,15 @@
 package org.dabudb.dabu.server.db;
 
 import com.google.protobuf.ByteString;
+import org.dabudb.dabu.server.io.DatabaseExporter;
 import org.dabudb.dabu.shared.protobufs.Request;
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -52,6 +55,18 @@ public class OffHeapBTreeDb implements Db {
       }
     }
     return docs;
+  }
+
+  @Override
+  public void export(File file) {
+    DatabaseExporter exporter = DatabaseExporter.getInstance(file);
+    store.forEach((k, v) -> {
+      try {
+        exporter.log(v);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 
   @Override

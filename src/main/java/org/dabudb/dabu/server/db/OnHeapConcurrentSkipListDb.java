@@ -2,9 +2,13 @@ package org.dabudb.dabu.server.db;
 
 import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
+import org.dabudb.dabu.server.io.DatabaseExporter;
 import org.dabudb.dabu.shared.protobufs.Request;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +44,18 @@ public class OnHeapConcurrentSkipListDb implements Db {
       }
     }
     return docs;
+  }
+
+  public void export(File file) {
+    DatabaseExporter exporter = DatabaseExporter.getInstance(file);
+    store.forEach((k, v) -> {
+      try {
+        System.out.println(Arrays.toString(k));
+        exporter.log(v);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
   }
 
   @Override

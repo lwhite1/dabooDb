@@ -10,6 +10,7 @@ import org.dabudb.dabu.shared.protobufs.Request.GetReply;
 import org.dabudb.dabu.shared.protobufs.Request.WriteReply;
 import org.dabudb.dabu.shared.protobufs.Request.WriteRequest;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * The primary controller for the db. It receives input from a CommServer and forwards to a WAL (log) and db
  */
-class DbServer {
+public class DbServer {
 
   private static DbServer INSTANCE;
 
@@ -29,8 +30,10 @@ class DbServer {
 
   public static DbServer get() {
 
-    if (INSTANCE == null) {
-      INSTANCE = new DbServer();
+    synchronized (DbServer.class) {
+      if (INSTANCE == null) {
+        INSTANCE = new DbServer();
+      }
     }
     return INSTANCE;
   }
@@ -63,7 +66,7 @@ class DbServer {
   }
 
 
-  Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
+  public Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
     try {
       writeLog().log(requestBytes);
       if (!request.getIsDelete()) {
@@ -144,5 +147,9 @@ class DbServer {
         .setErrorType(Request.ErrorType.NONE)
         .setDescription("")
         .build();
+  }
+
+  public void export(File file) {
+    db().export(file);
   }
 }
