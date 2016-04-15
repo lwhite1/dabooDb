@@ -1,26 +1,37 @@
-# dabuDB
+dabuDB
+======
 
-DabuDB is a simple key-value document store. It is designed as a vehicle for teaching how to write High-Performance/Low-Latency Java.
+DabuDB is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. 
 
 DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. 
 
-## Features/Requirements
-The system is a key-value document store with the following capabilities:
+## The API
+The database provides standard key-value operations:
 
-#### Documents
-* are arbitrary POJOs implementing a simple interface.
-* must provide a byte array key that is unique within the database
-* must serialize to a byte array, so they can be stored as a value in the database
-* are ordered by a Comparator, and can be range-searched in that order
+* Write(), Get(), and Delete(); for both single documents and batches
+* GetRange(); for range queries
 
+## The Features
+What makes dabuDB different from, say, a standard Java TreeMap?
 
-#### The database:
-* supports Write, Delete, Get, and GetRange(from, to) operations
-* supports Client-Server and Embedded (client and server in a single JVM) modes
-* is durable (application can be closed and re-opened without losing data)
-* is transactional: batches written in a single call are processed atomically (committed or rolled-back together)
-* uses Optimistic Locking to allow multiple writers
-* supports idempotent Writes to allow clients to safely retry updates
+* The data is persistent and durable in the event of a shutdown or crash
+* Both in-process (embedded) and client-server modes
+* In client server mode, all communication is handled transparently
+* Transactions on all batch operations
+* Optimistic Locking, so it can be safely used by more than one client
+* Compression and encryption of documents for improved performance and security
+* It is extremely flexible: You can select or create plugins for:
+    * Storage technology
+    * Transaction logging
+    * In-memory data structures
+    * Communications
+    * Compression
+    * Encryption
+* Options can be combined to create a custom fit for your application
+* It is extremely fast for both reads and writes:
+
+    * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
+    * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
 
 ## A (rough) roadmap:
 
@@ -33,14 +44,10 @@ The system is a key-value document store with the following capabilities:
 * Pluggable serializers for data and messages
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
-Performance with small databases is quite good: (my laptop):
-
-* 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
-* 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
 
 ### 1.1
 
-* Pluggable comparator 
+* Pluggable comparators 
 * Range search
 * Backup and restore
 
