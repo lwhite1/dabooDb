@@ -7,18 +7,20 @@ DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she
 ## Features/Requirements
 The system is a key-value document store with the following capabilities:
 
-#### Basics
-* Documents are arbitrary POJOs implementing a simple interface.
-* Documents must provide a byte array key that is unique within the database
-* Documents are ordered based on a Comparator, and can be range-searched in that order
-* Supported operations are: Write, Delete, and Get; plus GetRange(from, to)
-* Client-Server and Embedded (client and server in a single JVM) modes are supported
+#### Documents
+* are arbitrary POJOs implementing a simple interface.
+* must provide a byte array key that is unique within the database
+* must serialize to a byte array, so they can be stored as a value in the database
+* are ordered by a Comparator, and can be range-searched in that order
 
-#### Database functionality
-* Data must be persistent (application can be closed and re-opened without losing data)
-* Data written in a single call are processed atomically (commit or roll-back together)
-* Optimistic locking is used to allow multiple writers
-* Idempotent Writes (and Reads) to allow clients to safely retry updates
+
+#### The database:
+* supports Write, Delete, Get, and GetRange(from, to) operations
+* supports Client-Server and Embedded (client and server in a single JVM) modes
+* is durable (application can be closed and re-opened without losing data)
+* is transactional: batches written in a single call are processed atomically (committed or rolled-back together)
+* uses Optimistic Locking to allow multiple writers
+* supports idempotent Writes to allow clients to safely retry updates
 
 ## A (rough) roadmap:
 
@@ -40,6 +42,8 @@ Performance with small databases is quite good: (my laptop):
 
 * Pluggable comparator 
 * Range search
+* Backup and restore
+
 
 ### 1.2
 * Optimistic locking
@@ -56,7 +60,7 @@ We should now have a good working system, with excellent performance at reasonab
 We can proceed with making a Low Performance/High Latency version that can be used as a starting point for students.
 
 ## Beyond that?
-Here are some further extensions to make it a real db (should we decide that would be fun):
+Here are some further extensions to make it a real db (if that would be fun):
 
 ### 2.5
 
@@ -72,7 +76,6 @@ Here are some further extensions to make it a real db (should we decide that wou
 ### 4.0
 
 * Catalog
-* Backup and restore
 
 ### 5.0
 * Full-text-search support
