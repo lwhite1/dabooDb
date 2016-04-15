@@ -1,17 +1,12 @@
 package org.dabudb.dabu.server.io;
 
-
-import org.dabudb.dabu.shared.protobufs.Request;
-
 import java.io.IOException;
 import java.util.Iterator;
 
 /**
- *
+ *  Interface for Write-Ahead Log implementations
  */
 public interface WriteAheadLog extends Iterator<byte[]> {
-
-  void logRequest(Request.WriteRequest request) throws IOException;
 
   void log(byte[] request) throws IOException;
 

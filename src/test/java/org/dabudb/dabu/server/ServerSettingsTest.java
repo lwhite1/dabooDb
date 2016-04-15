@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- *
+ *  Tests for ServerSettings
  */
 public class ServerSettingsTest {
 

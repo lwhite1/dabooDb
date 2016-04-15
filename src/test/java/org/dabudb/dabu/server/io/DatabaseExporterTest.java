@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.dabudb.dabu.shared.msg.MessageUtils.*;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -1,11 +1,9 @@
 package org.dabudb.dabu.server.io;
 
-import org.dabudb.dabu.server.ServerSettings;
 import com.google.common.io.ByteSink;
 import com.google.common.io.CharSink;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
-import org.dabudb.dabu.shared.protobufs.Request;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -48,11 +46,6 @@ public class WriteLog implements WriteAheadLog, Closeable {
 
   private WriteLog(File rootFolder) throws IOException {
     initializeLog(rootFolder);
-  }
-
-  @Override
-  public void logRequest(Request.WriteRequest request) throws IOException {
-    log(ServerSettings.getInstance().getMessagePipe().messageToBytes(request));
   }
 
   @Override

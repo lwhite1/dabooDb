@@ -13,7 +13,7 @@ import static org.dabudb.dabu.shared.protobufs.Request.*;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Tests for MessagePipe
  */
 public class MessagePipeTest {
 

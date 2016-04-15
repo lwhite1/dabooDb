@@ -10,7 +10,7 @@ import org.dabudb.dabu.testutil.Person;
 import org.junit.Test;
 
 /**
- *
+ *  Tests for WriteLog
  */
 public class WriteLogTest {
 

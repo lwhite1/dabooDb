@@ -20,8 +20,8 @@ import java.util.Map;
  */
 public class OffHeapBTreeDb implements Db {
 
-  //private final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 1024;  // 1 GB
-  private final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 50;  // 50 MB
+  //private static final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 1024;  // 1 GB
+  private static final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 50;  // 50 MB
 
   private final DB db = DBMaker
       .memoryDB()

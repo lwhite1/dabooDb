@@ -103,7 +103,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       e.printStackTrace();
       // TODO(lwhite): Handle exception
     }
-    Request.Document document = null;
+    Request.Document document;
     try {
       document = parseFrom(requestBytes);
     } catch (InvalidProtocolBufferException e) {

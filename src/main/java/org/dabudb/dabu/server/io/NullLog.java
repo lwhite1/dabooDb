@@ -24,11 +24,6 @@ public class NullLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
   private NullLog(File rootFolder) {}
 
   @Override
-  public void logRequest(Request.WriteRequest request) throws IOException {
-
-  }
-
-  @Override
   public void close() throws IOException {
   }
 

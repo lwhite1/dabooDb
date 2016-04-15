@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 /**
- * Configuratin settings for a Dabu server, or any Dabu server running in embedded mode
+ * Configuration settings for a Dabu server, or any Dabu server running in embedded mode
  */
 public class ServerSettings {
 
