@@ -30,14 +30,7 @@ public class DatabaseExporterTest {
     Request.GetRequestBody getBody = getGetRequestBody(ByteString.EMPTY);
     Request.GetRequest getRequest = getGetRequest(header, getBody);
     Request.GetReply getReply = server.handleRequest(getRequest);
-    try {
-      System.out.println("waiting");
-      synchronized (reply) {
-        reply.wait(20000);
-      }
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    server.export(Paths.get("exports").toFile());
+
+    server.export(Paths.get("testoutput/exports").toFile());
   }
 }

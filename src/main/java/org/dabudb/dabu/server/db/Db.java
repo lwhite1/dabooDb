@@ -19,5 +19,4 @@ public interface Db extends Iterable<Map.Entry<byte[], byte[]>> {
   List<ByteString> get(List<ByteString> keyList);
 
   void export(File file);
-
 }

@@ -32,7 +32,6 @@ public class WriteLog implements WriteAheadLog, Closeable {
   }
 
   //TODO(lwhite) handle locking/synchronization for these files
-  private final static String FOLDER = "wal";
   private final static String DATA_FILE = "dataFile";
   private final static String INDEX_FILE = "indexFile";
 
@@ -137,10 +136,5 @@ public class WriteLog implements WriteAheadLog, Closeable {
 
     CharSink charSink = Files.asCharSink(indexFile, StandardCharsets.UTF_8, FileWriteMode.APPEND);
     indexWriter = charSink.openStream();
-  }
-
-  private static java.io.File getFolderName(String logFileRoot) {
-    String name = logFileRoot + java.io.File.separatorChar + FOLDER;
-    return Paths.get(name).toFile();
   }
 }

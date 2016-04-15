@@ -16,6 +16,7 @@ import com.google.common.base.Strings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
@@ -32,7 +33,7 @@ public class ServerSettings {
 
   private Db db;
 
-  private File databaseDirectory = new File(System.getProperty("user.dir"));
+  private String databaseDirectory;
 
   private WriteAheadLog writeAheadLog;
 
@@ -55,6 +56,7 @@ public class ServerSettings {
 
     setDocumentClass(properties);
     setDocumentSerializer(properties);
+    setDatabaseDirectory(properties);
     setDb(properties);
     setWriteAheadLog(properties);
     setCommServer(properties);
@@ -117,9 +119,13 @@ public class ServerSettings {
   }
 
   private void setWriteAheadLog(Properties properties) {
+
     String folderName = String.valueOf(properties.getProperty("db.write_ahead_log.folderName"));
+
     String writeAheadClassName = String.valueOf(properties.getProperty("db.write_ahead_log.class"));
-    File logFolder = Paths.get(folderName).toFile();
+
+    Path logFolderPath = Paths.get(getDatabaseDirectory(), folderName);
+    File logFolder = logFolderPath.toFile();
     if (writeAheadClassName.equals(WriteLog.class.getCanonicalName())) {
       this.writeAheadLog = WriteLog.getInstance(logFolder);
     } else if (writeAheadClassName.equals(NullLog.class.getCanonicalName())) {
@@ -155,7 +161,12 @@ public class ServerSettings {
     this.messagePipe = MessagePipe.create(compressionType);
   }
 
-  public File getDatabaseDirectory() {
+  private void setDatabaseDirectory(Properties properties) {
+    databaseDirectory = String.valueOf(properties.getProperty("db.folderName"));
+  }
+
+
+  public String getDatabaseDirectory() {
     return databaseDirectory;
   }
 
