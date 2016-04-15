@@ -27,8 +27,7 @@ public class DbClientTest {
     Stopwatch stopwatch = Stopwatch.createStarted();
     client.write(document);
 
-    //byte[] key = document.key();
-    byte[] key = null;
+    byte[] key = document.key();
 
     Document document1 = client.get(key);
     assertTrue(document1 != null);
