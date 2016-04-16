@@ -37,7 +37,6 @@ public class WriteLog implements WriteAheadLog, Closeable {
   private int length = -1;
 
   private BufferedReader indexReader;
-  //private BufferedInputStream requestInputByteStream;
 
   private OutputStream requestOutputByteStream;
 
@@ -49,12 +48,27 @@ public class WriteLog implements WriteAheadLog, Closeable {
   }
 
   @Override
-  public void close() throws IOException {
+  public void close()  {
 
-    requestOutputByteStream.close();
-    dataInputStream.close();
-    indexWriter.close();
-    indexReader.close();
+    try {
+      requestOutputByteStream.close();
+      dataInputStream.close();
+      indexWriter.close();
+      indexReader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Override
+  public void clear() throws IOException {
+    close();
+    deleteLog();
+  }
+
+  private void deleteLog() throws IOException {
+    java.nio.file.Files.deleteIfExists(Paths.get(INDEX_FILE));
+    java.nio.file.Files.deleteIfExists(Paths.get(DATA_FILE));
   }
 
   @Override

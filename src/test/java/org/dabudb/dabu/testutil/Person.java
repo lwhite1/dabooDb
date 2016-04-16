@@ -101,7 +101,7 @@ public class Person implements DocumentContents {
 
   @Override
   public byte[] getKey() {
-    return new byte[0];
+    return key;
   }
 
   public String getFirstName() {

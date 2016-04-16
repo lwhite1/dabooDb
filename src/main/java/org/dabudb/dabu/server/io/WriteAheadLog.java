@@ -8,6 +8,7 @@ import java.util.Iterator;
  */
 public interface WriteAheadLog extends Iterator<byte[]> {
 
-  void log(byte[] request) throws IOException;
+  void clear() throws IOException;
 
+  void log(byte[] request) throws IOException;
 }

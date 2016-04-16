@@ -1,6 +1,8 @@
 package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.generated.protobufs.Request;
+import org.dabudb.dabu.testutil.BasicTest;
+import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,9 +13,16 @@ import static org.dabudb.dabu.shared.msg.MessageUtils.*;
 /**
  *
  */
-public class DbServerTest {
+public class DbServerTest extends BasicTest {
 
   private final DbServer server = DbServer.get();
+
+
+  @Override
+  @After
+  public void tearDown() throws Exception {
+    super.tearDown();
+  }
 
   @Test
   public void testGet() {

@@ -22,9 +22,4 @@ public class ServerSettingsTest {
     new ServerSettings(serverProperties);
   }
 
-  @Test
-  public void testStub() {
-
-
-  }
 }

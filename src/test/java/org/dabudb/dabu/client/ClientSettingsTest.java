@@ -1,5 +1,7 @@
 package org.dabudb.dabu.client;
 
+import org.dabudb.dabu.testutil.BasicTest;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +13,7 @@ import java.util.Properties;
  * Tests for ClientSettings (client)
  */
 @SuppressWarnings("unused")
-public class ClientSettingsTest {
+public class ClientSettingsTest extends BasicTest {
 
   @Before
   public void setUp() throws Exception {
@@ -22,6 +24,12 @@ public class ClientSettingsTest {
     new ClientSettings(clientProperties);
 
     // System.out.println(new ClientJsonSettings().toJson());
+  }
+
+  @Override
+  @After
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
 
   @Test
