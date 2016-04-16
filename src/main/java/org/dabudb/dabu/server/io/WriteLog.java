@@ -43,7 +43,10 @@ public class WriteLog implements WriteAheadLog, Closeable {
   private Writer indexWriter;
   private DataInputStream dataInputStream;
 
+  private File rootFolder;
+
   private WriteLog(File rootFolder) throws IOException {
+    this.rootFolder = rootFolder;
     initializeLog(rootFolder);
   }
 
@@ -64,11 +67,12 @@ public class WriteLog implements WriteAheadLog, Closeable {
   public void clear() throws IOException {
     close();
     deleteLog();
+    initializeLog(rootFolder);
   }
 
   private void deleteLog() throws IOException {
-    java.nio.file.Files.deleteIfExists(Paths.get(INDEX_FILE));
-    java.nio.file.Files.deleteIfExists(Paths.get(DATA_FILE));
+    java.nio.file.Files.deleteIfExists(getIndexFile(rootFolder).toPath());
+    java.nio.file.Files.deleteIfExists(getDataFile(rootFolder).toPath());
   }
 
   @Override
@@ -123,8 +127,8 @@ public class WriteLog implements WriteAheadLog, Closeable {
       targetDirectory.mkdirs();
     }
 
-    File indexFile = Paths.get(targetDirectory + String.valueOf(File.separatorChar) + INDEX_FILE).toFile();
-    File dataFile = Paths.get(targetDirectory + String.valueOf(File.separatorChar) + DATA_FILE).toFile();
+    File indexFile = getIndexFile(targetDirectory);
+    File dataFile = getDataFile(targetDirectory);
 
     if (!indexFile.exists()) {
       indexFile.createNewFile();
@@ -143,5 +147,13 @@ public class WriteLog implements WriteAheadLog, Closeable {
 
     CharSink charSink = Files.asCharSink(indexFile, StandardCharsets.UTF_8, FileWriteMode.APPEND);
     indexWriter = charSink.openStream();
+  }
+
+  private File getDataFile(File targetDirectory) {
+    return Paths.get(targetDirectory + String.valueOf(File.separatorChar) + DATA_FILE).toFile();
+  }
+
+  private File getIndexFile(File targetDirectory) {
+    return Paths.get(targetDirectory + String.valueOf(File.separatorChar) + INDEX_FILE).toFile();
   }
 }

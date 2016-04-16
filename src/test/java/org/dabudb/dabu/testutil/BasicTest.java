@@ -12,11 +12,11 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
 /**
- *
+ *  Provides basic setup and clean up help for tests that write to disk
  */
 public class BasicTest {
 
-  private String testDataFolder = "/tmp/dabudb/testdata";
+  protected static final String TEST_DATA_FOLDER = "/tmp/dabudb/testdata";
 
   @Before
   public void setUp() throws Exception {
@@ -25,7 +25,7 @@ public class BasicTest {
 
   @After
   public void tearDown() throws Exception {
-    removeRecursive(Paths.get(testDataFolder));
+    removeRecursive(Paths.get(TEST_DATA_FOLDER));
   }
 
 
