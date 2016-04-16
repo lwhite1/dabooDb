@@ -60,6 +60,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
       indexReader.close();
     } catch (IOException e) {
       e.printStackTrace();
+      throw new RuntimeException(e);
     }
   }
 
@@ -84,6 +85,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
         return true;
       }
     } catch (IOException ex) {
+      ex.printStackTrace();
       //TODO(lwhite): handle exception
     }
     length = -1;

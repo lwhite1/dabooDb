@@ -92,7 +92,7 @@ public class DbClient implements KeyValueStoreApi {
     } else {
        resultBytes = resultBytesList.get(0);
     }
-    return getDocumentFromRequestDoc(resultBytes);
+    return getDocumentFromRequestDoc(settings.getDocumentClass(), resultBytes);
   }
 
   /**
@@ -112,7 +112,7 @@ public class DbClient implements KeyValueStoreApi {
     List<ByteString> byteStringList = reply.getDocumentBytesList();
     List<Document> results = new ArrayList<>();
     for (ByteString bytes : byteStringList) {
-      results.add(getDocumentFromRequestDoc(bytes));
+      results.add(getDocumentFromRequestDoc(settings.getDocumentClass(), bytes));
     }
     return results;
   }
@@ -176,29 +176,5 @@ public class DbClient implements KeyValueStoreApi {
           */
       }
     }
-  }
-
-  private Document getDocumentFromRequestDoc(ByteString resultBytes) {
-
-    Document document = DocumentFactory.documentForClass(settings.getDocumentClass());
-
-    if (document == null) {
-      throw new RuntimeException("Failed to get document from DocumentFactory.");
-    }
-
-    Request.Document result;
-    try {
-      result = Request.Document.parseFrom(resultBytes);
-    } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
-      throw new RuntimeException("Unable to parse from protobuf");
-    }
-    document.setContentClass(result.getContentClass());
-    document.setContentType(result.getContentType());
-    document.setKey(result.getKey().toByteArray());
-    document.setSchemaVersion((short) result.getSchemaVersion());
-    document.setInstanceVersion(result.getInstanceVersion());
-    document.setContents(result.getContentBytes().toByteArray());
-    return document;
   }
 }

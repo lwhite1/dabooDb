@@ -69,4 +69,9 @@ public class OnHeapConcurrentSkipListDb implements Db {
   public int size() {
     return store.size();
   }
+
+  @Override
+  public void clear() {
+    store.clear();
+  }
 }

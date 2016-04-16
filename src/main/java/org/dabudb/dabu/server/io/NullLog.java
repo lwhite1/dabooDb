@@ -11,20 +11,14 @@ import java.util.Iterator;
  */
 public class NullLog implements WriteAheadLog, Closeable {
 
-  private static NullLog instance;
-
   public static NullLog getInstance(File databaseDirectory) {
-    if (instance == null) {
-      instance = new NullLog(databaseDirectory);
-    }
-    return instance;
+    return new NullLog(databaseDirectory);
   }
 
   private NullLog(File rootFolder) {}
 
   @Override
-  public void close() throws IOException {
-  }
+  public void close() throws IOException {}
 
   @Override
   public boolean hasNext() {

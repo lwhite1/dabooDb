@@ -141,13 +141,6 @@ public class DbServer {
     System.out.println("Loaded " + count + " documents in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
 
-  private Request.ErrorCondition noErrorCondition() {
-    return Request.ErrorCondition.newBuilder()
-        .setErrorType(Request.ErrorType.NONE)
-        .setDescription("")
-        .build();
-  }
-
   /**
    * Returns the number of documents in the database
    */
@@ -166,11 +159,47 @@ public class DbServer {
     db().exportDocuments(file);
   }
 
+  /*
+   * TODO(lwhite): Need more sophisticated approach to backup and recovery that addresses issues of concurrent writes
+   */
   /**
    * Backs-up the database to a file, and clears the WriteAheadLog, so that going forward it will only contain
    * updates since the latest backup
    */
   public void backup(File file) {
-    //TODO(lwhite): Implement
+    //TODO(lwhite): Make sure that we delete the file if it already exists, rather than append to it.
+    db().exportDocuments(file);
+    try {
+      writeLog().clear();
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void recoverFromBackup(File file) {
+
+    // get everything from the last backup, if any
+    db().importDocuments(file);
+
+    // now get anything that was written to the WAL since the last backup.
+    loadExistingDataFromWAL();
+
+    // now clear the WAL
+    try {
+      writeLog().clear();
+    } catch (IOException e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void clear() {
+    db().clear();
+    try {
+      writeLog().clear();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

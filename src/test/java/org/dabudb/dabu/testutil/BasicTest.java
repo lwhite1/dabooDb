@@ -1,5 +1,6 @@
 package org.dabudb.dabu.testutil;
 
+import org.dabudb.dabu.server.io.WriteLog;
 import org.junit.After;
 import org.junit.Before;
 
