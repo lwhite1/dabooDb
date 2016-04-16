@@ -54,8 +54,10 @@ public class OnHeapConcurrentSkipListDb implements Db {
         exporter.log(v);
       } catch (IOException e) {
         e.printStackTrace();
+        //TODO(lwhite): Handle this exception
       }
     });
+    exporter.close();
   }
 
   @Override
@@ -66,10 +68,5 @@ public class OnHeapConcurrentSkipListDb implements Db {
   @Override
   public int size() {
     return store.size();
-  }
-
-  @Override
-  public Iterator<Map.Entry<byte[], byte[]>> iterator() {
-    return store.entrySet().iterator();
   }
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * The main interface for the database (server-side)
  */
-public interface Db extends Iterable<Map.Entry<byte[], byte[]>> {
+public interface Db {
 
   void write(Map<byte[], byte[]> documentMap);
 
@@ -33,6 +33,7 @@ public interface Db extends Iterable<Map.Entry<byte[], byte[]>> {
       Request.Document document = exporter.next();
       put(document.getKey().toByteArray(), document.toByteArray());
     }
+    exporter.close();
   }
 
   void put(byte[] key, byte[] value);

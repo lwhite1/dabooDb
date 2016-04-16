@@ -67,12 +67,18 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
   }
 
   @Override
-  public void close() throws IOException {
+  public void close() {
 
-    requestOutputByteStream.close();
-    dataInputStream.close();
-    indexWriter.close();
-    indexReader.close();
+    try {
+      requestOutputByteStream.close();
+      dataInputStream.close();
+      indexWriter.close();
+      indexReader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+      //TODO(lwhite): Handle
+    }
+
   }
 
   @Override

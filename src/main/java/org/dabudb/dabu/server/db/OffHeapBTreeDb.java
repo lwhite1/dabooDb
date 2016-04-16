@@ -64,8 +64,10 @@ public class OffHeapBTreeDb implements Db {
         exporter.log(v);
       } catch (IOException e) {
         e.printStackTrace();
+        //TODO(lwhite): Handle
       }
     });
+    exporter.close();
   }
 
   @Override
@@ -76,10 +78,5 @@ public class OffHeapBTreeDb implements Db {
   @Override
   public int size() {
     return store.size();
-  }
-
-  @Override
-  public Iterator<Map.Entry<byte[], byte[]>> iterator() {
-    return store.entrySet().iterator();
   }
 }
