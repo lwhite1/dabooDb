@@ -57,17 +57,17 @@ At this point, 1.0 is mostly done. More work is needed on tests, documentation, 
 * Transaction support 
 
 ### 1.3
-* Proper performance testing framework
+* Performance testing framework
+* Performance logging
 
 ### 2.0
 
 * Client-Server Mode with pluggable communication protocols
 
 We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
-We can proceed with making a Low Performance/High Latency version that can be used as a starting point for students.
 
 ## Beyond that?
-Here are some further extensions to make it a real db (if that would be fun):
+Here are some further extensions to make it a full database (if that would be fun):
 
 ### 2.5
 
