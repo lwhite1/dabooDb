@@ -58,7 +58,7 @@ public class OffHeapBTreeDb implements Db {
 
   @Override
   public void exportDocuments(File file) {
-    DatabaseExporter exporter = DatabaseExporter.getInstance(file);
+    DatabaseExporter exporter = DatabaseExporter.get(file);
     store.forEach((k, v) -> {
       try {
         exporter.log(v);

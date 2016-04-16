@@ -4,6 +4,7 @@ import com.google.common.base.Stopwatch;
 import org.dabudb.dabu.client.DbClient;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.StandardDocument;
+import org.dabudb.dabu.testutil.BasicTest;
 import org.dabudb.dabu.testutil.Person;
 
 import java.util.ArrayList;
@@ -15,13 +16,13 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Executes a series of tests using embedded mode
  */
-class EmbeddedTest {
+class EmbeddedTest extends BasicTest {
 
   public static void main(String[] args) throws Exception {
 
     DbClient client = DbClient.get();
 
-    int testCount = 100_000;
+    int testCount = 1_000_000;
 
     List<Person> people = Person.createPeoples(testCount);
     List<Document> peopleDocs = new ArrayList<>();

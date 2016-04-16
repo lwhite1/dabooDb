@@ -29,24 +29,20 @@ import static org.dabudb.dabu.generated.protobufs.Request.Document.parseFrom;
  */
 public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
 
-  private static DatabaseExporter instance;
-
-  public static DatabaseExporter getInstance(File databaseDirectory) {
+  public static DatabaseExporter get(File databaseDirectory) {
+    DatabaseExporter exporter = null;
     try {
-      if (instance == null) {
-        instance = new DatabaseExporter(databaseDirectory);
-      }
+      exporter = new DatabaseExporter(databaseDirectory);
     } catch (IOException e) {
       e.printStackTrace();
-      throw new RuntimeException(e);
     }
-    return instance;
+    return exporter;
   }
 
   //TODO(lwhite) handle locking/synchronization for these files
-  private final static String FOLDER = "db_export";
-  private final static String DATA_FILE = "dataFile";
-  private final static String INDEX_FILE = "indexFile";
+  public final static String FOLDER = "db_export";
+  public final static String DATA_FILE = "dataFile";
+  public final static String INDEX_FILE = "indexFile";
 
   // The length of the current request in bytes
   private int length = -1;
@@ -68,7 +64,6 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
 
   @Override
   public void close() {
-
     try {
       requestOutputByteStream.close();
       dataInputStream.close();
@@ -91,6 +86,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       }
     } catch (IOException ex) {
       //TODO(lwhite): handle exception
+      ex.printStackTrace();
     }
     length = -1;
     return false;

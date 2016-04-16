@@ -28,7 +28,7 @@ public interface Db {
    * Imports all documents in the given file
    */
   default void importDocuments(File file) {
-    DatabaseExporter exporter = DatabaseExporter.getInstance(file);
+    DatabaseExporter exporter = DatabaseExporter.get(file);
     while (exporter.hasNext()) {
       Request.Document document = exporter.next();
       put(document.getKey().toByteArray(), document.toByteArray());

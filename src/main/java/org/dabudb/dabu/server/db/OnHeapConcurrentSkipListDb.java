@@ -47,7 +47,7 @@ public class OnHeapConcurrentSkipListDb implements Db {
   }
 
   public void exportDocuments(File file) {
-    DatabaseExporter exporter = DatabaseExporter.getInstance(file);
+    DatabaseExporter exporter = DatabaseExporter.get(file);
     store.forEach((k, v) -> {
       try {
         System.out.println(Arrays.toString(k));

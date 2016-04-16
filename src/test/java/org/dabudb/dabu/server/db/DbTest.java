@@ -3,52 +3,41 @@ package org.dabudb.dabu.server.db;
 import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.generated.protobufs.Request;
+import org.dabudb.dabu.server.io.DatabaseExporter;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.StandardDocument;
+import org.dabudb.dabu.testutil.BasicTest;
 import org.dabudb.dabu.testutil.Person;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static org.dabudb.dabu.server.io.DatabaseExporter.*;
 import static org.junit.Assert.*;
 
 /**
  * Tests for all implementations of Db
  */
-public class DbTest {
+public class DbTest extends BasicTest {
 
-  private Map<byte[], byte[]> documentMap;
+  private List<Person> people;
+  private Map<byte[], byte[]> documentMap = new TreeMap<>(SignedBytes.lexicographicalComparator());
   private final List<ByteString> keys = new ArrayList<>();
   private final List<Request.Document> documentList = new ArrayList<>();
   private Db db;
 
-  @Before
-  public void setUp() throws Exception {
-
-    documentMap = new TreeMap<>(SignedBytes.lexicographicalComparator());
-
-    List<Person> people = Person.createPeoples(10);
-
-    for (Person person : people) {
-      Document document = new StandardDocument(person);
-      Request.Document doc = Request.Document.newBuilder()
-          .setContentBytes(ByteString.copyFrom(document.contents()))
-          .setContentClass(person.getClass().getCanonicalName())
-          .setContentType(person.getContentType())
-          .setKey(ByteString.copyFrom(person.getKey()))
-          .setInstanceVersion(0)
-          .setSchemaVersion(1)
-          .build();
-
-      documentMap.put(doc.getKey().toByteArray(), doc.toByteArray());
-      keys.add(doc.getKey());
-      documentList.add(doc);
-    }
+  @Override
+  @After
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
 
   /**
@@ -56,6 +45,7 @@ public class DbTest {
    */
   @Test
   public void testBatchWriteGetDelete1() throws Exception {
+    setupPeople(10);
 
     // Create the db and write a batch of documents
     db = new OnHeapConcurrentSkipListDb();
@@ -83,6 +73,7 @@ public class DbTest {
    */
   @Test
   public void testBatchWriteGetDelete2() throws Exception {
+    setupPeople(10);
 
     db = new OnHeapRBTreeDb();
     List<ByteString> docs = db.get(keys);
@@ -114,7 +105,7 @@ public class DbTest {
    */
   @Test
   public void testBatchWriteGetDelete3() throws Exception {
-
+    setupPeople(10);
     // setup db and write docs
     db = new OffHeapBTreeDb();
     db.write(documentMap);
@@ -141,7 +132,80 @@ public class DbTest {
 
 
   @Test
-  public void testExport() {
+  public void testImportExport1() {
 
+    setupPeople(100);
+    db = new OffHeapBTreeDb();
+    db.write(documentMap);
+    File file = Paths.get("/tmp/dabudb/testdata/exportTest").toFile();
+    db.exportDocuments(file);
+    assertTrue(file.exists());
+
+    File file2 = Paths.get("/tmp/dabudb/testdata/exportTest").toFile();
+    assertTrue(file.exists());
+
+    Db db2 = new OffHeapBTreeDb();
+    db2.importDocuments(file2);
+    assertEquals(db.size(), db2.size());
+    assertEquals(100, db2.size());
+  }
+
+  @Test
+  public void testImportExport2() {
+    setupPeople(100);
+    db = new OnHeapRBTreeDb();
+    db.write(documentMap);
+    File file = Paths.get("/tmp/dabudb/testdata/exportTest").toFile();
+    db.exportDocuments(file);
+    assertTrue(file.exists());
+
+    File file2 = Paths.get("/tmp/dabudb/testdata/exportTest").toFile();
+    assertTrue(file.exists());
+
+    Db db2 = new OnHeapRBTreeDb();
+    db2.importDocuments(file2);
+    assertEquals(db.size(), db2.size());
+    assertEquals(100, db2.size());
+  }
+
+  @Test
+  public void testImportExport3() {
+    setupPeople(100);
+    db = new OnHeapConcurrentSkipListDb();
+    db.write(documentMap);
+    File file = Paths.get("/tmp/dabudb/testdata/exportTest").toFile();
+    db.exportDocuments(file);
+    assertTrue(file.exists());
+
+    File file2 = Paths.get("/tmp/dabudb/testdata/exportTest").toFile();
+    assertTrue(file.exists());
+
+    Db db2 = new OnHeapConcurrentSkipListDb();
+    db2.importDocuments(file2);
+    assertEquals(db.size(), db2.size());
+    assertEquals(100, db2.size());
+  }
+
+  private void setupPeople(int count) {
+    people = Person.createPeoples(count);
+    keys.clear();
+    documentList.clear();
+    documentMap.clear();
+
+    for (Person person : people) {
+      Document document = new StandardDocument(person);
+      Request.Document doc = Request.Document.newBuilder()
+          .setContentBytes(ByteString.copyFrom(document.contents()))
+          .setContentClass(person.getClass().getCanonicalName())
+          .setContentType(person.getContentType())
+          .setKey(ByteString.copyFrom(person.getKey()))
+          .setInstanceVersion(0)
+          .setSchemaVersion(1)
+          .build();
+
+      documentMap.put(doc.getKey().toByteArray(), doc.toByteArray());
+      keys.add(doc.getKey());
+      documentList.add(doc);
+    }
   }
 }
