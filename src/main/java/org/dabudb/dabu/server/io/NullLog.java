@@ -9,7 +9,7 @@ import java.util.Iterator;
 /**
  * Logs nothing. Assumes that there is an alternate log (as would be the case if the storage engine provided their own)
  */
-public class NullLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
+public class NullLog implements WriteAheadLog, Closeable {
 
   private static NullLog instance;
 
@@ -34,6 +34,10 @@ public class NullLog implements WriteAheadLog, Closeable, Iterator<byte[]> {
   @Override
   public byte[] next() {
     throw new UnsupportedOperationException("Null log doesn't support iteration. Use a real log implementation");
+  }
+
+  @Override
+  public void clear() throws IOException {
   }
 
   @Override
