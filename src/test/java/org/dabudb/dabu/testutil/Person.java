@@ -29,13 +29,13 @@ public class Person implements DocumentContents {
 
   public static List<Person> createPeoples(int quantity) {
 
-    Person person = new Person();
     Fairy fairy = Fairy.create();
 
     io.codearte.jfairy.producer.person.Person p;
 
     List<Person> people = new ArrayList<>();
     for (int r = 0; r < quantity; r++) {
+      Person person = new Person();
       p = fairy.person();
       person.fName = p.firstName();
       person.lName = p.lastName();

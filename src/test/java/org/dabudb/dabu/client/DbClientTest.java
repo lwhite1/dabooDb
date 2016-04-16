@@ -157,6 +157,7 @@ public class DbClientTest extends BasicTest {
     int count = 0;
     List<Document> peopleDocs = new ArrayList<>();
     List<byte[]> keys = new ArrayList<>();
+
     for (Person person : people) {
       Document document = new StandardDocument(person);
       peopleDocs.add(document);
@@ -167,10 +168,9 @@ public class DbClientTest extends BasicTest {
       count++;
     }
     // Write
-    for (Document document : peopleDocs) {
-      client.write(document);
-    }
+    client.write(peopleDocs);
 
+    // Delete
     client.delete(deleteDoc);
 
     List<Document> documents = client.get(keys);

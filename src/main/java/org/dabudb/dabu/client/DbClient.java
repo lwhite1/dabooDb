@@ -84,7 +84,14 @@ public class DbClient implements KeyValueStoreApi {
 
     Request.GetReply reply = settings.getCommClient().sendRequest(request);
     checkErrorCondition(reply.getErrorCondition());
-    ByteString resultBytes = reply.getDocumentBytesList().get(0);
+
+    List<ByteString> resultBytesList = reply.getDocumentBytesList();
+    ByteString resultBytes;
+    if (resultBytesList.isEmpty()) {
+      return null;
+    } else {
+       resultBytes = resultBytesList.get(0);
+    }
     return getDocumentFromRequestDoc(resultBytes);
   }
 
