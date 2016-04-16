@@ -31,8 +31,7 @@ public class ClientSettings {
 
   private static ClientSettings ourInstance;
 
-  public ClientSettings() {
-  }
+  private ClientSettings() {}
 
   public static ClientSettings getInstance() {
     if (ourInstance == null) {
