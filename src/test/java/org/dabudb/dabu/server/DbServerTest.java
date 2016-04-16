@@ -11,12 +11,11 @@ import java.util.List;
 import static org.dabudb.dabu.shared.msg.MessageUtils.*;
 
 /**
- *
+ * Tests for DbServer
  */
 public class DbServerTest extends BasicTest {
 
   private final DbServer server = DbServer.get();
-
 
   @Override
   @After
@@ -43,5 +42,4 @@ public class DbServerTest extends BasicTest {
   public void testHandleRequest1() {
 
   }
-
 }

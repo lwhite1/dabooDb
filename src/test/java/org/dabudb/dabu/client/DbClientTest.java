@@ -7,6 +7,7 @@ import org.dabudb.dabu.testutil.Company;
 import org.dabudb.dabu.testutil.Person;
 import com.google.common.base.Stopwatch;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,6 +22,13 @@ import static org.junit.Assert.*;
 public class DbClientTest extends BasicTest {
 
   private final DbClient client = DbClient.get();
+
+  @Override
+  @Before
+  public void setUp() throws Exception {
+    super.tearDown();
+    super.setUp();
+  }
 
   @After
   public void tearDown() throws Exception {
@@ -113,7 +121,7 @@ public class DbClientTest extends BasicTest {
   @Test
   public void testDelete() throws Exception {
     DbClient client = DbClient.get();
-    int testCount = 100_000;
+    int testCount = 1_000;
 
     List<Person> people = Person.createPeoples(testCount);
     List<Document> peopleDocs = new ArrayList<>();
@@ -135,12 +143,13 @@ public class DbClientTest extends BasicTest {
     stopwatch.reset().start();
     client.delete(peopleDocs);
     System.out.println("Deleted "
-        + testCount + " objects in 1 batch " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+        + testCount + " objects in 1 batch in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
 
     stopwatch.reset().start();
     List<Document> documents = client.get(keys);
     assertEquals(0, documents.size());
-    System.out.println("Read " + testCount + " objects in 1 batch " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+    System.out.println("Read " + testCount + " objects in 1 batch in "
+        + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
   }
 
   /**

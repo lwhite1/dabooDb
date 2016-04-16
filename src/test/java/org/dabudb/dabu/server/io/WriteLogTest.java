@@ -33,7 +33,8 @@ public class WriteLogTest extends BasicTest {
 
   @Before
   public void setUp() throws Exception {
-     writeLog = WriteLog.getInstance(Paths.get(TEST_DATA_FOLDER, "writeLogTest").toFile());
+    super.tearDown();
+    writeLog = WriteLog.getInstance(Paths.get(TEST_DATA_FOLDER, "writeLogTest").toFile());
   }
 
   @Override
@@ -44,6 +45,7 @@ public class WriteLogTest extends BasicTest {
 
   @Test
   public void testLogRequest() throws Exception {
+    writeLog.clear();
     writeLog.log(writeRequest.toByteArray());
 
     int count = 0;
@@ -57,10 +59,5 @@ public class WriteLogTest extends BasicTest {
 
     writeLog.clear();
     assertFalse(writeLog.hasNext());
-  }
-
-  @Test
-  public void testReplay() {
-
   }
 }
