@@ -65,7 +65,6 @@ public class DbServer {
     return writeAheadLog;
   }
 
-
   public Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
     try {
       writeLog().log(requestBytes);
@@ -164,7 +163,7 @@ public class DbServer {
    * Exports the database in its entirety to the given file
    */
   public void export(File file) {
-    db().export(file);
+    db().exportDocuments(file);
   }
 
   /**

@@ -46,7 +46,7 @@ public class OnHeapConcurrentSkipListDb implements Db {
     return docs;
   }
 
-  public void export(File file) {
+  public void exportDocuments(File file) {
     DatabaseExporter exporter = DatabaseExporter.getInstance(file);
     store.forEach((k, v) -> {
       try {
@@ -56,6 +56,11 @@ public class OnHeapConcurrentSkipListDb implements Db {
         e.printStackTrace();
       }
     });
+  }
+
+  @Override
+  public void put(byte[] key, byte[] value) {
+    store.put(key, value);
   }
 
   @Override

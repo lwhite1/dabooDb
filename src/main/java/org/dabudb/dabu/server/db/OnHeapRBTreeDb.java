@@ -45,7 +45,7 @@ public class OnHeapRBTreeDb implements Db {
   }
 
   @Override
-  public void export(File file) {
+  public void exportDocuments(File file) {
     DatabaseExporter exporter = DatabaseExporter.getInstance(file);
     store.forEach((k, v) -> {
       try {
@@ -54,6 +54,11 @@ public class OnHeapRBTreeDb implements Db {
         e.printStackTrace();
       }
     });
+  }
+
+  @Override
+  public void put(byte[] key, byte[] value) {
+    store.put(key, value);
   }
 
   @Override

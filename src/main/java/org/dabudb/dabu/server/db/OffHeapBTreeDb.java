@@ -48,7 +48,6 @@ public class OffHeapBTreeDb implements Db {
   public List<ByteString> get(List<ByteString> keyList) {
     List<ByteString> docs = new ArrayList<>();
     for (ByteString key : keyList) {
-
       byte[] result = store.get(key.toByteArray());
       if (result != null) {
         docs.add(ByteString.copyFrom(result));
@@ -58,7 +57,7 @@ public class OffHeapBTreeDb implements Db {
   }
 
   @Override
-  public void export(File file) {
+  public void exportDocuments(File file) {
     DatabaseExporter exporter = DatabaseExporter.getInstance(file);
     store.forEach((k, v) -> {
       try {
@@ -67,6 +66,11 @@ public class OffHeapBTreeDb implements Db {
         e.printStackTrace();
       }
     });
+  }
+
+  @Override
+  public void put(byte[] key, byte[] value) {
+    store.put(key, value);
   }
 
   @Override
