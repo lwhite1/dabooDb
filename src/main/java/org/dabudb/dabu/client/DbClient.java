@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.dabudb.dabu.shared.DocumentUtils.*;
-import static org.dabudb.dabu.shared.msg.MessageUtils.*;
 import static org.dabudb.dabu.generated.protobufs.Request.*;
+import static org.dabudb.dabu.shared.msg.MessageUtils.*;
 
 /**
  * The database client interface

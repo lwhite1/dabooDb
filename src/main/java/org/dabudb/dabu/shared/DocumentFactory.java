@@ -7,8 +7,7 @@ import javax.annotation.Nullable;
  */
 public final class DocumentFactory {
 
-  private DocumentFactory() {
-  }
+  private DocumentFactory() {}
 
   @Nullable
   public static Document documentForClass(Class cls) {

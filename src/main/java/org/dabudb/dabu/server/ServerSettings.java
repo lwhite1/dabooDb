@@ -9,7 +9,6 @@ import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.shared.compression.CompressionType;
 import org.dabudb.dabu.shared.encryption.EncryptionType;
-import org.dabudb.dabu.shared.msg.MessagePipe;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -24,8 +23,6 @@ import java.util.Properties;
  * Configuration settings for a Dabu server, or any Dabu server running in embedded mode
  */
 public class ServerSettings {
-
-  private MessagePipe messagePipe;
 
   private Class documentClass = StandardDocument.class;
 
@@ -60,13 +57,8 @@ public class ServerSettings {
     setDb(properties);
     setWriteAheadLog(properties);
     setCommServer(properties);
-    setMessagePipe(properties);
 
     ourInstance = this;
-  }
-
-  public MessagePipe getMessagePipe() {
-    return messagePipe;
   }
 
   public Class getDocumentClass() {
@@ -146,25 +138,9 @@ public class ServerSettings {
     }
   }
 
-  private void setMessagePipe(Properties properties) {
-    CompressionType compressionType = CompressionType.valueOf(properties.getProperty("message.compression"));
-    EncryptionType encryptionType = EncryptionType.valueOf(properties.getProperty("message.encryption"));
-    String encryptionPwd = String.valueOf(properties.getProperty("message.encryption.pwd"));
-
-    try {
-      Preconditions.checkState(encryptionType == EncryptionType.NONE || !Strings.isNullOrEmpty(encryptionPwd));
-    } catch (IllegalStateException e) {
-      e.printStackTrace();
-      throw new StartupException("Unable to load MessagePipe as specified in server.properties", e);
-    }
-
-    this.messagePipe = MessagePipe.create(compressionType);
-  }
-
   private void setDatabaseDirectory(Properties properties) {
     databaseDirectory = String.valueOf(properties.getProperty("db.folderName"));
   }
-
 
   public String getDatabaseDirectory() {
     return databaseDirectory;
