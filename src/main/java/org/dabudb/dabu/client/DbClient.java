@@ -1,13 +1,11 @@
 package org.dabudb.dabu.client;
 
 import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
 import org.dabudb.dabu.shared.exceptions.DatastoreException;
 import org.dabudb.dabu.client.exceptions.JsonSerializationException;
 import org.dabudb.dabu.client.exceptions.ProtobufSerializationException;
 import org.dabudb.dabu.client.exceptions.SerializationException;
 import org.dabudb.dabu.shared.Document;
-import org.dabudb.dabu.shared.DocumentFactory;
 import org.dabudb.dabu.shared.exceptions.OptimisticLockException;
 import org.dabudb.dabu.shared.exceptions.PersistenceException;
 import org.dabudb.dabu.generated.protobufs.Request;
@@ -19,7 +17,7 @@ import java.util.List;
 
 import static org.dabudb.dabu.shared.DocumentUtils.*;
 import static org.dabudb.dabu.generated.protobufs.Request.*;
-import static org.dabudb.dabu.shared.msg.MessageUtils.*;
+import static org.dabudb.dabu.shared.MessageUtils.*;
 
 /**
  * The database client interface

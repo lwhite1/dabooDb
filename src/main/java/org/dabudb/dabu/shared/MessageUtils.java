@@ -1,4 +1,4 @@
-package org.dabudb.dabu.shared.msg;
+package org.dabudb.dabu.shared;
 
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.generated.protobufs.Request;

@@ -1,15 +1,12 @@
 package org.dabudb.dabu.server.io;
 
-import com.google.protobuf.ByteString;
 import org.dabudb.dabu.generated.protobufs.Request;
 import org.dabudb.dabu.server.DbServer;
-import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.DocumentUtils;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.testutil.BasicTest;
 import org.dabudb.dabu.testutil.Person;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dabudb.dabu.shared.msg.MessageUtils.*;
+import static org.dabudb.dabu.shared.MessageUtils.*;
 import static org.junit.Assert.assertEquals;
 
 /**
