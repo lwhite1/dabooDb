@@ -160,9 +160,4 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
     CharSink charSink = Files.asCharSink(indexFile, StandardCharsets.UTF_8, FileWriteMode.APPEND);
     indexWriter = charSink.openStream();
   }
-
-  private static File getFolderName(String logFileRoot) {
-    String name = logFileRoot + File.separatorChar + FOLDER;
-    return Paths.get(name).toFile();
-  }
 }

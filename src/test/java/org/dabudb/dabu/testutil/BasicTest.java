@@ -17,7 +17,7 @@ import java.nio.file.attribute.BasicFileAttributes;
  */
 public class BasicTest {
 
-  protected static final String TEST_DATA_FOLDER = "/tmp/dabudb/testdata";
+  public static final String TEST_DATA_FOLDER = "/tmp/dabudb/testdata";
 
   @Before
   public void setUp() throws Exception {
@@ -33,7 +33,7 @@ public class BasicTest {
   /**
    * Recursively deletes the given path, if it exists
    */
-  private static void removeRecursive(Path path) throws IOException {
+  protected static void removeRecursive(Path path) throws IOException {
 
     if (! path.toFile().exists()) {
       return;

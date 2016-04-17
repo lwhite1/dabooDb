@@ -2,6 +2,7 @@ package org.dabudb.dabu.server;
 
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.generated.protobufs.Request;
+import org.dabudb.dabu.server.db.Db;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 import org.dabudb.dabu.server.io.WriteLog;
 import org.dabudb.dabu.shared.Document;
@@ -13,6 +14,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,11 +79,5 @@ public class DbServerTest extends BasicTest {
     Document result = DocumentUtils.getDocumentFromRequestDoc(StandardDocument.class, bytes);
     Person person1 = (Person) result.documentContents();
     assertEquals(person, person1);
-  }
-
-  @Test
-  public void testBackupAndRecovery() {
-
-
   }
 }

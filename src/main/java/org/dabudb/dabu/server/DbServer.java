@@ -39,7 +39,7 @@ public class DbServer {
   }
 
   private DbServer() {
-    loadExistingDataFromWAL();
+    //loadExistingDataFromWAL();
   }
 
   /**
@@ -107,7 +107,6 @@ public class DbServer {
   private synchronized void loadExistingDataFromWAL() {
 
     int count = 0;
-    Stopwatch stopwatch = Stopwatch.createStarted();
     while (writeLog().hasNext()) {
 
       byte[] requestBytes = writeLog().next();
@@ -138,7 +137,7 @@ public class DbServer {
         System.out.println("Loaded " + count + " documents ");
       }
     }
-    System.out.println("Loaded " + count + " documents in " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " ms");
+    System.out.println("Loaded " + count + " documents ");
   }
 
   /**
