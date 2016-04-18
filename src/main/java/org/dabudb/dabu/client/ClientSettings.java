@@ -60,7 +60,7 @@ public class ClientSettings {
     return documentSerializer;
   }
 
-  public CommClient getCommClient() {
+  CommClient getCommClient() {
     return commClient;
   }
 
