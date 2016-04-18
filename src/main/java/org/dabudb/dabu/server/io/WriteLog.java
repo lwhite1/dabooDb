@@ -43,7 +43,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
   private Writer indexWriter;
   private DataInputStream dataInputStream;
 
-  private File rootFolder;
+  private final File rootFolder;
 
   private WriteLog(File rootFolder) throws IOException {
     this.rootFolder = rootFolder;

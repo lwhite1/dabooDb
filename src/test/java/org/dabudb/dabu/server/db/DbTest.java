@@ -29,7 +29,7 @@ import static org.junit.Assert.*;
 public class DbTest extends BasicTest {
 
   private List<Person> people;
-  private Map<byte[], byte[]> documentMap = new TreeMap<>(SignedBytes.lexicographicalComparator());
+  private final Map<byte[], byte[]> documentMap = new TreeMap<>(SignedBytes.lexicographicalComparator());
   private final List<ByteString> keys = new ArrayList<>();
   private final List<Request.Document> documentList = new ArrayList<>();
   private Db db;
