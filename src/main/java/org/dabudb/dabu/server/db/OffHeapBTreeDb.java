@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentNavigableMap;
 
 /**
  * An in-memory implementation of a Db
@@ -84,5 +85,15 @@ public class OffHeapBTreeDb implements Db {
   @Override
   public void clear() {
     store.clear();
+  }
+
+  @Override
+  public List<ByteString> getRange(byte[] from, byte[] to) {
+    List<ByteString> docs = new ArrayList<>();
+    ConcurrentNavigableMap<byte[], byte[]> results = store.subMap(from, to);
+    for (Map.Entry<byte[], byte[]> entry : results.entrySet()) {
+      docs.add(ByteString.copyFrom(entry.getValue()));
+    }
+    return docs;
   }
 }

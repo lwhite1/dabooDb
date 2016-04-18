@@ -45,4 +45,6 @@ public interface Db {
   }
 
   void clear();
+
+  List<ByteString> getRange(byte[] from, byte[] to);
 }
