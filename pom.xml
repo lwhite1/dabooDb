@@ -41,6 +41,21 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>net.openhft</groupId>
+            <artifactId>chronicle-logger-slf4j</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
             <groupId>org.iq80.snappy</groupId>
             <artifactId>snappy</artifactId>
             <version>0.4</version>
