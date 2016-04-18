@@ -14,8 +14,7 @@ import org.junit.Test;
 
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 /**
  *  Tests for WriteLog
@@ -52,6 +51,7 @@ public class WriteLogTest extends BasicTest {
     while (writeLog.hasNext()) {
       byte[] bytes = writeLog.next();
       Request.WriteRequest fromLog = Request.WriteRequest.parseFrom(bytes);
+      assertNotNull(fromLog);
       count++;
     }
     assertEquals(1, count);

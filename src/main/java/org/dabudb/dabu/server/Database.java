@@ -85,7 +85,7 @@ class Database implements DatabaseAdmin {
    * @throws RuntimeRequestException if a runtime exception occurred while fulfilling this request
    */
    Request.GetReply handleRequest(Request.GetRequest request) {
-    List<ByteString> result = null;
+    List<ByteString> result;
     Request.ErrorCondition condition = Request.ErrorCondition.getDefaultInstance();
     try {
       result = db().get(request.getBody().getKeyList());

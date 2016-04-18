@@ -36,7 +36,7 @@ public class BasicTest {
     Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
 
       @Override
-      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+      public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) throws IOException {
         Files.delete(file);
         return FileVisitResult.CONTINUE;
       }

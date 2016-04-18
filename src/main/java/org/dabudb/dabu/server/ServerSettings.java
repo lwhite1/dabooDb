@@ -138,7 +138,7 @@ public class ServerSettings {
     databaseDirectory = String.valueOf(properties.getProperty("db.folderName"));
   }
 
-  public String getDatabaseDirectory() {
+  String getDatabaseDirectory() {
     return databaseDirectory;
   }
 

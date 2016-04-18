@@ -23,8 +23,6 @@ import static org.junit.Assert.*;
  */
 public class DatabaseTest extends BasicTest {
 
-  private Database server;
-
   @Override
   @Before
   public void setUp() throws Exception {
@@ -45,7 +43,7 @@ public class DatabaseTest extends BasicTest {
   @Test
   public void testHandleRequests() {
 
-    server = Database.get();
+    Database server = Database.get();
     server.clear();
 
     // Create some data and process the write

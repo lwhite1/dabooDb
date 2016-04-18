@@ -145,7 +145,7 @@ public class StandardDocument implements Document {
   }
 
   public DocumentContents documentContents() {
-    DocumentContents documentContents = null;
+    DocumentContents documentContents;
     try {
       documentContents = getContentsPipe().bytesToContents(Class.forName(contentClass), contents);
     } catch (ClassNotFoundException e) {

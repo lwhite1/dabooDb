@@ -180,6 +180,7 @@ public class DbClientTest extends BasicTest {
     client.write(peopleDocs);
 
     // Delete
+    assertNotNull(deleteDoc);
     client.delete(deleteDoc);
 
     List<Document> documents = client.get(keys);

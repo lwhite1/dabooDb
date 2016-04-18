@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
  */
 public class DbTest extends BasicTest {
 
-  private List<Person> people;
   private final Map<byte[], byte[]> documentMap = new TreeMap<>(SignedBytes.lexicographicalComparator());
   private final List<ByteString> keys = new ArrayList<>();
   private final List<Request.Document> documentList = new ArrayList<>();
@@ -57,6 +56,7 @@ public class DbTest extends BasicTest {
     // confirm that what we got are real, uncorrupted documents
     for (ByteString value : docs) {
       Request.Document doc = Request.Document.parseFrom(value);
+      assertNotNull(doc);
     }
 
     // delete them all and assert the db is empty
@@ -72,7 +72,7 @@ public class DbTest extends BasicTest {
     setupPeople(10);
 
     db = new OnHeapRBTreeDb();
-    List<ByteString> docs = db.get(keys);
+    List<ByteString> docs;
 
     db = new OnHeapRBTreeDb();
     db.write(documentMap);
@@ -87,6 +87,7 @@ public class DbTest extends BasicTest {
     // makes sure none of the returned values is corrupted
     for (ByteString value : docs) {
       Request.Document doc = Request.Document.parseFrom(value);
+      assertNotNull(doc);
     }
 
     // delete all the docs
@@ -109,7 +110,7 @@ public class DbTest extends BasicTest {
     assertEquals(documentMap.size(), db.size());
 
     // get all the docs in one request
-    List<ByteString> docs = db.get(keys);
+    List<ByteString> docs;
     docs = db.get(keys);
     // assert we got the right number of records
     assertEquals(keys.size(), docs.size());
@@ -117,6 +118,7 @@ public class DbTest extends BasicTest {
     // make sure they came back correctly and aren't corrupted
     for (ByteString value : docs) {
       Request.Document doc = Request.Document.parseFrom(value);
+      assertNotNull(doc);
     }
 
     // delete them from the db
@@ -183,7 +185,7 @@ public class DbTest extends BasicTest {
   }
 
   private void setupPeople(int count) {
-    people = Person.createPeoples(count);
+    List<Person> people = Person.createPeoples(count);
     keys.clear();
     documentList.clear();
     documentMap.clear();
