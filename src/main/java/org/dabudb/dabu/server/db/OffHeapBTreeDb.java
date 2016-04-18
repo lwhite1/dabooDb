@@ -24,7 +24,7 @@ public class OffHeapBTreeDb implements Db {
   private static final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 50;  // 50 MB
 
   private final DB db = DBMaker
-      .memoryDB()
+      .memoryDirectDB()
       .allocateStartSize(ALLOCATED_SIZE_IN_BYTES)
       .make();
 
