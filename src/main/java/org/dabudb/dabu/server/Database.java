@@ -8,7 +8,6 @@ import org.dabudb.dabu.generated.protobufs.Request;
 import org.dabudb.dabu.generated.protobufs.Request.GetReply;
 import org.dabudb.dabu.generated.protobufs.Request.WriteReply;
 import org.dabudb.dabu.generated.protobufs.Request.WriteRequest;
-import org.dabudb.dabu.shared.exceptions.DatastoreException;
 import org.dabudb.dabu.shared.exceptions.RuntimePersistenceException;
 import org.dabudb.dabu.shared.exceptions.RuntimeRequestException;
 

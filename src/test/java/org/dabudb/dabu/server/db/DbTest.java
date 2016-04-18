@@ -3,14 +3,11 @@ package org.dabudb.dabu.server.db;
 import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.generated.protobufs.Request;
-import org.dabudb.dabu.server.io.DatabaseExporter;
 import org.dabudb.dabu.shared.Document;
-import org.dabudb.dabu.shared.DocumentContents;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.testutil.BasicTest;
 import org.dabudb.dabu.testutil.Person;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -20,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.dabudb.dabu.server.io.DatabaseExporter.*;
 import static org.junit.Assert.*;
 
 /**

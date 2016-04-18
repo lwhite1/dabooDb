@@ -4,7 +4,6 @@ package org.dabudb.dabu.server.io;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * Logs nothing. Assumes that there is an alternate log (as would be the case if the storage engine provided their own)

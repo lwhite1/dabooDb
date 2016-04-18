@@ -7,10 +7,6 @@ import org.dabudb.dabu.server.io.WriteLog;
 import org.dabudb.dabu.shared.exceptions.StartupException;
 import org.dabudb.dabu.shared.serialization.DocumentSerializer;
 import org.dabudb.dabu.shared.StandardDocument;
-import org.dabudb.dabu.shared.compression.CompressionType;
-import org.dabudb.dabu.shared.encryption.EncryptionType;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 
 import java.io.File;
 import java.io.FileInputStream;

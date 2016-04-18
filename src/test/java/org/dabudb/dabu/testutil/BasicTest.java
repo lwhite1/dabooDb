@@ -1,9 +1,5 @@
 package org.dabudb.dabu.testutil;
 
-import org.dabudb.dabu.server.io.WriteLog;
-import org.junit.After;
-import org.junit.Before;
-
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -17,15 +13,13 @@ import java.nio.file.attribute.BasicFileAttributes;
  */
 public class BasicTest {
 
-  public static final String TEST_DATA_FOLDER = "/tmp/dabudb/testdata";
+  protected static final String TEST_DATA_FOLDER = "/tmp/dabudb/testdata";
 
-  @Before
-  public void setUp() throws Exception {
+  protected void setUp() throws Exception {
 
   }
 
-  @After
-  public void tearDown() throws Exception {
+  protected void tearDown() throws Exception {
     removeRecursive(Paths.get(TEST_DATA_FOLDER));
   }
 

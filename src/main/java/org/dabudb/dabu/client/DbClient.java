@@ -3,7 +3,7 @@ package org.dabudb.dabu.client;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.client.exceptions.RequestTimeoutException;
 import org.dabudb.dabu.shared.exceptions.DatastoreException;
-import org.dabudb.dabu.client.exceptions.SerializationException;
+import org.dabudb.dabu.client.exceptions.RuntimeSerializationException;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.exceptions.OptimisticLockException;
 import org.dabudb.dabu.shared.exceptions.RuntimeDatastoreException;
@@ -199,7 +199,7 @@ public class DbClient implements KeyValueStoreApi {
       switch (type) {
         case SERIALIZATION_EXCEPTION:
           //TODO(lwhite): decide how to handle the various serialization issues. Which, if any, are recoverable?
-          throw new SerializationException(null, null);
+          throw new RuntimeSerializationException(null, null);
         case OPTIMISTIC_LOCK_EXCEPTION:
           throw new OptimisticLockException(condition.getDescription());
         case PERSISTENCE_EXCEPTION:

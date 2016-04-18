@@ -1,7 +1,6 @@
 package org.dabudb.dabu.server;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

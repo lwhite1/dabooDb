@@ -3,14 +3,14 @@ package org.dabudb.dabu.shared;
 import javax.annotation.Nullable;
 
 /**
- *
+ * Handles instantiation of documents using an appropriate class
  */
-public final class DocumentFactory {
+final class DocumentFactory {
 
   private DocumentFactory() {}
 
   @Nullable
-  public static Document documentForClass(Class cls) {
+  static Document documentForClass(Class cls) {
     Document document = null;
 
     if (cls == StandardDocument.class) {

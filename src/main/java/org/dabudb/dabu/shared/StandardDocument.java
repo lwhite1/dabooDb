@@ -1,7 +1,10 @@
 package org.dabudb.dabu.shared;
 
+import com.google.common.base.Preconditions;
 import org.dabudb.dabu.client.ClientSettings;
+import org.dabudb.dabu.client.exceptions.RuntimeSerializationException;
 
+import javax.annotation.Nonnull;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.UUID;
@@ -50,10 +53,18 @@ public class StandardDocument implements Document {
   /**
    * visible for serialization only.
    */
-  StandardDocument() {
-  }
+  StandardDocument() {}
 
-  public StandardDocument(Document other) {
+  /**
+   * Returns a new instance of StandardDocument created from the given instance, with all elements the same as in other,
+   * except that the instance version is incremented
+   *
+   * @throws NullPointerException if the given document is null
+   */
+  public StandardDocument(@Nonnull Document other) {
+
+    Preconditions.checkNotNull(other);
+
     this.contents = other.contents();
     synchronized (this) {
       this.instanceVersion = other.instanceVersion() + 1;
@@ -139,6 +150,9 @@ public class StandardDocument implements Document {
       documentContents = getContentsPipe().bytesToContents(Class.forName(contentClass), contents);
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
+      //TODO(lwhite): Log
+      String msg = "Unable to deserialize JSON contents because content class could not be found";
+      throw new RuntimeSerializationException(msg, e);
     }
     return documentContents;
   }

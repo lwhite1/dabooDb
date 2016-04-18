@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * A database administer
  */
-public interface DatabaseAdmin {
+interface DatabaseAdmin {
 
   /**
    * Clears the primary database storage and the WAL
