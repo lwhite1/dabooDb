@@ -8,13 +8,13 @@ import org.dabudb.dabu.generated.protobufs.Request;
 public class DirectCommServer implements CommServer {
 
   /** The database server I work for */
-  private DbServer dbServer;
+  private Database database;
 
-  private DbServer dbServer() {
-    if (dbServer == null) {
-      dbServer = DbServer.get();
+  private Database dbServer() {
+    if (database == null) {
+      database = Database.get();
     }
-    return dbServer;
+    return database;
   }
 
   /**

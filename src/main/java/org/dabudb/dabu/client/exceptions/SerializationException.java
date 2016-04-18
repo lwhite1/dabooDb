@@ -5,13 +5,11 @@ import org.dabudb.dabu.shared.exceptions.DatastoreException;
 import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
- *  An exception occurred serializing or deserializing a document using ProtocolBuffers.
+ *  An exception occurred serializing or deserializing a document
  */
 public class SerializationException extends DatastoreException {
 
-  public SerializationException(Request.ErrorCondition errorCondition) {
-    super(errorCondition);
-    Preconditions.checkArgument(errorCondition.getErrorType()
-        == Request.ErrorType.SERIALIZATION_EXCEPTION);
+  public SerializationException(String message, Throwable cause) {
+    super(message, cause);
   }
 }

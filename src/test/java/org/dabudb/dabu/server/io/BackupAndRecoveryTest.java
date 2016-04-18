@@ -1,7 +1,7 @@
 package org.dabudb.dabu.server.io;
 
 import org.dabudb.dabu.generated.protobufs.Request;
-import org.dabudb.dabu.server.DbServer;
+import org.dabudb.dabu.server.Database;
 import org.dabudb.dabu.shared.DocumentUtils;
 import org.dabudb.dabu.shared.StandardDocument;
 import org.dabudb.dabu.testutil.BasicTest;
@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dabudb.dabu.shared.MessageUtils.*;
+import static org.dabudb.dabu.shared.RequestUtils.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -31,7 +31,7 @@ public class BackupAndRecoveryTest extends BasicTest {
   public void testBackupAndRecovery() {
 
     // create a db
-    DbServer server = DbServer.get();
+    Database server = Database.get();
     server.clear();
 
     // Create some data and process the write
@@ -60,7 +60,7 @@ public class BackupAndRecoveryTest extends BasicTest {
     writeRequest = getWriteRequest(header, body);
     server.handleRequest(writeRequest, writeRequest.toByteArray());
 
-    server = DbServer.get();
+    server = Database.get();
 
     backupFile = Paths.get(BasicTest.TEST_DATA_FOLDER, "backupTest").toFile();
 

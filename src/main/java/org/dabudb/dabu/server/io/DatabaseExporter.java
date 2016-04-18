@@ -5,7 +5,7 @@ import com.google.common.io.CharSink;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
 import com.google.protobuf.InvalidProtocolBufferException;
-import org.dabudb.dabu.shared.exceptions.DatastoreRuntimeException;
+import org.dabudb.dabu.shared.exceptions.RuntimeDatastoreException;
 import org.dabudb.dabu.generated.protobufs.Request;
 
 import java.io.BufferedReader;
@@ -110,12 +110,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       document = parseFrom(requestBytes);
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
-      throw new DatastoreRuntimeException(
-          Request.ErrorCondition.newBuilder()
-            .setErrorType(Request.ErrorType.PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION)
-            .setDescription("Failed to parse protobuf document from export file")
-            .build()
-      );
+      throw new RuntimeDatastoreException("Failed to parse protobuf document from export file", null);
     }
     return document;
   }

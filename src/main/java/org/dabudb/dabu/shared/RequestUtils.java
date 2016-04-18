@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
+ * Utilities for creating Request protobufs
  */
-public final class MessageUtils {
+public final class RequestUtils {
 
-  private MessageUtils() {
+  private RequestUtils() {
   }
 
   public static Request.WriteRequest getWriteRequest(Request.Header header, Request.WriteRequestBody body) {

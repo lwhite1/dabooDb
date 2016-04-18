@@ -15,15 +15,15 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dabudb.dabu.shared.MessageUtils.*;
+import static org.dabudb.dabu.shared.RequestUtils.*;
 import static org.junit.Assert.*;
 
 /**
- * Tests for DbServer
+ * Tests for Database
  */
-public class DbServerTest extends BasicTest {
+public class DatabaseTest extends BasicTest {
 
-  private DbServer server;
+  private Database server;
 
   @Override
   @Before
@@ -45,7 +45,7 @@ public class DbServerTest extends BasicTest {
   @Test
   public void testHandleRequests() {
 
-    server = DbServer.get();
+    server = Database.get();
     server.clear();
 
     // Create some data and process the write

@@ -2,12 +2,10 @@ package org.dabudb.dabu.client;
 
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.shared.exceptions.DatastoreException;
-import org.dabudb.dabu.client.exceptions.JsonSerializationException;
-import org.dabudb.dabu.client.exceptions.ProtobufSerializationException;
 import org.dabudb.dabu.client.exceptions.SerializationException;
 import org.dabudb.dabu.shared.Document;
 import org.dabudb.dabu.shared.exceptions.OptimisticLockException;
-import org.dabudb.dabu.shared.exceptions.PersistenceException;
+import org.dabudb.dabu.shared.exceptions.RuntimePersistenceException;
 import org.dabudb.dabu.generated.protobufs.Request;
 
 import javax.annotation.Nonnull;
@@ -17,7 +15,7 @@ import java.util.List;
 
 import static org.dabudb.dabu.shared.DocumentUtils.*;
 import static org.dabudb.dabu.generated.protobufs.Request.*;
-import static org.dabudb.dabu.shared.MessageUtils.*;
+import static org.dabudb.dabu.shared.RequestUtils.*;
 
 /**
  * The database client interface
@@ -88,7 +86,7 @@ public class DbClient implements KeyValueStoreApi {
     if (resultBytesList.isEmpty()) {
       return null;
     } else {
-       resultBytes = resultBytesList.get(0);
+      resultBytes = resultBytesList.get(0);
     }
     return getDocumentFromRequestDoc(settings.getDocumentClass(), resultBytes);
   }
@@ -157,18 +155,14 @@ public class DbClient implements KeyValueStoreApi {
       ErrorType type = condition.getErrorType();
 
       switch (type) {
-        case JSON_SERIALIZATION_EXCEPTION:
-          throw new JsonSerializationException(condition);
-        case PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION:
-          throw new ProtobufSerializationException(condition);
         case SERIALIZATION_EXCEPTION:
-          throw new SerializationException(condition);
+          throw new SerializationException(null, null);
         case OPTIMISTIC_LOCK_EXCEPTION:
-          throw new OptimisticLockException(condition);
+          throw new OptimisticLockException(null, null, condition.getRequestId().toByteArray());
         case PERSISTENCE_EXCEPTION:
-          throw new PersistenceException(condition);
-      /*  case SEVERE_SERVER_EXCEPTION:
-            throw new SevereServerException();
+          throw new RuntimePersistenceException(condition.getDescription(), null);
+      /*  case REQUEST_TIMEOUT_EXCEPTION:
+            throw new RequestTimeoutException();
         default:
           throw new DatastoreException("An unhandled error-type condition occurred");
           */

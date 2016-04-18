@@ -123,7 +123,7 @@ public class ServerSettings {
     } else if (writeAheadClassName.equals(NullLog.class.getCanonicalName())) {
       this.writeAheadLog = NullLog.getInstance(logFolder);
     } else {
-      throw new StartupException("Write ahead log not configured.");
+      throw new StartupException("The Write Ahead Log is not configured.");
     }
   }
 

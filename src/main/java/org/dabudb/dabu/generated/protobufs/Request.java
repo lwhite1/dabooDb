@@ -116,6 +116,132 @@ public final class Request {
   }
 
   /**
+   * Protobuf enum {@code org.dabudb.dabu.generated.protobufs.ErrorOrigin}
+   */
+  public enum ErrorOrigin
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>OTHER_OR_UNKNOWN = 1;</code>
+     */
+    OTHER_OR_UNKNOWN(0, 1),
+    /**
+     * <code>CLIENT = 2;</code>
+     *
+     * <pre>
+     * an issue that occurs below CommClient in the client side
+     * </pre>
+     */
+    CLIENT(1, 2),
+    /**
+     * <code>SERVER = 3;</code>
+     *
+     * <pre>
+     * an error that occurs above CommServer in the server side
+     * </pre>
+     */
+    SERVER(2, 3),
+    /**
+     * <code>MESSAGING = 4;</code>
+     *
+     * <pre>
+     * a marshalling, unmarshalling, or data transmission issue; usually originating in CommClient or CommServer
+     * </pre>
+     */
+    MESSAGING(3, 4),
+    ;
+
+    /**
+     * <code>OTHER_OR_UNKNOWN = 1;</code>
+     */
+    public static final int OTHER_OR_UNKNOWN_VALUE = 1;
+    /**
+     * <code>CLIENT = 2;</code>
+     *
+     * <pre>
+     * an issue that occurs below CommClient in the client side
+     * </pre>
+     */
+    public static final int CLIENT_VALUE = 2;
+    /**
+     * <code>SERVER = 3;</code>
+     *
+     * <pre>
+     * an error that occurs above CommServer in the server side
+     * </pre>
+     */
+    public static final int SERVER_VALUE = 3;
+    /**
+     * <code>MESSAGING = 4;</code>
+     *
+     * <pre>
+     * a marshalling, unmarshalling, or data transmission issue; usually originating in CommClient or CommServer
+     * </pre>
+     */
+    public static final int MESSAGING_VALUE = 4;
+
+
+    public final int getNumber() {
+      return value;
+    }
+
+    public static ErrorOrigin valueOf(int value) {
+      switch (value) {
+        case 1: return OTHER_OR_UNKNOWN;
+        case 2: return CLIENT;
+        case 3: return SERVER;
+        case 4: return MESSAGING;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ErrorOrigin>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ErrorOrigin> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ErrorOrigin>() {
+            public ErrorOrigin findValueByNumber(int number) {
+              return ErrorOrigin.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return org.dabudb.dabu.generated.protobufs.Request.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final ErrorOrigin[] VALUES = values();
+
+    public static ErrorOrigin valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private ErrorOrigin(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:org.dabudb.dabu.generated.protobufs.ErrorOrigin)
+  }
+
+  /**
    * Protobuf enum {@code org.dabudb.dabu.generated.protobufs.ErrorType}
    */
   public enum ErrorType
@@ -133,21 +259,17 @@ public final class Request {
      */
     PERSISTENCE_EXCEPTION(2, 3),
     /**
-     * <code>SEVERE_SERVER_EXCEPTION = 4;</code>
+     * <code>REQUEST_EXCEPTION = 4;</code>
      */
-    SEVERE_SERVER_EXCEPTION(3, 4),
+    REQUEST_EXCEPTION(3, 4),
     /**
-     * <code>PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION = 5;</code>
+     * <code>SERIALIZATION_EXCEPTION = 5;</code>
      */
-    PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION(4, 5),
+    SERIALIZATION_EXCEPTION(4, 5),
     /**
-     * <code>JSON_SERIALIZATION_EXCEPTION = 6;</code>
+     * <code>COMMUNICATION_EXCEPTION = 6;</code>
      */
-    JSON_SERIALIZATION_EXCEPTION(5, 6),
-    /**
-     * <code>SERIALIZATION_EXCEPTION = 7;</code>
-     */
-    SERIALIZATION_EXCEPTION(6, 7),
+    COMMUNICATION_EXCEPTION(5, 6),
     ;
 
     /**
@@ -163,21 +285,17 @@ public final class Request {
      */
     public static final int PERSISTENCE_EXCEPTION_VALUE = 3;
     /**
-     * <code>SEVERE_SERVER_EXCEPTION = 4;</code>
+     * <code>REQUEST_EXCEPTION = 4;</code>
      */
-    public static final int SEVERE_SERVER_EXCEPTION_VALUE = 4;
+    public static final int REQUEST_EXCEPTION_VALUE = 4;
     /**
-     * <code>PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION = 5;</code>
+     * <code>SERIALIZATION_EXCEPTION = 5;</code>
      */
-    public static final int PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION_VALUE = 5;
+    public static final int SERIALIZATION_EXCEPTION_VALUE = 5;
     /**
-     * <code>JSON_SERIALIZATION_EXCEPTION = 6;</code>
+     * <code>COMMUNICATION_EXCEPTION = 6;</code>
      */
-    public static final int JSON_SERIALIZATION_EXCEPTION_VALUE = 6;
-    /**
-     * <code>SERIALIZATION_EXCEPTION = 7;</code>
-     */
-    public static final int SERIALIZATION_EXCEPTION_VALUE = 7;
+    public static final int COMMUNICATION_EXCEPTION_VALUE = 6;
 
 
     public final int getNumber() {
@@ -189,10 +307,9 @@ public final class Request {
         case 1: return NONE;
         case 2: return OPTIMISTIC_LOCK_EXCEPTION;
         case 3: return PERSISTENCE_EXCEPTION;
-        case 4: return SEVERE_SERVER_EXCEPTION;
-        case 5: return PROTOCOL_BUFFER_SERIALIZATION_EXCEPTION;
-        case 6: return JSON_SERIALIZATION_EXCEPTION;
-        case 7: return SERIALIZATION_EXCEPTION;
+        case 4: return REQUEST_EXCEPTION;
+        case 5: return SERIALIZATION_EXCEPTION;
+        case 6: return COMMUNICATION_EXCEPTION;
         default: return null;
       }
     }
@@ -219,7 +336,7 @@ public final class Request {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return org.dabudb.dabu.generated.protobufs.Request.getDescriptor().getEnumTypes().get(1);
+      return org.dabudb.dabu.generated.protobufs.Request.getDescriptor().getEnumTypes().get(2);
     }
 
     private static final ErrorType[] VALUES = values();
@@ -7356,18 +7473,54 @@ public final class Request {
     org.dabudb.dabu.generated.protobufs.Request.ErrorType getErrorType();
 
     /**
-     * <code>optional string description = 2;</code>
+     * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
+     */
+    boolean hasOrigin();
+    /**
+     * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
+     */
+    org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin getOrigin();
+
+    /**
+     * <code>optional bytes token = 3;</code>
+     */
+    boolean hasToken();
+    /**
+     * <code>optional bytes token = 3;</code>
+     */
+    com.google.protobuf.ByteString getToken();
+
+    /**
+     * <code>optional bytes requestId = 4;</code>
+     */
+    boolean hasRequestId();
+    /**
+     * <code>optional bytes requestId = 4;</code>
+     */
+    com.google.protobuf.ByteString getRequestId();
+
+    /**
+     * <code>optional string description = 5;</code>
      */
     boolean hasDescription();
     /**
-     * <code>optional string description = 2;</code>
+     * <code>optional string description = 5;</code>
      */
     java.lang.String getDescription();
     /**
-     * <code>optional string description = 2;</code>
+     * <code>optional string description = 5;</code>
      */
     com.google.protobuf.ByteString
         getDescriptionBytes();
+
+    /**
+     * <code>optional bytes stackTrace = 6;</code>
+     */
+    boolean hasStackTrace();
+    /**
+     * <code>optional bytes stackTrace = 6;</code>
+     */
+    com.google.protobuf.ByteString getStackTrace();
   }
   /**
    * Protobuf type {@code org.dabudb.dabu.generated.protobufs.ErrorCondition}
@@ -7387,7 +7540,11 @@ public final class Request {
     }
     private ErrorCondition() {
       errorType_ = 1;
+      origin_ = 1;
+      token_ = com.google.protobuf.ByteString.EMPTY;
+      requestId_ = com.google.protobuf.ByteString.EMPTY;
       description_ = "";
+      stackTrace_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -7428,10 +7585,36 @@ public final class Request {
               }
               break;
             }
-            case 18: {
+            case 16: {
+              int rawValue = input.readEnum();
+              org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin value = org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                origin_ = rawValue;
+              }
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              token_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              requestId_ = input.readBytes();
+              break;
+            }
+            case 42: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000010;
               description_ = bs;
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              stackTrace_ = input.readBytes();
               break;
             }
           }
@@ -7476,16 +7659,62 @@ public final class Request {
       return result == null ? org.dabudb.dabu.generated.protobufs.Request.ErrorType.NONE : result;
     }
 
-    public static final int DESCRIPTION_FIELD_NUMBER = 2;
-    private volatile java.lang.Object description_;
+    public static final int ORIGIN_FIELD_NUMBER = 2;
+    private int origin_;
     /**
-     * <code>optional string description = 2;</code>
+     * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
      */
-    public boolean hasDescription() {
+    public boolean hasOrigin() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string description = 2;</code>
+     * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
+     */
+    public org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin getOrigin() {
+      org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin result = org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin.valueOf(origin_);
+      return result == null ? org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin.OTHER_OR_UNKNOWN : result;
+    }
+
+    public static final int TOKEN_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString token_;
+    /**
+     * <code>optional bytes token = 3;</code>
+     */
+    public boolean hasToken() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bytes token = 3;</code>
+     */
+    public com.google.protobuf.ByteString getToken() {
+      return token_;
+    }
+
+    public static final int REQUESTID_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString requestId_;
+    /**
+     * <code>optional bytes requestId = 4;</code>
+     */
+    public boolean hasRequestId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional bytes requestId = 4;</code>
+     */
+    public com.google.protobuf.ByteString getRequestId() {
+      return requestId_;
+    }
+
+    public static final int DESCRIPTION_FIELD_NUMBER = 5;
+    private volatile java.lang.Object description_;
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string description = 5;</code>
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -7502,7 +7731,7 @@ public final class Request {
       }
     }
     /**
-     * <code>optional string description = 2;</code>
+     * <code>optional string description = 5;</code>
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -7516,6 +7745,21 @@ public final class Request {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+
+    public static final int STACKTRACE_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString stackTrace_;
+    /**
+     * <code>optional bytes stackTrace = 6;</code>
+     */
+    public boolean hasStackTrace() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bytes stackTrace = 6;</code>
+     */
+    public com.google.protobuf.ByteString getStackTrace() {
+      return stackTrace_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -7534,7 +7778,19 @@ public final class Request {
         output.writeEnum(1, errorType_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 2, description_);
+        output.writeEnum(2, origin_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, token_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, requestId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        com.google.protobuf.GeneratedMessage.writeString(output, 5, description_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, stackTrace_);
       }
       unknownFields.writeTo(output);
     }
@@ -7549,7 +7805,23 @@ public final class Request {
           .computeEnumSize(1, errorType_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, description_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, origin_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, token_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, requestId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(5, description_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, stackTrace_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -7670,8 +7942,16 @@ public final class Request {
         super.clear();
         errorType_ = 1;
         bitField0_ = (bitField0_ & ~0x00000001);
-        description_ = "";
+        origin_ = 1;
         bitField0_ = (bitField0_ & ~0x00000002);
+        token_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        requestId_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        stackTrace_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -7703,7 +7983,23 @@ public final class Request {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.origin_ = origin_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.token_ = token_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.requestId_ = requestId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
         result.description_ = description_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.stackTrace_ = stackTrace_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7723,10 +8019,22 @@ public final class Request {
         if (other.hasErrorType()) {
           setErrorType(other.getErrorType());
         }
+        if (other.hasOrigin()) {
+          setOrigin(other.getOrigin());
+        }
+        if (other.hasToken()) {
+          setToken(other.getToken());
+        }
+        if (other.hasRequestId()) {
+          setRequestId(other.getRequestId());
+        }
         if (other.hasDescription()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000010;
           description_ = other.description_;
           onChanged();
+        }
+        if (other.hasStackTrace()) {
+          setStackTrace(other.getStackTrace());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -7792,15 +8100,121 @@ public final class Request {
         return this;
       }
 
-      private java.lang.Object description_ = "";
+      private int origin_ = 1;
       /**
-       * <code>optional string description = 2;</code>
+       * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
        */
-      public boolean hasDescription() {
+      public boolean hasOrigin() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string description = 2;</code>
+       * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin getOrigin() {
+        org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin result = org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin.valueOf(origin_);
+        return result == null ? org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin.OTHER_OR_UNKNOWN : result;
+      }
+      /**
+       * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
+       */
+      public Builder setOrigin(org.dabudb.dabu.generated.protobufs.Request.ErrorOrigin value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        origin_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .org.dabudb.dabu.generated.protobufs.ErrorOrigin origin = 2;</code>
+       */
+      public Builder clearOrigin() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        origin_ = 1;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString token_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes token = 3;</code>
+       */
+      public boolean hasToken() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bytes token = 3;</code>
+       */
+      public com.google.protobuf.ByteString getToken() {
+        return token_;
+      }
+      /**
+       * <code>optional bytes token = 3;</code>
+       */
+      public Builder setToken(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes token = 3;</code>
+       */
+      public Builder clearToken() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString requestId_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes requestId = 4;</code>
+       */
+      public boolean hasRequestId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bytes requestId = 4;</code>
+       */
+      public com.google.protobuf.ByteString getRequestId() {
+        return requestId_;
+      }
+      /**
+       * <code>optional bytes requestId = 4;</code>
+       */
+      public Builder setRequestId(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes requestId = 4;</code>
+       */
+      public Builder clearRequestId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        requestId_ = getDefaultInstance().getRequestId();
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object description_ = "";
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string description = 5;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -7817,7 +8231,7 @@ public final class Request {
         }
       }
       /**
-       * <code>optional string description = 2;</code>
+       * <code>optional string description = 5;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -7833,37 +8247,72 @@ public final class Request {
         }
       }
       /**
-       * <code>optional string description = 2;</code>
+       * <code>optional string description = 5;</code>
        */
       public Builder setDescription(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000010;
         description_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 2;</code>
+       * <code>optional string description = 5;</code>
        */
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000010);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string description = 2;</code>
+       * <code>optional string description = 5;</code>
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000010;
         description_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString stackTrace_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes stackTrace = 6;</code>
+       */
+      public boolean hasStackTrace() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bytes stackTrace = 6;</code>
+       */
+      public com.google.protobuf.ByteString getStackTrace() {
+        return stackTrace_;
+      }
+      /**
+       * <code>optional bytes stackTrace = 6;</code>
+       */
+      public Builder setStackTrace(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        stackTrace_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes stackTrace = 6;</code>
+       */
+      public Builder clearStackTrace() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        stackTrace_ = getDefaultInstance().getStackTrace();
         onChanged();
         return this;
       }
@@ -8502,19 +8951,23 @@ public final class Request {
       "\224\001\n\010GetReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\treque" +
       "stId\030\002 \001(\014\022K\n\016errorCondition\030\003 \001(\01323.org" +
       ".dabudb.dabu.generated.protobufs.ErrorCo" +
-      "ndition\022\025\n\rdocumentBytes\030\004 \003(\014\"h\n\016ErrorC",
-      "ondition\022A\n\terrorType\030\001 \001(\0162..org.dabudb" +
-      ".dabu.generated.protobufs.ErrorType\022\023\n\013d" +
-      "escription\030\002 \001(\t\".\n\020DocumentKeyValue\022\013\n\003" +
-      "key\030\001 \002(\014\022\r\n\005value\030\002 \002(\014*8\n\013RequestType\022" +
-      "\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE\020\003\022\t\n\005QUERY" +
-      "\020\004*\330\001\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031OPTIMISTIC" +
-      "_LOCK_EXCEPTION\020\002\022\031\n\025PERSISTENCE_EXCEPTI" +
-      "ON\020\003\022\033\n\027SEVERE_SERVER_EXCEPTION\020\004\022+\n\'PRO" +
-      "TOCOL_BUFFER_SERIALIZATION_EXCEPTION\020\005\022 " +
-      "\n\034JSON_SERIALIZATION_EXCEPTION\020\006\022\033\n\027SERI",
-      "ALIZATION_EXCEPTION\020\007B.\n#org.dabudb.dabu" +
-      ".generated.protobufsB\007Request"
+      "ndition\022\025\n\rdocumentBytes\030\004 \003(\014\"\340\001\n\016Error",
+      "Condition\022A\n\terrorType\030\001 \001(\0162..org.dabud" +
+      "b.dabu.generated.protobufs.ErrorType\022@\n\006" +
+      "origin\030\002 \001(\01620.org.dabudb.dabu.generated" +
+      ".protobufs.ErrorOrigin\022\r\n\005token\030\003 \001(\014\022\021\n" +
+      "\trequestId\030\004 \001(\014\022\023\n\013description\030\005 \001(\t\022\022\n" +
+      "\nstackTrace\030\006 \001(\014\".\n\020DocumentKeyValue\022\013\n" +
+      "\003key\030\001 \002(\014\022\r\n\005value\030\002 \002(\014*8\n\013RequestType" +
+      "\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE\020\003\022\t\n\005QUER" +
+      "Y\020\004*J\n\013ErrorOrigin\022\024\n\020OTHER_OR_UNKNOWN\020\001" +
+      "\022\n\n\006CLIENT\020\002\022\n\n\006SERVER\020\003\022\r\n\tMESSAGING\020\004*",
+      "\240\001\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031OPTIMISTIC_LO" +
+      "CK_EXCEPTION\020\002\022\031\n\025PERSISTENCE_EXCEPTION\020" +
+      "\003\022\025\n\021REQUEST_EXCEPTION\020\004\022\033\n\027SERIALIZATIO" +
+      "N_EXCEPTION\020\005\022\033\n\027COMMUNICATION_EXCEPTION" +
+      "\020\006B.\n#org.dabudb.dabu.generated.protobuf" +
+      "sB\007Request"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8587,7 +9040,7 @@ public final class Request {
     internal_static_org_dabudb_dabu_generated_protobufs_ErrorCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_ErrorCondition_descriptor,
-        new java.lang.String[] { "ErrorType", "Description", });
+        new java.lang.String[] { "ErrorType", "Origin", "Token", "RequestId", "Description", "StackTrace", });
     internal_static_org_dabudb_dabu_generated_protobufs_DocumentKeyValue_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_org_dabudb_dabu_generated_protobufs_DocumentKeyValue_fieldAccessorTable = new

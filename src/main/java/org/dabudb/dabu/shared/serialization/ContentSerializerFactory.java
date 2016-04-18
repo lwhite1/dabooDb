@@ -1,6 +1,6 @@
 package org.dabudb.dabu.shared.serialization;
 
-import org.dabudb.dabu.shared.exceptions.DatastoreRuntimeException;
+import org.dabudb.dabu.shared.exceptions.RuntimeDatastoreException;
 import org.dabudb.dabu.generated.protobufs.Request;
 
 /**
@@ -10,17 +10,13 @@ public class ContentSerializerFactory {
   /**
    * Returns a content serializer of the type specified in the input
    */
-  public static ContentSerializerDeserializer get(ContentSerializerType type) throws RuntimeException {
+  public static ContentSerializerDeserializer get(ContentSerializerType type) throws RuntimeDatastoreException {
 
     switch (type) {
       case JSON:
         return ContentJsonSerializer.get();
       default:
-        throw new DatastoreRuntimeException(
-            Request.ErrorCondition.newBuilder()
-                .setErrorType(Request.ErrorType.SERIALIZATION_EXCEPTION)
-                .setDescription("No Serializer available for specified type: " + type.name())
-                .build());
+        throw new RuntimeDatastoreException("No Serializer available for specified type: " + type.name(), null);
     }
   }
 }
