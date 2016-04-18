@@ -26,9 +26,15 @@ public class Database implements DatabaseAdmin {
 
   private static Database INSTANCE;
 
+  // The primary storage mechanism. Used to answer requests for data
   private Db db;
+
+  // The Write request log. It ensures that updates are persistent
   private WriteAheadLog writeAheadLog;
 
+  /**
+   * Returns an instance of this class
+   */
   public static Database get() {
 
     synchronized (Database.class) {
@@ -45,6 +51,9 @@ public class Database implements DatabaseAdmin {
   private Database() {}
 
 
+  /**
+   * Handles a request to write data to the database and returns an appropriate reply
+   */
   public Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
     try {
       writeLog().log(requestBytes);
@@ -64,60 +73,27 @@ public class Database implements DatabaseAdmin {
       throw new RuntimeException(e);
     }
 
-    return WriteReply.newBuilder()
-        .setRequestId(request.getHeader().getId())
-        .setTimestamp(Instant.now().toEpochMilli())
-        .build();
+    return getWriteReply(request);
   }
 
+  /**
+   * Handles a request to get data from the database and returns an appropriate reply
+   *
+   * @throws RuntimeRequestException if a runtime exception occurred while fulfilling this request
+   */
   public Request.GetReply handleRequest(Request.GetRequest request) {
     List<ByteString> result = null;
     Request.ErrorCondition condition = Request.ErrorCondition.getDefaultInstance();
     try {
       result = db().get(request.getBody().getKeyList());
-    } catch (RuntimeException rtEx){
-      // TODO(log):
-      String msg = "A runtime exception was caught handling a get request";
-      RuntimeRequestException rtReqEx
-          = new RuntimeRequestException(msg, rtEx, request.getHeader().getId().toByteArray());
-
-      condition = Request.ErrorCondition.newBuilder()
-          .setDescription(msg)
-          .setErrorType(Request.ErrorType.NONE)
-          .setRequestId(request.getHeader().getId())
-          .build();
-    } catch (Exception ex) {
-      // TODO(log):
-      String msg = "A checked exception was caught handling a get request";
-      DatastoreException datastoreException = new DatastoreException(msg, ex);
-
-      condition = Request.ErrorCondition.newBuilder()
-          .setDescription(msg)
-          .setErrorType(Request.ErrorType.NONE)
-          .setRequestId(request.getHeader().getId())
-          .build();
-
     } catch (Throwable throwable) {
-      // TODO(log):
+      // We catch everything here to make sure it is logged before exiting
       String msg = "A Throwable was caught handling a get request";
       RuntimeRequestException rtReqEx
           = new RuntimeRequestException(msg, throwable, request.getHeader().getId().toByteArray());
-
-      condition = Request.ErrorCondition.newBuilder()
-          .setDescription(msg)
-          .setErrorType(Request.ErrorType.NONE)
-          .setRequestId(request.getHeader().getId())
-          .setToken(ByteString.copyFrom(rtReqEx.getToken()))
-          .setDescription(rtReqEx.getMessage())
-          .setOrigin(Request.ErrorOrigin.SERVER)
-          .build();
+      throw rtReqEx;
     }
-    return GetReply.newBuilder()
-        .setRequestId(request.getHeader().getId())
-        .setTimestamp(Instant.now().toEpochMilli())
-        .addAllDocumentBytes(result)
-        .setErrorCondition(condition)
-        .build();
+    return getGetReply(request, result, condition);
   }
 
   /**
@@ -250,5 +226,35 @@ public class Database implements DatabaseAdmin {
         throw new RuntimePersistenceException(message, e);
       }
     }
+  }
+
+  private GetReply getGetReply(Request.GetRequest request, List<ByteString> result, Request.ErrorCondition condition) {
+    return GetReply.newBuilder()
+        .setRequestId(request.getHeader().getId())
+        .setTimestamp(Instant.now().toEpochMilli())
+        .addAllDocumentBytes(result)
+        .setErrorCondition(condition)
+        .build();
+  }
+
+  private Request.ErrorCondition getErrorCondition(Request.GetRequest request, String msg, RuntimeRequestException
+      rtReqEx) {
+    Request.ErrorCondition condition;
+    condition = Request.ErrorCondition.newBuilder()
+        .setDescription(msg)
+        .setErrorType(Request.ErrorType.NONE)
+        .setRequestId(request.getHeader().getId())
+        .setToken(ByteString.copyFrom(rtReqEx.getToken()))
+        .setDescription(rtReqEx.getMessage())
+        .setOrigin(Request.ErrorOrigin.SERVER)
+        .build();
+    return condition;
+  }
+
+  private WriteReply getWriteReply(WriteRequest request) {
+    return WriteReply.newBuilder()
+        .setRequestId(request.getHeader().getId())
+        .setTimestamp(Instant.now().toEpochMilli())
+        .build();
   }
 }

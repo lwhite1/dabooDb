@@ -6,7 +6,7 @@ package org.dabudb.dabu.shared.exceptions;
  */
 public class OptimisticLockException extends DatastoreException {
 
-  public OptimisticLockException(String message, Throwable cause, byte[] requestId) {
-    super(message, cause);
+  public OptimisticLockException(String message) {
+    super(message);
   }
 }

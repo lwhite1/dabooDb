@@ -201,7 +201,7 @@ public class DbClient implements KeyValueStoreApi {
           //TODO(lwhite): decide how to handle the various serialization issues. Which, if any, are recoverable?
           throw new SerializationException(null, null);
         case OPTIMISTIC_LOCK_EXCEPTION:
-          throw new OptimisticLockException(null, null, condition.getRequestId().toByteArray());
+          throw new OptimisticLockException(condition.getDescription());
         case PERSISTENCE_EXCEPTION:
           throw new RuntimePersistenceException(condition.getDescription(), null);
         default:
