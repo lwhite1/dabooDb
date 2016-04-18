@@ -76,6 +76,7 @@ public class OnHeapRBTreeDb implements Db {
     store.clear();
   }
 
+  @Override
   public List<ByteString> getRange(byte[] from, byte[] to) {
     List<ByteString> docs = new ArrayList<>();
     SortedMap<byte[], byte[]> results = store.subMap(from, to);
