@@ -23,7 +23,8 @@ public class StandardDocumentTest {
 
   @Test
   public void testGetContents() {
-    //TODO(lwhite): implement
+    byte[] contents = document.contents();
+    assertNotNull(contents);
   }
 
   @Test
