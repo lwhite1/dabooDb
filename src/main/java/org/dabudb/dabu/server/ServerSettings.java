@@ -18,7 +18,7 @@ import java.util.Properties;
 /**
  * Configuration settings for a Dabu server, or any Dabu server running in embedded mode
  */
-public class ServerSettings {
+class ServerSettings {
 
   private Class documentClass = StandardDocument.class;
 
