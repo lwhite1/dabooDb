@@ -1,4 +1,4 @@
-package org.dabudb.dabu.server.io;
+package org.dabudb.dabu.server;
 
 import org.dabudb.dabu.generated.protobufs.Request;
 import org.dabudb.dabu.server.Database;
