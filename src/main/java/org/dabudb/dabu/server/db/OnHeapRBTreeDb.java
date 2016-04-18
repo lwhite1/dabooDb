@@ -4,6 +4,7 @@ import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.io.DatabaseExporter;
 import org.dabudb.dabu.generated.protobufs.Request;
+import org.dabudb.dabu.shared.exceptions.RuntimePersistenceException;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +53,8 @@ public class OnHeapRBTreeDb implements Db {
         exporter.log(v);
       } catch (IOException e) {
         e.printStackTrace();
+        //TODO(lwhite): Log this exception
+        throw new RuntimePersistenceException("An IOException occurred exporting documents from the database", e);
       }
     });
     exporter.close();

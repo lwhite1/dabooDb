@@ -3,6 +3,7 @@ package org.dabudb.dabu.server.db;
 import com.google.protobuf.ByteString;
 import org.dabudb.dabu.server.io.DatabaseExporter;
 import org.dabudb.dabu.generated.protobufs.Request;
+import org.dabudb.dabu.shared.exceptions.RuntimePersistenceException;
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
@@ -64,7 +65,8 @@ public class OffHeapBTreeDb implements Db {
         exporter.log(v);
       } catch (IOException e) {
         e.printStackTrace();
-        //TODO(lwhite): Handle
+        //TODO(lwhite): Log this exception
+        throw new RuntimePersistenceException("An IOException occurred exporting documents from the database", e);
       }
     });
     exporter.close();

@@ -203,8 +203,10 @@ public class DbClient implements KeyValueStoreApi {
         case OPTIMISTIC_LOCK_EXCEPTION:
           throw new OptimisticLockException(condition.getDescription());
         case PERSISTENCE_EXCEPTION:
+          //TODO(lwhite): throw this exception without the null param
           throw new RuntimePersistenceException(condition.getDescription(), null);
         default:
+          //TODO(lwhite): throw this exception without the null param
           throw new RuntimeDatastoreException("An unhandled error-type condition occurred", null);
       }
     }
