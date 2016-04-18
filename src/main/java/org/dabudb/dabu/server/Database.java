@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * The primary controller for the db. It receives input from a CommServer and forwards to a WAL (log) and db
  */
-public class Database implements DatabaseAdmin {
+class Database implements DatabaseAdmin {
 
   private static Database INSTANCE;
 
@@ -54,7 +54,7 @@ public class Database implements DatabaseAdmin {
   /**
    * Handles a request to write data to the database and returns an appropriate reply
    */
-  public Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
+  Request.WriteReply handleRequest(WriteRequest request, byte[] requestBytes) {
     try {
       writeLog().log(requestBytes);
       if (!request.getIsDelete()) {
@@ -69,8 +69,12 @@ public class Database implements DatabaseAdmin {
         db().delete(documents);
       }
     } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      String msg = "An IOException was caught handling a WRITE request";
+      throw new RuntimeRequestException(msg, e, request.getHeader().getId().toByteArray());
+    } catch (Throwable e) {
+      // We catch everything here to make sure it is logged before exiting
+      String msg = "A Throwable was caught handling a WRITE request";
+      throw new RuntimeRequestException(msg, e, request.getHeader().getId().toByteArray());
     }
 
     return getWriteReply(request);
@@ -81,17 +85,15 @@ public class Database implements DatabaseAdmin {
    *
    * @throws RuntimeRequestException if a runtime exception occurred while fulfilling this request
    */
-  public Request.GetReply handleRequest(Request.GetRequest request) {
+   Request.GetReply handleRequest(Request.GetRequest request) {
     List<ByteString> result = null;
     Request.ErrorCondition condition = Request.ErrorCondition.getDefaultInstance();
     try {
       result = db().get(request.getBody().getKeyList());
     } catch (Throwable throwable) {
       // We catch everything here to make sure it is logged before exiting
-      String msg = "A Throwable was caught handling a get request";
-      RuntimeRequestException rtReqEx
-          = new RuntimeRequestException(msg, throwable, request.getHeader().getId().toByteArray());
-      throw rtReqEx;
+      String msg = "A Throwable was caught handling a GET request";
+      throw new RuntimeRequestException(msg, throwable, request.getHeader().getId().toByteArray());
     }
     return getGetReply(request, result, condition);
   }
@@ -99,14 +101,14 @@ public class Database implements DatabaseAdmin {
   /**
    * Returns the number of documents in the database
    */
-  public int size() {
+  int size() {
     return db().size();
   }
 
   /**
    * Returns true if there is no data in this database; false otherwise
    */
-  public boolean isEmpty() {
+  boolean isEmpty() {
     return size() == 0;
   }
 
