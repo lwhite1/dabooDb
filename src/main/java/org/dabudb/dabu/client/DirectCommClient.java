@@ -24,4 +24,8 @@ public class DirectCommClient implements CommClient {
     return directCommServer.handleRequest(request);
   }
 
+  @Override
+  public Request.GetReply sendRequest(Request.GetRangeRequest request) {
+    return directCommServer.handleRequest(request);
+  }
 }

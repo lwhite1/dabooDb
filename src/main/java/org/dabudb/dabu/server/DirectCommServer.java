@@ -34,4 +34,13 @@ public class DirectCommServer implements CommServer {
   public Request.GetReply handleRequest(Request.GetRequest request) {
     return dbServer().handleRequest(request);
   }
+
+  /**
+   * Passes a get-range request to the database server for processing
+   * @param request The get-range request
+   * @return  A reply containing all documents found
+   */
+  public Request.GetReply handleRequest(Request.GetRangeRequest request) {
+    return dbServer().handleRequest(request);
+  }
 }

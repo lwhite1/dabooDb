@@ -139,6 +139,25 @@ public class DbClient implements KeyValueStoreApi {
   }
 
   /**
+   * Returns a collection (possibly empty) of documents with keys between the given range
+   *
+   * @throws RequestTimeoutException   if this request failed to return within the allotted time
+   * <p/>
+   * @throws NullPointerException      if the value of the keys parameter is null, or keys contains any null entries
+   * @throws RuntimeDatastoreException if a non-recoverable error has occurred
+   */
+  public List<Document> getRangeRequest(@Nonnull byte[] startKey, byte[] endKey) throws DatastoreException {
+    Header header = getHeader();
+    GetRangeRequestBody body = getGetRangeRequestBody(ByteString.copyFrom(startKey), ByteString.copyFrom(endKey));
+    GetRangeRequest request = getGetRangeRequest(header, body);
+    Request.GetReply reply = settings.getCommClient().sendRequest(request);
+    checkErrorCondition(reply.getErrorCondition());
+    List<ByteString> byteStringList = reply.getDocumentBytesList();
+    return byteStringList.stream().map(bytes -> getDocumentFromRequestDoc(settings.getDocumentClass(), bytes))
+        .collect(Collectors.toList());
+  }
+
+  /**
    * Deletes the given document if it exists in the database
    * <p>
    * Does nothing if the document does not exist

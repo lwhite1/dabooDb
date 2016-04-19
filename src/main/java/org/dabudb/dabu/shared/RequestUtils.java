@@ -41,6 +41,13 @@ public final class RequestUtils {
         .build();
   }
 
+  public static Request.GetRangeRequest getGetRangeRequest(Request.Header header, Request.GetRangeRequestBody body) {
+    return Request.GetRangeRequest.newBuilder()
+        .setHeader(header)
+        .setBody(body)
+        .build();
+  }
+
   public static Request.WriteRequestBody getWriteRequestBody(Request.Document doc) {
 
     Request.DocumentKeyValue keyValue = Request.DocumentKeyValue.newBuilder()
@@ -68,6 +75,13 @@ public final class RequestUtils {
   public static Request.GetRequestBody getGetRequestBody(List<ByteString> keys) {
     return Request.GetRequestBody.newBuilder()
         .addAllKey(keys)
+        .build();
+  }
+
+  public static Request.GetRangeRequestBody getGetRangeRequestBody(ByteString startKey, ByteString endKey) {
+    return Request.GetRangeRequestBody.newBuilder()
+        .setStartKey(startKey)
+        .setEndKey(endKey)
         .build();
   }
 
