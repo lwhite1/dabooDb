@@ -53,19 +53,6 @@ Now you can use dabuDB in your own projects.
 
 ## A (rough) roadmap:
 
-### 1.0
-
-* Basic key value functionality: write, get, delete (single and batch)
-* Range search
-* Embedded mode only
-* Excellent performance for small amounts of data
-* Pluggable storage engine and write-ahead logging
-* Pluggable serializers for data
-* Backup and restore
-* Integrated JSR 349-based data validation checked before writes
-
-At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
-
 ### 1.1
 
 * Pluggable comparators 
