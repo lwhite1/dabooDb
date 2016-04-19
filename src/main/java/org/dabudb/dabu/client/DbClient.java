@@ -12,6 +12,7 @@ import org.dabudb.dabu.generated.protobufs.Request;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,12 +41,14 @@ public class DbClient implements KeyValueStoreApi {
   /**
    * Writes the given document to the database as an "upsert"
    *
-   * @throws OptimisticLockException   if the attempt to update a document would overwrite an unseen change to that
-   * document
-   * @throws RequestTimeoutException   if this request failed to return within the allotted time
+   * @throws OptimisticLockException      if the attempt to update a document would overwrite an unseen change to that
+   *                                      document
+   * @throws RequestTimeoutException      if this request failed to return within the allotted time
    * <p/>
-   * @throws NullPointerException      if the document parameter is null
-   * @throws RuntimeDatastoreException if a non-recoverable error has occurred
+   * @throws NullPointerException         if the document parameter is null
+   * @throws RuntimeDatastoreException    if a non-recoverable error has occurred
+   * @throws ConstraintViolationException if a JSR 349 validation constraint is violated by the attributes of any
+   *                                      document
    */
   @Override
   public void write(@Nonnull Document document) throws DatastoreException {
@@ -63,13 +66,14 @@ public class DbClient implements KeyValueStoreApi {
    * <p>
    * All writes are "upserts"
    *
-   * @throws OptimisticLockException   if the attempt to update a document would overwrite an unseen change to that
-   * document
-   * @throws RequestTimeoutException   if this request failed to return within the allotted time
-   * <p/>
-   * @throws NullPointerException      if the document parameter is null
-   * @throws RuntimeDatastoreException if a non-recoverable error has occurred
-
+   * @throws OptimisticLockException      if the attempt to update a document would overwrite an unseen change to that
+   *                                      document
+   * @throws RequestTimeoutException      if this request failed to return within the allotted time
+   *                                      <p/>
+   * @throws NullPointerException         if the document parameter is null
+   * @throws RuntimeDatastoreException    if a non-recoverable error has occurred
+   * @throws ConstraintViolationException if a JSR 349 validation constraint is violated by the attributes of any
+   *                                      document
    */
   @Override
   public void write(@Nonnull List<Document> documentCollection)
@@ -92,7 +96,7 @@ public class DbClient implements KeyValueStoreApi {
    * Returns the document with the given key, or null if it doesn't exist
    *
    * @throws RequestTimeoutException   if this request failed to return within the allotted time
-   * <p/>
+   *                                   <p/>
    * @throws NullPointerException      if the value of the key parameter is null
    * @throws RuntimeDatastoreException if a non-recoverable error has occurred
    */
@@ -121,7 +125,7 @@ public class DbClient implements KeyValueStoreApi {
    * Returns a collection (possibly empty) of documents associated with the given list of keys
    *
    * @throws RequestTimeoutException   if this request failed to return within the allotted time
-   * <p/>
+   *                                   <p/>
    * @throws NullPointerException      if the value of the keys parameter is null, or keys contains any null entries
    * @throws RuntimeDatastoreException if a non-recoverable error has occurred
    */
@@ -142,7 +146,7 @@ public class DbClient implements KeyValueStoreApi {
    * Returns a collection (possibly empty) of documents with keys between the given range
    *
    * @throws RequestTimeoutException   if this request failed to return within the allotted time
-   * <p/>
+   *                                   <p/>
    * @throws NullPointerException      if the value of the keys parameter is null, or keys contains any null entries
    * @throws RuntimeDatastoreException if a non-recoverable error has occurred
    */
@@ -162,10 +166,11 @@ public class DbClient implements KeyValueStoreApi {
    * <p>
    * Does nothing if the document does not exist
    * <p/>
+   *
    * @throws OptimisticLockException   if the attempt to delete a document would overwrite an unseen change to that
-   * document
+   *                                   document
    * @throws RequestTimeoutException   if this request failed to return within the allotted time
-   * <p/>
+   *                                   <p/>
    * @throws NullPointerException      if the documents parameter is null
    * @throws RuntimeDatastoreException if a non-recoverable error has occurred
    */
@@ -185,9 +190,9 @@ public class DbClient implements KeyValueStoreApi {
    * Any documents not in the database are ignored
    *
    * @throws OptimisticLockException   if the attempt to delete a document would overwrite an unseen change to that
-   * document
+   *                                   document
    * @throws RequestTimeoutException   if this request failed to return within the allotted time
-   * <p/>
+   *                                   <p/>
    * @throws NullPointerException      if the documents parameter is null
    * @throws RuntimeDatastoreException if a non-recoverable error has occurred
    */
