@@ -30,7 +30,7 @@ public class ServerSettingsTest {
     serverProperties.put("db.write_ahead_log.class", "org.dabudb.dabu.server.io.WriteLog");
     serverProperties.put("db.write_ahead_log.folderName", "wal");
 
-    settings = new ServerSettings(serverProperties);
+    settings = ServerSettings.create(serverProperties);
   }
 
   @Test

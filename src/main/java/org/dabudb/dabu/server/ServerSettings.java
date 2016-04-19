@@ -45,7 +45,15 @@ class ServerSettings {
   /**
    * Returns ServerSettings initialized from the given Properties object
    */
-  ServerSettings(Properties properties) {
+  public static ServerSettings create(Properties properties) {
+    ourInstance = new ServerSettings(properties);
+    return ourInstance;
+  }
+
+  /**
+   * Returns ServerSettings initialized from the given Properties object
+   */
+  private ServerSettings(Properties properties) {
 
     setDocumentClass(properties);
     setDocumentSerializer(properties);
@@ -53,8 +61,6 @@ class ServerSettings {
     setDb(properties);
     setWriteAheadLog(properties);
     setCommServer(properties);
-
-    ourInstance = this;
   }
 
   public Class getDocumentClass() {
