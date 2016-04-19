@@ -14,12 +14,14 @@ The database provides standard key-value operations:
 ## The Features
 What makes dabuDB different from, say, a standard Java TreeMap?
 
-* The data is persistent and durable in the event of a shutdown or crash
+* Data is persistent and durable in the event of a shutdown or crash
 * Both in-process (embedded) and client-server modes
 * In client server mode, all communication is handled transparently
 * Transactions on all batch operations
 * Optimistic Locking, so it can be safely used by more than one client
 * Compression and encryption of documents for improved performance and security
+* Pre-write data validation using JSR 349 annotations on documents
+* Built-in backup and restore
 * It is extremely flexible: You can select or create plugins for:
     * Storage technology
     * Transaction logging
@@ -27,8 +29,8 @@ What makes dabuDB different from, say, a standard Java TreeMap?
     * Communications
     * Compression
     * Encryption
-* Options can be combined to create a custom fit for your application
-* It is extremely fast for both reads and writes:
+* These options can be combined to create a custom storage solution for your application
+* It is quite fast for both reads and writes:
 
     * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
     * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
@@ -42,8 +44,9 @@ What makes dabuDB different from, say, a standard Java TreeMap?
 * Embedded mode only
 * Excellent performance for small amounts of data
 * Pluggable storage engine and write-ahead logging
-* Pluggable serializers for data and messages
+* Pluggable serializers for data
 * Backup and restore
+* Integrated JSR 349-based data validation checked before writes
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
 
@@ -65,7 +68,6 @@ At this point, 1.0 is mostly done. More work is needed on tests, documentation, 
 ### 2.5
 
 * Document schema version management
-* Integrated data validation before writes
 
 We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
 
