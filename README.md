@@ -14,8 +14,8 @@ The database provides standard key-value operations:
 ## The Features
 What makes dabuDB different from, say, a standard Java TreeMap?
 
-* Data is persistent and durable in the event of a shutdown or crash
-* Both in-process (embedded) and client-server modes
+* Data is persistent, and durable in the event of a shutdown or crash
+* Supports Both in-process (embedded) and client-server modes
 * Transactions on batch operations
 * Optimistic Locking, so it can be safely used by more than one client
 * Integrated document compression and encryption
@@ -30,8 +30,7 @@ What makes dabuDB different from, say, a standard Java TreeMap?
 * It is quite fast for both reads and writes:
 
     * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
-    * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
-    
+    * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)    
     
 ## Getting Started
         
@@ -43,11 +42,6 @@ Build and install:
 
     mvn clean install
     
-    
-Now you can use dabuDB in your own projects.
-    
-
-
 ## A (rough) roadmap:
 
 ### 1.1
@@ -63,7 +57,7 @@ Now you can use dabuDB in your own projects.
 
 ### 2.0
 
-* Client-Server Mode with pluggable communication protocols
+* High-Performance client-Server mode with new communciation plugin
 
 ### 2.5
 
