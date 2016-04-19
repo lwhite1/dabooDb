@@ -2109,6 +2109,735 @@ public final class Request {
 
   }
 
+  public interface GetRangeRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:org.dabudb.dabu.generated.protobufs.GetRangeRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+     */
+    boolean hasHeader();
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+     */
+    org.dabudb.dabu.generated.protobufs.Request.Header getHeader();
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+     */
+    org.dabudb.dabu.generated.protobufs.Request.HeaderOrBuilder getHeaderOrBuilder();
+
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+     */
+    boolean hasBody();
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+     */
+    org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody getBody();
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+     */
+    org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder getBodyOrBuilder();
+  }
+  /**
+   * Protobuf type {@code org.dabudb.dabu.generated.protobufs.GetRangeRequest}
+   *
+   * <pre>
+   **
+   *  A Get request message
+   * </pre>
+   */
+  public  static final class GetRangeRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:org.dabudb.dabu.generated.protobufs.GetRangeRequest)
+      GetRangeRequestOrBuilder {
+    // Use GetRangeRequest.newBuilder() to construct.
+    private GetRangeRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private GetRangeRequest() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetRangeRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              org.dabudb.dabu.generated.protobufs.Request.Header.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = header_.toBuilder();
+              }
+              header_ = input.readMessage(org.dabudb.dabu.generated.protobufs.Request.Header.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(header_);
+                header_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = body_.toBuilder();
+              }
+              body_ = input.readMessage(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(body_);
+                body_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw new RuntimeException(e.setUnfinishedMessage(this));
+      } catch (java.io.IOException e) {
+        throw new RuntimeException(
+            new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this));
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.class, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int HEADER_FIELD_NUMBER = 1;
+    private org.dabudb.dabu.generated.protobufs.Request.Header header_;
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+     */
+    public boolean hasHeader() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+     */
+    public org.dabudb.dabu.generated.protobufs.Request.Header getHeader() {
+      return header_ == null ? org.dabudb.dabu.generated.protobufs.Request.Header.getDefaultInstance() : header_;
+    }
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+     */
+    public org.dabudb.dabu.generated.protobufs.Request.HeaderOrBuilder getHeaderOrBuilder() {
+      return header_ == null ? org.dabudb.dabu.generated.protobufs.Request.Header.getDefaultInstance() : header_;
+    }
+
+    public static final int BODY_FIELD_NUMBER = 2;
+    private org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody body_;
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+     */
+    public boolean hasBody() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+     */
+    public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody getBody() {
+      return body_ == null ? org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance() : body_;
+    }
+    /**
+     * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+     */
+    public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder getBodyOrBuilder() {
+      return body_ == null ? org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance() : body_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasHeader()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBody()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getHeader().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, getHeader());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, getBody());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getHeader());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getBody());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code org.dabudb.dabu.generated.protobufs.GetRangeRequest}
+     *
+     * <pre>
+     **
+     *  A Get request message
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:org.dabudb.dabu.generated.protobufs.GetRangeRequest)
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.class, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.Builder.class);
+      }
+
+      // Construct using org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHeaderFieldBuilder();
+          getBodyFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (headerBuilder_ == null) {
+          header_ = null;
+        } else {
+          headerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (bodyBuilder_ == null) {
+          body_ = null;
+        } else {
+          bodyBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_descriptor;
+      }
+
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest getDefaultInstanceForType() {
+        return org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.getDefaultInstance();
+      }
+
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest build() {
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest buildPartial() {
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest result = new org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (headerBuilder_ == null) {
+          result.header_ = header_;
+        } else {
+          result.header_ = headerBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (bodyBuilder_ == null) {
+          result.body_ = body_;
+        } else {
+          result.body_ = bodyBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest) {
+          return mergeFrom((org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest other) {
+        if (other == org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest.getDefaultInstance()) return this;
+        if (other.hasHeader()) {
+          mergeHeader(other.getHeader());
+        }
+        if (other.hasBody()) {
+          mergeBody(other.getBody());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasHeader()) {
+          return false;
+        }
+        if (!hasBody()) {
+          return false;
+        }
+        if (!getHeader().isInitialized()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private org.dabudb.dabu.generated.protobufs.Request.Header header_ = null;
+      private com.google.protobuf.SingleFieldBuilder<
+          org.dabudb.dabu.generated.protobufs.Request.Header, org.dabudb.dabu.generated.protobufs.Request.Header.Builder, org.dabudb.dabu.generated.protobufs.Request.HeaderOrBuilder> headerBuilder_;
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public boolean hasHeader() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.Header getHeader() {
+        if (headerBuilder_ == null) {
+          return header_ == null ? org.dabudb.dabu.generated.protobufs.Request.Header.getDefaultInstance() : header_;
+        } else {
+          return headerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public Builder setHeader(org.dabudb.dabu.generated.protobufs.Request.Header value) {
+        if (headerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          header_ = value;
+          onChanged();
+        } else {
+          headerBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public Builder setHeader(
+          org.dabudb.dabu.generated.protobufs.Request.Header.Builder builderForValue) {
+        if (headerBuilder_ == null) {
+          header_ = builderForValue.build();
+          onChanged();
+        } else {
+          headerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public Builder mergeHeader(org.dabudb.dabu.generated.protobufs.Request.Header value) {
+        if (headerBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              header_ != null &&
+              header_ != org.dabudb.dabu.generated.protobufs.Request.Header.getDefaultInstance()) {
+            header_ =
+              org.dabudb.dabu.generated.protobufs.Request.Header.newBuilder(header_).mergeFrom(value).buildPartial();
+          } else {
+            header_ = value;
+          }
+          onChanged();
+        } else {
+          headerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public Builder clearHeader() {
+        if (headerBuilder_ == null) {
+          header_ = null;
+          onChanged();
+        } else {
+          headerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.Header.Builder getHeaderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHeaderFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.HeaderOrBuilder getHeaderOrBuilder() {
+        if (headerBuilder_ != null) {
+          return headerBuilder_.getMessageOrBuilder();
+        } else {
+          return header_ == null ?
+              org.dabudb.dabu.generated.protobufs.Request.Header.getDefaultInstance() : header_;
+        }
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.Header header = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          org.dabudb.dabu.generated.protobufs.Request.Header, org.dabudb.dabu.generated.protobufs.Request.Header.Builder, org.dabudb.dabu.generated.protobufs.Request.HeaderOrBuilder> 
+          getHeaderFieldBuilder() {
+        if (headerBuilder_ == null) {
+          headerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.dabudb.dabu.generated.protobufs.Request.Header, org.dabudb.dabu.generated.protobufs.Request.Header.Builder, org.dabudb.dabu.generated.protobufs.Request.HeaderOrBuilder>(
+                  getHeader(),
+                  getParentForChildren(),
+                  isClean());
+          header_ = null;
+        }
+        return headerBuilder_;
+      }
+
+      private org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody body_ = null;
+      private com.google.protobuf.SingleFieldBuilder<
+          org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder> bodyBuilder_;
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public boolean hasBody() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody getBody() {
+        if (bodyBuilder_ == null) {
+          return body_ == null ? org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance() : body_;
+        } else {
+          return bodyBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public Builder setBody(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody value) {
+        if (bodyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          body_ = value;
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public Builder setBody(
+          org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder builderForValue) {
+        if (bodyBuilder_ == null) {
+          body_ = builderForValue.build();
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public Builder mergeBody(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody value) {
+        if (bodyBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              body_ != null &&
+              body_ != org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance()) {
+            body_ =
+              org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.newBuilder(body_).mergeFrom(value).buildPartial();
+          } else {
+            body_ = value;
+          }
+          onChanged();
+        } else {
+          bodyBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public Builder clearBody() {
+        if (bodyBuilder_ == null) {
+          body_ = null;
+          onChanged();
+        } else {
+          bodyBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder getBodyBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getBodyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder getBodyOrBuilder() {
+        if (bodyBuilder_ != null) {
+          return bodyBuilder_.getMessageOrBuilder();
+        } else {
+          return body_ == null ?
+              org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance() : body_;
+        }
+      }
+      /**
+       * <code>required .org.dabudb.dabu.generated.protobufs.GetRangeRequestBody body = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder> 
+          getBodyFieldBuilder() {
+        if (bodyBuilder_ == null) {
+          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder>(
+                  getBody(),
+                  getParentForChildren(),
+                  isClean());
+          body_ = null;
+        }
+        return bodyBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:org.dabudb.dabu.generated.protobufs.GetRangeRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:org.dabudb.dabu.generated.protobufs.GetRangeRequest)
+    private static final org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest();
+    }
+
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetRangeRequest>
+        PARSER = new com.google.protobuf.AbstractParser<GetRangeRequest>() {
+      public GetRangeRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        try {
+          return new GetRangeRequest(input, extensionRegistry);
+        } catch (RuntimeException e) {
+          if (e.getCause() instanceof
+              com.google.protobuf.InvalidProtocolBufferException) {
+            throw (com.google.protobuf.InvalidProtocolBufferException)
+                e.getCause();
+          }
+          throw e;
+        }
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetRangeRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetRangeRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface HeaderOrBuilder extends
       // @@protoc_insertion_point(interface_extends:org.dabudb.dabu.generated.protobufs.Header)
       com.google.protobuf.MessageOrBuilder {
@@ -4714,6 +5443,496 @@ public final class Request {
     }
 
     public org.dabudb.dabu.generated.protobufs.Request.GetRequestBody getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GetRangeRequestBodyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:org.dabudb.dabu.generated.protobufs.GetRangeRequestBody)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional bytes startKey = 1;</code>
+     */
+    boolean hasStartKey();
+    /**
+     * <code>optional bytes startKey = 1;</code>
+     */
+    com.google.protobuf.ByteString getStartKey();
+
+    /**
+     * <code>optional bytes endKey = 2;</code>
+     */
+    boolean hasEndKey();
+    /**
+     * <code>optional bytes endKey = 2;</code>
+     */
+    com.google.protobuf.ByteString getEndKey();
+  }
+  /**
+   * Protobuf type {@code org.dabudb.dabu.generated.protobufs.GetRangeRequestBody}
+   *
+   * <pre>
+   **
+   *   The body of a get request
+   * </pre>
+   */
+  public  static final class GetRangeRequestBody extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:org.dabudb.dabu.generated.protobufs.GetRangeRequestBody)
+      GetRangeRequestBodyOrBuilder {
+    // Use GetRangeRequestBody.newBuilder() to construct.
+    private GetRangeRequestBody(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+    }
+    private GetRangeRequestBody() {
+      startKey_ = com.google.protobuf.ByteString.EMPTY;
+      endKey_ = com.google.protobuf.ByteString.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetRangeRequestBody(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              startKey_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              endKey_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw new RuntimeException(e.setUnfinishedMessage(this));
+      } catch (java.io.IOException e) {
+        throw new RuntimeException(
+            new com.google.protobuf.InvalidProtocolBufferException(
+                e.getMessage()).setUnfinishedMessage(this));
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.class, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int STARTKEY_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString startKey_;
+    /**
+     * <code>optional bytes startKey = 1;</code>
+     */
+    public boolean hasStartKey() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional bytes startKey = 1;</code>
+     */
+    public com.google.protobuf.ByteString getStartKey() {
+      return startKey_;
+    }
+
+    public static final int ENDKEY_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString endKey_;
+    /**
+     * <code>optional bytes endKey = 2;</code>
+     */
+    public boolean hasEndKey() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bytes endKey = 2;</code>
+     */
+    public com.google.protobuf.ByteString getEndKey() {
+      return endKey_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, startKey_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, endKey_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, startKey_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, endKey_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code org.dabudb.dabu.generated.protobufs.GetRangeRequestBody}
+     *
+     * <pre>
+     **
+     *   The body of a get request
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:org.dabudb.dabu.generated.protobufs.GetRangeRequestBody)
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBodyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.class, org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.Builder.class);
+      }
+
+      // Construct using org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        startKey_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        endKey_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.dabudb.dabu.generated.protobufs.Request.internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_descriptor;
+      }
+
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody getDefaultInstanceForType() {
+        return org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance();
+      }
+
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody build() {
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody buildPartial() {
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody result = new org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.startKey_ = startKey_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.endKey_ = endKey_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody) {
+          return mergeFrom((org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody other) {
+        if (other == org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody.getDefaultInstance()) return this;
+        if (other.hasStartKey()) {
+          setStartKey(other.getStartKey());
+        }
+        if (other.hasEndKey()) {
+          setEndKey(other.getEndKey());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.ByteString startKey_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes startKey = 1;</code>
+       */
+      public boolean hasStartKey() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional bytes startKey = 1;</code>
+       */
+      public com.google.protobuf.ByteString getStartKey() {
+        return startKey_;
+      }
+      /**
+       * <code>optional bytes startKey = 1;</code>
+       */
+      public Builder setStartKey(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        startKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes startKey = 1;</code>
+       */
+      public Builder clearStartKey() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        startKey_ = getDefaultInstance().getStartKey();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString endKey_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes endKey = 2;</code>
+       */
+      public boolean hasEndKey() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional bytes endKey = 2;</code>
+       */
+      public com.google.protobuf.ByteString getEndKey() {
+        return endKey_;
+      }
+      /**
+       * <code>optional bytes endKey = 2;</code>
+       */
+      public Builder setEndKey(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        endKey_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes endKey = 2;</code>
+       */
+      public Builder clearEndKey() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        endKey_ = getDefaultInstance().getEndKey();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:org.dabudb.dabu.generated.protobufs.GetRangeRequestBody)
+    }
+
+    // @@protoc_insertion_point(class_scope:org.dabudb.dabu.generated.protobufs.GetRangeRequestBody)
+    private static final org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody();
+    }
+
+    public static org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetRangeRequestBody>
+        PARSER = new com.google.protobuf.AbstractParser<GetRangeRequestBody>() {
+      public GetRangeRequestBody parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        try {
+          return new GetRangeRequestBody(input, extensionRegistry);
+        } catch (RuntimeException e) {
+          if (e.getCause() instanceof
+              com.google.protobuf.InvalidProtocolBufferException) {
+            throw (com.google.protobuf.InvalidProtocolBufferException)
+                e.getCause();
+          }
+          throw e;
+        }
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetRangeRequestBody> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetRangeRequestBody> getParserForType() {
+      return PARSER;
+    }
+
+    public org.dabudb.dabu.generated.protobufs.Request.GetRangeRequestBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -8869,6 +10088,11 @@ public final class Request {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_dabudb_dabu_generated_protobufs_GetRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_dabudb_dabu_generated_protobufs_Header_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8888,6 +10112,11 @@ public final class Request {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_dabudb_dabu_generated_protobufs_GetRequestBody_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_dabudb_dabu_generated_protobufs_Document_descriptor;
   private static
@@ -8933,41 +10162,46 @@ public final class Request {
       "der\030\001 \002(\0132+.org.dabudb.dabu.generated.pr" +
       "otobufs.Header\022A\n\004body\030\002 \002(\01323.org.dabud",
       "b.dabu.generated.protobufs.GetRequestBod" +
-      "y\"n\n\006Header\022\n\n\002id\030\001 \002(\014\022\021\n\ttimestamp\030\002 \002" +
-      "(\003\022E\n\013requestType\030\003 \002(\01620.org.dabudb.dab" +
-      "u.generated.protobufs.RequestType\"c\n\020Wri" +
-      "teRequestBody\022O\n\020documentKeyValue\030\001 \003(\0132" +
-      "5.org.dabudb.dabu.generated.protobufs.Do" +
-      "cumentKeyValue\"T\n\021DeleteRequestBody\022?\n\010d" +
-      "ocument\030\001 \003(\0132-.org.dabudb.dabu.generate" +
-      "d.protobufs.Document\"\035\n\016GetRequestBody\022\013" +
-      "\n\003key\030\001 \003(\014\"\210\001\n\010Document\022\013\n\003key\030\001 \002(\014\022\024\n",
-      "\014contentClass\030\002 \002(\t\022\023\n\013contentType\030\003 \002(\t" +
-      "\022\025\n\rschemaVersion\030\004 \002(\005\022\024\n\014contentBytes\030" +
-      "\005 \002(\014\022\027\n\017instanceVersion\030\006 \002(\005\"\177\n\nWriteR" +
-      "eply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\trequestId\030\002 \001" +
-      "(\014\022K\n\016errorCondition\030\003 \001(\01323.org.dabudb." +
-      "dabu.generated.protobufs.ErrorCondition\"" +
-      "\224\001\n\010GetReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\treque" +
-      "stId\030\002 \001(\014\022K\n\016errorCondition\030\003 \001(\01323.org" +
-      ".dabudb.dabu.generated.protobufs.ErrorCo" +
-      "ndition\022\025\n\rdocumentBytes\030\004 \003(\014\"\340\001\n\016Error",
-      "Condition\022A\n\terrorType\030\001 \001(\0162..org.dabud" +
-      "b.dabu.generated.protobufs.ErrorType\022@\n\006" +
-      "origin\030\002 \001(\01620.org.dabudb.dabu.generated" +
-      ".protobufs.ErrorOrigin\022\r\n\005token\030\003 \001(\014\022\021\n" +
-      "\trequestId\030\004 \001(\014\022\023\n\013description\030\005 \001(\t\022\022\n" +
-      "\nstackTrace\030\006 \001(\014\".\n\020DocumentKeyValue\022\013\n" +
-      "\003key\030\001 \002(\014\022\r\n\005value\030\002 \002(\014*8\n\013RequestType" +
-      "\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE\020\003\022\t\n\005QUER" +
-      "Y\020\004*J\n\013ErrorOrigin\022\024\n\020OTHER_OR_UNKNOWN\020\001" +
-      "\022\n\n\006CLIENT\020\002\022\n\n\006SERVER\020\003\022\r\n\tMESSAGING\020\004*",
-      "\240\001\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031OPTIMISTIC_LO" +
-      "CK_EXCEPTION\020\002\022\031\n\025PERSISTENCE_EXCEPTION\020" +
-      "\003\022\025\n\021REQUEST_EXCEPTION\020\004\022\033\n\027SERIALIZATIO" +
-      "N_EXCEPTION\020\005\022\033\n\027COMMUNICATION_EXCEPTION" +
-      "\020\006B.\n#org.dabudb.dabu.generated.protobuf" +
-      "sB\007Request"
+      "y\"\226\001\n\017GetRangeRequest\022;\n\006header\030\001 \002(\0132+." +
+      "org.dabudb.dabu.generated.protobufs.Head" +
+      "er\022F\n\004body\030\002 \002(\01328.org.dabudb.dabu.gener" +
+      "ated.protobufs.GetRangeRequestBody\"n\n\006He" +
+      "ader\022\n\n\002id\030\001 \002(\014\022\021\n\ttimestamp\030\002 \002(\003\022E\n\013r" +
+      "equestType\030\003 \002(\01620.org.dabudb.dabu.gener" +
+      "ated.protobufs.RequestType\"c\n\020WriteReque" +
+      "stBody\022O\n\020documentKeyValue\030\001 \003(\01325.org.d" +
+      "abudb.dabu.generated.protobufs.DocumentK",
+      "eyValue\"T\n\021DeleteRequestBody\022?\n\010document" +
+      "\030\001 \003(\0132-.org.dabudb.dabu.generated.proto" +
+      "bufs.Document\"\035\n\016GetRequestBody\022\013\n\003key\030\001" +
+      " \003(\014\"7\n\023GetRangeRequestBody\022\020\n\010startKey\030" +
+      "\001 \001(\014\022\016\n\006endKey\030\002 \001(\014\"\210\001\n\010Document\022\013\n\003ke" +
+      "y\030\001 \002(\014\022\024\n\014contentClass\030\002 \002(\t\022\023\n\013content" +
+      "Type\030\003 \002(\t\022\025\n\rschemaVersion\030\004 \002(\005\022\024\n\014con" +
+      "tentBytes\030\005 \002(\014\022\027\n\017instanceVersion\030\006 \002(\005" +
+      "\"\177\n\nWriteReply\022\021\n\ttimestamp\030\001 \002(\003\022\021\n\treq" +
+      "uestId\030\002 \001(\014\022K\n\016errorCondition\030\003 \001(\01323.o",
+      "rg.dabudb.dabu.generated.protobufs.Error" +
+      "Condition\"\224\001\n\010GetReply\022\021\n\ttimestamp\030\001 \002(" +
+      "\003\022\021\n\trequestId\030\002 \001(\014\022K\n\016errorCondition\030\003" +
+      " \001(\01323.org.dabudb.dabu.generated.protobu" +
+      "fs.ErrorCondition\022\025\n\rdocumentBytes\030\004 \003(\014" +
+      "\"\340\001\n\016ErrorCondition\022A\n\terrorType\030\001 \001(\0162." +
+      ".org.dabudb.dabu.generated.protobufs.Err" +
+      "orType\022@\n\006origin\030\002 \001(\01620.org.dabudb.dabu" +
+      ".generated.protobufs.ErrorOrigin\022\r\n\005toke" +
+      "n\030\003 \001(\014\022\021\n\trequestId\030\004 \001(\014\022\023\n\013descriptio",
+      "n\030\005 \001(\t\022\022\n\nstackTrace\030\006 \001(\014\".\n\020DocumentK" +
+      "eyValue\022\013\n\003key\030\001 \002(\014\022\r\n\005value\030\002 \002(\014*8\n\013R" +
+      "equestType\022\007\n\003GET\020\001\022\t\n\005WRITE\020\002\022\n\n\006DELETE" +
+      "\020\003\022\t\n\005QUERY\020\004*J\n\013ErrorOrigin\022\024\n\020OTHER_OR" +
+      "_UNKNOWN\020\001\022\n\n\006CLIENT\020\002\022\n\n\006SERVER\020\003\022\r\n\tME" +
+      "SSAGING\020\004*\240\001\n\tErrorType\022\010\n\004NONE\020\001\022\035\n\031OPT" +
+      "IMISTIC_LOCK_EXCEPTION\020\002\022\031\n\025PERSISTENCE_" +
+      "EXCEPTION\020\003\022\025\n\021REQUEST_EXCEPTION\020\004\022\033\n\027SE" +
+      "RIALIZATION_EXCEPTION\020\005\022\033\n\027COMMUNICATION" +
+      "_EXCEPTION\020\006B.\n#org.dabudb.dabu.generate",
+      "d.protobufsB\007Request"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8993,56 +10227,68 @@ public final class Request {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_GetRequest_descriptor,
         new java.lang.String[] { "Header", "Body", });
-    internal_static_org_dabudb_dabu_generated_protobufs_Header_descriptor =
+    internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequest_descriptor,
+        new java.lang.String[] { "Header", "Body", });
+    internal_static_org_dabudb_dabu_generated_protobufs_Header_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_org_dabudb_dabu_generated_protobufs_Header_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_Header_descriptor,
         new java.lang.String[] { "Id", "Timestamp", "RequestType", });
     internal_static_org_dabudb_dabu_generated_protobufs_WriteRequestBody_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_org_dabudb_dabu_generated_protobufs_WriteRequestBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_WriteRequestBody_descriptor,
         new java.lang.String[] { "DocumentKeyValue", });
     internal_static_org_dabudb_dabu_generated_protobufs_DeleteRequestBody_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_org_dabudb_dabu_generated_protobufs_DeleteRequestBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_DeleteRequestBody_descriptor,
         new java.lang.String[] { "Document", });
     internal_static_org_dabudb_dabu_generated_protobufs_GetRequestBody_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_org_dabudb_dabu_generated_protobufs_GetRequestBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_GetRequestBody_descriptor,
         new java.lang.String[] { "Key", });
+    internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_org_dabudb_dabu_generated_protobufs_GetRangeRequestBody_descriptor,
+        new java.lang.String[] { "StartKey", "EndKey", });
     internal_static_org_dabudb_dabu_generated_protobufs_Document_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_org_dabudb_dabu_generated_protobufs_Document_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_Document_descriptor,
         new java.lang.String[] { "Key", "ContentClass", "ContentType", "SchemaVersion", "ContentBytes", "InstanceVersion", });
     internal_static_org_dabudb_dabu_generated_protobufs_WriteReply_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_org_dabudb_dabu_generated_protobufs_WriteReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_WriteReply_descriptor,
         new java.lang.String[] { "Timestamp", "RequestId", "ErrorCondition", });
     internal_static_org_dabudb_dabu_generated_protobufs_GetReply_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_org_dabudb_dabu_generated_protobufs_GetReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_GetReply_descriptor,
         new java.lang.String[] { "Timestamp", "RequestId", "ErrorCondition", "DocumentBytes", });
     internal_static_org_dabudb_dabu_generated_protobufs_ErrorCondition_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_org_dabudb_dabu_generated_protobufs_ErrorCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_ErrorCondition_descriptor,
         new java.lang.String[] { "ErrorType", "Origin", "Token", "RequestId", "Description", "StackTrace", });
     internal_static_org_dabudb_dabu_generated_protobufs_DocumentKeyValue_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_org_dabudb_dabu_generated_protobufs_DocumentKeyValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_org_dabudb_dabu_generated_protobufs_DocumentKeyValue_descriptor,

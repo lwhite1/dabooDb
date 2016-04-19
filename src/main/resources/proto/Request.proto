@@ -3,8 +3,6 @@ package org.dabudb.dabu.generated.protobufs;
 option java_package = "org.dabudb.dabu.generated.protobufs";
 option java_outer_classname = "Request";
 
-syntax = "proto3";
-
 /**
  *  A write request message
  */
@@ -21,6 +19,14 @@ message WriteRequest {
 message GetRequest {
     required Header header = 1;
     required GetRequestBody body = 2;
+}
+
+/**
+ *  A Get request message
+ */
+message GetRangeRequest {
+    required Header header = 1;
+    required GetRangeRequestBody body = 2;
 }
 
 /**
@@ -57,6 +63,14 @@ message DeleteRequestBody {
 */
 message GetRequestBody {
     repeated bytes key = 1;   //keys to get
+}
+
+/**
+*   The body of a get request
+*/
+message GetRangeRequestBody {
+    optional bytes startKey = 1;
+    optional bytes endKey = 2;
 }
 
 /**

@@ -1,6 +1,9 @@
 package org.dabudb.dabu.server;
 
 import com.google.protobuf.ByteString;
+import org.dabudb.dabu.generated.protobufs.Request.ErrorCondition;
+import org.dabudb.dabu.generated.protobufs.Request.GetRangeRequest;
+import org.dabudb.dabu.generated.protobufs.Request.GetRequest;
 import org.dabudb.dabu.server.db.Db;
 import org.dabudb.dabu.server.io.WriteAheadLog;
 
@@ -84,11 +87,30 @@ class Database implements DatabaseAdmin {
    *
    * @throws RuntimeRequestException if a runtime exception occurred while fulfilling this request
    */
-   Request.GetReply handleRequest(Request.GetRequest request) {
+   Request.GetReply handleRequest(GetRequest request) {
     List<ByteString> result;
-    Request.ErrorCondition condition = Request.ErrorCondition.getDefaultInstance();
+    ErrorCondition condition = ErrorCondition.getDefaultInstance();
     try {
       result = db().get(request.getBody().getKeyList());
+    } catch (Throwable throwable) {
+      // We catch everything here to make sure it is logged before exiting
+      String msg = "A Throwable was caught handling a GET request";
+      throw new RuntimeRequestException(msg, throwable, request.getHeader().getId().toByteArray());
+    }
+    return getGetReply(request, result, condition);
+  }
+
+  /**
+   * Handles a request to get data from the database and returns an appropriate reply
+   *
+   * @throws RuntimeRequestException if a runtime exception occurred while fulfilling this request
+   */
+   Request.GetReply handleRequest(GetRangeRequest request) {
+    List<ByteString> result;
+    ErrorCondition condition = ErrorCondition.getDefaultInstance();
+    try {
+      Request.GetRangeRequestBody body = request.getBody();
+      result = db().getRange(body.getStartKey().toByteArray(), body.getEndKey().toByteArray());
     } catch (Throwable throwable) {
       // We catch everything here to make sure it is logged before exiting
       String msg = "A Throwable was caught handling a GET request";
@@ -229,7 +251,7 @@ class Database implements DatabaseAdmin {
     }
   }
 
-  private GetReply getGetReply(Request.GetRequest request, List<ByteString> result, Request.ErrorCondition condition) {
+  private GetReply getGetReply(GetRequest request, List<ByteString> result, ErrorCondition condition) {
     return GetReply.newBuilder()
         .setRequestId(request.getHeader().getId())
         .setTimestamp(Instant.now().toEpochMilli())
@@ -238,10 +260,19 @@ class Database implements DatabaseAdmin {
         .build();
   }
 
-  private Request.ErrorCondition getErrorCondition(Request.GetRequest request, String msg, RuntimeRequestException
+  private GetReply getGetReply(GetRangeRequest request, List<ByteString> result, ErrorCondition condition) {
+    return GetReply.newBuilder()
+        .setRequestId(request.getHeader().getId())
+        .setTimestamp(Instant.now().toEpochMilli())
+        .addAllDocumentBytes(result)
+        .setErrorCondition(condition)
+        .build();
+  }
+
+  private ErrorCondition getErrorCondition(GetRequest request, String msg, RuntimeRequestException
       rtReqEx) {
-    Request.ErrorCondition condition;
-    condition = Request.ErrorCondition.newBuilder()
+    ErrorCondition condition;
+    condition = ErrorCondition.newBuilder()
         .setDescription(msg)
         .setErrorType(Request.ErrorType.NONE)
         .setRequestId(request.getHeader().getId())
