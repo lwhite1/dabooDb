@@ -26,7 +26,14 @@ public class HttpCommClient implements CommClient {
   private static final String CONTENT_TYPE = "application/octet-stream";
 
   //TODO(lwhite) Replace this with configurable address
-  private static final String serverAddress = "localhost:7070/write";
+  private static final String serverAddress = "http://localhost:7070/";
+  private static final String WRITE = "WRITE";
+  private static final String GET_RANGE = "GET_RANGE";
+  private static final String GET = "GET";
+
+  private static final GenericUrl WRITE_URL = new GenericUrl(serverAddress.concat(WRITE));
+  private static final GenericUrl GET_URL = new GenericUrl(serverAddress.concat(GET));
+  private static final GenericUrl GET_RANGE_URL = new GenericUrl(serverAddress.concat(GET_RANGE));
 
   HttpCommClient() {
   }
@@ -34,12 +41,12 @@ public class HttpCommClient implements CommClient {
   @Override
   public Request.WriteReply sendRequest(Request.WriteRequest request) {
 
-    GenericUrl url = new GenericUrl(serverAddress);
+
 
     HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
     try {
       HttpContent content = new ByteArrayContent(CONTENT_TYPE, request.toByteArray());
-      HttpRequest httpRequest = requestFactory.buildPostRequest(url, content);
+      HttpRequest httpRequest = requestFactory.buildPostRequest(WRITE_URL, content);
       HttpResponse response = httpRequest.execute();
       InputStream is = response.getContent();
       CodedInputStream cis = CodedInputStream.newInstance(is);
