@@ -16,16 +16,13 @@ What makes dabuDB different from, say, a standard Java TreeMap?
 
 * Data is persistent and durable in the event of a shutdown or crash
 * Both in-process (embedded) and client-server modes
-* In client server mode, all communication is handled transparently
-* Transactions on all batch operations
+* Transactions on batch operations
 * Optimistic Locking, so it can be safely used by more than one client
-* Compression and encryption of documents for improved performance and security
-* Pre-write data validation using JSR 349 annotations on documents
+* Integrated document compression and encryption
+* Integrated document validation using JSR 349 annotations before writes
 * Built-in backup and restore
-* It is extremely flexible: You can select or create plugins for:
-    * Storage technology
-    * Transaction logging
-    * In-memory data structures
+* Extremely flexible: Select or create plugins for:
+    * Storage technology and in-memory data structures
     * Communications
     * Compression
     * Encryption
