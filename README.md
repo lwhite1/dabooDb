@@ -34,6 +34,22 @@ What makes dabuDB different from, say, a standard Java TreeMap?
 
     * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
     * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
+    
+    
+## Getting Started
+        
+Download the latest release from:
+
+    https://github.com/lwhite1/dabudb/releases
+
+Build and install: 
+
+    mvn clean install
+    
+    
+Now you can use dabuDB in your own projects.
+    
+
 
 ## A (rough) roadmap:
 
