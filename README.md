@@ -42,21 +42,19 @@ What makes dabuDB different from, say, a standard Java TreeMap?
 * Excellent performance for small amounts of data
 * Pluggable storage engine and write-ahead logging
 * Pluggable serializers for data and messages
+* Range search
+* Backup and restore
 
 At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
 
 ### 1.1
 
 * Pluggable comparators 
-* Range search
-* Backup and restore
-
-
-### 1.2
 * Optimistic locking
 * Transaction support 
 
-### 1.3
+### 1.2
+
 * Performance testing framework
 * Performance logging
 
@@ -64,15 +62,16 @@ At this point, 1.0 is mostly done. More work is needed on tests, documentation, 
 
 * Client-Server Mode with pluggable communication protocols
 
-We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
-
-## Beyond that?
-Here are some further extensions to make it a full database (if that would be fun):
-
 ### 2.5
 
 * Document schema version management
 * Integrated data validation before writes
+
+
+We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
+
+## Beyond that?
+Here are some further extensions to make it a full database (if that would be fun):
 
 ### 3.0
 
