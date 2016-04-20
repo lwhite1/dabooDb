@@ -42,6 +42,14 @@ Build and install:
 
     mvn clean install
     
+Then add a dependency to your pom file:
+    
+    <dependency>
+        <groupId>org.dabudb</groupId>
+        <artifactId>dabu</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    
 ## A (rough) roadmap:
 
 ### 1.1
