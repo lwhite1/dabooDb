@@ -1,7 +1,7 @@
 dabooDB
 ======
 
-DabuDB is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. It's 
+DabooDB is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. It's 
 named after my daughter, who thought her name was "Daboo" when she was little - thanks to her big brother. 
 
 ## The API
