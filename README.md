@@ -1,9 +1,8 @@
-dabuDB
+dabooDB
 ======
 
-DabuDB is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. 
-
-DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. 
+DabuDB is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. It's 
+named after my daughter, who thought her name was "Daboo" when she was little - thanks to her big brother. 
 
 ## The API
 The database provides standard key-value operations:
@@ -12,10 +11,10 @@ The database provides standard key-value operations:
 * GetRange(); for range queries
 
 ## The Features
-What makes dabuDB different from, say, a standard Java TreeMap?
+What makes dabooDB different?
 
-* Data is persistent, and durable in the event of a shutdown or crash
-* Supports Both in-process (embedded) and client-server modes
+* It's persistent; Durable in the event of a shutdown or crash
+* Supports in-process (embedded) and client-server modes
 * Transactions on batch operations
 * Optimistic Locking, so it can be safely used by more than one client
 * Integrated document compression and encryption
@@ -28,7 +27,6 @@ What makes dabuDB different from, say, a standard Java TreeMap?
     * Encryption
 * These options can be combined to create a custom storage solution for your application
 * It is quite fast for both reads and writes:
-
     * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
     * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)    
     
@@ -36,7 +34,7 @@ What makes dabuDB different from, say, a standard Java TreeMap?
         
 Download the latest release from:
 
-    https://github.com/lwhite1/dabudb/releases
+    https://github.com/lwhite1/daboodb/releases
 
 Build and install: 
 
@@ -45,8 +43,8 @@ Build and install:
 Then add a dependency to your pom file:
     
     <dependency>
-        <groupId>org.dabudb</groupId>
-        <artifactId>dabu</artifactId>
+        <groupId>org.daboodb</groupId>
+        <artifactId>daboo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     
@@ -65,13 +63,11 @@ Then add a dependency to your pom file:
 
 ### 2.0
 
-* High-Performance client-Server mode with new communciation plugin
+* High-Performance client-Server mode with new communication plugin
 
 ### 2.5
 
 * Document schema version management
-
-We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
 
 ## Beyond that?
 Here are some further extensions to make it a full database (if that would be fun):
