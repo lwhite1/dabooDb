@@ -7,7 +7,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 /**
  * A server that handles http requests that hold database requests in their payloads
  */
-public class HttpCommServer {
+public class HttpCommServer implements CommServer {
 
   public static void main(String[] args) throws Exception {
 
