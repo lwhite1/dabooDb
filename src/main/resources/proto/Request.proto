@@ -1,6 +1,6 @@
-package org.dabudb.dabu.shared.protobufs;
+package org.daboodb.daboo.generated.protobufs;
 
-option java_package = "org.dabudb.dabu.shared.protobufs";
+option java_package = "org.daboodb.daboo.generated.protobufs";
 option java_outer_classname = "Request";
 
 /**
@@ -19,6 +19,14 @@ message WriteRequest {
 message GetRequest {
     required Header header = 1;
     required GetRequestBody body = 2;
+}
+
+/**
+ *  A Get request message
+ */
+message GetRangeRequest {
+    required Header header = 1;
+    required GetRangeRequestBody body = 2;
 }
 
 /**
@@ -55,6 +63,14 @@ message DeleteRequestBody {
 */
 message GetRequestBody {
     repeated bytes key = 1;   //keys to get
+}
+
+/**
+*   The body of a get request
+*/
+message GetRangeRequestBody {
+    optional bytes startKey = 1;
+    optional bytes endKey = 2;
 }
 
 /**
@@ -114,14 +130,33 @@ message GetReply {
 */
 message ErrorCondition {
     optional ErrorType errorType = 1;
-    optional string description = 2;
+    optional ErrorOrigin origin = 2;
+    optional bytes token = 3;
+    optional bytes requestId = 4;
+    optional string description = 5;
+    optional bytes stackTrace = 6;
+}
+
+enum ErrorOrigin {
+    OTHER_OR_UNKNOWN = 1;
+
+    // an issue that occurs below CommClient in the client side
+    CLIENT = 2;
+
+    // an error that occurs above CommServer in the server side
+    SERVER = 3;
+
+    // a marshalling, unmarshalling, or data transmission issue; usually originating in CommClient or CommServer
+    MESSAGING = 4;
 }
 
 enum ErrorType {
     NONE = 1;
     OPTIMISTIC_LOCK_EXCEPTION = 2;
     PERSISTENCE_EXCEPTION = 3;
-    SEVERE_SERVER_EXCEPTION = 4;
+    REQUEST_EXCEPTION = 4;
+    SERIALIZATION_EXCEPTION = 5;
+    COMMUNICATION_EXCEPTION = 6;
 }
 
 message DocumentKeyValue {

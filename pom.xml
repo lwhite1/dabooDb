@@ -4,19 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dabudb</groupId>
-    <artifactId>dabu</artifactId>
-    <version>1.0</version>
+    <groupId>org.daboo</groupId>
+    <artifactId>daboodb</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>dabooDB</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
+        <dependency>
+            <!-- Provides javax annotations -->
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>2.0.1</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -24,15 +30,27 @@
             <version>19.0</version>
         </dependency>
         <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>1.21.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>3.0.0-beta-2</version>
         </dependency>
         <dependency>
+            <!-- Simple but slow test class generation -->
             <groupId>io.codearte.jfairy</groupId>
             <artifactId>jfairy</artifactId>
             <version>0.5.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- validation -->
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -41,34 +59,46 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.openhft</groupId>
-            <artifactId>chronicle-logger-slf4j</artifactId>
-            <version>1.1.1</version>
+            <!-- for http communications plugin -->
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.3.8.v20160314</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.5</version>
+            <!-- for http communications plugin -->
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>9.3.8.v20160314</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.5</version>
+            <!-- for http communications plugin -->
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>9.3.8.v20160314</version>
         </dependency>
         <dependency>
+            <!-- validation -->
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
+        </dependency>
+        <dependency>
+            <!-- Snappy compression -->
             <groupId>org.iq80.snappy</groupId>
             <artifactId>snappy</artifactId>
             <version>0.4</version>
         </dependency>
         <dependency>
+            <!-- Java Simple Cryptography -->
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
             <version>1.9.2</version>
         </dependency>
         <dependency>
+            <!-- Off-heap btree -->
             <groupId>org.mapdb</groupId>
             <artifactId>mapdb</artifactId>
-            <version>3.0.0-M4</version>
+            <version>3.0.0-M5</version>
         </dependency>
     </dependencies>
     <build>

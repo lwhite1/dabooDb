@@ -16,6 +16,3 @@ hs_err_pid*
 # Intellij files
 .idea/
 dabu.iml
-/wal
-dataFile
-indexFile

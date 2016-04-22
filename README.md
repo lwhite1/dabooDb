@@ -1,67 +1,76 @@
-# dabuDB
+dabooDb
+=======
 
-DabuDB is a simple key-value document store. It is designed as a vehicle for teaching how to write High-Performance/Low-Latency Java.
+DabooDb is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. It's 
+named after my daughter, who thought her name was "Daboo" when she was little - thanks to her big brother. 
 
-DabuDB is named after Larry's daughter, who thought her name was "Dabu" when she was little - thanks to her big brother. 
+## The API
+The database provides standard key-value operations:
 
-## Features/Requirements
-The system is a key-value document store with the following capabilities:
+* Write(), Get(), and Delete(); for both single documents and batches
+* GetRange(); for range queries
 
-#### Basics
-* Documents are arbitrary POJOs implementing a simple interface.
-* Documents must provide a byte array key that is unique within the database
-* Documents are ordered based on a Comparator, and can be range-searched in that order
-* Supported operations are: Write, Delete, and Get; plus GetRange(from, to)
-* Client-Server and Embedded (client and server in a single JVM) modes are supported
+## The Features
+What makes dabooDb different?
 
-#### Database functionality
-* Data must be persistent (application can be closed and re-opened without losing data)
-* Data written in a single call are processed atomically (commit or roll-back together)
-* Optimistic locking is used to allow multiple writers
-* Idempotent Writes (and Reads) to allow clients to safely retry updates
+* It's persistent; Durable in the event of a shutdown or crash
+* Supports in-process (embedded) and client-server modes
+* Transactions on batch operations
+* Optimistic Locking, so it can be safely used by more than one client
+* Integrated document compression and encryption
+* Integrated document validation using JSR 349 annotations before writes
+* Built-in backup and restore
+* Extremely flexible: Select or create plugins for:
+    * Storage technology and in-memory data structures
+    * Communications
+    * Compression
+    * Encryption
+* These options can be combined to create a custom storage solution for your application
+* It is quite fast for both reads and writes:
+    * 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
+    * 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)    
+    
+## Getting Started
+        
+Download the latest release from:
 
+    https://github.com/lwhite1/daboodb/releases
+
+Build and install: 
+
+    mvn clean install
+    
+Then add a dependency to your pom file:
+    
+    <dependency>
+        <groupId>org.daboodb</groupId>
+        <artifactId>daboo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    
 ## A (rough) roadmap:
-
-### 1.0
-
-* Basic key value functionality: write, get, delete (single and batch)
-* Embedded mode only
-* Excellent performance for small amounts of data
-* Pluggable storage engine and write-ahead logging
-* Pluggable serializers for data and messages
-
-At this point, 1.0 is mostly done. More work is needed on tests, documentation, and code cleanup. 
-Performance with small databases is quite good: (my laptop):
-
-* 1 million random inserts: 8.8 seconds (113,636 OPS or 8.8 micros per insert)
-* 1 million random reads: 3.279 seconds (304,971 OPS or 3.3 micros per read)
 
 ### 1.1
 
-* Pluggable comparator 
-* Range search
-
-### 1.2
+* Pluggable comparators 
 * Optimistic locking
 * Transaction support 
 
-### 1.3
-* Proper performance testing framework
+### 1.2
+
+* Performance testing framework
+* Performance logging
 
 ### 2.0
 
-* Client-Server Mode with pluggable communication protocols
-
-We should now have a good working system, with excellent performance at reasonable scale (say, less than 10 micros per read, up to 100 million records).
-We can proceed with making a Low Performance/High Latency version that can be used as a starting point for students.
-
-## Beyond that?
-Here are some further extensions to make it a real db (should we decide that would be fun):
+* High-Performance client-Server mode with new communication plugin
 
 ### 2.5
 
 * Document schema version management
-* Integrated data validation before writes
+
+## Beyond that?
+Here are some further extensions to make it a full database (if that would be fun):
 
 ### 3.0
 
@@ -72,7 +81,6 @@ Here are some further extensions to make it a real db (should we decide that wou
 ### 4.0
 
 * Catalog
-* Backup and restore
 
 ### 5.0
 * Full-text-search support
