@@ -59,6 +59,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <!-- Compression -->
+            <groupId>net.jpountz.lz4</groupId>
+            <artifactId>lz4</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <dependency>
             <!-- for http communications plugin -->
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
