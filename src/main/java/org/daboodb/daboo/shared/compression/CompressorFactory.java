@@ -13,6 +13,12 @@ public class CompressorFactory {
     switch (type) {
       case SNAPPY:
         return SnappyCompressor.get();
+      case LZ4_FAST:
+        return LZ4FastCompressor.get();
+      case LZ4_MC:
+        return LZ4ModerateCompressor.get();
+      case LZ4_HC:
+        return LZ4HCCompressor.get();
       case NONE:
         return NullCompressor.get();
       default:
