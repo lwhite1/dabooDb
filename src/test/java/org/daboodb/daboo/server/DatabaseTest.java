@@ -74,4 +74,38 @@ public class DatabaseTest extends BasicTest {
     Person person1 = (Person) result.documentContents();
     assertEquals(person, person1);
   }
+
+  @Test
+  public void testOptimisticLocking() {
+    Database server = Database.get();
+    server.clear();
+
+    // Create some data and process the write
+    List<Request.Document> documentList = new ArrayList<>();
+
+    Person person = Person.createPeoples(1).get(0);
+    StandardDocument standardDocument = new StandardDocument(person);
+    documentList.add(DocumentUtils.getDocument(standardDocument));
+
+    Request.Header header = getHeader();
+    Request.WriteRequestBody body = getWriteRequestBody(documentList);
+    Request.WriteRequest writeRequest = getWriteRequest(header, body);
+
+    assertTrue(server.isEmpty());
+    server.handleRequest(writeRequest, writeRequest.toByteArray());
+
+    // verify that the write happened
+    assertFalse(server.isEmpty());
+    assertEquals(1, server.size());
+
+    // Create a Get request and read back the data we just wrote
+    Request.GetRequestBody getRequestBody = getGetRequestBody(ByteString.copyFrom(person.getKey()));
+    Request.GetRequest getRequest = getGetRequest(header, getRequestBody);
+
+    Request.GetReply reply = server.handleRequest(getRequest);
+    ByteString bytes = reply.getDocumentBytesList().get(0);
+    Document result = DocumentUtils.getDocumentFromRequestDoc(StandardDocument.class, bytes);
+    Person person1 = (Person) result.documentContents();
+    assertEquals(person, person1);
+  }
 }

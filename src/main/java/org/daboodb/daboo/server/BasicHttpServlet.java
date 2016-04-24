@@ -18,7 +18,7 @@ public class BasicHttpServlet extends HttpServlet {
   private static final String GET = "/GET";
   private static final String GET_RANGE = "/GET_RANGE";
   private static final String WRITE = "/WRITE";
-  
+
   private final Database database = Database.get();
 
   @Override
@@ -46,7 +46,6 @@ public class BasicHttpServlet extends HttpServlet {
           handleGetRange(request, response);
           break;
         default:
-
           response.setStatus(HttpStatus.NOT_FOUND_404);
           break;
       }
