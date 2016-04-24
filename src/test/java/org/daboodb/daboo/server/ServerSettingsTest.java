@@ -15,7 +15,7 @@ public class ServerSettingsTest {
   private ServerSettings settings;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
 
     Properties serverProperties = new Properties();
     serverProperties.put("document.class", "org.daboodb.daboo.shared.StandardDocument");

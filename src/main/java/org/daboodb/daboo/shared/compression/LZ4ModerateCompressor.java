@@ -10,7 +10,7 @@ import net.jpountz.lz4.LZ4Factory;
  */
 public class LZ4ModerateCompressor extends LZ4AbstractCompressor {
 
-  private static LZ4Factory factory = LZ4Factory.fastestInstance();
+  private final static LZ4Factory LZ_4_FACTORY = LZ4Factory.fastestInstance();
 
 
   // TODO(lwhite): Either make this a singleton (if thread-safe) or make a pool of pre-allocated compressors
@@ -22,6 +22,6 @@ public class LZ4ModerateCompressor extends LZ4AbstractCompressor {
    * No direct instantiation from outside
    */
   private LZ4ModerateCompressor() {
-    super(factory.highCompressor(12), factory.fastDecompressor());
+    super(LZ_4_FACTORY.highCompressor(12), LZ_4_FACTORY.fastDecompressor());
   }
 }

@@ -11,15 +11,15 @@ import static org.junit.Assert.assertEquals;
  */
 public class LZ4ModerateCompressorTest {
 
-  private final String string = "Yes, friends, I know this is news to absolutely nobody. But today I had " +
+  private final static String STRING = "Yes, friends, I know this is news to absolutely nobody. But today I had " +
       "up-close-and-personal problems with Java garbage collection for the first time so " +
       "I am going to tell you about it.";
 
   @Test
   public void testCompress() {
     LZ4ModerateCompressor compressor = LZ4ModerateCompressor.get();
-    byte[] compressed = compressor.compress(string.getBytes(StandardCharsets.UTF_8));
+    byte[] compressed = compressor.compress(STRING.getBytes(StandardCharsets.UTF_8));
     byte[] decompressed = compressor.decompress(compressed);
-    assertEquals(string, new String(decompressed, StandardCharsets.UTF_8));
+    assertEquals(STRING, new String(decompressed, StandardCharsets.UTF_8));
   }
 }

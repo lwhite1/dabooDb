@@ -20,7 +20,7 @@ import static org.daboodb.daboo.shared.RequestUtils.*;
  */
 public class HttpCommClientTest extends BasicTest {
 
-  HttpCommClient client = new HttpCommClient();
+  private final HttpCommClient client = new HttpCommClient();
 
   @Override
   @Before

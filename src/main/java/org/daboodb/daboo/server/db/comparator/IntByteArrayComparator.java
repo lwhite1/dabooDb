@@ -3,7 +3,7 @@ package org.daboodb.daboo.server.db.comparator;
 import java.util.Comparator;
 
 /**
- * Compares ints after converting from their byte array encoding.
+ * Compares integers after converting from their byte array encoding.
  */
 public enum IntByteArrayComparator implements Comparator<byte[]> {
 

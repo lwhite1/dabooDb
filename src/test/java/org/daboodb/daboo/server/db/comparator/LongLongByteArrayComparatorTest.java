@@ -5,7 +5,6 @@ import com.google.common.primitives.Longs;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import static org.junit.Assert.*;
 
@@ -14,9 +13,9 @@ import static org.junit.Assert.*;
  */
 public class LongLongByteArrayComparatorTest {
 
-  LongLongByteArrayComparator comparator = LongLongByteArrayComparator.INSTANCE;
+  private final LongLongByteArrayComparator comparator = LongLongByteArrayComparator.INSTANCE;
 
-  // we will test using datetimes
+  // we will test using dateTime objects
 
   @Test
   public void testCompareEquals() {
@@ -24,8 +23,8 @@ public class LongLongByteArrayComparatorTest {
     LocalDateTime localDateTime1A = LocalDateTime.now();
     LocalDateTime localDateTime1B = localDateTime1A;
 
-    byte[] ldt1ABytes = convert(localDateTime1A, new byte[16]);
-    byte[] ldt1BBytes = convert(localDateTime1B, new byte[16]);
+    byte[] ldt1ABytes = convert(localDateTime1A);
+    byte[] ldt1BBytes = convert(localDateTime1B);
 
     assertTrue(localDateTime1A.compareTo(localDateTime1B) == comparator.compare(ldt1ABytes, ldt1BBytes));
   }
@@ -36,22 +35,22 @@ public class LongLongByteArrayComparatorTest {
     LocalDateTime localDateTime1A = LocalDateTime.now();
     LocalDateTime localDateTime1B = localDateTime1A.minusDays(2);
 
-    byte[] ldt1ABytes = convert(localDateTime1A, new byte[16]);
-    byte[] ldt1BBytes = convert(localDateTime1B, new byte[16]);
+    byte[] ldt1ABytes = convert(localDateTime1A);
+    byte[] ldt1BBytes = convert(localDateTime1B);
 
     int stdResult = localDateTime1A.compareTo(localDateTime1B);
     int othResult = comparator.compare(ldt1ABytes, ldt1BBytes);
     assertTrue(Integer.signum(stdResult) ==  Integer.signum(othResult));
   }
-  
+
   @Test
   public void testCompare2() {
 
     LocalDateTime localDateTime1A = LocalDateTime.now();
     LocalDateTime localDateTime1B = localDateTime1A.plusDays(10000000);
 
-    byte[] ldt1ABytes = convert(localDateTime1A, new byte[16]);
-    byte[] ldt1BBytes = convert(localDateTime1B, new byte[16]);
+    byte[] ldt1ABytes = convert(localDateTime1A);
+    byte[] ldt1BBytes = convert(localDateTime1B);
 
     int stdResult = localDateTime1A.compareTo(localDateTime1B);
     int othResult = comparator.compare(ldt1ABytes, ldt1BBytes);
@@ -64,8 +63,8 @@ public class LongLongByteArrayComparatorTest {
     LocalDateTime localDateTime1A = LocalDateTime.now();
     LocalDateTime localDateTime1B = localDateTime1A.plusNanos(100);
 
-    byte[] ldt1ABytes = convert(localDateTime1A, new byte[16]);
-    byte[] ldt1BBytes = convert(localDateTime1B, new byte[16]);
+    byte[] ldt1ABytes = convert(localDateTime1A);
+    byte[] ldt1BBytes = convert(localDateTime1B);
 
     int stdResult = localDateTime1A.compareTo(localDateTime1B);
     int othResult = comparator.compare(ldt1ABytes, ldt1BBytes);
@@ -78,15 +77,15 @@ public class LongLongByteArrayComparatorTest {
     LocalDateTime localDateTime1A = LocalDateTime.now();
     LocalDateTime localDateTime1B = localDateTime1A.minusNanos(100);
 
-    byte[] ldt1ABytes = convert(localDateTime1A, new byte[16]);
-    byte[] ldt1BBytes = convert(localDateTime1B, new byte[16]);
+    byte[] ldt1ABytes = convert(localDateTime1A);
+    byte[] ldt1BBytes = convert(localDateTime1B);
 
     int stdResult = localDateTime1A.compareTo(localDateTime1B);
     int othResult = comparator.compare(ldt1ABytes, ldt1BBytes);
     assertTrue(Integer.signum(stdResult) ==  Integer.signum(othResult));
   }
 
-  private byte[] convert(LocalDateTime ldt, byte[] destination) {
+  private byte[] convert(LocalDateTime ldt) {
     long date = ldt.toLocalDate().toEpochDay();
     long time = ldt.toLocalTime().toNanoOfDay();
 

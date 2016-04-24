@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.stream.Collectors;
 
 /**
  * An in-memory implementation of a Db
@@ -81,9 +82,8 @@ public class OnHeapConcurrentSkipListDb implements Db {
   public List<ByteString> getRange(byte[] from, byte[] to) {
     List<ByteString> docs = new ArrayList<>();
     ConcurrentNavigableMap<byte[], byte[]> results = store.subMap(from, to);
-    for (Map.Entry<byte[], byte[]> entry : results.entrySet()) {
-      docs.add(ByteString.copyFrom(entry.getValue()));
-    }
+    docs.addAll(results.entrySet().stream()
+        .map(entry -> ByteString.copyFrom(entry.getValue())).collect(Collectors.toList()));
     return docs;
   }
 }

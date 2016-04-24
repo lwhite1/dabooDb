@@ -35,7 +35,7 @@ public abstract class LZ4AbstractCompressor implements CompressorDeCompressor {
     return compressor;
   }
 
-  public LZ4FastDecompressor getDecompressor() {
+  private LZ4FastDecompressor getDecompressor() {
     return decompressor;
   }
 
@@ -65,7 +65,7 @@ public abstract class LZ4AbstractCompressor implements CompressorDeCompressor {
   }
 
   /**
-   * Returns an int equivilent derived from the given byte array
+   * Returns an int equivalent derived from the given byte array
    * @param arr   An array of bytes representing a single integer in standard Java Big-Endian format
    */
   private int bytesToInt(byte[] arr) {

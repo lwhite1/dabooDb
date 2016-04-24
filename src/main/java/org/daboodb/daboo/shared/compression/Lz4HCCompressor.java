@@ -1,13 +1,7 @@
 package org.daboodb.daboo.shared.compression;
 
 
-import com.google.common.primitives.Bytes;
-import net.jpountz.lz4.LZ4Compressor;
 import net.jpountz.lz4.LZ4Factory;
-import net.jpountz.lz4.LZ4FastDecompressor;
-
-import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 /**
  * A compressor/de-compressor that uses Lz4 HC (High Compression) mode for compression.
@@ -16,7 +10,7 @@ import java.util.Arrays;
  */
 public class LZ4HCCompressor extends LZ4AbstractCompressor {
 
-  private static LZ4Factory factory = LZ4Factory.unsafeInstance();
+  private final static LZ4Factory LZ_4_FACTORY = LZ4Factory.unsafeInstance();
 
 
   // TODO(lwhite): Either make this a singleton (if thread-safe) or make a pool of pre-allocated compressors
@@ -28,6 +22,6 @@ public class LZ4HCCompressor extends LZ4AbstractCompressor {
    * No direct instantiation from outside
    */
   private LZ4HCCompressor() {
-    super(factory.highCompressor(), factory.fastDecompressor());
+    super(LZ_4_FACTORY.highCompressor(), LZ_4_FACTORY.fastDecompressor());
   }
 }

@@ -3,6 +3,7 @@
 
 package org.daboodb.daboo.generated.protobufs;
 
+@SuppressWarnings("ALL")
 public final class Request {
   private Request() {}
   public static void registerAllExtensions(
