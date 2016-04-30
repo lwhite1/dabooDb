@@ -6,7 +6,6 @@ import org.daboodb.daboo.server.io.WriteAheadLog;
 import org.daboodb.daboo.server.io.WriteLog;
 import org.daboodb.daboo.shared.exceptions.StartupException;
 import org.daboodb.daboo.shared.serialization.DocumentSerializer;
-import org.daboodb.daboo.shared.StandardDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,9 +17,7 @@ import java.util.Properties;
 /**
  * Configuration settings for a Dabu server, or any Dabu server running in embedded mode
  */
-class ServerSettings {
-
-  private Class documentClass = StandardDocument.class;
+public class ServerSettings {
 
   private DocumentSerializer documentSerializer;
 
@@ -55,16 +52,11 @@ class ServerSettings {
    */
   private ServerSettings(Properties properties) {
 
-    setDocumentClass(properties);
     setDocumentSerializer(properties);
     setDatabaseDirectory(properties);
     setDb(properties);
     setWriteAheadLog(properties);
     setCommServer(properties);
-  }
-
-  public Class getDocumentClass() {
-    return documentClass;
   }
 
   public DocumentSerializer getDocumentSerializer() {
@@ -91,15 +83,6 @@ class ServerSettings {
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
       throw new RuntimeException("Unable to load DocumentSerializer as specified in server.properties", e);
-    }
-  }
-
-  private void setDocumentClass(Properties properties) {
-    try {
-      this.documentClass = Class.forName(String.valueOf(properties.get("document.class")));
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      throw new RuntimeException("Unable to load document class specified in server.properties", e);
     }
   }
 

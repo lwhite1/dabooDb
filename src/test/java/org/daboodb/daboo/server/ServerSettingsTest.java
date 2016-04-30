@@ -32,11 +32,6 @@ public class ServerSettingsTest {
   }
 
   @Test
-  public void testGetDocumentClass() throws Exception {
-    assertEquals(Class.forName("org.daboodb.daboo.shared.StandardDocument"), settings.getDocumentClass());
-  }
-
-  @Test
   public void testGetDocumentSerializer() throws Exception {
     Class c = Class.forName("org.daboodb.daboo.shared.serialization.DocumentJsonSerializer");
     assertTrue(settings.getDocumentSerializer().getClass().equals(c));

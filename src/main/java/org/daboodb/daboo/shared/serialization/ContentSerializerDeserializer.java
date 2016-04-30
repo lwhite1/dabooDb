@@ -1,14 +1,13 @@
 package org.daboodb.daboo.shared.serialization;
 
-import org.daboodb.daboo.shared.DocumentContents;
+import org.daboodb.daboo.shared.Document;
 
 /**
- * General interface for serializing and deserializing contents to and from byte arrays
+ * General interface for serializing and deserializing serialized to and from byte arrays
  */
 public interface ContentSerializerDeserializer {
 
-  byte[] serialize(DocumentContents contents);
+  byte[] serialize(Document document);
 
-  //TODO(lwhite): Can we improve this by specifying that clazz extends DocumentContents
-  DocumentContents deserialize(Class clazz, byte[] contentBytes);
+  Document deserialize(Class clazz, byte[] contentBytes);
 }

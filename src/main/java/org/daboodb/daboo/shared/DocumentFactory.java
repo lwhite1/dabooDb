@@ -10,11 +10,13 @@ final class DocumentFactory {
   private DocumentFactory() {}
 
   @Nullable
-  static Document documentForClass(Class cls) {
-    Document document = null;
+  static Document documentForClass(Class cls) throws IllegalAccessException, InstantiationException {
+    Document document;
 
-    if (cls == StandardDocument.class) {
-      document = new StandardDocument();
+    if (cls == Document.class) {
+      document = new AbstractDocument();
+    } else {
+      document = (Document) cls.newInstance();
     }
 
     return document;

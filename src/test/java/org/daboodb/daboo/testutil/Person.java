@@ -1,7 +1,8 @@
 package org.daboodb.daboo.testutil;
 
-import org.daboodb.daboo.shared.DocumentContents;
 import io.codearte.jfairy.Fairy;
+import org.daboodb.daboo.shared.AbstractDocument;
+import org.daboodb.daboo.shared.Document;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -14,9 +15,8 @@ import java.util.UUID;
 /**
  *  A class representing a person that can be used as a test content for the db
  */
-public class Person implements DocumentContents {
+public class Person extends AbstractDocument {
 
-  private final byte[] key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
   private String fName;
   private String lName;
   private String city;
@@ -59,7 +59,6 @@ public class Person implements DocumentContents {
     return height == person.height &&
         weight == person.weight &&
         gender == person.gender &&
-        Arrays.equals(key, person.key) &&
         Objects.equals(fName, person.fName) &&
         Objects.equals(lName, person.lName) &&
         Objects.equals(city, person.city) &&
@@ -70,13 +69,12 @@ public class Person implements DocumentContents {
 
   @Override
   public int hashCode() {
-    return Objects.hash(key, fName, lName, city, state, zip, birthday, height, weight, gender);
+    return Objects.hash(fName, lName, city, state, zip, birthday, height, weight, gender);
   }
 
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("Person{");
-    sb.append("key=").append(Arrays.toString(key));
     sb.append(", fName='").append(fName).append('\'');
     sb.append(", lName='").append(lName).append('\'');
     sb.append(", city='").append(city).append('\'');
@@ -98,11 +96,6 @@ public class Person implements DocumentContents {
       "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"};
 
   private static final List<String> US_STATES = Arrays.asList(US_STATE_ARRAY);
-
-  @Override
-  public byte[] getKey() {
-    return key;
-  }
 
   public String getFirstName() {
     return fName;

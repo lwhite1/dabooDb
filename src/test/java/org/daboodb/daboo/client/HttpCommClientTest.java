@@ -2,7 +2,6 @@ package org.daboodb.daboo.client;
 
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.DocumentUtils;
-import org.daboodb.daboo.shared.StandardDocument;
 import org.daboodb.daboo.testutil.BasicTest;
 import org.daboodb.daboo.testutil.Person;
 import org.junit.After;
@@ -40,8 +39,7 @@ public class HttpCommClientTest extends BasicTest {
     List<Request.Document> documentList = new ArrayList<>();
 
     Person person = Person.createPeoples(1).get(0);
-    StandardDocument standardDocument = new StandardDocument(person);
-    documentList.add(DocumentUtils.getDocument(standardDocument));
+    documentList.add(DocumentUtils.getDocument(person));
 
     Request.Header header = getHeader();
     Request.WriteRequestBody body = getWriteRequestBody(documentList);

@@ -1,7 +1,6 @@
 package org.daboodb.daboo.client;
 
 import org.daboodb.daboo.shared.Document;
-import org.daboodb.daboo.shared.StandardDocument;
 import org.daboodb.daboo.testutil.BasicTest;
 import org.daboodb.daboo.testutil.Company;
 import org.daboodb.daboo.testutil.Person;
@@ -38,25 +37,23 @@ public class DbClientTest extends BasicTest {
   @Test
   public void testWriteDocument() throws Exception {
     Company company = new Company("Drr");
-    Document document = new StandardDocument(company);
     Stopwatch stopwatch = Stopwatch.createStarted();
-    client.write(document);
+    client.write(company);
 
-    byte[] key = document.key();
+    byte[] key = company.getKey();
 
     Document document1 = client.get(key);
     assertTrue(document1 != null);
-    Company company1 = (Company) document1.documentContents();
+    Company company1 = (Company) document1;
     assertEquals(company, company1);
     System.out.println("Round trip: " + stopwatch.elapsed(TimeUnit.MICROSECONDS));
-    System.out.println(document.toString());
+    System.out.println(company.toString());
   }
 
   @Test
   public void testWriteDocument2() throws Exception {
     Company company = new Company("Drr");
-    Document document = new StandardDocument(company);
-    client.write(document);
+    client.write(company);
   }
 
   @Test
@@ -64,7 +61,7 @@ public class DbClientTest extends BasicTest {
     List<Person> people = Person.createPeoples(6_000);
     List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
-      Document document = new StandardDocument(person);
+      Document document = person;
       peopleDocs.add(document);
     }
 
@@ -81,8 +78,7 @@ public class DbClientTest extends BasicTest {
     List<Person> people = Person.createPeoples(count);
     List<Document> peopleDocs = new ArrayList<>();
     for (Person person : people) {
-      Document document = new StandardDocument(person);
-      peopleDocs.add(document);
+      peopleDocs.add(person);
     }
 
     Stopwatch stopwatch = Stopwatch.createStarted();
@@ -99,8 +95,7 @@ public class DbClientTest extends BasicTest {
     List<Document> peopleDocs = new ArrayList<>();
     List<byte[]> keys = new ArrayList<>();
     for (Person person : people) {
-      Document document = new StandardDocument(person);
-      peopleDocs.add(document);
+      peopleDocs.add(person);
       keys.add(person.getKey());
     }
 
@@ -127,8 +122,7 @@ public class DbClientTest extends BasicTest {
     List<Document> peopleDocs = new ArrayList<>();
     List<byte[]> keys = new ArrayList<>();
     for (Person person : people) {
-      Document document = new StandardDocument(person);
-      peopleDocs.add(document);
+      peopleDocs.add(person);
       keys.add(person.getKey());
     }
 
@@ -168,11 +162,10 @@ public class DbClientTest extends BasicTest {
     List<byte[]> keys = new ArrayList<>();
 
     for (Person person : people) {
-      Document document = new StandardDocument(person);
-      peopleDocs.add(document);
+      peopleDocs.add(person);
       keys.add(person.getKey());
       if (count == 49) {
-        deleteDoc = document;
+        deleteDoc = person;
       }
       count++;
     }
@@ -186,7 +179,7 @@ public class DbClientTest extends BasicTest {
     List<Document> documents = client.get(keys);
     assertEquals(99, documents.size());
 
-    Document missing = client.get(deleteDoc.key());
+    Document missing = client.get(deleteDoc.getKey());
     assertNull(missing);
   }
 }

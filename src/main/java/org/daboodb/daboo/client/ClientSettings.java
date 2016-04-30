@@ -3,7 +3,6 @@ package org.daboodb.daboo.client;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import org.daboodb.daboo.shared.ContentsPipe;
-import org.daboodb.daboo.shared.StandardDocument;
 import org.daboodb.daboo.shared.compression.CompressionType;
 import org.daboodb.daboo.shared.encryption.EncryptionType;
 import org.daboodb.daboo.shared.exceptions.StartupException;
@@ -23,7 +22,7 @@ public class ClientSettings {
 
   private ContentsPipe contentsPipe = ContentsPipe.create(CompressionType.SNAPPY, ContentSerializerType.JSON);
 
-  private Class documentClass = StandardDocument.class;
+  private Class documentClass;
 
   private DocumentSerializer documentSerializer = new DocumentJsonSerializer();
 
@@ -41,8 +40,6 @@ public class ClientSettings {
   }
 
   ClientSettings(Properties properties) {
-
-    setDocumentClass(properties);
     setDocumentSerializer(properties);
     setCommClient(properties);
     setContentsPipe(properties);
@@ -52,7 +49,7 @@ public class ClientSettings {
     return contentsPipe;
   }
 
-  public Class getDocumentClass() {
+  Class getDocumentClass() {
     return documentClass;
   }
 
@@ -72,15 +69,6 @@ public class ClientSettings {
     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
       e.printStackTrace();
       throw new StartupException("Unable to load DocumentSerializer as specified in client.properties", e);
-    }
-  }
-
-  private void setDocumentClass(Properties properties) {
-    try {
-      this.documentClass = Class.forName(String.valueOf(properties.get("document.class")));
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      throw new StartupException("Unable to load document class specified in client.properties", e);
     }
   }
 

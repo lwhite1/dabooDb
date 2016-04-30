@@ -3,6 +3,7 @@ package org.daboodb.daboo.shared;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.daboodb.daboo.generated.protobufs.Request;
+import org.daboodb.daboo.server.ServerSettings;
 
 /**
  * Utilities for working with Documents
@@ -14,22 +15,18 @@ public final class DocumentUtils {
 
   public static Request.Document getDocument(Document document) {
     return Request.Document.newBuilder()
-        .setKey(ByteString.copyFrom(document.key()))
-        .setContentBytes(ByteString.copyFrom(document.contents()))
+        .setKey(ByteString.copyFrom(document.getKey()))
+        .setContentBytes(ByteString.copyFrom(document.serialized()))
         .setContentClass(document.getContentClass())
-        .setContentType(document.contentType())
+        .setContentType(document.getContentType())
         .setInstanceVersion(document.instanceVersion())
         .setSchemaVersion(document.schemaVersion())
         .build();
   }
 
-  public static Document getDocumentFromRequestDoc(Class documentClass, ByteString resultBytes) {
+  public static Document getDocumentFromRequestDoc(ByteString resultBytes) {
 
-    Document document = DocumentFactory.documentForClass(documentClass);
 
-    if (document == null) {
-      throw new RuntimeException("Failed to get document from DocumentFactory.");
-    }
 
     Request.Document result;
     try {
@@ -38,12 +35,26 @@ public final class DocumentUtils {
       e.printStackTrace();
       throw new RuntimeException("Unable to parse from protobuf");
     }
+
+    Document document;
+    try {
+      document = ServerSettings.getInstance()
+          .getDocumentSerializer()
+            .bytesToDocument(Class.forName(result.getContentClass()),
+                result.getContentBytes().toByteArray());
+      if (document == null) {
+        throw new RuntimeException("Failed to get document from DocumentFactory.");
+      }
+    }
+    catch (ClassNotFoundException e) {
+      throw new RuntimeException("Failed to get document from DocumentFactory.");
+    }
+
     document.setContentClass(result.getContentClass());
     document.setContentType(result.getContentType());
     document.setKey(result.getKey().toByteArray());
     document.setSchemaVersion((short) result.getSchemaVersion());
     document.setInstanceVersion(result.getInstanceVersion());
-    document.setContents(result.getContentBytes().toByteArray());
     return document;
   }
 }

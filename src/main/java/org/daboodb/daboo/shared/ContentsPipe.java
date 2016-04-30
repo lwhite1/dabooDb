@@ -63,18 +63,18 @@ public class ContentsPipe {
     this.serializerDeserializer = serializerDeserializer;
   }
 
-  byte[] contentsToBytes(DocumentContents contents) {
+  byte[] contentsToBytes(Document document) {
     return
         encryptorDecryptor.encrypt(
             compressorDeCompressor.compress(
-                serializerDeserializer.serialize(contents)));
+                serializerDeserializer.serialize(document)));
 
   }
 
-  DocumentContents bytesToContents(Class contentClass, byte[] contentAsBytes) {
+  Document bytesToContents(Class documentClass, byte[] contentAsBytes) {
     return
         serializerDeserializer.deserialize(
-            contentClass,
+            documentClass,
             compressorDeCompressor.decompress(
                 encryptorDecryptor.decrypt(contentAsBytes)));
   }

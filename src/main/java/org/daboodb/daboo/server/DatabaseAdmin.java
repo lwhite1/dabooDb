@@ -13,12 +13,12 @@ interface DatabaseAdmin {
   void clear();
 
   /**
-   * Exports the entire contents of the database to the given backup file
+   * Exports the entire serialized of the database to the given backup file
    */
   void export(File backupFile);
 
   /**
-   * Exports the entire contents of the database to the given backup file,
+   * Exports the entire serialized of the database to the given backup file,
    * and clears the WAL to the point of backup
    */
   void backup(File backupFile);

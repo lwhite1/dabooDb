@@ -6,29 +6,15 @@ package org.daboodb.daboo.shared;
 public interface Document {
 
   /**
-   * Returns the primary key by which this document can be found in the db
-   */
-  byte[] key();
-
-  /**
    * Returns an integer representing the number of times the document has been saved.
    * This value is used for optimistic lock checking
    */
   int instanceVersion();
 
   /**
-   * Returns the document's contents as a byte array
+   * Returns the document's serialized as a byte array
    */
-  byte[] contents();
-
-  /**
-   * Returns a String naming the kind of document represented by the content
-   * <p/>
-   * This string will be used to query data, and is somewhat analogous to a "table name".
-   * For example, if you have two kinds of invoices, implemented by different classes and want to query them together,
-   * you could give them both the same contentType.
-   */
-  String contentType();
+  byte[] serialized();
 
   /**
    * Returns a String containing the canonical name of the class
@@ -40,13 +26,6 @@ public interface Document {
    * Returns the version number of the Json schema used when the object was last serialized
    */
   int schemaVersion();
-
-  /**
-   * Sets the contents from the given byte array
-   *
-   * @param contents A byte array containing the contents. Conversion is determined by the ContentsPipe
-   */
-  void setContents(byte[] contents);
 
   /**
    * Sets the instance version, which should be updated whenever a new version of the document is saved
@@ -71,7 +50,7 @@ public interface Document {
   void setContentType(String contentType);
 
   /**
-   * Returns the canonical class name for the document contents.
+   * Returns the canonical class name for the document serialized.
    * <p/>
    * NOTE: This class name can never change without manually migrating the database
    *
@@ -87,5 +66,18 @@ public interface Document {
    */
   void setSchemaVersion(short schemaVersion);
 
-  DocumentContents documentContents();
+
+  /**
+   * Returns the key to be used as the primary database key for this object
+   */
+  byte[] getKey();
+
+  /**
+   * Returns a String naming the kind of document represented by the content
+   * <p/>
+   * This string will be used to query data, and is somewhat analogous to a "table name".
+   * For example, if you have two kinds of invoices, implemented by different classes and want to query them together,
+   * you could give them both the same contentType.
+   */
+  String getContentType();
 }

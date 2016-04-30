@@ -3,7 +3,7 @@ package org.daboodb.daboo.shared.serialization;
 import org.daboodb.daboo.shared.Document;
 
 /**
- * A serializer that operates on Documents, as opposed to on their contents.
+ * A serializer that operates on Documents, as opposed to on their serialized.
  * We use this because we write documents in the database as byte arrays
  */
 public interface DocumentSerializer {

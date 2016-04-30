@@ -4,7 +4,6 @@ import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.Document;
-import org.daboodb.daboo.shared.StandardDocument;
 import org.daboodb.daboo.testutil.BasicTest;
 import org.daboodb.daboo.testutil.Person;
 import org.junit.After;
@@ -191,9 +190,8 @@ public class DbTest extends BasicTest {
     documentMap.clear();
 
     for (Person person : people) {
-      Document document = new StandardDocument(person);
       Request.Document doc = Request.Document.newBuilder()
-          .setContentBytes(ByteString.copyFrom(document.contents()))
+          .setContentBytes(ByteString.copyFrom(person.serialized()))
           .setContentClass(person.getClass().getCanonicalName())
           .setContentType(person.getContentType())
           .setKey(ByteString.copyFrom(person.getKey()))

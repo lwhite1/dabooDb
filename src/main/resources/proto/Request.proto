@@ -87,19 +87,19 @@ enum RequestType {
 *   A Document, which is the thing written in a write request
 */
 message Document {
-    /** A unique identifier for this document and its contents */
+    /** A unique identifier for this document */
     required bytes key = 1;
 
-    /** The java class name of the class of the contents */
+    /** The java class name of the class of the document */
     required string contentClass = 2;
 
-    /** A human-friendly name for the kind of contents, such as a company or user. Used for querying */
+    /** A human-friendly name for the kind of document, such as a company or user. Used for querying */
     required string contentType = 3;
 
     /** The version of the json schema used to encode the payload */
     required int32 schemaVersion = 4;
 
-    /** The document contents as bytes, possibly compressed or encrypted */
+    /** The document serialized as bytes, possibly compressed or encrypted */
     required bytes contentBytes = 5;
 
     /** The current instance (document) version of this object */

@@ -1,8 +1,8 @@
 package org.daboodb.daboo.server;
 
 import org.daboodb.daboo.generated.protobufs.Request;
+import org.daboodb.daboo.shared.Document;
 import org.daboodb.daboo.shared.DocumentUtils;
-import org.daboodb.daboo.shared.StandardDocument;
 import org.daboodb.daboo.testutil.BasicTest;
 import org.daboodb.daboo.testutil.Person;
 import org.junit.BeforeClass;
@@ -37,8 +37,7 @@ public class BackupAndRecoveryTest extends BasicTest {
     List<Request.Document> documentList = new ArrayList<>();
     List<Person> people = Person.createPeoples(2);
     Person person = people.get(0);
-    StandardDocument standardDocument = new StandardDocument(person);
-    documentList.add(DocumentUtils.getDocument(standardDocument));
+    documentList.add(DocumentUtils.getDocument(person));
 
     Request.Header header = getHeader();
     Request.WriteRequestBody body = getWriteRequestBody(documentList);
@@ -51,9 +50,8 @@ public class BackupAndRecoveryTest extends BasicTest {
 
     // add more data
     Person person2 = people.get(1);
-    StandardDocument standardDocument2 = new StandardDocument(person2);
     documentList.clear();
-    documentList.add(DocumentUtils.getDocument(standardDocument2));
+    documentList.add(DocumentUtils.getDocument(person2));
 
     body = getWriteRequestBody(documentList);
     writeRequest = getWriteRequest(header, body);

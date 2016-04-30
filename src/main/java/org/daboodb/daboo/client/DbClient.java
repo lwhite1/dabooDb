@@ -2,6 +2,7 @@ package org.daboodb.daboo.client;
 
 import com.google.protobuf.ByteString;
 import org.daboodb.daboo.client.exceptions.RequestTimeoutException;
+import org.daboodb.daboo.shared.DocumentUtils;
 import org.daboodb.daboo.shared.exceptions.DatastoreException;
 import org.daboodb.daboo.client.exceptions.RuntimeSerializationException;
 import org.daboodb.daboo.shared.Document;
@@ -118,7 +119,7 @@ public class DbClient implements KeyValueStoreApi {
     } else {
       resultBytes = resultBytesList.get(0);
     }
-    return getDocumentFromRequestDoc(settings.getDocumentClass(), resultBytes);
+    return getDocumentFromRequestDoc(resultBytes);
   }
 
   /**
@@ -138,8 +139,7 @@ public class DbClient implements KeyValueStoreApi {
     Request.GetReply reply = settings.getCommClient().sendRequest(request);
     checkErrorCondition(reply.getErrorCondition());
     List<ByteString> byteStringList = reply.getDocumentBytesList();
-    return byteStringList.stream().map(bytes -> getDocumentFromRequestDoc(settings.getDocumentClass(), bytes))
-        .collect(Collectors.toList());
+    return byteStringList.stream().map(DocumentUtils::getDocumentFromRequestDoc).collect(Collectors.toList());
   }
 
   /**
@@ -157,7 +157,7 @@ public class DbClient implements KeyValueStoreApi {
     Request.GetReply reply = settings.getCommClient().sendRequest(request);
     checkErrorCondition(reply.getErrorCondition());
     List<ByteString> byteStringList = reply.getDocumentBytesList();
-    return byteStringList.stream().map(bytes -> getDocumentFromRequestDoc(settings.getDocumentClass(), bytes))
+    return byteStringList.stream().map(DocumentUtils::getDocumentFromRequestDoc)
         .collect(Collectors.toList());
   }
 

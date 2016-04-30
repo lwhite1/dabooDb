@@ -1,9 +1,8 @@
 package org.daboodb.daboo.server.io;
 
 import org.daboodb.daboo.shared.Document;
-import org.daboodb.daboo.shared.DocumentContents;
+import org.daboodb.daboo.shared.Document;
 import org.daboodb.daboo.shared.DocumentUtils;
-import org.daboodb.daboo.shared.StandardDocument;
 import org.daboodb.daboo.shared.RequestUtils;
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.testutil.BasicTest;
@@ -22,9 +21,8 @@ import static org.junit.Assert.*;
 public class WriteLogTest extends BasicTest {
 
   // setup data to create a request
-  private final DocumentContents contents = Person.createPeoples(1).get(0);
-  private final Document document = new StandardDocument(contents);
-  private final Request.Document doc = DocumentUtils.getDocument(document);
+  private final Document contents = Person.createPeoples(1).get(0);
+  private final Request.Document doc = DocumentUtils.getDocument(contents);
   private final Request.Header header = RequestUtils.getHeader();
   private final Request.WriteRequestBody body = RequestUtils.getWriteRequestBody(doc);
   private final Request.WriteRequest writeRequest = RequestUtils.getWriteRequest(header, body);

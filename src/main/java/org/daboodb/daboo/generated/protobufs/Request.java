@@ -5947,7 +5947,7 @@ public final class Request {
      * <code>required bytes key = 1;</code>
      *
      * <pre>
-     ** A unique identifier for this document and its contents 
+     ** A unique identifier for this document and its serialized
      * </pre>
      */
     boolean hasKey();
@@ -5955,7 +5955,7 @@ public final class Request {
      * <code>required bytes key = 1;</code>
      *
      * <pre>
-     ** A unique identifier for this document and its contents 
+     ** A unique identifier for this document and its serialized
      * </pre>
      */
     com.google.protobuf.ByteString getKey();
@@ -5964,7 +5964,7 @@ public final class Request {
      * <code>required string contentClass = 2;</code>
      *
      * <pre>
-     ** The java class name of the class of the contents 
+     ** The java class name of the class of the serialized
      * </pre>
      */
     boolean hasContentClass();
@@ -5972,7 +5972,7 @@ public final class Request {
      * <code>required string contentClass = 2;</code>
      *
      * <pre>
-     ** The java class name of the class of the contents 
+     ** The java class name of the class of the serialized
      * </pre>
      */
     java.lang.String getContentClass();
@@ -5980,7 +5980,7 @@ public final class Request {
      * <code>required string contentClass = 2;</code>
      *
      * <pre>
-     ** The java class name of the class of the contents 
+     ** The java class name of the class of the serialized
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -5990,7 +5990,7 @@ public final class Request {
      * <code>required string contentType = 3;</code>
      *
      * <pre>
-     ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+     ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
      * </pre>
      */
     boolean hasContentType();
@@ -5998,7 +5998,7 @@ public final class Request {
      * <code>required string contentType = 3;</code>
      *
      * <pre>
-     ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+     ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
      * </pre>
      */
     java.lang.String getContentType();
@@ -6006,7 +6006,7 @@ public final class Request {
      * <code>required string contentType = 3;</code>
      *
      * <pre>
-     ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+     ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
      * </pre>
      */
     com.google.protobuf.ByteString
@@ -6033,7 +6033,7 @@ public final class Request {
      * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
-     ** The document contents as bytes, possibly compressed or encrypted 
+     ** The document serialized as bytes, possibly compressed or encrypted
      * </pre>
      */
     boolean hasContentBytes();
@@ -6041,7 +6041,7 @@ public final class Request {
      * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
-     ** The document contents as bytes, possibly compressed or encrypted 
+     ** The document serialized as bytes, possibly compressed or encrypted
      * </pre>
      */
     com.google.protobuf.ByteString getContentBytes();
@@ -6179,7 +6179,7 @@ public final class Request {
      * <code>required bytes key = 1;</code>
      *
      * <pre>
-     ** A unique identifier for this document and its contents 
+     ** A unique identifier for this document and its serialized
      * </pre>
      */
     public boolean hasKey() {
@@ -6189,7 +6189,7 @@ public final class Request {
      * <code>required bytes key = 1;</code>
      *
      * <pre>
-     ** A unique identifier for this document and its contents 
+     ** A unique identifier for this document and its serialized
      * </pre>
      */
     public com.google.protobuf.ByteString getKey() {
@@ -6202,7 +6202,7 @@ public final class Request {
      * <code>required string contentClass = 2;</code>
      *
      * <pre>
-     ** The java class name of the class of the contents 
+     ** The java class name of the class of the serialized
      * </pre>
      */
     public boolean hasContentClass() {
@@ -6212,7 +6212,7 @@ public final class Request {
      * <code>required string contentClass = 2;</code>
      *
      * <pre>
-     ** The java class name of the class of the contents 
+     ** The java class name of the class of the serialized
      * </pre>
      */
     public java.lang.String getContentClass() {
@@ -6233,7 +6233,7 @@ public final class Request {
      * <code>required string contentClass = 2;</code>
      *
      * <pre>
-     ** The java class name of the class of the contents 
+     ** The java class name of the class of the serialized
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -6256,7 +6256,7 @@ public final class Request {
      * <code>required string contentType = 3;</code>
      *
      * <pre>
-     ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+     ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
      * </pre>
      */
     public boolean hasContentType() {
@@ -6266,7 +6266,7 @@ public final class Request {
      * <code>required string contentType = 3;</code>
      *
      * <pre>
-     ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+     ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
      * </pre>
      */
     public java.lang.String getContentType() {
@@ -6287,7 +6287,7 @@ public final class Request {
      * <code>required string contentType = 3;</code>
      *
      * <pre>
-     ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+     ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
      * </pre>
      */
     public com.google.protobuf.ByteString
@@ -6333,7 +6333,7 @@ public final class Request {
      * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
-     ** The document contents as bytes, possibly compressed or encrypted 
+     ** The document serialized as bytes, possibly compressed or encrypted
      * </pre>
      */
     public boolean hasContentBytes() {
@@ -6343,7 +6343,7 @@ public final class Request {
      * <code>required bytes contentBytes = 5;</code>
      *
      * <pre>
-     ** The document contents as bytes, possibly compressed or encrypted 
+     ** The document serialized as bytes, possibly compressed or encrypted
      * </pre>
      */
     public com.google.protobuf.ByteString getContentBytes() {
@@ -6723,7 +6723,7 @@ public final class Request {
        * <code>required bytes key = 1;</code>
        *
        * <pre>
-       ** A unique identifier for this document and its contents 
+       ** A unique identifier for this document and its serialized
        * </pre>
        */
       public boolean hasKey() {
@@ -6733,7 +6733,7 @@ public final class Request {
        * <code>required bytes key = 1;</code>
        *
        * <pre>
-       ** A unique identifier for this document and its contents 
+       ** A unique identifier for this document and its serialized
        * </pre>
        */
       public com.google.protobuf.ByteString getKey() {
@@ -6743,7 +6743,7 @@ public final class Request {
        * <code>required bytes key = 1;</code>
        *
        * <pre>
-       ** A unique identifier for this document and its contents 
+       ** A unique identifier for this document and its serialized
        * </pre>
        */
       public Builder setKey(com.google.protobuf.ByteString value) {
@@ -6759,7 +6759,7 @@ public final class Request {
        * <code>required bytes key = 1;</code>
        *
        * <pre>
-       ** A unique identifier for this document and its contents 
+       ** A unique identifier for this document and its serialized
        * </pre>
        */
       public Builder clearKey() {
@@ -6774,7 +6774,7 @@ public final class Request {
        * <code>required string contentClass = 2;</code>
        *
        * <pre>
-       ** The java class name of the class of the contents 
+       ** The java class name of the class of the serialized
        * </pre>
        */
       public boolean hasContentClass() {
@@ -6784,7 +6784,7 @@ public final class Request {
        * <code>required string contentClass = 2;</code>
        *
        * <pre>
-       ** The java class name of the class of the contents 
+       ** The java class name of the class of the serialized
        * </pre>
        */
       public java.lang.String getContentClass() {
@@ -6805,7 +6805,7 @@ public final class Request {
        * <code>required string contentClass = 2;</code>
        *
        * <pre>
-       ** The java class name of the class of the contents 
+       ** The java class name of the class of the serialized
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -6825,7 +6825,7 @@ public final class Request {
        * <code>required string contentClass = 2;</code>
        *
        * <pre>
-       ** The java class name of the class of the contents 
+       ** The java class name of the class of the serialized
        * </pre>
        */
       public Builder setContentClass(
@@ -6842,7 +6842,7 @@ public final class Request {
        * <code>required string contentClass = 2;</code>
        *
        * <pre>
-       ** The java class name of the class of the contents 
+       ** The java class name of the class of the serialized
        * </pre>
        */
       public Builder clearContentClass() {
@@ -6855,7 +6855,7 @@ public final class Request {
        * <code>required string contentClass = 2;</code>
        *
        * <pre>
-       ** The java class name of the class of the contents 
+       ** The java class name of the class of the serialized
        * </pre>
        */
       public Builder setContentClassBytes(
@@ -6874,7 +6874,7 @@ public final class Request {
        * <code>required string contentType = 3;</code>
        *
        * <pre>
-       ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+       ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
        * </pre>
        */
       public boolean hasContentType() {
@@ -6884,7 +6884,7 @@ public final class Request {
        * <code>required string contentType = 3;</code>
        *
        * <pre>
-       ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+       ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
        * </pre>
        */
       public java.lang.String getContentType() {
@@ -6905,7 +6905,7 @@ public final class Request {
        * <code>required string contentType = 3;</code>
        *
        * <pre>
-       ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+       ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
        * </pre>
        */
       public com.google.protobuf.ByteString
@@ -6925,7 +6925,7 @@ public final class Request {
        * <code>required string contentType = 3;</code>
        *
        * <pre>
-       ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+       ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
        * </pre>
        */
       public Builder setContentType(
@@ -6942,7 +6942,7 @@ public final class Request {
        * <code>required string contentType = 3;</code>
        *
        * <pre>
-       ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+       ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
        * </pre>
        */
       public Builder clearContentType() {
@@ -6955,7 +6955,7 @@ public final class Request {
        * <code>required string contentType = 3;</code>
        *
        * <pre>
-       ** A human-friendly name for the kind of contents, such as a company or user. Used for querying 
+       ** A human-friendly name for the kind of serialized, such as a company or user. Used for querying
        * </pre>
        */
       public Builder setContentTypeBytes(
@@ -7022,7 +7022,7 @@ public final class Request {
        * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
-       ** The document contents as bytes, possibly compressed or encrypted 
+       ** The document serialized as bytes, possibly compressed or encrypted
        * </pre>
        */
       public boolean hasContentBytes() {
@@ -7032,7 +7032,7 @@ public final class Request {
        * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
-       ** The document contents as bytes, possibly compressed or encrypted 
+       ** The document serialized as bytes, possibly compressed or encrypted
        * </pre>
        */
       public com.google.protobuf.ByteString getContentBytes() {
@@ -7042,7 +7042,7 @@ public final class Request {
        * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
-       ** The document contents as bytes, possibly compressed or encrypted 
+       ** The document serialized as bytes, possibly compressed or encrypted
        * </pre>
        */
       public Builder setContentBytes(com.google.protobuf.ByteString value) {
@@ -7058,7 +7058,7 @@ public final class Request {
        * <code>required bytes contentBytes = 5;</code>
        *
        * <pre>
-       ** The document contents as bytes, possibly compressed or encrypted 
+       ** The document serialized as bytes, possibly compressed or encrypted
        * </pre>
        */
       public Builder clearContentBytes() {

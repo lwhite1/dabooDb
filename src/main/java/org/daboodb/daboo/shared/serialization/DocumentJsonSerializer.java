@@ -19,6 +19,7 @@ public class DocumentJsonSerializer implements DocumentSerializer {
 
   @Override
   public Document bytesToDocument(Class documentClass, byte[] documentBytes) {
-    return (Document) GSON.fromJson(new String(documentBytes, StandardCharsets.UTF_8), documentClass);
+    String string = new String(documentBytes, StandardCharsets.UTF_8);
+    return (Document) GSON.fromJson(string, documentClass);
   }
 }
