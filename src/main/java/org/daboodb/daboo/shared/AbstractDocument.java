@@ -20,22 +20,63 @@ public class AbstractDocument implements Document {
     return contentsPipe;
   }
 
+  /**
+   * An int that tracks the number of times this document has been saved. It is used in the implementation of optimistic locking.
+   */
   private int instanceVersion;
 
+  /**
+   * The version of the global schema in use at the time this document was saved
+   */
   private short schemaVersion = 0;
 
+  /**
+   * A byte array that uniquely identifies this document, amongst all documents in the store. There can only be one
+   * document with a given key in the store at any time
+   */
   private byte[] key;
 
   /**
    * The kind of document represented by the serialized
    */
-  private String contentType;
+  private String documentType;
 
-  private String contentClass;
+  /**
+   * The fully qualified class name of this document.
+   */
+  private String documentClass;
 
+  /**
+   * Constructs and returns a Document initialized with a random UUID key, and a documentType based on the class name
+   */
   public AbstractDocument() {
-    this.contentClass = this.getClass().getCanonicalName();
-    this.contentType = this.getClass().getSimpleName();
+    this.documentClass = this.getClass().getCanonicalName();
+    this.documentType = this.getClass().getSimpleName();
+    this.instanceVersion = 0;
+    key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
+  }
+
+  /**
+   * Constructs and returns a Document initialized with a documentType based on the class name
+   *
+   * @param key a byte[] that uniquely identifies this document, amongst all the documents in the store
+   */
+  public AbstractDocument(byte[] key) {
+    this.documentClass = this.getClass().getCanonicalName();
+    this.documentType = this.getClass().getSimpleName();
+    this.instanceVersion = 0;
+    this.key = key;
+  }
+
+  /**
+   * Constructs and returns a Document initialized with a random UUID key
+   *
+   * @param documentType A string that serves a purpose similar to a 'table name' in sql. In the future, it will allow
+   *                     queries that restrict their results to a particular type of document, such as an "INVOICE"
+   */
+  public AbstractDocument(String documentType) {
+    this.documentClass = this.getClass().getCanonicalName();
+    this.documentType = documentType;
     this.instanceVersion = 0;
     key = UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8);
   }
@@ -45,9 +86,8 @@ public class AbstractDocument implements Document {
     return ServerSettings.getInstance().getDocumentSerializer().documentToBytes(this);
   }
 
-  @Override
-  public String getContentClass() {
-    return contentClass;
+  public String getDocumentClass() {
+    return documentClass;
   }
 
   @Override
@@ -69,19 +109,12 @@ public class AbstractDocument implements Document {
     this.key = key;
   }
 
-  @Override
-  public void setContentType(String contentType) {
-    this.contentType = contentType;
+  public void setDocumentType(String documentType) {
+    this.documentType = documentType;
   }
 
-  @Override
-  public void setContentClass(String contentClass) {
-    this.contentClass = contentClass;
-  }
-
-  @Override
-  public void setSchemaVersion(short schemaVersion) {
-    this.schemaVersion = schemaVersion;
+  public void setDocumentClass(String documentClass) {
+    this.documentClass = documentClass;
   }
 
   @Override
@@ -89,10 +122,23 @@ public class AbstractDocument implements Document {
     final StringBuilder sb = new StringBuilder("AbstractDocument{");
     sb.append("instanceVersion=").append(instanceVersion);
     sb.append(", schemaVersion=").append(schemaVersion);
-    sb.append(", contentClass=").append(contentClass);
-    sb.append(", contentType='").append(contentType).append('\'');
+    sb.append(", documentClass=").append(documentClass);
+    sb.append(", documentType='").append(documentType).append('\'');
     sb.append('}');
     return sb.toString();
+  }
+
+  /**
+   * Sets the global json schema version that was in effect (and thus used to serialize the object) when this
+   * document was saved
+   *
+   * Note: This should generally NOT be used by client code
+   *
+   * @param schemaVersion A number indicating what schema version was used to serialize the document
+   */
+  @Override
+  public void setSchemaVersion(short schemaVersion) {
+    this.schemaVersion = schemaVersion;
   }
 
   /**
@@ -106,8 +152,7 @@ public class AbstractDocument implements Document {
   /**
    * Returns a string, analogous to a database table name, that describes what kind of object this is
    */
-  @Override
-  public String getContentType() {
-    return contentType;
+  public String getDocumentType() {
+    return documentType;
   }
 }

@@ -16,7 +16,7 @@ public class DocumentContentsTest {
 
   @Test
   public void testGetType() {
-    assertEquals("Company", company.getContentType());
+    assertEquals("Company", company.getDocumentType());
   }
 
   @Test

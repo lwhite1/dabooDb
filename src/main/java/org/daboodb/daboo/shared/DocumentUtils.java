@@ -17,8 +17,8 @@ public final class DocumentUtils {
     return Request.Document.newBuilder()
         .setKey(ByteString.copyFrom(document.getKey()))
         .setContentBytes(ByteString.copyFrom(document.serialized()))
-        .setContentClass(document.getContentClass())
-        .setContentType(document.getContentType())
+        .setContentClass(document.getDocumentClass())
+        .setContentType(document.getDocumentType())
         .setInstanceVersion(document.instanceVersion())
         .setSchemaVersion(document.schemaVersion())
         .build();
@@ -50,10 +50,9 @@ public final class DocumentUtils {
       throw new RuntimeException("Failed to get document from DocumentFactory.");
     }
 
-    document.setContentClass(result.getContentClass());
-    document.setContentType(result.getContentType());
+    document.setDocumentClass(result.getContentClass());
+    document.setDocumentType(result.getContentType());
     document.setKey(result.getKey().toByteArray());
-    document.setSchemaVersion((short) result.getSchemaVersion());
     document.setInstanceVersion(result.getInstanceVersion());
     return document;
   }

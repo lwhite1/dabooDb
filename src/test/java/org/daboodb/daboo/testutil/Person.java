@@ -141,7 +141,7 @@ public class Person extends AbstractDocument {
     return US_STATES;
   }
 
-  public String getContentType() {
+  public String getDocumentType() {
     return "Person";
   }
 }

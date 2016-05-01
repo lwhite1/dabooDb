@@ -20,7 +20,7 @@ public interface Document {
    * Returns a String containing the canonical name of the class
    * This method is used in deserialization
    */
-  String getContentClass();
+  String getDocumentClass();
 
   /**
    * Returns the version number of the Json schema used when the object was last serialized
@@ -45,18 +45,18 @@ public interface Document {
   /**
    * Sets a name, analogous to a database table name for this kind of document
    *
-   * @param contentType This should generally not be changed after the document is persisted
+   * @param documentType This should generally not be changed after the document is persisted
    */
-  void setContentType(String contentType);
+  void setDocumentType(String documentType);
 
   /**
    * Returns the canonical class name for the document serialized.
    * <p/>
    * NOTE: This class name can never change without manually migrating the database
    *
-   * @param contentClass A canonical class name
+   * @param documentClass A canonical class name
    */
-  void setContentClass(String contentClass);
+  void setDocumentClass(String documentClass);
 
   /**
    * Sets the global json schema version that was in effect (and thus used to serialize the object) when this
@@ -79,5 +79,5 @@ public interface Document {
    * For example, if you have two kinds of invoices, implemented by different classes and want to query them together,
    * you could give them both the same contentType.
    */
-  String getContentType();
+  String getDocumentType();
 }

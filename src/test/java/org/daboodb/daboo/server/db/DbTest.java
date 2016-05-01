@@ -3,7 +3,6 @@ package org.daboodb.daboo.server.db;
 import com.google.common.primitives.SignedBytes;
 import com.google.protobuf.ByteString;
 import org.daboodb.daboo.generated.protobufs.Request;
-import org.daboodb.daboo.shared.Document;
 import org.daboodb.daboo.testutil.BasicTest;
 import org.daboodb.daboo.testutil.Person;
 import org.junit.After;
@@ -193,7 +192,7 @@ public class DbTest extends BasicTest {
       Request.Document doc = Request.Document.newBuilder()
           .setContentBytes(ByteString.copyFrom(person.serialized()))
           .setContentClass(person.getClass().getCanonicalName())
-          .setContentType(person.getContentType())
+          .setContentType(person.getDocumentType())
           .setKey(ByteString.copyFrom(person.getKey()))
           .setInstanceVersion(0)
           .setSchemaVersion(1)

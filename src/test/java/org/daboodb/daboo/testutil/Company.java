@@ -23,7 +23,7 @@ public class Company extends AbstractDocument {
   }
 
   @Override
-  public String getContentType() {
+  public String getDocumentType() {
     return "Company";
   }
 
