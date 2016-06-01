@@ -14,13 +14,12 @@ package org.daboodb.daboo.shared.util.logging;
  * Apache Common Logging
  *
  * or any other logging framework. That logging framework is wrapped
- * using the adaptor pattern allowing any logging framework to be easily
- * used.
+ * using the adaptor pattern allowing any logging framework to be easily used.
  */
 public class LoggingFactory {
 
     /**
-     * Get the logger for a particular class
+     * Gets the logger for a particular class
      *
      * @param clientClass the class that wants to do logging.
      * @return a Logger implementation
@@ -29,7 +28,4 @@ public class LoggingFactory {
         return new Log4jLogger(clientClass);
 
     }
-
-
-
 }
