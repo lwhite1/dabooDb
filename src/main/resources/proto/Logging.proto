@@ -1,0 +1,32 @@
+package org.dabudb.dabu.shared.protobufs;
+
+option java_package = "org.dabudb.dabu.shared.protobufs";
+option java_outer_classname = "Log";
+
+message LogMessage {
+    required Header header = 1;
+    required string contents = 2;
+    optional string stackTrace = 3;
+}
+
+/**
+* The header for a log message
+*/
+message Header {
+
+    /** The time the request was created (Not sent), according to the client */
+    required int64 timestamp = 2;
+
+    /** The type of request */
+    required MessageType requestType = 3;
+}
+
+/**
+*   logging level - how serious the issue is
+*/
+enum MessageType {
+  ERROR = 1;
+  WARN = 2;
+  INFO = 3;
+  DEBUG = 4;
+}
