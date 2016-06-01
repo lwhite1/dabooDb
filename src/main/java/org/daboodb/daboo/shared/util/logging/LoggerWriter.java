@@ -1,4 +1,4 @@
-package org.dabudb.dabu.shared.util.logging;
+package org.daboodb.daboo.shared.util.logging;
 
 /**
  * Vanilla logging api (interface)

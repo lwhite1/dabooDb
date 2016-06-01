@@ -1,4 +1,4 @@
-package org.dabudb.dabu.shared.util.logging;
+package org.daboodb.daboo.shared.util.logging;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

@@ -1,4 +1,4 @@
-package org.dabudb.dabu.shared.util.logging;
+package org.daboodb.daboo.shared.util.logging;
 
 /**
  * Clients use this factory to get a specific logger.
