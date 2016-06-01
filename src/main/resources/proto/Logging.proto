@@ -1,6 +1,6 @@
-package org.dabudb.dabu.shared.protobufs;
+package org.daboodb.daboo.generated.protobufs;
 
-option java_package = "org.dabudb.dabu.shared.protobufs";
+option java_package = "org.daboodb.daboo.generated.protobufs";
 option java_outer_classname = "Log";
 
 message LogMessage {
