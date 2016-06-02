@@ -4,6 +4,8 @@ import com.google.protobuf.ByteString;
 import org.daboodb.daboo.server.io.DatabaseExporter;
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.exceptions.RuntimePersistenceException;
+import org.daboodb.daboo.shared.util.logging.LoggerWriter;
+import org.daboodb.daboo.shared.util.logging.LoggingFactory;
 import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
@@ -21,6 +23,8 @@ import java.util.stream.Collectors;
  * An in-memory implementation of a Db
  */
 public class OffHeapBTreeDb implements Db {
+
+  private LoggerWriter loggerWriter = LoggingFactory.getLogger(this.getClass());
 
   //private static final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 1024;  // 1 GB
   private static final long ALLOCATED_SIZE_IN_BYTES = 1024 * 1024 * 50;  // 50 MB
@@ -65,8 +69,7 @@ public class OffHeapBTreeDb implements Db {
       try {
         exporter.log(v);
       } catch (IOException e) {
-        e.printStackTrace();
-        //TODO(lwhite): Log this exception
+        loggerWriter.logError("Failed to export documents to the database file " + file.toString(), e);
         throw new RuntimePersistenceException("An IOException occurred exporting documents from the database", e);
       }
     });

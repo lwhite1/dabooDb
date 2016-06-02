@@ -8,6 +8,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import org.daboodb.daboo.shared.exceptions.RuntimeDatastoreException;
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.exceptions.RuntimePersistenceException;
+import org.daboodb.daboo.shared.util.logging.LoggerWriter;
+import org.daboodb.daboo.shared.util.logging.LoggingFactory;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -29,6 +31,8 @@ import static org.daboodb.daboo.generated.protobufs.Request.Document.parseFrom;
  * Logs all write requests to a file
  */
 public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
+
+  private static LoggerWriter loggerWriter = LoggingFactory.getLogger(DatabaseExporter.class);
 
   public static DatabaseExporter get(File databaseDirectory) {
     DatabaseExporter exporter = null;
@@ -71,8 +75,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       indexWriter.close();
       indexReader.close();
     } catch (IOException e) {
-      //TODO(lwhite): Log
-      e.printStackTrace();
+      loggerWriter.logError("An IOException occurred closing exporter log files.", e);
       throw new RuntimePersistenceException("An IOException occurred closing exporter log files.", e);
     }
 
@@ -87,8 +90,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
         return true;
       }
     } catch (IOException e) {
-      //TODO(lwhite): Log
-      e.printStackTrace();
+      loggerWriter.logError("An IOException occurred reading index file for export log.", e);
       throw new RuntimePersistenceException("An IOException occurred reading index file for export log.", e);
     }
     length = -1;
@@ -105,7 +107,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       dataInputStream.read(requestBytes);
     } catch (IOException e) {
       e.printStackTrace();
-      //TODO(lwhite): Log
+      loggerWriter.logError("An IOException occurred reading requests from document log.", e);
       throw new RuntimePersistenceException("An IOException occurred reading requests from document log.", e);
     }
     Request.Document document;
@@ -113,7 +115,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       document = parseFrom(requestBytes);
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
-      //TODO(lwhite): Log
+      loggerWriter.logError("Failed to parse protobuf document from export file", e);
       throw new RuntimeDatastoreException("Failed to parse protobuf document from export file", e);
     }
     return document;

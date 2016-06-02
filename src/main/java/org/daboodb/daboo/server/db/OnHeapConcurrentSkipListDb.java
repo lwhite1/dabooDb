@@ -5,6 +5,8 @@ import com.google.protobuf.ByteString;
 import org.daboodb.daboo.server.io.DatabaseExporter;
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.exceptions.RuntimePersistenceException;
+import org.daboodb.daboo.shared.util.logging.LoggerWriter;
+import org.daboodb.daboo.shared.util.logging.LoggingFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
  * An in-memory implementation of a Db
  */
 public class OnHeapConcurrentSkipListDb implements Db {
+
+  private LoggerWriter loggerWriter = LoggingFactory.getLogger(this.getClass());
 
   private final ConcurrentSkipListMap<byte[], byte[]> store
       = new ConcurrentSkipListMap<>(SignedBytes.lexicographicalComparator());
@@ -56,7 +60,7 @@ public class OnHeapConcurrentSkipListDb implements Db {
         exporter.log(v);
       } catch (IOException e) {
         e.printStackTrace();
-        //TODO(lwhite): Log this exception
+        loggerWriter.logError("Failed to export documents to the database file " + file.toString(), e);
         throw new RuntimePersistenceException("An IOException occurred exporting documents from the database", e);
       }
     });

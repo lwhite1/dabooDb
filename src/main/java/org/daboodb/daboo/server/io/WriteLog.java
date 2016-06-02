@@ -4,6 +4,8 @@ import com.google.common.io.ByteSink;
 import com.google.common.io.CharSink;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
+import org.daboodb.daboo.shared.util.logging.LoggerWriter;
+import org.daboodb.daboo.shared.util.logging.LoggingFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +16,7 @@ import java.util.NoSuchElementException;
  * Logs all write requests to a file
  */
 public class WriteLog implements WriteAheadLog, Closeable {
+  private LoggerWriter loggerWriter = LoggingFactory.getLogger(this.getClass());
 
   private static WriteLog instance;
 
@@ -85,8 +88,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
         return true;
       }
     } catch (IOException ex) {
-      ex.printStackTrace();
-      //TODO(lwhite): handle exception
+      loggerWriter.logError("IO Failure advancing iterator", ex);
     }
     length = -1;
     return false;
@@ -102,8 +104,7 @@ public class WriteLog implements WriteAheadLog, Closeable {
       dataInputStream.read(requestBytes);
 
     } catch (IOException e) {
-      e.printStackTrace();
-      // TODO(lwhite): Handle exception
+      loggerWriter.logError("IO Failure advancing iterator", e);
     }
 
     return requestBytes;
