@@ -28,8 +28,8 @@ import java.util.NoSuchElementException;
 import static org.daboodb.daboo.generated.protobufs.Request.Document.parseFrom;
 
 /**
- * Writes all the content of a database to a file to make a single-file export
- * @see WriteLog for the class that actually implements the write-ahead logging for the database
+ * Writes all the content of a database to a file to make a single-file export designed to be used as a backup
+ * @see WriteLog for the class that actually implements the write-ahead logging as part of normal database operation
  */
 public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
 
