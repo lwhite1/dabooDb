@@ -2,15 +2,12 @@ package org.daboodb.daboo.testutil;
 
 import io.codearte.jfairy.Fairy;
 import org.daboodb.daboo.shared.AbstractDocument;
-import org.daboodb.daboo.shared.Document;
 
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  *  A class representing a person that can be used as a test content for the db
