@@ -8,14 +8,14 @@ import net.jpountz.lz4.LZ4Factory;
  * <p>
  * It provides good compression ratios, but is much slower than the fastest LZ mode.
  */
-public class LZ4HCCompressor extends LZ4AbstractCompressor {
+class LZ4HCCompressor extends LZ4AbstractCompressor {
 
   private final static LZ4Factory LZ_4_FACTORY = LZ4Factory.unsafeInstance();
 
+  private static final LZ4HCCompressor INSTANCE = new LZ4HCCompressor();
 
-  // TODO(lwhite): Either make this a singleton (if thread-safe) or make a pool of pre-allocated compressors
   public static LZ4HCCompressor get() {
-    return new LZ4HCCompressor();
+    return INSTANCE;
   }
 
   /**
