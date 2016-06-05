@@ -2,16 +2,20 @@ package org.daboodb.daboo.shared.compression;
 
 import org.iq80.snappy.Snappy;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * A compressor/de-compressor that uses Snappy for compression.
  * <p>
  * Snappy provides very fast compression, but with low compression ratios.
  */
-public class SnappyCompressor implements CompressorDeCompressor {
+@ThreadSafe
+class SnappyCompressor implements CompressorDeCompressor {
 
-  // TODO(lwhite): Either make this a singleton (if thread-safe) or make a pool of pre-allocated compressors
+  static final SnappyCompressor compressor = new SnappyCompressor();
+
   public static SnappyCompressor get() {
-    return new SnappyCompressor();
+    return compressor;
   }
 
   /**
