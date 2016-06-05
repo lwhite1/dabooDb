@@ -13,7 +13,7 @@ import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.exceptions.RuntimeDatastoreException;
 import org.eclipse.jetty.http.HttpStatus;
 
-public class BasicHttpServlet extends HttpServlet {
+class BasicHttpServlet extends HttpServlet {
 
   private static final String GET = "/GET";
   private static final String GET_RANGE = "/GET_RANGE";
@@ -68,10 +68,10 @@ public class BasicHttpServlet extends HttpServlet {
   private void handleGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     InputStream is = request.getInputStream();
     CodedInputStream cis = CodedInputStream.newInstance(is);
-    Request.WriteRequest databaseRequest = Request.WriteRequest.parseFrom(cis);
-    Request.WriteReply writeReply;
-    writeReply = database.handleRequest(databaseRequest, databaseRequest.toByteArray());
-    response.getOutputStream().write(writeReply.toByteArray());
+    Request.GetRequest databaseRequest = Request.GetRequest.parseFrom(cis);
+    Request.GetReply getReply;
+    getReply = database.handleRequest(databaseRequest);
+    response.getOutputStream().write(getReply.toByteArray());
     response.setStatus(HttpStatus.OK_200);
   }
 

@@ -1,5 +1,6 @@
 package org.daboodb.daboo.client;
 
+import com.google.protobuf.ByteString;
 import org.daboodb.daboo.generated.protobufs.Request;
 import org.daboodb.daboo.shared.DocumentUtils;
 import org.daboodb.daboo.testutil.BasicTest;
@@ -13,28 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.daboodb.daboo.shared.RequestUtils.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  *  Tests for Http-based database client
  */
 public class HttpCommClientTest extends BasicTest {
 
-  private final HttpCommClient client = new HttpCommClient();
+  private static final HttpCommClient client = new HttpCommClient("localhost", 7070);
 
-  @Override
-  @Before
-  public void setUp() throws Exception {
-    super.tearDown();
-  }
-
-  @After
-  public void tearDown() throws Exception {
-    super.tearDown();
-  }
-
-  @Ignore
-  @Test
-  public void testSendWriteRequest() {
+  public static void main(String[] args) {
     // Create some data and process the write
     List<Request.Document> documentList = new ArrayList<>();
 
@@ -46,17 +35,12 @@ public class HttpCommClientTest extends BasicTest {
     Request.WriteRequest writeRequest = getWriteRequest(header, body);
 
     Request.WriteReply reply = client.sendRequest(writeRequest);
-  }
+    assertNotNull(reply);
 
-  @Ignore
-  @Test
-  public void testSendRequest1() {
+    Request.GetRequestBody getRequestBody = getGetRequestBody(ByteString.copyFrom(person.getKey()));
+    Request.GetRequest getRequest = getGetRequest(header, getRequestBody);
 
-  }
-
-  @Ignore
-  @Test
-  public void testSendRequest2() {
-
+    Request.GetReply reply1 = client.sendRequest(getRequest);
+    assertNotNull(reply1);
   }
 }

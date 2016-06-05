@@ -24,23 +24,28 @@ public class HttpCommClient implements CommClient {
   // We send raw bytes for performance reasons
   private static final String CONTENT_TYPE = "application/octet-stream";
 
-  //TODO(lwhite) Replace this with configurable address
-  private static final String serverAddress = "http://localhost:7070/";
   private static final String WRITE = "WRITE";
   private static final String GET_RANGE = "GET_RANGE";
   private static final String GET = "GET";
 
-  private static final GenericUrl WRITE_URL = new GenericUrl(serverAddress.concat(WRITE));
-  private static final GenericUrl GET_URL = new GenericUrl(serverAddress.concat(GET));
-  private static final GenericUrl GET_RANGE_URL = new GenericUrl(serverAddress.concat(GET_RANGE));
+  private final GenericUrl WRITE_URL;
+  private final GenericUrl GET_URL;
+  private final GenericUrl GET_RANGE_URL;
 
-  HttpCommClient() {
+  HttpCommClient(String address, int port) {
+    String serverAddress = new StringBuilder("http://")
+        .append(address)
+        .append(':')
+        .append(port)
+        .append('/')
+        .toString();
+    WRITE_URL = new GenericUrl(serverAddress.concat(WRITE));
+    GET_URL = new GenericUrl(serverAddress.concat(GET));
+    GET_RANGE_URL = new GenericUrl(serverAddress.concat(GET_RANGE));
   }
 
   @Override
   public Request.WriteReply sendRequest(Request.WriteRequest request) {
-
-
 
     HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
     try {
@@ -59,9 +64,24 @@ public class HttpCommClient implements CommClient {
     }
   }
 
+  // TODO(lwhite): Implement next two methods
   @Override
   public Request.GetReply sendRequest(Request.GetRequest request) {
-    return null;
+    HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
+    try {
+      HttpContent content = new ByteArrayContent(CONTENT_TYPE, request.toByteArray());
+      HttpRequest httpRequest = requestFactory.buildPostRequest(GET_URL, content);
+      HttpResponse response = httpRequest.execute();
+      InputStream is = response.getContent();
+      CodedInputStream cis = CodedInputStream.newInstance(is);
+      Request.GetReply reply = Request.GetReply.parseFrom(cis);
+      is.close();
+      return reply;
+    } catch (InvalidProtocolBufferException e) {
+      throw new RuntimeSerializationException("ProtocolBuffer serialization exception caught.", e);
+    } catch (IOException e) {
+      throw new RuntimeDatastoreException("IO exception caught making HTTP request.", e);
+    }
   }
 
   @Override
