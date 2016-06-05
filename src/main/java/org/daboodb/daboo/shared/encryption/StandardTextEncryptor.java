@@ -3,9 +3,9 @@ package org.daboodb.daboo.shared.encryption;
 import org.jasypt.encryption.pbe.PooledPBEByteEncryptor;
 
 /**
- *
+ * Encrypts and decrypts text in the form of byte arrays. It delegates to a pooled encryptor for parallelization
  */
-public class StandardTextEncryptor implements EncryptorDecryptor {
+class StandardTextEncryptor implements EncryptorDecryptor {
 
   private final PooledPBEByteEncryptor textEncryptor = new PooledPBEByteEncryptor();
 

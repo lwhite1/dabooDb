@@ -10,6 +10,10 @@ public class EncryptorFactory {
 
   public static final EncryptorDecryptor NONE = NullEncryptor.get();
 
+  // holds the single instance of standard text encryptor for this database. All encryption and decryption must be done
+  // with one algorithm/password
+  private static EncryptorDecryptor standard;
+
   /**
    * Returns a compressor of the type specified in the input
    */
@@ -18,9 +22,11 @@ public class EncryptorFactory {
     Preconditions.checkState(type == EncryptionType.NONE || !Strings.isNullOrEmpty(password));
 
     switch (type) {
-      // TODO(lwhite): instantiate the encryptor using a pool like the underlying algorithm does
       case STANDARD:
-        return new StandardTextEncryptor(password);
+        if (standard == null) {
+          standard = new StandardTextEncryptor(password);
+        }
+        return standard;
       case NONE:
         return NONE;
       default:
