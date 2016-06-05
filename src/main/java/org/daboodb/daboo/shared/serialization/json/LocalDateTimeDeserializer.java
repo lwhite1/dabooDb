@@ -16,18 +16,9 @@ import java.time.format.DateTimeFormatter;
  * <p>
  * Note: While this is inefficient, it's (about) the best *simple* solution,
  * because a LocalDateTime in Java 8 is represented by two longs, so a primitive conversion will not work.
- * It has problems, though.
- * <p>
- * TODO(lwhite): Fix precision (and improve efficiency)
- * It should be possible to serialize to 2 longs (i.e. 16 bytes) and convert that to a (zero-padded) string (32 bytes),
- * as opposed to representing in ISO local date time format (38 bytes). The 2-long solution would be better in fact,
- * because ISO_LOCAL_DATE_TIME only has second precision, so we lose all sub-second precision (ms to nanos).
- * This solution should also be used for Instants and any other datetime format
  */
 @ThreadSafe
 class LocalDateTimeDeserializer implements JsonDeserializer<LocalDateTime> {
-
-  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
   public LocalDateTime deserialize(JsonElement json,
                                    Type typeOfT,
@@ -37,7 +28,19 @@ class LocalDateTimeDeserializer implements JsonDeserializer<LocalDateTime> {
     if (Strings.isNullOrEmpty(json.getAsString())) {
       return null;
     }
-    return LocalDateTime.parse(json.getAsString(), FORMATTER);
+    return parseFromSerializationString(json.getAsString());
+  }
+
+  private LocalDateTime parseFromSerializationString(String serializedDateTime) {
+
+    int year = Integer.valueOf(serializedDateTime.substring(0, 4));
+    int month = Integer.valueOf(serializedDateTime.substring(4, 6));
+    int day = Integer.valueOf(serializedDateTime.substring(6, 8));
+    int hour = Integer.valueOf(serializedDateTime.substring(8, 10));
+    int minute = Integer.valueOf(serializedDateTime.substring(10, 12));
+    int second = Integer.valueOf(serializedDateTime.substring(12, 14));
+    int nano = Integer.valueOf(serializedDateTime.substring(14));
+    return LocalDateTime.of(year, month, day, hour, minute, second, nano);
   }
 }
 
