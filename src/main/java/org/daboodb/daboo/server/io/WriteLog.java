@@ -4,6 +4,8 @@ import com.google.common.io.ByteSink;
 import com.google.common.io.CharSink;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
+import org.daboodb.daboo.shared.exceptions.RuntimeDatastoreException;
+import org.daboodb.daboo.shared.exceptions.RuntimePersistenceException;
 import org.daboodb.daboo.shared.util.logging.LoggerWriter;
 import org.daboodb.daboo.shared.util.logging.LoggingFactory;
 
@@ -16,7 +18,8 @@ import java.util.NoSuchElementException;
  * Logs all write requests to a file
  */
 public class WriteLog implements WriteAheadLog, Closeable {
-  private LoggerWriter loggerWriter = LoggingFactory.getLogger(this.getClass());
+
+  private static LoggerWriter loggerWriter = LoggingFactory.getLogger(WriteLog.class);
 
   private static WriteLog instance;
 
@@ -26,8 +29,8 @@ public class WriteLog implements WriteAheadLog, Closeable {
         instance = new WriteLog(databaseDirectory);
       }
     } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      loggerWriter.logError("Fatal: Unable to instantiate the Write-ahead Log", e);
+      throw new RuntimePersistenceException("Unable to instantiate the Write-ahead Log", e);
     }
     return instance;
   }
@@ -62,8 +65,8 @@ public class WriteLog implements WriteAheadLog, Closeable {
       indexWriter.close();
       indexReader.close();
     } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      loggerWriter.logError("Unable to close Write-Ahead Log.", e);
+      throw new RuntimePersistenceException("Unable to close Write-Ahead Log.", e);
     }
   }
 
