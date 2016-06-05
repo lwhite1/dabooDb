@@ -28,18 +28,20 @@ import java.util.NoSuchElementException;
 import static org.daboodb.daboo.generated.protobufs.Request.Document.parseFrom;
 
 /**
- * Logs all write requests to a file
+ * Writes all the content of a database to a file to make a single-file export
+ * @see WriteLog for the class that actually implements the write-ahead logging for the database
  */
 public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
 
   private static LoggerWriter loggerWriter = LoggingFactory.getLogger(DatabaseExporter.class);
 
   public static DatabaseExporter get(File databaseDirectory) {
-    DatabaseExporter exporter = null;
+    DatabaseExporter exporter;
     try {
       exporter = new DatabaseExporter(databaseDirectory);
     } catch (IOException e) {
-      e.printStackTrace();
+      loggerWriter.logError("Unable to export database to folder " + databaseDirectory, e);
+      throw new RuntimePersistenceException("An IOException occurred creating a db exporter.", e);
     }
     return exporter;
   }
@@ -76,7 +78,7 @@ public class DatabaseExporter implements Iterator<Request.Document>, Closeable {
       indexReader.close();
     } catch (IOException e) {
       loggerWriter.logError("An IOException occurred closing exporter log files.", e);
-      throw new RuntimePersistenceException("An IOException occurred closing exporter log files.", e);
+      throw new RuntimePersistenceException("An IOException occurred closing exporter files.", e);
     }
 
   }
