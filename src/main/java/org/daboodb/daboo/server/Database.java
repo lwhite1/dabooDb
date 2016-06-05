@@ -210,7 +210,9 @@ class Database implements DatabaseAdmin {
    * TODO(lwhite): Need more sophisticated approach to backup and recovery that addresses issues of concurrent writes
    */
   public void backup(File file) {
-    //TODO(lwhite): Make sure that we delete the file if it already exists, rather than append to it.
+    if (file.exists()) {
+      file.delete();
+    }
     db().exportDocuments(file);
     try {
       writeLog().clear();
