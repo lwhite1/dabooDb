@@ -55,7 +55,7 @@ public class DbClient implements KeyValueStoreApi {
   public void write(@Nonnull Document document) throws DatastoreException {
 
     Request.Document doc = getDocument(document);
-    Header header = getHeader();
+    Header header = getWriteHeader();
     WriteRequestBody body = getWriteRequestBody(doc);
     WriteRequest request = getWriteRequest(header, body);
     Request.WriteReply reply = settings.getCommClient().sendRequest(request);
@@ -86,7 +86,7 @@ public class DbClient implements KeyValueStoreApi {
       documentList.add(doc);
     }
 
-    Header header = getHeader();
+    Header header = getWriteHeader();
     WriteRequestBody body = getWriteRequestBody(documentList);
     WriteRequest request = getWriteRequest(header, body);
     Request.WriteReply reply = settings.getCommClient().sendRequest(request);
@@ -105,7 +105,7 @@ public class DbClient implements KeyValueStoreApi {
   @Override
   public Document get(@Nonnull byte[] key) throws DatastoreException {
     ByteString keyBytes = ByteString.copyFrom(key);
-    Header header = getHeader();
+    Header header = getGetHeader();
     GetRequestBody body = getGetRequestBody(keyBytes);
     GetRequest request = getGetRequest(header, body);
 
@@ -132,7 +132,7 @@ public class DbClient implements KeyValueStoreApi {
    */
   @Override
   public List<Document> get(@Nonnull List<byte[]> keys) throws DatastoreException {
-    Header header = getHeader();
+    Header header = getGetHeader();
     List<ByteString> byteStrings = keys.stream().map(ByteString::copyFrom).collect(Collectors.toList());
     GetRequestBody body = getGetRequestBody(byteStrings);
     GetRequest request = getGetRequest(header, body);
@@ -151,7 +151,7 @@ public class DbClient implements KeyValueStoreApi {
    * @throws RuntimeDatastoreException if a non-recoverable error has occurred
    */
   public List<Document> getRangeRequest(@Nonnull byte[] startKey, byte[] endKey) throws DatastoreException {
-    Header header = getHeader();
+    Header header = getGetHeader();
     GetRangeRequestBody body = getGetRangeRequestBody(ByteString.copyFrom(startKey), ByteString.copyFrom(endKey));
     GetRangeRequest request = getGetRangeRequest(header, body);
     Request.GetReply reply = settings.getCommClient().sendRequest(request);
@@ -177,7 +177,7 @@ public class DbClient implements KeyValueStoreApi {
   @Override
   public void delete(@Nonnull Document document) throws DatastoreException {
     Request.Document doc = getDocument(document);
-    Header header = getHeader();
+    Header header = getDeleteHeader();
     DeleteRequestBody body = getDeleteRequestBody(doc);
     WriteRequest request = getDeleteRequest(header, body);
     Request.WriteReply reply = settings.getCommClient().sendRequest(request);
@@ -205,7 +205,7 @@ public class DbClient implements KeyValueStoreApi {
       docs.add(doc);
     }
 
-    Header header = getHeader();
+    Header header = getDeleteHeader();
     DeleteRequestBody body = getDeleteRequestBody(docs);
     WriteRequest request = getDeleteRequest(header, body);
     Request.WriteReply reply = settings.getCommClient().sendRequest(request);

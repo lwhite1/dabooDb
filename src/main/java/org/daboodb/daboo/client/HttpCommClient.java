@@ -64,7 +64,6 @@ public class HttpCommClient implements CommClient {
     }
   }
 
-  // TODO(lwhite): Implement next two methods
   @Override
   public Request.GetReply sendRequest(Request.GetRequest request) {
     HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
@@ -84,6 +83,7 @@ public class HttpCommClient implements CommClient {
     }
   }
 
+  // TODO(lwhite): Implement
   @Override
   public Request.GetReply sendRequest(Request.GetRangeRequest request) {
     return null;

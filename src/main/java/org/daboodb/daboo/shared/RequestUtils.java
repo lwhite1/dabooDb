@@ -129,10 +129,26 @@ public final class RequestUtils {
         .build();
   }
 
-  public static Request.Header getHeader() {
+  public static Request.Header getWriteHeader() {
     return Request.Header.newBuilder()
         .setId(ByteString.copyFrom(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8)))
         .setRequestType(Request.RequestType.WRITE)
+        .setTimestamp(Instant.now().toEpochMilli())
+        .build();
+  }
+
+  public static Request.Header getGetHeader() {
+    return Request.Header.newBuilder()
+        .setId(ByteString.copyFrom(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8)))
+        .setRequestType(Request.RequestType.GET)
+        .setTimestamp(Instant.now().toEpochMilli())
+        .build();
+  }
+
+  public static Request.Header getDeleteHeader() {
+    return Request.Header.newBuilder()
+        .setId(ByteString.copyFrom(UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8)))
+        .setRequestType(Request.RequestType.DELETE)
         .setTimestamp(Instant.now().toEpochMilli())
         .build();
   }
