@@ -53,7 +53,7 @@ public class DatabaseTest extends BasicTest {
     Person person = Person.createPeoples(1).get(0);
     documentList.add(DocumentUtils.getDocument(person));
 
-    Request.Header header = getHeader();
+    Request.Header header = getWriteHeader();
     Request.WriteRequestBody body = getWriteRequestBody(documentList);
     Request.WriteRequest writeRequest = getWriteRequest(header, body);
 
@@ -84,7 +84,7 @@ public class DatabaseTest extends BasicTest {
     Person person = Person.createPeoples(1).get(0);
     documentList.add(DocumentUtils.getDocument(person));
 
-    Request.Header header = getHeader();
+    Request.Header header = getWriteHeader();
     Request.WriteRequestBody body = getWriteRequestBody(documentList);
     Request.WriteRequest writeRequest = getWriteRequest(header, body);
     server.handleRequest(writeRequest, writeRequest.toByteArray());

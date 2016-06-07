@@ -23,7 +23,7 @@ public class WriteLogTest extends BasicTest {
   // setup data to create a request
   private final Document contents = Person.createPeoples(1).get(0);
   private final Request.Document doc = DocumentUtils.getDocument(contents);
-  private final Request.Header header = RequestUtils.getHeader();
+  private final Request.Header header = RequestUtils.getWriteHeader();
   private final Request.WriteRequestBody body = RequestUtils.getWriteRequestBody(doc);
   private final Request.WriteRequest writeRequest = RequestUtils.getWriteRequest(header, body);
   private WriteLog writeLog;
