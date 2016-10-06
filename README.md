@@ -1,8 +1,10 @@
 dabooDb
 =======
 
-DabooDb is a pure Java, key-value store, designed for very high performance on small to moderate-sized databases. It's 
+DabooDb is a pure Java, key-value store, designed for high performance on small to moderate-sized databases. It's 
 named after my daughter, who thought her name was "Daboo" when she was little - thanks to her big brother. 
+
+This software was originally written for use in a course on Java performance engineering, but the course never materialized and so the slower "starter" version was jettisoned and this higher-performance version is all that remains. It does work, however ;). 
 
 ## The API
 The database provides standard key-value operations:
